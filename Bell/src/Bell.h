@@ -1,10 +1,11 @@
 #pragma once
 
-// Only for use by Bell Apps
+// ---- Used for Application to include all useful files ----
+// ----------------------------------------------------------
 
 #include "Bell/Application.h"
 
-// ---- Entry Point --------------
-// -------------------------------
+// ---- Entry Point Definition ----
+// --------------------------------
 
 #include "Bell/EntryPoint.h"

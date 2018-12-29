@@ -4,6 +4,7 @@
 
 namespace Bell {
 
+	// Base class for applications for entry point creation
 	class BELL_API Application
 	{
 	public:
@@ -14,7 +15,7 @@ namespace Bell {
 	};
 
 
-	// To do defined in client
+	// To be defined in client
 	Application* CreateApplication();
 
 }

@@ -1,6 +1,0 @@
-﻿  Application.cpp
-c:\dev\bell\sandbox\src\application.cpp(8): warning C4326: return type of 'main' should be 'int' instead of 'void'
-  Generating code
-  All 1 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Finished generating code
-  Sandbox.vcxproj -> C:\dev\Bell\bin\Release-x64\Sandbox\Sandbox.exe

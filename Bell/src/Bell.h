@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BELL_H
+#define BELL_H
 
 // ---- Used for Application to include all useful files ----
 // ----------------------------------------------------------
@@ -10,3 +11,6 @@
 // --------------------------------
 
 #include "Bell/EntryPoint.h"
+
+// Header Guard
+#endif BELL_H

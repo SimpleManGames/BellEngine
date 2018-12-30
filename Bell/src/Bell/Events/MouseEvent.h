@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MOUSE_EVENT_H
+#define MOUSE_EVENT_H
 
 #include "Event.h"
 
@@ -93,3 +94,6 @@ namespace Bell {
 		EVENT_CLASS_TYPE(MouseButtonReleased)
 	};
 }
+
+// Header Guard
+#endif

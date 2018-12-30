@@ -1,4 +1,5 @@
-#pragma once
+#ifndef KEY_EVENT_H
+#define KEY_EVENT_H
 
 #include "Event.h"
 
@@ -56,3 +57,6 @@ namespace Bell {
 	private:
 	};
 }
+
+// Header Guard
+#endif

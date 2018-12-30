@@ -1,4 +1,5 @@
-#pragma once
+#ifndef APPLICATION_EVENT_H
+#define APPLICATION_EVENT_H
 
 #include "Event.h"
 
@@ -65,3 +66,6 @@ namespace Bell
 			EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 }
+
+// Header Guard
+#endif

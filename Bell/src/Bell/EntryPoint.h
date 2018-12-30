@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ENTRY_POINT_H
+#define ENTRY_POINT_H
 
 #ifdef BZ_PLATFORM_WINDOWS
 
@@ -15,4 +16,7 @@ int main(int argc, char** argv)
 	delete app;
 }
 
+#endif
+
+// Header Guard
 #endif

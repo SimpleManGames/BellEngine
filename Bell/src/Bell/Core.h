@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CORE_H
+#define CORE_H
 
 #ifdef BZ_PLATFORM_WINDOWS
 	#ifdef BZ_BUILD_DLL
@@ -11,3 +12,6 @@
 #endif
 
 #define BIT(x) (1 << x)
+
+// Header Guard
+#endif

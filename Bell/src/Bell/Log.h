@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LOG_H
+#define LOG_H
 
 #include <memory>
 
@@ -36,3 +37,6 @@ namespace Bell {
 #define BZ_WARN(...)  ::Bell::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define BZ_ERROR(...) ::Bell::Log::GetClientLogger()->error(__VA_ARGS__)
 #define BZ_FATAL(...) ::Bell::Log::GetClientLogger()->fatal(__VA_ARGS__)
+
+// Header Guard
+#endif

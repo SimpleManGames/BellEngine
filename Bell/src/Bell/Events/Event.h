@@ -1,4 +1,5 @@
-#pragma once
+#ifndef EVENT_H
+#define EVENT_H
 
 #include "Bell/Core.h"
 
@@ -78,3 +79,6 @@ namespace Bell {
 		return os << e.ToString();
 	}
 }
+
+// Header Guard
+#endif

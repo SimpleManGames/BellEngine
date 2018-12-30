@@ -4,6 +4,9 @@
     <Filter Include="Bell">
       <UniqueIdentifier>{84FC827C-7033-840D-1920-6A100536000F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Bell\Events">
+      <UniqueIdentifier>{E8EB3681-54A1-AF76-DD95-A94D494AA67A}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Bell.h" />
@@ -15,6 +18,18 @@
     </ClInclude>
     <ClInclude Include="src\Bell\EntryPoint.h">
       <Filter>Bell</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Events\ApplicationEvent.h">
+      <Filter>Bell\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Events\Event.h">
+      <Filter>Bell\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Events\KeyEvent.h">
+      <Filter>Bell\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Events\MouseEvent.h">
+      <Filter>Bell\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\Log.h">
       <Filter>Bell</Filter>

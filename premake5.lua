@@ -26,6 +26,7 @@ project "Bell"
 
 	includedirs
 	{
+		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include"
 	}
 
@@ -73,8 +74,8 @@ project "Sandbox"
 
 	includedirs
 	{
-		"Bell/vendor/spdlog/include",
-		"Bell/src"
+		"Bell/vendor/spdlog/include/",
+		"Bell/src/"
 	}
 
 	links

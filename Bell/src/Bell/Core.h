@@ -9,3 +9,5 @@
 #else
 	#error Bell only Supports Windows
 #endif
+
+#define BIT(x) (1 << x)

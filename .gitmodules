@@ -1,0 +1,3 @@
+[submodule "Bell/vendor/spdlog"]
+	path = Bell/vendor/spdlog
+	url = https://github.com/gabime/spdlog

@@ -4,6 +4,7 @@
 // ----------------------------------------------------------
 
 #include "Bell/Application.h"
+#include "Bell/Log.h"
 
 // ---- Entry Point Definition ----
 // --------------------------------

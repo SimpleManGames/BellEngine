@@ -3,8 +3,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Bell {
 	class BELL_API MouseMovedEvent : public Event
 	{

@@ -1,3 +1,4 @@
+#include "bpch.h"
 #include "Application.h"
 
 #include "Bell/Events/ApplicationEvent.h"
@@ -12,7 +13,7 @@ namespace Bell {
 	void Application::Run()
 	{
 		WindowResizeEvent e(1280, 720);
-		BZ_TRACE(e);
+		B_TRACE(e);
 
 		while (true);
 	}

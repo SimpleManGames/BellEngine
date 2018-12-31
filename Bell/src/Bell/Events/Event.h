@@ -3,9 +3,6 @@
 
 #include "Bell/Core.h"
 
-#include <string>
-#include <functional>
-
 namespace Bell {
 
 	enum class EventType

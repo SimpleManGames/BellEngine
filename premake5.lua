@@ -18,6 +18,9 @@ project "Bell"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "bpch.h"
+	pchsource "Bell/src/bpch.cpp"
+
 	files
 	{
 		"%{prj.name}/src/**.h",
@@ -37,8 +40,8 @@ project "Bell"
 
 		defines
 		{
-			"BZ_PLATFORM_WINDOWS",
-			"BZ_BUILD_DLL"
+			"B_PLATFORM_WINDOWS",
+			"B_BUILD_DLL"
 		}
 		
 		postbuildcommands
@@ -47,15 +50,15 @@ project "Bell"
 		}
 
 	filter "configurations:Debug"
-		defines "BZ_DEBUG"
+		defines "B_DEBUG"
 		symbols "On"
 		
 	filter "configurations:Release"
-		defines "BZ_RELEASE"
+		defines "B_RELEASE"
 		optimize "On"
 
 	filter "configurations:Debug"
-		defines "BZ_DIST"
+		defines "B_DIST"
 		optimize "On"
 		
 project "Sandbox"
@@ -90,17 +93,17 @@ project "Sandbox"
 
 		defines
 		{
-			"BZ_PLATFORM_WINDOWS"
+			"B_PLATFORM_WINDOWS"
 		}
 
 	filter "configurations:Debug"
-		defines "BZ_DEBUG"
+		defines "B_DEBUG"
 		symbols "On"
 		
 	filter "configurations:Release"
-		defines "BZ_RELEASE"
+		defines "B_RELEASE"
 		optimize "On"
 
 	filter "configurations:Debug"
-		defines "BZ_DIST"
+		defines "B_DIST"
 		optimize "On"

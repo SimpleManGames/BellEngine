@@ -1,8 +1,8 @@
 #ifndef CORE_H
 #define CORE_H
 
-#ifdef BZ_PLATFORM_WINDOWS
-	#ifdef BZ_BUILD_DLL
+#ifdef B_PLATFORM_WINDOWS
+	#ifdef B_BUILD_DLL
 		#define BELL_API __declspec(dllexport)
 	#else
 		#define BELL_API __declspec(dllimport)

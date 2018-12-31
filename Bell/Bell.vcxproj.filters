@@ -35,6 +35,8 @@
       <Filter>Bell</Filter>
     </ClInclude>
     <ClInclude Include="src\bpch.h" />
+    <ClInclude Include="src\Bell\Window.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Application.cpp">
@@ -44,5 +46,6 @@
       <Filter>Bell</Filter>
     </ClCompile>
     <ClCompile Include="src\bpch.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
 </Project>

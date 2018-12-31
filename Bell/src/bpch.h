@@ -19,5 +19,4 @@
     #include <Windows.h>
 #endif
 
-// Header Guard
-#endif
+#endif // !BPCH_H

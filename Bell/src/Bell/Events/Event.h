@@ -78,5 +78,4 @@ namespace Bell {
     }
 }
 
-// Header Guard
-#endif
+#endif // !EVENT_H

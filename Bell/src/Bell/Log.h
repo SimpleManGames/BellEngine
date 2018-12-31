@@ -36,5 +36,4 @@ namespace Bell {
 #define B_ERROR(...) ::Bell::Log::GetClientLogger()->error(__VA_ARGS__)
 #define B_FATAL(...) ::Bell::Log::GetClientLogger()->fatal(__VA_ARGS__)
 
-// Header Guard
-#endif
+#endif // !LOG_H

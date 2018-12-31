@@ -12,5 +12,4 @@
 
 #include "Bell/EntryPoint.h"
 
-// Header Guard
 #endif BELL_H

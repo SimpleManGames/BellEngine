@@ -18,5 +18,4 @@ int main(int argc, char** argv)
 
 #endif
 
-// Header Guard
-#endif
+#endif // !ENTRY_POINT_H

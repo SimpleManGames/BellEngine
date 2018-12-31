@@ -26,5 +26,4 @@ namespace Bell {
 
 }
 
-// Header Guard
-#endif
+#endif // !APPLICATION_H

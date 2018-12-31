@@ -22,5 +22,4 @@
 
 #define BIT(x) (1 << x)
 
-// Header Guard
-#endif
+#endif // !CORE_H

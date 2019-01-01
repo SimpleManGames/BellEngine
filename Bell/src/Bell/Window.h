@@ -1,3 +1,7 @@
+// Window Abstraction
+// Each OS will have their own window using this class
+// ---------------------------------------------------
+
 #ifndef WINDOW_H
 #define WINDOW_H
 
@@ -23,7 +27,8 @@ namespace Bell
         }
     };
 
-    // Interface
+    // Window Interface
+    // Virtual class to be used for each OS type window
     class BELL_API Window
     {
     public:

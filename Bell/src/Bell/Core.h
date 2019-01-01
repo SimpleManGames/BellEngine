@@ -1,3 +1,6 @@
+// Core Defines
+// ------------
+
 #ifndef CORE_H
 #define CORE_H
 
@@ -6,14 +9,14 @@
 #define BELL_API __declspec(dllexport)
 #else
 #define BELL_API __declspec(dllimport)
-#endif
+#endif // !B_BUILD_DLL
 #else
 #error Bell only Supports Windows
-#endif
+#endif // !B_PLATFORM_WINDOWS
 
 #ifdef B_ENABLE_ASSERT
-#define B_ASSERT(x, ...) { if (!(x)) { BL_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
-#define B_CORE_ASSERT(x, ...) { if (!(x)) { BL_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+#define B_ASSERT(x, ...) { if (!(x)) { B_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+#define B_CORE_ASSERT(x, ...) { if (!(x)) { B_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #else
 #define B_ASSERT(x, ...)
 #define B_CORE_ASSERT(x, ...)

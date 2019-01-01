@@ -1,3 +1,6 @@
+// Precompiled Header for Bell Engine Use
+// --------------------------------------
+
 #ifndef BPCH_H
 #define BPCH_H
 

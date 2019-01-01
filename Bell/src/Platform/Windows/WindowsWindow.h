@@ -1,3 +1,6 @@
+// Window OS specific definition for the window application 
+// --------------------------------------------------------
+
 #ifndef WINDOWS_WINDOW_H
 #define WINDOWS_WINDOW_H
 

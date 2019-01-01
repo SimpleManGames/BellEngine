@@ -8,8 +8,8 @@ extern Bell::Application* Bell::CreateApplication();
 int main(int argc, char** argv)
 {
     Bell::Log::Init();
-    B_CORE_WARN("Initialized Log!");
-    B_INFO("Initialized Log!");
+    BL_CORE_INFO("Initialized Log!");
+    BL_INFO("Initialized Log!");
 
     auto app = Bell::CreateApplication();
     app->Run();

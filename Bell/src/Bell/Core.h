@@ -11,14 +11,13 @@
 #error Bell only Supports Windows
 #endif
 
-#ifdef B_ENABLE_ASSERTS
-#define B_ASSERT(x, ...) { if (!(x)) { B_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
-#define B_CORE_ASSERT(x, ...) { if (!(x)) { B_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+#ifdef B_ENABLE_ASSERT
+#define B_ASSERT(x, ...) { if (!(x)) { BL_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+#define B_CORE_ASSERT(x, ...) { if (!(x)) { BL_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #else
 #define B_ASSERT(x, ...)
 #define B_CORE_ASSERT(x, ...)
 #endif // B_ENABLE_ASSERTS
-
 
 #define BIT(x) (1 << x)
 

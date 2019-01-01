@@ -7,6 +7,12 @@
     <Filter Include="Bell\Events">
       <UniqueIdentifier>{E8EB3681-54A1-AF76-DD95-A94D494AA67A}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Bell.h" />
@@ -34,9 +40,13 @@
     <ClInclude Include="src\Bell\Log.h">
       <Filter>Bell</Filter>
     </ClInclude>
+    <ClInclude Include="src\Bell\Window.h">
+      <Filter>Bell</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\bpch.h" />
-    <ClInclude Include="src\Bell\Window.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Application.cpp">
@@ -45,7 +55,9 @@
     <ClCompile Include="src\Bell\Log.cpp">
       <Filter>Bell</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
     <ClCompile Include="src\bpch.cpp" />
-    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,15 @@
 #ifndef BPCH_H
 #define BPCH_H
 
+
+// ----- Common Engine Includes -----
+// ----------------------------------
+
+#include "Bell/Log.h"
+
+// ----- Common C++ Includes -----
+// -------------------------------
+
 #include <iostream>
 #include <memory>
 #include <utility>
@@ -13,7 +22,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "Bell/Log.h"
+// ----- Common Platform Specific Includes -----
+// ---------------------------------------------
 
 #ifdef B_PLATFORM_WINDOWS
     #include <Windows.h>

@@ -62,7 +62,7 @@ project "Bell"
 		}
 
 	filter "configurations:Debug"
-		defines "B_DEBUG"
+		defines { "B_DEBUG", "B_ENABLE_ASSERT" }
 		symbols "On"
 		
 	filter "configurations:Release"
@@ -109,7 +109,7 @@ project "Sandbox"
 		}
 
 	filter "configurations:Debug"
-		defines "B_DEBUG"
+		defines { "B_DEBUG", "B_ENABLE_ASSERT" }
 		symbols "On"
 		
 	filter "configurations:Release"

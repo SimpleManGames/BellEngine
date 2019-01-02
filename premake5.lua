@@ -63,14 +63,17 @@ project "Bell"
 
 	filter "configurations:Debug"
 		defines { "B_DEBUG", "B_ENABLE_ASSERT" }
+		buildoptions "/MDd"
 		symbols "On"
 		
 	filter "configurations:Release"
 		defines "B_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Debug"
 		defines "B_DIST"
+		buildoptions "/MD"
 		optimize "On"
 		
 project "Sandbox"
@@ -110,12 +113,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines { "B_DEBUG", "B_ENABLE_ASSERT" }
+		buildoptions "/MDd"
 		symbols "On"
 		
 	filter "configurations:Release"
 		defines "B_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Debug"
 		defines "B_DIST"
+		buildoptions "/MD"
 		optimize "On"

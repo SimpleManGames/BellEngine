@@ -149,6 +149,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Bell\Layer\LayerStack.h" />
+    <ClInclude Include="src\Bell\Layer\Layer.h" />
     <ClInclude Include="src\Bell.h" />
     <ClInclude Include="src\Bell\Application.h" />
     <ClInclude Include="src\Bell\Core.h" />
@@ -163,6 +165,8 @@
     <ClInclude Include="src\bpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Bell\Layer\LayerStack.cpp" />
+    <ClCompile Include="src\Bell\Layer\Layer.cpp" />
     <ClCompile Include="src\Bell\Application.cpp" />
     <ClCompile Include="src\Bell\Log.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />

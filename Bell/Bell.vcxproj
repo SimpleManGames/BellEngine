@@ -19,7 +19,7 @@
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Bell</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -88,6 +88,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/MDd /MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -115,6 +116,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -149,8 +151,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Bell\Layer\LayerStack.h" />
-    <ClInclude Include="src\Bell\Layer\Layer.h" />
     <ClInclude Include="src\Bell.h" />
     <ClInclude Include="src\Bell\Application.h" />
     <ClInclude Include="src\Bell\Core.h" />
@@ -159,15 +159,17 @@
     <ClInclude Include="src\Bell\Events\Event.h" />
     <ClInclude Include="src\Bell\Events\KeyEvent.h" />
     <ClInclude Include="src\Bell\Events\MouseEvent.h" />
+    <ClInclude Include="src\Bell\Layer\Layer.h" />
+    <ClInclude Include="src\Bell\Layer\LayerStack.h" />
     <ClInclude Include="src\Bell\Log.h" />
     <ClInclude Include="src\Bell\Window.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\bpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Bell\Layer\LayerStack.cpp" />
-    <ClCompile Include="src\Bell\Layer\Layer.cpp" />
     <ClCompile Include="src\Bell\Application.cpp" />
+    <ClCompile Include="src\Bell\Layer\Layer.cpp" />
+    <ClCompile Include="src\Bell\Layer\LayerStack.cpp" />
     <ClCompile Include="src\Bell\Log.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\bpch.cpp">

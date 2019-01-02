@@ -26,14 +26,22 @@ namespace Bell {
         // Listens and acts on window close events using the defined OnWindowClose function
         dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 
-        // Output the events that are currently happening to the console
-        B_CORE_TRACE("{0}", e);
+        // Reverse through the layers so the overlays get events before regular layers
+        for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
+        {
+            (*--it)->OnEvent(e);
+            if (e.Handled)
+                break;
+        }
     }
 
     void Application::Run()
     {
         while (m_Running)
         {
+            for (Layer* layer : m_LayerStack)
+                layer->OnUpdate();
+
             m_Window->OnUpdate();
         }
     }
@@ -42,5 +50,15 @@ namespace Bell {
     {
         m_Running = false;
         return false;
+    }
+
+    void Application::PushLayer(Layer * layer)
+    {
+        m_LayerStack.PushLayer(layer);
+    }
+
+    void Application::PushOverlay(Layer * layer)
+    {
+        m_LayerStack.PushOverlay(layer);
     }
 }

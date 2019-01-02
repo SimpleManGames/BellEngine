@@ -7,6 +7,9 @@
     <Filter Include="Bell\Events">
       <UniqueIdentifier>{E8EB3681-54A1-AF76-DD95-A94D494AA67A}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Bell\Layer">
+      <UniqueIdentifier>{504C10CE-3C04-521B-A50B-2B7791E2EC0B}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
     </Filter>
@@ -37,6 +40,12 @@
     <ClInclude Include="src\Bell\Events\MouseEvent.h">
       <Filter>Bell\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Bell\Layer\Layer.h">
+      <Filter>Bell\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Layer\LayerStack.h">
+      <Filter>Bell\Layer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Bell\Log.h">
       <Filter>Bell</Filter>
     </ClInclude>
@@ -47,12 +56,16 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\bpch.h" />
-    <ClInclude Include="src\Bell\Layer\Layer.h" />
-    <ClInclude Include="src\Bell\Layer\LayerStack.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Application.cpp">
       <Filter>Bell</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bell\Layer\Layer.cpp">
+      <Filter>Bell\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bell\Layer\LayerStack.cpp">
+      <Filter>Bell\Layer</Filter>
     </ClCompile>
     <ClCompile Include="src\Bell\Log.cpp">
       <Filter>Bell</Filter>
@@ -61,7 +74,5 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\bpch.cpp" />
-    <ClCompile Include="src\Bell\Layer\Layer.cpp" />
-    <ClCompile Include="src\Bell\Layer\LayerStack.cpp" />
   </ItemGroup>
 </Project>

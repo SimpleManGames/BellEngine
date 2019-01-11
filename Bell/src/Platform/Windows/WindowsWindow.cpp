@@ -5,6 +5,8 @@
 #include "Bell/Events/MouseEvent.h"
 #include "Bell/Events/KeyEvent.h"
 
+#include <glad/glad.h>
+
 namespace Bell 
 {
     static bool s_GLFWInitialized = false;
@@ -57,6 +59,11 @@ namespace Bell
         m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
         // Puts in focus
         glfwMakeContextCurrent(m_Window);
+
+        // Load Glad
+        int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+        B_CORE_ASSERT(status, "Failed to initialize Glad");
+
         // Grabs a pointer for us to use
         glfwSetWindowUserPointer(m_Window, &m_Data);
         SetVSync(true);

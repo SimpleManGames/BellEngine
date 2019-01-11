@@ -39,6 +39,7 @@ namespace Bell {
     {
         while (m_Running)
         {
+            // Update each layer
             for (Layer* layer : m_LayerStack)
                 layer->OnUpdate();
 

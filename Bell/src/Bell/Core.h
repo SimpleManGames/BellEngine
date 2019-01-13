@@ -12,8 +12,10 @@
 #define B_PLATFORM PLATFORM_WINDOWS
 #elif defined(__APPLE__)
 #define B_PLATFORM PLATFORM_MAC
+#error Bell only supports Windows
 #else
 #define B_PLATFORM PLATFORM_UNIX
+#error Bell only supports Windows
 #endif
 
 #if B_PLATFORM == PLATFORM_WINDOWS

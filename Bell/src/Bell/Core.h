@@ -4,7 +4,19 @@
 #ifndef CORE_H
 #define CORE_H
 
-#ifdef B_PLATFORM_WINDOWS
+#define PLATFORM_WINDOWS 1
+#define PLATFORM_MAC 2
+#define PLATFORM_UNIX 3
+
+#if defined(_WIN32)
+#define B_PLATFORM PLATFORM_WINDOWS
+#elif defined(__APPLE__)
+#define B_PLATFORM PLATFORM_MAC
+#else
+#define B_PLATFORM PLATFORM_UNIX
+#endif
+
+#if B_PLATFORM == PLATFORM_WINDOWS
 #ifdef B_BUILD_DLL
 #define BELL_API __declspec(dllexport)
 #else

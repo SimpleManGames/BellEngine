@@ -162,6 +162,7 @@
     <ClInclude Include="src\Bell\Layer\Layer.h" />
     <ClInclude Include="src\Bell\Layer\LayerStack.h" />
     <ClInclude Include="src\Bell\Log.h" />
+    <ClInclude Include="src\Bell\Network\Socket.h" />
     <ClInclude Include="src\Bell\Window.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\bpch.h" />
@@ -171,6 +172,7 @@
     <ClCompile Include="src\Bell\Layer\Layer.cpp" />
     <ClCompile Include="src\Bell\Layer\LayerStack.cpp" />
     <ClCompile Include="src\Bell\Log.cpp" />
+    <ClCompile Include="src\Bell\Network\Socket.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\bpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

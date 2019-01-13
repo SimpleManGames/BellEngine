@@ -46,7 +46,8 @@ project "Bell"
 	{
 		"GLFW",
 		"Glad",
-		"opengl32.lib"
+		"opengl32.lib",
+		"wsock32.lib"
 	}
 
 	filter "system:windows"

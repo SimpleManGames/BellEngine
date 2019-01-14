@@ -9,8 +9,13 @@ namespace Bell {
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
+    Application* Application::s_Instance = nullptr;
+
     Application::Application() 
     {
+        B_CORE_ASSERT(!s_Instance, "There is already an instance of Application");
+        s_Instance = this;
+
         // Creates the unique pointer for our window
         m_Window = std::unique_ptr<Window>(Window::Create());
         // Sets the function we use for event handling
@@ -56,10 +61,12 @@ namespace Bell {
     void Application::PushLayer(Layer * layer)
     {
         m_LayerStack.PushLayer(layer);
+        layer->OnAttach();
     }
 
     void Application::PushOverlay(Layer * layer)
     {
         m_LayerStack.PushOverlay(layer);
+        layer->OnAttach();
     }
 }

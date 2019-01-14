@@ -6,9 +6,11 @@
 #define BELL_H
 
 
-#include "Bell/Log.h"
-#include "Bell/Layer/Layer.h"
 #include "Bell/Application.h"
+#include "Bell/Layer/Layer.h"
+#include "Bell/Log.h"
+
+#include "Bell/ImGui/ImGuiLayer.h"
 
 // ---- Entry Point Definition ----
 // --------------------------------

@@ -4,3 +4,6 @@
 [submodule "Bell/vendor/glfw"]
 	path = Bell/vendor/glfw
 	url = https://github.com/SimpleManGames/glfw
+[submodule "Bell/vendor/imgui"]
+	path = Bell/vendor/imgui
+	url = https://github.com/SimpleManGames/imgui

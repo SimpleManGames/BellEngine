@@ -2,6 +2,9 @@
 #define IMGUI_LAYER
 
 #include "Bell/Layer/Layer.h"
+#include "Bell/Events/KeyEvent.h"
+#include "Bell/Events/MouseEvent.h"
+#include "Bell/Events/ApplicationEvent.h"
 
 namespace Bell
 {
@@ -17,6 +20,15 @@ namespace Bell
         void OnUpdate();
         void OnEvent(Event& event);
 
+    private:
+        bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);
+        bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
+        bool OnMouseMovedEvent(MouseMovedEvent& e);
+        bool OnMouseScrolledEvent(MouseScrolledEvent& e);
+        bool OnKeyPressedEvent(KeyPressedEvent& e);
+        bool OnKeyReleasedEvent(KeyReleasedEvent& e);
+        bool OnKeyTypedEvent(KeyTypedEvent& e);
+        bool OnWindowResizedEvent(WindowResizeEvent& e);
     private:
         float m_Time = 0.0f;
     };

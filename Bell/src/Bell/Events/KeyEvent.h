@@ -38,10 +38,10 @@ namespace Bell {
         int m_RepeatCount;
     };
 
-    class BELL_API KeyPressedReleased : public KeyEvent
+    class BELL_API KeyReleasedEvent : public KeyEvent
     {
     public:
-        KeyPressedReleased(int keycode)
+        KeyReleasedEvent(int keycode)
             : KeyEvent(keycode) {}
 
         std::string ToString() const override
@@ -53,6 +53,22 @@ namespace Bell {
 
         EVENT_CLASS_TYPE(KeyReleased)
     private:
+    };
+
+    class BELL_API KeyTypedEvent : public KeyEvent
+    {
+    public:
+        KeyTypedEvent(int keycode)
+            : KeyEvent(keycode) {}
+        
+        std::string ToString() const override
+        {
+            std::stringstream ss;
+            ss << "KeyTypedEvent: " << m_KeyCode;
+            return ss.str();
+        }
+
+        EVENT_CLASS_TYPE(KeyTyped)
     };
 }
 

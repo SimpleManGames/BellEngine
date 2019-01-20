@@ -6,12 +6,9 @@
 #include <glad/glad.h>
 
 namespace Bell {
-
-#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
-
     Application* Application::s_Instance = nullptr;
 
-    Application::Application() 
+    Application::Application()
     {
         B_CORE_ASSERT(!s_Instance, "There is already an instance of Application");
         s_Instance = this;
@@ -19,7 +16,7 @@ namespace Bell {
         // Creates the unique pointer for our window
         m_Window = std::unique_ptr<Window>(Window::Create());
         // Sets the function we use for event handling
-        m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+        m_Window->SetEventCallback(B_BIND_EVENT_FN(Application::OnEvent));
     }
 
     Application::~Application() { }
@@ -29,7 +26,7 @@ namespace Bell {
         // Makes a dispatcher
         EventDispatcher dispatcher(e);
         // Listens and acts on window close events using the defined OnWindowClose function
-        dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
+        dispatcher.Dispatch<WindowCloseEvent>(B_BIND_EVENT_FN(Application::OnWindowClose));
 
         // Reverse through the layers so the overlays get events before regular layers
         for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
@@ -44,6 +41,9 @@ namespace Bell {
     {
         while (m_Running)
         {
+            glClearColor(0, 0.5, 0, 1);
+            glClear(GL_COLOR_BUFFER_BIT);
+
             // Update each layer
             for (Layer* layer : m_LayerStack)
                 layer->OnUpdate();

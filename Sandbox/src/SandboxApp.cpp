@@ -10,12 +10,12 @@ public:
 
     void OnUpdate() override
     {
-        B_INFO("Example Layer::Update");
+        //B_INFO("Example Layer::Update");
     }
 
     void OnEvent(Bell::Event& event) override
     {
-        B_TRACE("{0}", event);
+        //B_TRACE("{0}", event);
     }
 };
 

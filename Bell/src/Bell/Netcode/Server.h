@@ -1,7 +1,8 @@
-#ifndef SERVER_H
+#ifndef BELLSERVER_H
+#define BELLSERVER_H
 
 #include "Bell/Core.h"
-#include <winsock2.h>
+#include <WinSock2.h>
 
 namespace Bell
 {
@@ -13,4 +14,4 @@ namespace Bell
     };
 }
 
-#endif // !SERVER_H
+#endif // !BELLSERVER_H

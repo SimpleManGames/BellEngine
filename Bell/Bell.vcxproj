@@ -96,7 +96,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;WSock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>..\bin\Debug-windows-x86_64\Bell\Bell.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
@@ -123,7 +123,7 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;WSock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>..\bin\Release-windows-x86_64\Bell\Bell.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
@@ -143,7 +143,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>opengl32.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;WSock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>..\bin\Dist-windows-x86_64\Bell\Bell.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
@@ -163,6 +163,8 @@
     <ClInclude Include="src\Bell\Layer\Layer.h" />
     <ClInclude Include="src\Bell\Layer\LayerStack.h" />
     <ClInclude Include="src\Bell\Log.h" />
+    <ClInclude Include="src\Bell\Netcode\Server.h" />
+    <ClInclude Include="src\Bell\Netcode\Socket\Socket.h" />
     <ClInclude Include="src\Bell\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
@@ -174,6 +176,8 @@
     <ClCompile Include="src\Bell\Layer\Layer.cpp" />
     <ClCompile Include="src\Bell\Layer\LayerStack.cpp" />
     <ClCompile Include="src\Bell\Log.cpp" />
+    <ClCompile Include="src\Bell\Netcode\Server.cpp" />
+    <ClCompile Include="src\Bell\Netcode\Socket\Socket.cpp" />
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\bpch.cpp">

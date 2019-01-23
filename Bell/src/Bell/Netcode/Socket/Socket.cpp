@@ -1,31 +1,35 @@
-#include "Socket.h"
 #include "bpch.h"
+#include "Socket.h"
 
-bool Bell::Socket::CreateSocket()
+namespace Bell
 {
-    sock = socket(s_AddressFamily, s_Type, s_Protocol);
-
-    if (sock == INVALID_SOCKET)
+    bool Socket::CreateSocket()
     {
-        B_CORE_ASSERT("Socket creation failed: %d", WSAGetLastError());
-        return false;
+        sock = socket(s_AddressFamily, s_Type, s_Protocol);
+
+        if (sock == INVALID_SOCKET)
+        {
+            B_CORE_ASSERT("Socket creation failed: %d", WSAGetLastError());
+            return false;
+        }
+
+        return true;
     }
 
-    return true;
-}
-
-bool Bell::Socket::BindSocket()
-{
-    SOCKADDR_IN localAddress;
-    localAddress.sin_family = s_AddressFamily;
-    localAddress.sin_port = htons(9999); // Converts the port bytes of 9999 to big-endian
-    localAddress.sin_addr.s_addr = INADDR_ANY; // Allows the socket to accept packets on all interfaces
-
-    if (bind(sock, (SOCKADDR*)&localAddress, sizeof(localAddress)) == SOCKET_ERROR)
+    bool Socket::BindSocket()
     {
-        B_CORE_ASSERT("Bind Socket failed: %d", WSAGetLastError());
-        return false;
-    }
+        SOCKADDR_IN localAddress;
+        localAddress.sin_family = s_AddressFamily;
+        localAddress.sin_port = htons(9999); // Converts the port bytes of 9999 to big-endian
+        localAddress.sin_addr.s_addr = INADDR_ANY; // Allows the socket to accept packets on all interfaces
 
-    return true;
+        if (bind(sock, (SOCKADDR*)&localAddress, sizeof(localAddress)) == SOCKET_ERROR)
+        {
+            B_CORE_ASSERT("Bind Socket failed: %d", WSAGetLastError());
+            return false;
+        }
+
+        return true;
+
+    }
 }

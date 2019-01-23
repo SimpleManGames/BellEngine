@@ -1,25 +1,28 @@
-#include "Server.h"
 #include "bpch.h"
+#include "Server.h"
 
-bool Bell::Server::Start(WORD winsock_version)
+namespace Bell
 {
-    WSADATA winsock_data;
-    if (WSAStartup(winsock_version, &winsock_data))
+    bool Server::Start(WORD winsock_version)
     {
-        B_CORE_ASSERT("WSAStartup failed: %d", WSAGetLastError());
-        return false;
+        WSADATA winsock_data;
+        if (WSAStartup(winsock_version, &winsock_data))
+        {
+            B_CORE_ASSERT("WSAStartup failed: %d", WSAGetLastError());
+            return false;
+        }
+
+        return true;
     }
 
-    return true;
-}
-
-bool Bell::Server::Close()
-{
-    if (WSACleanup())
+    bool Server::Close()
     {
-        B_CORE_ASSERT("WSACleanup failed: %d", WSAGetLastError());
-        return false;
-    }
+        if (WSACleanup())
+        {
+            B_CORE_ASSERT("WSACleanup failed: %d", WSAGetLastError());
+            return false;
+        }
 
-    return true;
+        return true;
+    }
 }

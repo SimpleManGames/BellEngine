@@ -1,5 +1,7 @@
 #include <Bell.h>
 
+#include <Bell/Netcode/Server.h>
+
 class ExampleLayer : public Bell::Layer
 {
 public:
@@ -25,6 +27,9 @@ public:
     Sandbox() {
         PushLayer(new ExampleLayer());
         PushOverlay(new Bell::ImGuiLayer());
+
+        Bell::Server server = Bell::Server();
+        server.Start();
     }
     ~Sandbox() { }
 };

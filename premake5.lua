@@ -51,7 +51,7 @@ project "Bell"
 		"Glad",
 		"ImGui",
 		"opengl32.lib",
-		"wsock32.lib"
+		"WSock32.lib"
 	}
 
 	filter "system:windows"

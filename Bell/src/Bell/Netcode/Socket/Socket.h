@@ -1,7 +1,8 @@
 #ifndef SOCKET_H
+#define SOCKET_H
 
 #include "Bell/Core.h"
-#include <winsock2.h>
+#include <WinSock2.h>
 
 namespace Bell
 {

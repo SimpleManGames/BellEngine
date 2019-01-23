@@ -13,6 +13,12 @@
     <Filter Include="Bell\Layer">
       <UniqueIdentifier>{504C10CE-3C04-521B-A50B-2B7791E2EC0B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Bell\Netcode">
+      <UniqueIdentifier>{95294236-818C-D1DA-2A12-0A9116549D5D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bell\Netcode\Socket">
+      <UniqueIdentifier>{AD010951-1963-E65E-A2D0-2C110E311D1E}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
     </Filter>
@@ -68,6 +74,8 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\bpch.h" />
+    <ClInclude Include="src\Bell\Netcode\Server.h" />
+    <ClInclude Include="src\Bell\Netcode\Socket\Socket.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Application.cpp">
@@ -92,5 +100,7 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\bpch.cpp" />
+    <ClCompile Include="src\Bell\Netcode\Server.cpp" />
+    <ClCompile Include="src\Bell\Netcode\Socket\Socket.cpp" />
   </ItemGroup>
 </Project>

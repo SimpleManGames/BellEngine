@@ -4,13 +4,19 @@
 #include "Bell/Core.h"
 #include <WinSock2.h>
 
+typedef unsigned int uint32;
+
 namespace Bell
 {
+    const uint32 SOCKET_BUFFER_SIZE = 1024;
+
     class BELL_API Socket
     {
     public:
         bool CreateSocket();
         bool BindSocket();
+
+        bool ReceivePackets();
 
     private:
         SOCKET sock;

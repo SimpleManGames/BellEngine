@@ -32,4 +32,30 @@ namespace Bell
         return true;
 
     }
+    bool Socket::ReceivePackets()
+    {
+        char buffer[SOCKET_BUFFER_SIZE];
+        int flags = 0;
+        SOCKADDR_IN from;
+        int fromSize = sizeof(from);
+        int bytesReceived = recvfrom(sock, buffer, SOCKET_BUFFER_SIZE, flags, (SOCKADDR*)&from, &fromSize);
+
+        if (bytesReceived == SOCKET_ERROR)
+        {
+            B_CORE_ASSERT("recvfrom returned SOCKET_ERROR: %d", WSAGetLastError());
+            return false;
+        }
+        else
+        {
+            buffer[bytesReceived] = 0;
+            B_CORE_INFO("%d.%d.%d.%d:%d - %s",
+                from.sin_addr.S_un.S_un_b.s_b1,
+                from.sin_addr.S_un.S_un_b.s_b2,
+                from.sin_addr.S_un.S_un_b.s_b3,
+                from.sin_addr.S_un.S_un_b.s_b4,
+                ntohs(from.sin_port), buffer);
+        }
+
+        return true;
+    }
 }

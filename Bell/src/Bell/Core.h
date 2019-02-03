@@ -16,7 +16,7 @@
 #else
 #define B_PLATFORM PLATFORM_UNIX
 #error Bell only supports Windows
-#endif
+#endif // Operator Defitions
 
 #if B_PLATFORM == PLATFORM_WINDOWS
 #ifdef B_BUILD_DLL
@@ -28,7 +28,11 @@
 #error Bell only Supports Windows
 #endif // !B_PLATFORM_WINDOWS
 
-#ifdef B_ENABLE_ASSERT
+#ifdef B_DEBUG
+#define B_ENABLE_ASSERTS
+#endif // B_DEBUG
+
+#ifdef B_ENABLE_ASSERTS
 #define B_ASSERT(x, ...) { if (!(x)) { B_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #define B_CORE_ASSERT(x, ...) { if (!(x)) { B_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #else

@@ -12,7 +12,8 @@ public:
 
     void OnUpdate() override
     {
-        //B_INFO("Example Layer::Update");
+        if (Bell::Input::IsKeyPressed(B_KEY_TAB))
+            B_INFO("Tab Pressed");
     }
 
     void OnEvent(Bell::Event& event) override
@@ -27,9 +28,6 @@ public:
     Sandbox() {
         PushLayer(new ExampleLayer());
         PushOverlay(new Bell::ImGuiLayer());
-
-        Bell::Server server = Bell::Server();
-        server.Start();
     }
     ~Sandbox() { }
 };

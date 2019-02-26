@@ -10,6 +10,11 @@
 #include "Bell/Layer/Layer.h"
 #include "Bell/Log.h"
 
+// Input
+#include "Bell/Input.h"
+#include "Bell/KeyCodes.h"
+#include "Bell/MouseButtonCodes.h"
+
 #include "Bell/ImGui/ImGuiLayer.h"
 
 // ---- Entry Point Definition ----

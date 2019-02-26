@@ -1,3 +1,7 @@
+// Input abstraction
+// Each OS will have their own implemention inheriting from this
+// -------------------------------------------------------------
+
 #ifndef INPUT_H
 #define INPUT_H
 

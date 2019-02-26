@@ -1,3 +1,6 @@
+// Windows Implementation of Input
+// -------------------------------
+
 #ifndef WINDOWS_INPUT_H
 #define WINDOWS_INPUT_H
 

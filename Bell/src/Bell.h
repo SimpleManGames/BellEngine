@@ -5,7 +5,6 @@
 #ifndef BELL_H
 #define BELL_H
 
-
 #include "Bell/Application.h"
 #include "Bell/Layer/Layer.h"
 #include "Bell/Log.h"

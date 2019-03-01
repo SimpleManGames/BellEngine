@@ -32,27 +32,27 @@ namespace Bell
         io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
 
         // Temp will use our own keycodes
-        io.KeyMap[ImGuiKey_Tab] = GLFW_KEY_TAB;
-        io.KeyMap[ImGuiKey_LeftArrow] = GLFW_KEY_LEFT;
-        io.KeyMap[ImGuiKey_RightArrow] = GLFW_KEY_RIGHT;
-        io.KeyMap[ImGuiKey_UpArrow] = GLFW_KEY_UP;
-        io.KeyMap[ImGuiKey_DownArrow] = GLFW_KEY_DOWN;
-        io.KeyMap[ImGuiKey_PageUp] = GLFW_KEY_PAGE_UP;
-        io.KeyMap[ImGuiKey_PageDown] = GLFW_KEY_PAGE_DOWN;
-        io.KeyMap[ImGuiKey_Home] = GLFW_KEY_HOME;
-        io.KeyMap[ImGuiKey_End] = GLFW_KEY_END;
-        io.KeyMap[ImGuiKey_Insert] = GLFW_KEY_INSERT;
-        io.KeyMap[ImGuiKey_Delete] = GLFW_KEY_DELETE;
-        io.KeyMap[ImGuiKey_Backspace] = GLFW_KEY_BACKSPACE;
-        io.KeyMap[ImGuiKey_Space] = GLFW_KEY_SPACE;
-        io.KeyMap[ImGuiKey_Enter] = GLFW_KEY_ENTER;
-        io.KeyMap[ImGuiKey_Escape] = GLFW_KEY_ESCAPE;
-        io.KeyMap[ImGuiKey_A] = GLFW_KEY_A;
-        io.KeyMap[ImGuiKey_C] = GLFW_KEY_C;
-        io.KeyMap[ImGuiKey_V] = GLFW_KEY_V;
-        io.KeyMap[ImGuiKey_X] = GLFW_KEY_X;
-        io.KeyMap[ImGuiKey_Y] = GLFW_KEY_Y;
-        io.KeyMap[ImGuiKey_Z] = GLFW_KEY_Z;
+        io.KeyMap[ImGuiKey_Tab] = B_KEY_TAB;
+        io.KeyMap[ImGuiKey_LeftArrow] = B_KEY_LEFT;
+        io.KeyMap[ImGuiKey_RightArrow] = B_KEY_RIGHT;
+        io.KeyMap[ImGuiKey_UpArrow] = B_KEY_UP;
+        io.KeyMap[ImGuiKey_DownArrow] = B_KEY_DOWN;
+        io.KeyMap[ImGuiKey_PageUp] = B_KEY_PAGE_UP;
+        io.KeyMap[ImGuiKey_PageDown] = B_KEY_PAGE_DOWN;
+        io.KeyMap[ImGuiKey_Home] = B_KEY_HOME;
+        io.KeyMap[ImGuiKey_End] = B_KEY_END;
+        io.KeyMap[ImGuiKey_Insert] = B_KEY_INSERT;
+        io.KeyMap[ImGuiKey_Delete] = B_KEY_DELETE;
+        io.KeyMap[ImGuiKey_Backspace] = B_KEY_BACKSPACE;
+        io.KeyMap[ImGuiKey_Space] = B_KEY_SPACE;
+        io.KeyMap[ImGuiKey_Enter] = B_KEY_ENTER;
+        io.KeyMap[ImGuiKey_Escape] = B_KEY_ESCAPE;
+        io.KeyMap[ImGuiKey_A] = B_KEY_A;
+        io.KeyMap[ImGuiKey_C] = B_KEY_C;
+        io.KeyMap[ImGuiKey_V] = B_KEY_V;
+        io.KeyMap[ImGuiKey_X] = B_KEY_X;
+        io.KeyMap[ImGuiKey_Y] = B_KEY_Y;
+        io.KeyMap[ImGuiKey_Z] = B_KEY_Z;
 
         ImGui_ImplOpenGL3_Init("#version 410");
     }
@@ -132,10 +132,10 @@ namespace Bell
         ImGuiIO& io = ImGui::GetIO();
         io.KeysDown[e.GetKeyCode()] = true;
 
-        io.KeyCtrl = io.KeysDown[GLFW_KEY_LEFT_CONTROL] | io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
-        io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT] | io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
-        io.KeyAlt = io.KeysDown[GLFW_KEY_LEFT_ALT] | io.KeysDown[GLFW_KEY_RIGHT_ALT];
-        io.KeySuper = io.KeysDown[GLFW_KEY_LEFT_SUPER] | io.KeysDown[GLFW_KEY_RIGHT_SUPER];
+        io.KeyCtrl = io.KeysDown[B_KEY_LEFT_CONTROL] | io.KeysDown[B_KEY_RIGHT_CONTROL];
+        io.KeyShift = io.KeysDown[B_KEY_LEFT_SHIFT] | io.KeysDown[B_KEY_RIGHT_SHIFT];
+        io.KeyAlt = io.KeysDown[B_KEY_LEFT_ALT] | io.KeysDown[B_KEY_RIGHT_ALT];
+        io.KeySuper = io.KeysDown[B_KEY_LEFT_SUPER] | io.KeysDown[B_KEY_RIGHT_SUPER];
 
         return false;
     }

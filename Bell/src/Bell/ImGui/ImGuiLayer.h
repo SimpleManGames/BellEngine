@@ -1,6 +1,8 @@
 #ifndef IMGUI_LAYER
 #define IMGUI_LAYER
 
+#include "Bell/KeyCodes.h"
+#include "Bell/MouseButtonCodes.h"
 #include "Bell/Layer/Layer.h"
 #include "Bell/Events/KeyEvent.h"
 #include "Bell/Events/MouseEvent.h"

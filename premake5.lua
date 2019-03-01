@@ -16,6 +16,7 @@ IncludeDir["GLFW"] = "Bell/vendor/GLFW/include"
 IncludeDir["Glad"] = "Bell/vendor/Glad/include"
 IncludeDir["ImGui"] = "Bell/vendor/imgui"
 IncludeDir["glm"] = "Bell/vendor/glm"
+IncludeDir["enet"] = "Bell/vendor/enet/include"
 
 include "Bell/vendor/GLFW"
 include "Bell/vendor/Glad"
@@ -48,7 +49,8 @@ project "Bell"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.enet}"
 	}
 
 	links
@@ -57,7 +59,8 @@ project "Bell"
 		"Glad",
 		"ImGui",
 		"opengl32.lib",
-		"WSock32.lib"
+		"ws2_32.lib",
+		"winmm.lib"
 	}
 
 	filter "system:windows"

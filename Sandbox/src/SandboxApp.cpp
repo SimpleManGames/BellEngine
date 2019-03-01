@@ -1,7 +1,5 @@
 #include <Bell.h>
 
-#include <Bell/Netcode/Server.h>
-
 class ExampleLayer : public Bell::Layer
 {
 public:

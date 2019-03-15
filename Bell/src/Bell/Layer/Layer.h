@@ -18,6 +18,7 @@ namespace Bell
         virtual void OnDetach() {}
         // Calls when the stack needs to be updated
         virtual void OnUpdate() {}
+        virtual void OnImGuiRender() {}
         // Used for when the layer has an event to be handled
         virtual void OnEvent(Event& e) {}
 

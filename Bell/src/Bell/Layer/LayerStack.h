@@ -41,7 +41,7 @@ namespace Bell
     private:
         LayerStackVec m_Layers;
         // Iterator used to determine were we are placing layers onto the stack
-        LayerStackIt m_LayerInsert;
+        unsigned int m_LayerInsertIndex = 0;
     };
 }
 

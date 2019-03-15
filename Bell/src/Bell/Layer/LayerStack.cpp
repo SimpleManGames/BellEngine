@@ -5,8 +5,7 @@ namespace Bell
 {
     LayerStack::LayerStack()
     {
-        // Sets the pointer for the front of the stack
-        m_LayerInsert = m_Layers.begin();
+
     }
 
     LayerStack::~LayerStack()
@@ -20,7 +19,8 @@ namespace Bell
     {
         // Set the new point of m_LayerInsert while creating
         // a placing the layer of the stack at the old insert
-        m_LayerInsert = m_Layers.emplace(m_LayerInsert, layer);
+        m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, layer);
+        m_LayerInsertIndex++;
     }
 
     void LayerStack::PushOverlay(Layer * overlay)
@@ -38,7 +38,7 @@ namespace Bell
         {
             // Remove it from the stack
             m_Layers.erase(it);
-            m_LayerInsert--;
+            m_LayerInsertIndex--;
         }
     }
 

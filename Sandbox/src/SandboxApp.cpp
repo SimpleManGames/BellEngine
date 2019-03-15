@@ -25,7 +25,6 @@ class Sandbox : public Bell::Application {
 public:
     Sandbox() {
         PushLayer(new ExampleLayer());
-        PushOverlay(new Bell::ImGuiLayer());
     }
     ~Sandbox() { }
 };

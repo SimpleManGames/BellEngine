@@ -19,11 +19,15 @@
 #endif // Operator Defitions
 
 #if B_PLATFORM == PLATFORM_WINDOWS
-#ifdef B_BUILD_DLL
-#define BELL_API __declspec(dllexport)
+#if B_DYNAMIC_LINK
+    #ifdef B_BUILD_DLL
+        #define BELL_API __declspec(dllexport)
+    #else
+        #define BELL_API __declspec(dllimport)
+    #endif // !B_BUILD_DLL
 #else
-#define BELL_API __declspec(dllimport)
-#endif // !B_BUILD_DLL
+#define BELL_API 
+#endif
 #else
 #error Bell only Supports Windows
 #endif // !B_PLATFORM_WINDOWS

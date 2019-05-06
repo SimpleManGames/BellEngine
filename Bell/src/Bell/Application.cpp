@@ -26,7 +26,7 @@ namespace Bell {
 
     Application::~Application() { }
 
-    void Application::OnEvent(Event & e)
+    void Application::OnEvent(Event& e)
     {
         // Makes a dispatcher
         EventDispatcher dispatcher(e);
@@ -58,14 +58,14 @@ namespace Bell {
                 layer->OnImGuiRender();
             m_ImGuiLayer->End();
 
-            auto[x, y] = Input::GetMousePosition();
+            auto [x, y] = Input::GetMousePosition();
             B_CORE_TRACE("{0}, {1}", x, y);
 
             m_Window->OnUpdate();
         }
     }
 
-    bool Application::OnWindowClose(WindowCloseEvent& e)
+    bool Application::OnWindowClose(WindowCloseEvent & e)
     {
         m_Running = false;
         return false;

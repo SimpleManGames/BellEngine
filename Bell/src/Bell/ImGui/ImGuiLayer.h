@@ -1,3 +1,7 @@
+// ImGUI Layer
+// Specific layer for ImGUI elements
+// ---------------------------------
+
 #ifndef IMGUI_LAYER
 #define IMGUI_LAYER
 

@@ -1,3 +1,7 @@
+// Layer
+// Single layer for the Layer Stack
+// --------------------------------
+
 #ifndef LAYER_H
 #define LAYER_H
 

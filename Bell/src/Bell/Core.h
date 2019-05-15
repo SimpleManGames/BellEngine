@@ -20,14 +20,14 @@
 
 #if B_PLATFORM == PLATFORM_WINDOWS
 #if B_DYNAMIC_LINK
-    #ifdef B_BUILD_DLL
-        #define BELL_API __declspec(dllexport)
-    #else
-        #define BELL_API __declspec(dllimport)
-    #endif // !B_BUILD_DLL
+#ifdef B_BUILD_DLL
+#define BELL_API __declspec(dllexport)
+#else
+#define BELL_API __declspec(dllimport)
+#endif // !B_BUILD_DLL
 #else
 #define BELL_API 
-#endif
+#endif // !B_DYNAMIC_LINK
 #else
 #error Bell only Supports Windows
 #endif // !B_PLATFORM_WINDOWS

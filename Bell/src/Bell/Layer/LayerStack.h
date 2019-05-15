@@ -1,7 +1,6 @@
-// ----- Layer Stack -----
-// -----------------------
-
-// Mainly just a wrapper for vector of Layers
+// Layer Stack
+// Used for managing game elements in an easy queue way
+// ----------------------------------------------------
 
 #ifndef LAYER_STACK_H
 #define LAYER_STACK_H

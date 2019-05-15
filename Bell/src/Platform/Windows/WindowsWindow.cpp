@@ -5,7 +5,7 @@
 #include "Bell/Events/MouseEvent.h"
 #include "Bell/Events/KeyEvent.h"
 
-#include <glad/glad.h>
+#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace Bell 
 {
@@ -57,12 +57,9 @@ namespace Bell
 
         // Create the window
         m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
-        // Puts in focus
-        glfwMakeContextCurrent(m_Window);
 
-        // Load Glad
-        int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-        B_CORE_ASSERT(status, "Failed to initialize Glad");
+        m_Context = new OpenGLContext(m_Window);
+        m_Context->Init();
 
         // Grabs a pointer for us to use
         glfwSetWindowUserPointer(m_Window, &m_Data);
@@ -177,7 +174,7 @@ namespace Bell
     void WindowsWindow::OnUpdate()
     {
         glfwPollEvents();
-        glfwSwapBuffers(m_Window);
+        m_Context->SwapBuffers();
     }
 
     void WindowsWindow::SetVSync(bool enabled)

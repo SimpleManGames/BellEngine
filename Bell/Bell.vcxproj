@@ -155,7 +155,9 @@
     <ClInclude Include="src\Bell\Layer\LayerStack.h" />
     <ClInclude Include="src\Bell\Log.h" />
     <ClInclude Include="src\Bell\MouseButtonCodes.h" />
+    <ClInclude Include="src\Bell\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Bell\Window.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\bpch.h" />
@@ -529,6 +531,7 @@
     <ClCompile Include="src\Bell\Layer\Layer.cpp" />
     <ClCompile Include="src\Bell\Layer\LayerStack.cpp" />
     <ClCompile Include="src\Bell\Log.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\bpch.cpp">

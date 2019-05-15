@@ -5,6 +5,7 @@
 #define WINDOWS_WINDOW_H
 
 #include "Bell/Window.h"
+#include "Bell/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
 
@@ -32,6 +33,7 @@ namespace Bell
 
     private:
         GLFWwindow * m_Window;
+        GraphicsContext* m_Context;
 
         struct WindowData
         {

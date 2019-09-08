@@ -1190,6 +1190,10 @@
     </ClInclude>
     <ClInclude Include="src\Bell\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Bell\Renderer\Shader.h" />
+    <ClInclude Include="src\Bell\Renderer\Buffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="src\Bell\Renderer\Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Application.cpp">
@@ -1220,5 +1224,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Bell\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Bell\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\Bell\Renderer\Renderer.cpp" />
   </ItemGroup>
 </Project>

@@ -16,7 +16,7 @@ namespace Bell
         virtual void Unbind() const override;
 
     private:
-        unit32_t m_RendererID;
+        uint32_t m_RendererID;
     };
 }
 

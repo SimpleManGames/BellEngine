@@ -16,6 +16,18 @@
 
 #include "Bell/ImGui/ImGuiLayer.h"
 
+// ---- Renderer Includes ----
+// ---------------------------
+
+#include "Bell/Renderer/Renderer.h"
+#include "Bell/Renderer/RenderCommand.h"
+
+#include "Bell/Renderer/Buffer.h"
+#include "Bell/Renderer/Shader.h"
+#include "Bell/Renderer/VertexArray.h"
+
+#include "Bell/Renderer/OrthographicCamera.h"
+
 // ---- Entry Point Definition ----
 // --------------------------------
 

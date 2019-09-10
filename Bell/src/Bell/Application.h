@@ -12,13 +12,9 @@
 
 #include "Bell/ImGui/ImGuiLayer.h"
 
-#include "Bell/Renderer/Shader.h"
-#include "Bell/Renderer/Buffer.h"
-#include "Bell/Renderer/VertexArray.h"
-
 namespace Bell
 {
-    class BELL_API Application
+    class Application
     {
     public:
         Application();
@@ -43,12 +39,6 @@ namespace Bell
         ImGuiLayer* m_ImGuiLayer;
         bool m_Running = true;
         LayerStack m_LayerStack;
-
-        std::shared_ptr<Shader> m_Shader;
-        std::shared_ptr <VertexArray> m_VertexArray;
-               
-        std::shared_ptr<Shader> m_BlueShader;
-        std::shared_ptr <VertexArray> m_SquareVA;
 
     private:
         static Application* s_Instance;

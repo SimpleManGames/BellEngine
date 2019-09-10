@@ -1200,6 +1200,7 @@
     <ClInclude Include="src\Bell\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Bell\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="src\Bell\Renderer\OrthographicCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Application.cpp">
@@ -1240,5 +1241,6 @@
     <ClCompile Include="src\Bell\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Bell\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\Bell\Renderer\OrthographicCamera.cpp" />
   </ItemGroup>
 </Project>

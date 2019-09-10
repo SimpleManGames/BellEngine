@@ -37,6 +37,12 @@ namespace Bell
 
         struct WindowData
         {
+            WindowData()
+                : Title("Bell Engine"), Width(1280), Height(600), VSync(false)
+            {
+
+            }
+
             std::string Title;
             unsigned int Width, Height;
             bool VSync;

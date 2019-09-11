@@ -6,6 +6,8 @@
 
 namespace Bell
 {
+#define OpenGLShaderCast(x) std::dynamic_pointer_cast<Bell::OpenGLShader>(x)
+
     class OpenGLShader : public Shader
     {
     public:

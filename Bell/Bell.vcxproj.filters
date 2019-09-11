@@ -1201,6 +1201,7 @@
     <ClInclude Include="src\Bell\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Bell\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\Bell\Core\Timestep.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Application.cpp">

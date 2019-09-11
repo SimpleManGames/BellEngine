@@ -119,22 +119,24 @@ public:
         m_BlueShader.reset(Bell::Shader::Create(blueVertexSrc, blueFragmentSrc));
     }
 
-    void OnUpdate() override
+    void OnUpdate(Bell::Timestep timestep) override
     {
+        //B_TRACE("Delta time: {0}s ({1})ms", timestep.GetSeconds(), timestep.GetMilliseconds());
+
         if (Bell::Input::IsKeyPressed(B_KEY_LEFT))
-            m_CameraPosition.x -= m_CameraMoveSpeed;
+            m_CameraPosition.x -= m_CameraMoveSpeed * timestep;
         else if (Bell::Input::IsKeyPressed(B_KEY_RIGHT))
-            m_CameraPosition.x += m_CameraMoveSpeed;
+            m_CameraPosition.x += m_CameraMoveSpeed * timestep;
 
         if (Bell::Input::IsKeyPressed(B_KEY_UP))
-            m_CameraPosition.y += m_CameraMoveSpeed;
+            m_CameraPosition.y += m_CameraMoveSpeed * timestep;
         else if (Bell::Input::IsKeyPressed(B_KEY_DOWN))
-            m_CameraPosition.y -= m_CameraMoveSpeed;
+            m_CameraPosition.y -= m_CameraMoveSpeed * timestep;
 
         if (Bell::Input::IsKeyPressed(B_KEY_A))
-            m_CameraRotation += m_CameraRotationSpeed;
+            m_CameraRotation += m_CameraRotationSpeed * timestep;
         if (Bell::Input::IsKeyPressed(B_KEY_D))
-            m_CameraRotation -= m_CameraRotationSpeed;
+            m_CameraRotation -= m_CameraRotationSpeed * timestep;
 
         Bell::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
         Bell::RenderCommand::Clear();
@@ -161,10 +163,10 @@ private:
 
     Bell::OrthographicCamera m_Camera;
     glm::vec3 m_CameraPosition;
-    float m_CameraMoveSpeed = 0.1f;
+    float m_CameraMoveSpeed = 1.0f;
 
     float m_CameraRotation = 0.0f;
-    float m_CameraRotationSpeed = 1.0f;
+    float m_CameraRotationSpeed = 45.0f;
 
 };
 

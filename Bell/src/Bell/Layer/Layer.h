@@ -6,6 +6,7 @@
 #define LAYER_H
 
 #include "Bell/Core.h"
+#include "Bell/Core/Timestep.h"
 #include "Bell/Events/Event.h"
 
 namespace Bell
@@ -21,7 +22,7 @@ namespace Bell
         // Acts when removed from a stack
         virtual void OnDetach() {}
         // Calls when the stack needs to be updated
-        virtual void OnUpdate() {}
+        virtual void OnUpdate(Timestep timeStep) {}
         virtual void OnImGuiRender() {}
         // Used for when the layer has an event to be handled
         virtual void OnEvent(Event& e) {}

@@ -9,6 +9,8 @@
 #include "Bell/Layer/Layer.h"
 #include "Bell/Log.h"
 
+#include "Bell/Core/Timestep.h"
+
 // Input
 #include "Bell/Input.h"
 #include "Bell/KeyCodes.h"

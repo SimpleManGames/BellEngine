@@ -10,6 +10,8 @@
 #include "Bell/Layer/LayerStack.h"
 #include "Events/ApplicationEvent.h"
 
+#include "Bell/Core/Timestep.h"
+
 #include "Bell/ImGui/ImGuiLayer.h"
 
 namespace Bell
@@ -35,10 +37,12 @@ namespace Bell
     private:
         bool OnWindowClose(WindowCloseEvent& e);
 
+    private:
         std::unique_ptr<Window> m_Window;
         ImGuiLayer* m_ImGuiLayer;
         bool m_Running = true;
         LayerStack m_LayerStack;
+        float m_LastFrameTime = 0.0f;
 
     private:
         static Application* s_Instance;

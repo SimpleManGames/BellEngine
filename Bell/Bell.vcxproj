@@ -143,6 +143,7 @@
     <ClInclude Include="src\Bell.h" />
     <ClInclude Include="src\Bell\Application.h" />
     <ClInclude Include="src\Bell\Core.h" />
+    <ClInclude Include="src\Bell\Core\Timestep.h" />
     <ClInclude Include="src\Bell\EntryPoint.h" />
     <ClInclude Include="src\Bell\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Bell\Events\Event.h" />

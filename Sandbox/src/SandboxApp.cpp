@@ -47,7 +47,7 @@ public:
 
         m_SquareVA.reset(Bell::VertexArray::Create());
 
-        Bell::Ref<Bell::VertexBuffer> squareVB;
+        std::shared_ptr<Bell::VertexBuffer> squareVB;
         squareVB.reset(Bell::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
         squareVB->SetLayout({
             { Bell::ShaderDataType::Float3, "a_Position" },
@@ -55,7 +55,7 @@ public:
         m_SquareVA->AddVertexBuffer(squareVB);
 
         uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-        Bell::Ref<Bell::IndexBuffer> squareIB;
+        std::shared_ptr<Bell::IndexBuffer> squareIB;
         squareIB.reset(Bell::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
         m_SquareVA->SetIndexBuffer(squareIB);
 

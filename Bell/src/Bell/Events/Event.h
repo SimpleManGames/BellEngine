@@ -41,7 +41,6 @@ namespace Bell {
     // Inherit from this and use both, EVENT_CLASS_TYPE and EVENT_CLASS CATEGORY, defines
     // in order for your event to be seen by the Event Dispatcher 
     class BELL_API Event {
-        friend class EventDispatcher;
     public:
         // If this event has been handled and no longer should be used in other event
         bool Handled = false;
@@ -65,26 +64,23 @@ namespace Bell {
     // Used to send out when a Event happens
     class EventDispatcher
     {
-        template<typename T>
-        using EventFn = std::function<bool(T&)>;
-
     public:
         EventDispatcher(Event& e)
             : m_Event(e) {}
 
-        // 
-        template<typename T>
-        bool Dispatch(EventFn<T> func)
+        // F is deduced by the complier
+        template<typename T, typename F>
+        bool Dispatch(const F& func)
         {
             if (m_Event.GetEventType() == T::GetStaticType())
             {
-                m_Event.Handled = func(*(T*)&m_Event);
+                m_Event.Handled = func(static_cast<T&>(m_Event));
                 return true;
             }
             return false;
         }
     private:
-        Event & m_Event;
+        Event& m_Event;
     };
 
     // For the logging lib

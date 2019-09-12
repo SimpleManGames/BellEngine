@@ -1,9 +1,11 @@
 #include <Bell.h>
 
 #include "Platform/OpenGL/OpenGLShader.h"
-#include <glm/gtc/matrix_transform.hpp>
+
 #include "imgui/imgui.h"
-#include <glm\glm\gtc\type_ptr.hpp>
+
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class ExampleLayer : public Bell::Layer
 {
@@ -20,7 +22,7 @@ public:
              0.0f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f,
         };
 
-        std::shared_ptr<Bell::VertexBuffer> vertexBuffer;
+        Bell::Ref<Bell::VertexBuffer> vertexBuffer;
         vertexBuffer.reset(Bell::VertexBuffer::Create(vertices, sizeof(vertices)));
 
         Bell::BufferLayout layout = {
@@ -32,7 +34,7 @@ public:
         m_VertexArray->AddVertexBuffer(vertexBuffer);
 
         uint32_t indices[3] = { 0, 1, 2 };
-        std::shared_ptr<Bell::IndexBuffer> indexBuffer;
+        Bell::Ref<Bell::IndexBuffer> indexBuffer;
         indexBuffer.reset(Bell::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
         m_VertexArray->SetIndexBuffer(indexBuffer);
 
@@ -45,7 +47,7 @@ public:
 
         m_SquareVA.reset(Bell::VertexArray::Create());
 
-        std::shared_ptr<Bell::VertexBuffer> squareVB;
+        Bell::Ref<Bell::VertexBuffer> squareVB;
         squareVB.reset(Bell::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
         squareVB->SetLayout({
             { Bell::ShaderDataType::Float3, "a_Position" },
@@ -53,7 +55,7 @@ public:
         m_SquareVA->AddVertexBuffer(squareVB);
 
         uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-        std::shared_ptr<Bell::IndexBuffer> squareIB;
+        Bell::Ref<Bell::IndexBuffer> squareIB;
         squareIB.reset(Bell::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
         m_SquareVA->SetIndexBuffer(squareIB);
 
@@ -186,11 +188,11 @@ public:
     void OnEvent(Bell::Event& event) override { }
 
 private:
-    std::shared_ptr<Bell::Shader> m_Shader;
-    std::shared_ptr <Bell::VertexArray> m_VertexArray;
+    Bell::Ref<Bell::Shader> m_Shader;
+    Bell::Ref<Bell::VertexArray> m_VertexArray;
 
-    std::shared_ptr<Bell::Shader> m_FlatColorShader;
-    std::shared_ptr<Bell::VertexArray> m_SquareVA;
+    Bell::Ref<Bell::Shader> m_FlatColorShader;
+    Bell::Ref<Bell::VertexArray> m_SquareVA;
 
     Bell::OrthographicCamera m_Camera;
     glm::vec3 m_CameraPosition;

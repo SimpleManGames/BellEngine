@@ -4,6 +4,8 @@
 #ifndef CORE_H
 #define CORE_H
 
+#include <memory>
+
 #define PLATFORM_WINDOWS 1
 #define PLATFORM_MAC 2
 #define PLATFORM_UNIX 3
@@ -47,5 +49,14 @@
 #define BIT(x) (1 << x)
 
 #define B_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
+namespace Bell
+{
+    template<typename T>
+    using Scope = std::unique_ptr<T>;
+ 
+    template<typename T>
+    using Ref = std::shared_ptr<T>;
+}
 
 #endif // !CORE_H

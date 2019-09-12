@@ -49,12 +49,12 @@ namespace Bell {
         {
             // Calculate delta time
             float time = (float)glfwGetTime();
-            Timestep timestep = time - m_LastFrameTime;
+            Timestep deltaTime = time - m_LastFrameTime;
             m_LastFrameTime = time;
 
             // Update each layer
             for (Layer* layer : m_LayerStack)
-                layer->OnUpdate(timestep);
+                layer->OnUpdate(deltaTime);
 
             m_ImGuiLayer->Begin();
             for (Layer* layer : m_LayerStack)

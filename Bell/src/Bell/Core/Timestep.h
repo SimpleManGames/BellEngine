@@ -1,3 +1,6 @@
+// Timestep Definition
+// -------------------
+
 #ifndef _TIMESTEP_H
 #define _TIMESTEP_H
 

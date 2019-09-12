@@ -22,7 +22,7 @@ namespace Bell
         // Acts when removed from a stack
         virtual void OnDetach() {}
         // Calls when the stack needs to be updated
-        virtual void OnUpdate(Timestep timeStep) {}
+        virtual void OnUpdate(Timestep deltaTime) {}
         virtual void OnImGuiRender() {}
         // Used for when the layer has an event to be handled
         virtual void OnEvent(Event& e) {}

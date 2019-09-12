@@ -126,23 +126,23 @@ public:
         m_FlatColorShader.reset(Bell::Shader::Create(flatColorVertexSrc, flatColorFragmentSrc));
     }
 
-    void OnUpdate(Bell::Timestep timestep) override
+    void OnUpdate(Bell::Timestep deltaTime) override
     {
         // Camera
         if (Bell::Input::IsKeyPressed(B_KEY_LEFT))
-            m_CameraPosition.x -= m_CameraMoveSpeed * timestep;
+            m_CameraPosition.x -= m_CameraMoveSpeed * deltaTime;
         else if (Bell::Input::IsKeyPressed(B_KEY_RIGHT))
-            m_CameraPosition.x += m_CameraMoveSpeed * timestep;
+            m_CameraPosition.x += m_CameraMoveSpeed * deltaTime;
 
         if (Bell::Input::IsKeyPressed(B_KEY_UP))
-            m_CameraPosition.y += m_CameraMoveSpeed * timestep;
+            m_CameraPosition.y += m_CameraMoveSpeed * deltaTime;
         else if (Bell::Input::IsKeyPressed(B_KEY_DOWN))
-            m_CameraPosition.y -= m_CameraMoveSpeed * timestep;
+            m_CameraPosition.y -= m_CameraMoveSpeed * deltaTime;
 
         if (Bell::Input::IsKeyPressed(B_KEY_A))
-            m_CameraRotation += m_CameraRotationSpeed * timestep;
+            m_CameraRotation += m_CameraRotationSpeed * deltaTime;
         if (Bell::Input::IsKeyPressed(B_KEY_D))
-            m_CameraRotation -= m_CameraRotationSpeed * timestep;
+            m_CameraRotation -= m_CameraRotationSpeed * deltaTime;
 
         Bell::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
         Bell::RenderCommand::Clear();

@@ -4,9 +4,10 @@
 #include "Bell/Renderer/Shader.h"
 #include <glm/glm.hpp>
 
+#define OpenGLShaderCast(x) std::dynamic_pointer_cast<Bell::OpenGLShader>(x)
+
 namespace Bell
 {
-#define OpenGLShaderCast(x) std::dynamic_pointer_cast<Bell::OpenGLShader>(x)
 
     class OpenGLShader : public Shader
     {

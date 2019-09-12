@@ -2,6 +2,8 @@
 
 #include "Platform/OpenGL/OpenGLShader.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include "imgui/imgui.h"
+#include <glm\glm\gtc\type_ptr.hpp>
 
 class ExampleLayer : public Bell::Layer
 {
@@ -154,19 +156,15 @@ public:
 
         glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
-        glm::vec4 redColor(0.8f, 0.3f, 0.2f, 1.0f);
-        glm::vec4 blueColor(0.2f, 0.3f, 0.8f, 1.0f);
+        OpenGLShaderCast(m_FlatColorShader)->Bind();
+        OpenGLShaderCast(m_FlatColorShader)->UploadUniformFloat4("u_Color", m_SquareColor);
+
         for (int y = 0; y < 20; y++)
         {
             for (int x = 0; x < 20; x++)
             {
                 glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
                 glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
-                if (x % 2 == 0)
-                    OpenGLShaderCast(m_FlatColorShader)->UploadUniformFloat4("u_Color", redColor);
-                else
-                    OpenGLShaderCast(m_FlatColorShader)->UploadUniformFloat4("u_Color", blueColor);
-
                 Bell::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
             }
         }
@@ -174,6 +172,15 @@ public:
         Bell::Renderer::Submit(m_Shader, m_VertexArray);
 
         Bell::Renderer::EndScene();
+    }
+
+    virtual void OnImGuiRender() override
+    {
+        ImGui::Begin("Settings");
+
+        ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
+
+        ImGui::End();
     }
 
     void OnEvent(Bell::Event& event) override { }
@@ -191,6 +198,8 @@ private:
 
     float m_CameraRotation = 0.0f;
     float m_CameraRotationSpeed = 45.0f;
+
+    glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 };
 
 // Default class for entry point

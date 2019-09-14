@@ -8,19 +8,28 @@ workspace "Bell"
         "Release",
         "Dist"
     }
+    
+    flags
+    {
+        "MultiProcessorCompile"
+    }
 
-outputdir = "%{cfg.buildcfg}-%{(cfg.system)}-%{cfg.architecture}"
+outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Bell/vendor/GLFW/include"
 IncludeDir["Glad"] = "Bell/vendor/Glad/include"
 IncludeDir["ImGui"] = "Bell/vendor/imgui"
 IncludeDir["glm"] = "Bell/vendor/glm"
-IncludeDir["enet"] = "Bell/vendor/enet/include"
+IncludeDir["stb_image"] = "Bell/vendor/stb_image"
 
-include "Bell/vendor/GLFW"
-include "Bell/vendor/Glad"
-include "Bell/vendor/imgui"
+group "Dependencies"
+    include "Bell/vendor/GLFW"
+    include "Bell/vendor/Glad"
+    include "Bell/vendor/imgui"
+
+group ""
 
 project "Bell"
     location "Bell"
@@ -28,7 +37,7 @@ project "Bell"
     language "C++"
     cppdialect "C++17"
     staticruntime "on"
-    
+
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -39,8 +48,10 @@ project "Bell"
     {
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp",
+        "%{prj.name}/vendor/stb_image/**.h",
+        "%{prj.name}/vendor/stb_image/**.cpp",
         "%{prj.name}/vendor/glm/glm/**.hpp",
-        "%{prj.name}/vendor/glm/glm/**.inl"
+        "%{prj.name}/vendor/glm/glm/**.inl",
     }
 
     defines
@@ -54,23 +65,20 @@ project "Bell"
         "%{prj.name}/vendor/spdlog/include",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
-        "%{IncludeDir.ImGui}",  
+        "%{IncludeDir.ImGui}",
         "%{IncludeDir.glm}",
-        "%{IncludeDir.enet}"
+        "%{IncludeDir.stb_image}"
     }
 
-    links
-    {
+    links 
+    { 
         "GLFW",
         "Glad",
         "ImGui",
-        "opengl32.lib",
-        --"ws2_32.lib",
-        --"winmm.lib"
+        "opengl32.lib"
     }
 
     filter "system:windows"
-        staticruntime "On"
         systemversion "latest"
 
         defines
@@ -84,7 +92,7 @@ project "Bell"
         defines "B_DEBUG"
         runtime "Debug"
         symbols "on"
-        
+
     filter "configurations:Release"
         defines "B_RELEASE"
         runtime "Release"
@@ -94,7 +102,7 @@ project "Bell"
         defines "B_DIST"
         runtime "Release"
         optimize "on"
-        
+
 project "Sandbox"
     location "Sandbox"
     kind "ConsoleApp"
@@ -113,8 +121,9 @@ project "Sandbox"
 
     includedirs
     {
-        "Bell/vendor/spdlog/include/",
-        "Bell/src/",
+        "Bell/vendor/spdlog/include",
+        "Bell/src",
+        "Bell/vendor",
         "%{IncludeDir.glm}"
     }
 
@@ -135,7 +144,7 @@ project "Sandbox"
         defines "B_DEBUG"
         runtime "Debug"
         symbols "on"
-        
+
     filter "configurations:Release"
         defines "B_RELEASE"
         runtime "Release"

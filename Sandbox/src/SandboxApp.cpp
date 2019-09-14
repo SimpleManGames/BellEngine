@@ -2,10 +2,9 @@
 
 #include "Platform/OpenGL/OpenGLShader.h"
 
-#include "imgui/imgui.h"
-
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include "imgui/imgui.h"
 
 class ExampleLayer : public Bell::Layer
 {
@@ -13,7 +12,6 @@ public:
     ExampleLayer()
         : Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition({ 0.0f,0.0f,0.0f })
     {
-
         m_VertexArray.reset(Bell::VertexArray::Create());
 
         float vertices[3 * 7] = {
@@ -38,11 +36,11 @@ public:
         indexBuffer.reset(Bell::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
         m_VertexArray->SetIndexBuffer(indexBuffer);
 
-        float squareVertices[3 * 4] = {
-             -0.5f, -0.5f, 0.0f,
-              0.5f, -0.5f, 0.0f,
-              0.5f,  0.5f, 0.0f,
-             -0.5f,  0.5f, 0.0f
+        float squareVertices[5 * 4] = {
+             -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+              0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+              0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+             -0.5f,  0.5f, 0.0f, 0.0f, 1.0f
         };
 
         m_SquareVA.reset(Bell::VertexArray::Create());
@@ -51,6 +49,7 @@ public:
         squareVB.reset(Bell::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
         squareVB->SetLayout({
             { Bell::ShaderDataType::Float3, "a_Position" },
+            { Bell::ShaderDataType::Float2, "a_TexCoord" },
             });
         m_SquareVA->AddVertexBuffer(squareVB);
 
@@ -128,6 +127,46 @@ public:
         )";
 
         m_FlatColorShader.reset(Bell::Shader::Create(flatColorVertexSrc, flatColorFragmentSrc));
+
+        std::string textureShaderVertexSrc = R"(
+            #version 330 core
+
+            layout(location = 0) in vec3 a_Position;
+            layout(location = 1) in vec2 a_TexCoord;
+
+            uniform mat4 u_ViewProjection;
+            uniform mat4 u_Transform;
+
+            out vec2 v_TexCoord;
+
+            void main()
+            {
+                v_TexCoord = a_TexCoord;
+                gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+            }
+        )";
+
+        std::string textureShaderFragmentSrc = R"(
+            #version 330 core
+            layout(location = 0) out vec4 color;
+
+            in vec2 v_TexCoord;
+
+            uniform sampler2D u_Texture;
+
+            void main()
+            {
+                color = texture(u_Texture, v_TexCoord);
+            }
+        )";
+
+        m_TextureShader.reset(Bell::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+
+        m_Texture = Bell::Texture2D::Create("assets/textures/bigmisssteak.png");
+        m_AlphaImageTest = Bell::Texture2D::Create("assets/textures/sheet.png");
+
+        OpenGLShaderCast(m_TextureShader)->Bind();
+        OpenGLShaderCast(m_TextureShader)->UploadUniformInt("u_Texture", 0);
     }
 
     void OnUpdate(Bell::Timestep deltaTime) override
@@ -171,7 +210,12 @@ public:
             }
         }
 
-        Bell::Renderer::Submit(m_Shader, m_VertexArray);
+        m_Texture->Bind();
+        Bell::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
+        m_AlphaImageTest->Bind();
+        Bell::Renderer::Submit(m_TextureShader, m_SquareVA,
+            glm::scale(glm::mat4(1.0f), glm::vec3(2.72f, 1.28f, 1.0f)));
 
         Bell::Renderer::EndScene();
     }
@@ -191,8 +235,10 @@ private:
     Bell::Ref<Bell::Shader> m_Shader;
     Bell::Ref<Bell::VertexArray> m_VertexArray;
 
-    Bell::Ref<Bell::Shader> m_FlatColorShader;
+    Bell::Ref<Bell::Shader> m_FlatColorShader, m_TextureShader;
     Bell::Ref<Bell::VertexArray> m_SquareVA;
+
+    Bell::Ref<Bell::Texture> m_Texture, m_AlphaImageTest;
 
     Bell::OrthographicCamera m_Camera;
     glm::vec3 m_CameraPosition;

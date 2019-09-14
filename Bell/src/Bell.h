@@ -26,6 +26,7 @@
 
 #include "Bell/Renderer/Buffer.h"
 #include "Bell/Renderer/Shader.h"
+#include "Bell/Renderer/Texture.h"
 #include "Bell/Renderer/VertexArray.h"
 
 #include "Bell/Renderer/OrthographicCamera.h"

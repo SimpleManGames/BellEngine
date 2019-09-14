@@ -52,6 +52,9 @@
 
 namespace Bell
 {
+    /// Pre-defining types for changing later for ease of interation
+    ///
+
     template<typename T>
     using Scope = std::unique_ptr<T>;
  

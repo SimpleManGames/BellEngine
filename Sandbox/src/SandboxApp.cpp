@@ -2,9 +2,10 @@
 
 #include "Platform/OpenGL/OpenGLShader.h"
 
+#include "imgui/imgui.h"
+
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "imgui/imgui.h"
 
 class ExampleLayer : public Bell::Layer
 {
@@ -92,50 +93,16 @@ public:
             }
         )";
 
-        m_Shader.reset(Bell::Shader::Create(vertexSrc, fragmentSrc));
+        m_Shader = Bell::Shader::Create("VertexPosColor", vertexSrc, fragmentSrc);
 
-
-        std::string flatColorVertexSrc = R"(
-            #version 330 core
-
-            layout(location = 0) in vec3 a_Position;
-
-            uniform mat4 u_ViewProjection;
-            uniform mat4 u_Transform;
-
-            out vec3 v_Position;
-            out vec4 v_Color;
-
-            void main()
-            {
-                v_Position = a_Position;
-                gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
-            }
-        )";
-
-        std::string flatColorFragmentSrc = R"(
-            #version 330 core
-            layout(location = 0) out vec4 color;
-
-            in vec3 v_Position;
-
-            uniform vec4 u_Color;
-
-            void main()
-            {
-                color = u_Color;
-            }
-        )";
-
-        m_FlatColorShader.reset(Bell::Shader::Create(flatColorVertexSrc, flatColorFragmentSrc));
-        
-        m_TextureShader.reset(Bell::Shader::Create("assets/shaders/Texture.glsl"));
+        auto flatColorShader = m_ShaderLibrary.Load("FlatColor", "assets/shaders/FlatColor.glsl");        
+        auto textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 
         m_Texture = Bell::Texture2D::Create("assets/textures/bigmisssteak.png");
         m_AlphaImageTest = Bell::Texture2D::Create("assets/textures/sheet.png");
 
-        OpenGLShaderCast(m_TextureShader)->Bind();
-        OpenGLShaderCast(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+        OpenGLShaderCast(textureShader)->Bind();
+        OpenGLShaderCast(textureShader)->UploadUniformInt("u_Texture", 0);
     }
 
     void OnUpdate(Bell::Timestep deltaTime) override
@@ -166,8 +133,10 @@ public:
 
         glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
-        OpenGLShaderCast(m_FlatColorShader)->Bind();
-        OpenGLShaderCast(m_FlatColorShader)->UploadUniformFloat4("u_Color", m_SquareColor);
+        auto flatColorShader = m_ShaderLibrary.Get("FlatColor");
+
+        flatColorShader->Bind();
+        OpenGLShaderCast(flatColorShader)->UploadUniformFloat4("u_Color", m_SquareColor);
 
         for (int y = 0; y < 20; y++)
         {
@@ -175,16 +144,17 @@ public:
             {
                 glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
                 glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
-                Bell::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
+                Bell::Renderer::Submit(flatColorShader, m_SquareVA, transform);
             }
         }
 
+        auto textureShader = m_ShaderLibrary.Get("Texture");
+
         m_Texture->Bind();
-        Bell::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+        Bell::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
         m_AlphaImageTest->Bind();
-        Bell::Renderer::Submit(m_TextureShader, m_SquareVA,
-            glm::scale(glm::mat4(1.0f), glm::vec3(2.72f, 1.28f, 1.0f)));
+        Bell::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(2.72f, 1.28f, 1.0f)));
 
         Bell::Renderer::EndScene();
     }
@@ -201,10 +171,10 @@ public:
     void OnEvent(Bell::Event& event) override { }
 
 private:
+    Bell::ShaderLibrary m_ShaderLibrary;
     Bell::Ref<Bell::Shader> m_Shader;
     Bell::Ref<Bell::VertexArray> m_VertexArray;
 
-    Bell::Ref<Bell::Shader> m_FlatColorShader, m_TextureShader;
     Bell::Ref<Bell::VertexArray> m_SquareVA;
 
     Bell::Ref<Bell::Texture> m_Texture, m_AlphaImageTest;

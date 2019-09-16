@@ -85,7 +85,9 @@ project "Bell"
         {
             "B_PLATFORM_WINDOWS",
             "B_BUILD_DLL",
-            "GLFW_INCLUDE_NONE"
+            "GLFW_INCLUDE_NONE",
+            "UNICODE",
+            "_UNICODE"
         }
 
     filter "configurations:Debug"
@@ -137,7 +139,9 @@ project "Sandbox"
 
         defines
         {
-            "B_PLATFORM_WINDOWS"
+            "B_PLATFORM_WINDOWS",
+            "UNICODE",
+            "_UNICODE"
         }
 
     filter "configurations:Debug"

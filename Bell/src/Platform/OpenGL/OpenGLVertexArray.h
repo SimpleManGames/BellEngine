@@ -1,5 +1,5 @@
-#ifndef OPENGL_VERTEX_ARRAY_H
-#define OPENGL_VERTEX_ARRAY_H
+#ifndef _OPENGL_VERTEX_ARRAY_H
+#define _OPENGL_VERTEX_ARRAY_H
 
 #include "Bell/Renderer/VertexArray.h"
 
@@ -25,4 +25,4 @@ namespace Bell {
     };
 }
 
-#endif // !OPENGL_VERTEX_ARRAY_H
+#endif // !_OPENGL_VERTEX_ARRAY_H

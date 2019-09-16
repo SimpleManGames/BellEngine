@@ -1,8 +1,8 @@
 // Window OS specific definition for the window application 
 // --------------------------------------------------------
 
-#ifndef WINDOWS_WINDOW_H
-#define WINDOWS_WINDOW_H
+#ifndef _WINDOWS_WINDOW_H
+#define _WINDOWS_WINDOW_H
 
 #include "Bell/Window.h"
 #include "Bell/Renderer/GraphicsContext.h"
@@ -54,4 +54,4 @@ namespace Bell
     };
 }
 
-#endif // !WINDOWS_WINDOW_H
+#endif // !_WINDOWS_WINDOW_H

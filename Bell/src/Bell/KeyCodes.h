@@ -1,5 +1,5 @@
-#ifndef KEYCODES_H
-#define KEYCODES_H
+#ifndef _KEYCODES_H
+#define _KEYCODES_H
 
 // From glfw3.h
 
@@ -130,4 +130,4 @@
 #define B_KEY_LAST               B_KEY_MENU
 
 
-#endif // !KEYCODES_H
+#endif // !_KEYCODES_H

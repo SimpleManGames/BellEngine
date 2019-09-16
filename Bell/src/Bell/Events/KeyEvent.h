@@ -1,5 +1,5 @@
-#ifndef KEY_EVENT_H
-#define KEY_EVENT_H
+#ifndef _KEY_EVENT_H
+#define _KEY_EVENT_H
 
 #include "Event.h"
 
@@ -72,4 +72,4 @@ namespace Bell {
     };
 }
 
-#endif // !KEY_EVENT_H
+#endif // !_KEY_EVENT_H

@@ -1,8 +1,8 @@
 // Windows Implementation of Input
 // -------------------------------
 
-#ifndef WINDOWS_INPUT_H
-#define WINDOWS_INPUT_H
+#ifndef _WINDOWS_INPUT_H
+#define _WINDOWS_INPUT_H
 
 #include "Bell/Input.h"
 
@@ -20,4 +20,4 @@ namespace Bell
     };
 }
 
-#endif // !WINDOWS_INPUT_H
+#endif // !_WINDOWS_INPUT_H

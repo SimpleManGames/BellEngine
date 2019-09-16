@@ -1,8 +1,8 @@
 // Core Defines
 // ------------
 
-#ifndef CORE_H
-#define CORE_H
+#ifndef _CORE_H
+#define _CORE_H
 
 #include <memory>
 
@@ -62,4 +62,4 @@ namespace Bell
     using Ref = std::shared_ptr<T>;
 }
 
-#endif // !CORE_H
+#endif // !_CORE_H

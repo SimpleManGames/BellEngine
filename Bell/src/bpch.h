@@ -1,8 +1,8 @@
 // Precompiled Header for Bell Engine Use
 // --------------------------------------
 
-#ifndef BPCH_H
-#define BPCH_H
+#ifndef _BPCH_H
+#define _BPCH_H
 
 
 // ----- Common Engine Includes -----
@@ -34,4 +34,4 @@
     #include <Windows.h>
 #endif
 
-#endif // !BPCH_H
+#endif // !_BPCH_H

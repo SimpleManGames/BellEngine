@@ -2,8 +2,8 @@
 // Single layer for the Layer Stack
 // --------------------------------
 
-#ifndef LAYER_H
-#define LAYER_H
+#ifndef _LAYER_H
+#define _LAYER_H
 
 #include "Bell/Core.h"
 #include "Bell/Core/Timestep.h"
@@ -36,4 +36,4 @@ namespace Bell
 
 }
 
-#endif // !LAYER_H
+#endif // !_LAYER_H

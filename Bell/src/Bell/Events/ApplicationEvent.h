@@ -1,8 +1,8 @@
 // Application Events Definitions
 // ------------------------------
 
-#ifndef APPLICATION_EVENT_H
-#define APPLICATION_EVENT_H
+#ifndef _APPLICATION_EVENT_H
+#define _APPLICATION_EVENT_H
 
 #include "Event.h"
 
@@ -81,4 +81,4 @@ namespace Bell
 }
 
 // Header Guard
-#endif
+#endif // !_APPLICATION_EVENT_H

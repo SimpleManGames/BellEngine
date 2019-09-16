@@ -1,8 +1,8 @@
 // Application Definition
 // ----------------------
 
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#ifndef _APPLICATION_H
+#define _APPLICATION_H
 
 #include "Core.h"
 #include "Window.h"
@@ -52,4 +52,4 @@ namespace Bell
     Application* CreateApplication();
 }
 
-#endif // !APPLICATION_H
+#endif // !_APPLICATION_H

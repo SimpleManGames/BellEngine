@@ -2,8 +2,8 @@
 // Each supported Rendering Library will have it's own implementation
 // ------------------------------------------------------------------
 
-#ifndef GRAPHICSCONTEXT_H
-#define GRAPHICSCONTEXT_H
+#ifndef _GRAPHICSCONTEXT_H
+#define _GRAPHICSCONTEXT_H
 
 namespace Bell
 {
@@ -15,4 +15,4 @@ namespace Bell
     };
 }
 
-#endif // !GRAPHICSCONTEXT_H
+#endif // !_GRAPHICSCONTEXT_H

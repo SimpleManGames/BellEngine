@@ -2,8 +2,8 @@
 // Each OS will have their own implemention inheriting from this
 // -------------------------------------------------------------
 
-#ifndef INPUT_H
-#define INPUT_H
+#ifndef _INPUT_H
+#define _INPUT_H
 
 #include "Bell/Core.h"
 
@@ -40,4 +40,4 @@ namespace Bell
     };
 }
 
-#endif // !INPUT_H
+#endif // !_INPUT_H

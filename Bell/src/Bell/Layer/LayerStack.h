@@ -2,8 +2,8 @@
 // Used for managing game elements in an easy queue way
 // ----------------------------------------------------
 
-#ifndef LAYER_STACK_H
-#define LAYER_STACK_H
+#ifndef _LAYER_STACK_H
+#define _LAYER_STACK_H
 
 #include "Bell/Core.h"
 #include "Layer.h"
@@ -44,4 +44,4 @@ namespace Bell
     };
 }
 
-#endif // !LAYER_STACK_H
+#endif // !_LAYER_STACK_H

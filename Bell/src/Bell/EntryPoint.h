@@ -1,8 +1,8 @@
 // Entry Point definition for application using the Bell Engine
 // ------------------------------------------------------------
 
-#ifndef ENTRY_POINT_H
-#define ENTRY_POINT_H
+#ifndef _ENTRY_POINT_H
+#define _ENTRY_POINT_H
 
 #ifdef B_PLATFORM_WINDOWS
 
@@ -24,4 +24,4 @@ int main(int argc, char** argv)
 
 #endif // !B_PLATFORM_WINDOWS
 
-#endif // !ENTRY_POINT_H
+#endif // !_ENTRY_POINT_H

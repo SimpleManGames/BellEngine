@@ -2,8 +2,8 @@
 // Specific layer for ImGUI elements
 // ---------------------------------
 
-#ifndef IMGUI_LAYER
-#define IMGUI_LAYER
+#ifndef _IMGUI_LAYER_H
+#define _IMGUI_LAYER_H
 
 #include "Bell/KeyCodes.h"
 #include "Bell/MouseButtonCodes.h"
@@ -32,4 +32,4 @@ namespace Bell
     };
 }
 
-#endif // !IMGUI_LAYER
+#endif // !_IMGUI_LAYER_H

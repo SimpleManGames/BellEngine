@@ -1,8 +1,8 @@
 // Event Definition
 // ----------------
 
-#ifndef EVENT_H
-#define EVENT_H
+#ifndef _EVENT_H
+#define _EVENT_H
 
 #include "bpch.h"
 #include "Bell/Core.h"
@@ -90,4 +90,4 @@ namespace Bell {
     }
 }
 
-#endif // !EVENT_H
+#endif // !_EVENT_H

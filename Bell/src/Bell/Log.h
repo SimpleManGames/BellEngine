@@ -1,8 +1,8 @@
 // Logger Wrap
 // -----------
 
-#ifndef LOG_H
-#define LOG_H
+#ifndef _LOG_H
+#define _LOG_H
 
 #include "Core.h"
 #include "spdlog/spdlog.h"
@@ -40,4 +40,4 @@ namespace Bell
 #define B_ERROR(...) ::Bell::Log::GetClientLogger()->error(__VA_ARGS__)
 #define B_FATAL(...) ::Bell::Log::GetClientLogger()->fatal(__VA_ARGS__)
 
-#endif // !LOG_H
+#endif // !_LOG_H

@@ -1,5 +1,5 @@
-#ifndef MOUSE_EVENT_H
-#define MOUSE_EVENT_H
+#ifndef _MOUSE_EVENT_H
+#define _MOUSE_EVENT_H
 
 #include "Event.h"
 
@@ -96,4 +96,4 @@ namespace Bell {
     };
 }
 
-#endif // !MOUSE_EVENT_H
+#endif // !_MOUSE_EVENT_H

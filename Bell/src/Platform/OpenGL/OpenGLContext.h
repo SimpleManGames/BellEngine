@@ -1,8 +1,8 @@
 // OpenGL's version of the context abstraction 
 // -------------------------------------------
 
-#ifndef OPENGLCONTEXT_H
-#define OPENGLCONTEXT_H
+#ifndef _OPENGLCONTEXT_H
+#define _OPENGLCONTEXT_H
 
 #include "Bell/Renderer/GraphicsContext.h"
 
@@ -23,4 +23,4 @@ namespace Bell
     };
 }
 
-#endif // !OPENGLCONTEXT_H
+#endif // !_OPENGLCONTEXT_H

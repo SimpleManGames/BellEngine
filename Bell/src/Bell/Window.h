@@ -2,8 +2,8 @@
 // Each OS will have their own window using this class
 // ---------------------------------------------------
 
-#ifndef WINDOW_H
-#define WINDOW_H
+#ifndef _WINDOW_H
+#define _WINDOW_H
 
 #include "bpch.h"
 
@@ -51,4 +51,4 @@ namespace Bell
     };
 }
 
-#endif // !WINDOW_H
+#endif // !_WINDOW_H

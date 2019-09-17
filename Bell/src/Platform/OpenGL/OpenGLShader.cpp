@@ -175,9 +175,11 @@ namespace Bell
             return;
         }
 
-        for (auto id : glShaderIDs)
+        for (auto id : glShaderIDs) {
             // Always detach shaders after a successful link.
             glDetachShader(program, id);
+            glDeleteShader(id);
+        }
 
         m_RendererID = program;
     }

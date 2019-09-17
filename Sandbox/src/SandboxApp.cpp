@@ -93,6 +93,7 @@ public:
 
         m_Camera.SetPosition(m_CameraPosition);
         m_Camera.SetRotation(m_CameraRotation);
+        m_Camera.SetZoom(m_CameraZoom);
 
         Bell::Renderer::BeginScene(m_Camera);
 
@@ -103,9 +104,9 @@ public:
         flatColorShader->Bind();
         OpenGLShaderCast(flatColorShader)->UploadUniformFloat4("u_Color", m_SquareColor);
 
-        for (int y = 0; y < 20; y++)
+        for (int y = 0; y < m_SquareGridX; y++)
         {
-            for (int x = 0; x < 20; x++)
+            for (int x = 0; x < m_SquareGridY; x++)
             {
                 glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
                 glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
@@ -129,11 +130,26 @@ public:
         ImGui::Begin("Settings");
 
         ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
+        ImGui::DragInt("Grid X", &m_SquareGridX, 1.0f, 1, 100);
+        ImGui::DragInt("Grid Y", &m_SquareGridY, 1.0f, 1, 100);
 
         ImGui::End();
     }
 
-    void OnEvent(Bell::Event& event) override { }
+    void OnEvent(Bell::Event& event) override {
+        if (event.GetEventType() == Bell::EventType::MouseScrolled)
+        {
+            Bell::MouseScrolledEvent& e = (Bell::MouseScrolledEvent&)event;
+            if (e.GetYOffset() <= -1)
+            {
+                m_CameraZoom -= m_CameraZoomSpeed;
+            }
+            if (e.GetYOffset() >= 1)
+            {
+                m_CameraZoom += m_CameraZoomSpeed;
+            }
+        }
+    }
 
 private:
     Bell::ShaderLibrary m_ShaderLibrary;
@@ -143,12 +159,17 @@ private:
 
     Bell::Ref<Bell::Texture> m_Texture, m_AlphaImageTest;
 
+    int m_SquareGridX = 20, m_SquareGridY = 20;
+
     Bell::OrthographicCamera m_Camera;
     glm::vec3 m_CameraPosition;
     float m_CameraMoveSpeed = 5.0f;
 
     float m_CameraRotation = 0.0f;
     float m_CameraRotationSpeed = 45.0f;
+
+    float m_CameraZoom = 1.0f;
+    float m_CameraZoomSpeed = 0.1f;
 
     glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 };

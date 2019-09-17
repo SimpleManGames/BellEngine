@@ -4,10 +4,9 @@
 #include "Bell/Application.h"
 #include <GLFW/glfw3.h>
 
-
 namespace Bell
 {
-    Input* Input::s_Instance = new WindowsInput();
+    Bell::Scope<Input> Input::s_Instance(new WindowsInput());
 
     bool WindowsInput::IsKeyPressedImpl(int keycode)
     {

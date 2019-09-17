@@ -5,7 +5,7 @@
 
 namespace Bell
 {
-    Renderer::SceneData* Renderer::s_SceneData = new Renderer::SceneData;
+    Scope<Renderer::SceneData> Renderer::s_SceneData(new Renderer::SceneData);
 
     void Renderer::Init()
     {
@@ -26,7 +26,7 @@ namespace Bell
         OpenGLShaderCast(shader)->Bind();
         OpenGLShaderCast(shader)->UploadUniformMat4("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
         OpenGLShaderCast(shader)->UploadUniformMat4("u_Transform", transform);
-        
+
         vertexArray->Bind();
         RenderCommand::DrawIndexed(vertexArray);
     }

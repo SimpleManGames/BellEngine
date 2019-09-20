@@ -29,7 +29,7 @@
 #include "Bell/Renderer/Texture.h"
 #include "Bell/Renderer/VertexArray.h"
 
-#include "Bell/Renderer/OrthographicCamera.h"
+#include "Bell/Renderer/Camera/OrthographicCamera.h"
 
 // ---- Entry Point Definition ----
 // --------------------------------

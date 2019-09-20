@@ -3,7 +3,7 @@
 
 #include "RenderCommand.h"
 #include "Shader.h"
-#include "OrthographicCamera.h"
+#include "Camera/OrthographicCamera.h"
 
 namespace Bell
 {

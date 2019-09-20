@@ -8,5 +8,6 @@ namespace Bell
     Camera::Camera(glm::mat4 projectionMatrix, glm::mat4 viewMatrix)
         : m_ProjectionMatrix(projectionMatrix), m_ViewMatrix(viewMatrix)
     {
+        m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
     }
 }

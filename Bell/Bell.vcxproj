@@ -154,12 +154,12 @@
     <ClInclude Include="src\Bell\Events\KeyEvent.h" />
     <ClInclude Include="src\Bell\Events\MouseEvent.h" />
     <ClInclude Include="src\Bell\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\Bell\Input.h" />
-    <ClInclude Include="src\Bell\KeyCodes.h" />
+    <ClInclude Include="src\Bell\Input\Input.h" />
+    <ClInclude Include="src\Bell\Input\KeyCodes.h" />
     <ClInclude Include="src\Bell\Layer\Layer.h" />
     <ClInclude Include="src\Bell\Layer\LayerStack.h" />
     <ClInclude Include="src\Bell\Log.h" />
-    <ClInclude Include="src\Bell\MouseButtonCodes.h" />
+    <ClInclude Include="src\Bell\Input\MouseButtonCodes.h" />
     <ClInclude Include="src\Bell\Renderer\Buffer.h" />
     <ClInclude Include="src\Bell\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Bell\Renderer\Camera\OrthographicCamera.h" />

@@ -5,7 +5,7 @@
 
 #include "Bell/Renderer/Renderer.h"
 
-#include "Input.h"
+#include "Input/Input.h"
 
 #include <GLFW/glfw3.h>
 

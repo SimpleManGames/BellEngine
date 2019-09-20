@@ -12,9 +12,9 @@
 #include "Bell/Core/Timestep.h"
 
 // Input
-#include "Bell/Input.h"
-#include "Bell/KeyCodes.h"
-#include "Bell/MouseButtonCodes.h"
+#include "Bell/Input/Input.h"
+#include "Bell/Input/KeyCodes.h"
+#include "Bell/Input/MouseButtonCodes.h"
 
 #include "Bell/ImGui/ImGuiLayer.h"
 

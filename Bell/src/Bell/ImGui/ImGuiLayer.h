@@ -5,8 +5,8 @@
 #ifndef _IMGUI_LAYER_H
 #define _IMGUI_LAYER_H
 
-#include "Bell/KeyCodes.h"
-#include "Bell/MouseButtonCodes.h"
+#include "Bell/Input/KeyCodes.h"
+#include "Bell/Input/MouseButtonCodes.h"
 #include "Bell/Layer/Layer.h"
 #include "Bell/Events/KeyEvent.h"
 #include "Bell/Events/MouseEvent.h"

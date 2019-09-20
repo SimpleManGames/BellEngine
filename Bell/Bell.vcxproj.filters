@@ -87,12 +87,6 @@
     <ClInclude Include="src\Bell\ImGui\ImGuiLayer.h">
       <Filter>src\Bell\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\Bell\Input.h">
-      <Filter>src\Bell</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bell\KeyCodes.h">
-      <Filter>src\Bell</Filter>
-    </ClInclude>
     <ClInclude Include="src\Bell\Layer\Layer.h">
       <Filter>src\Bell\Layer</Filter>
     </ClInclude>
@@ -100,9 +94,6 @@
       <Filter>src\Bell\Layer</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\Log.h">
-      <Filter>src\Bell</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bell\MouseButtonCodes.h">
       <Filter>src\Bell</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\Renderer\Buffer.h">
@@ -1250,6 +1241,15 @@
     </ClInclude>
     <ClInclude Include="src\Bell\Renderer\Camera\OrthographicCamera.h">
       <Filter>src\Bell\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Input\Input.h">
+      <Filter>src\Bell</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Input\KeyCodes.h">
+      <Filter>src\Bell</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Input\MouseButtonCodes.h">
+      <Filter>src\Bell</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

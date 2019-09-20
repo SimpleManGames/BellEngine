@@ -1251,6 +1251,7 @@
     <ClInclude Include="src\Bell\Input\MouseButtonCodes.h">
       <Filter>src\Bell</Filter>
     </ClInclude>
+    <ClInclude Include="src\Bell\OrthographicCameraController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Application.cpp">
@@ -1325,5 +1326,6 @@
     <ClCompile Include="src\Bell\Renderer\Camera\OrthographicCamera.cpp">
       <Filter>src\Bell\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Bell\OrthographicCameraController.cpp" />
   </ItemGroup>
 </Project>

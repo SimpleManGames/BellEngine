@@ -11,7 +11,7 @@ class ExampleLayer : public Bell::Layer
 {
 public:
     ExampleLayer()
-        : Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition({ 0.0f,0.0f,0.0f })
+        : Layer("Example"), m_CameraController(1200.0f / 720.0f, false)
     {
         m_VertexArray.reset(Bell::VertexArray::Create());
 
@@ -72,30 +72,14 @@ public:
 
     void OnUpdate(Bell::Timestep deltaTime) override
     {
-        // Camera
-        if (Bell::Input::IsKeyPressed(B_KEY_LEFT))
-            m_CameraPosition.x -= m_CameraMoveSpeed * deltaTime;
-        else if (Bell::Input::IsKeyPressed(B_KEY_RIGHT))
-            m_CameraPosition.x += m_CameraMoveSpeed * deltaTime;
+        // Update
+        m_CameraController.OnUpdate(deltaTime);
 
-        if (Bell::Input::IsKeyPressed(B_KEY_UP))
-            m_CameraPosition.y += m_CameraMoveSpeed * deltaTime;
-        else if (Bell::Input::IsKeyPressed(B_KEY_DOWN))
-            m_CameraPosition.y -= m_CameraMoveSpeed * deltaTime;
-
-        if (Bell::Input::IsKeyPressed(B_KEY_A))
-            m_CameraRotation += m_CameraRotationSpeed * deltaTime;
-        if (Bell::Input::IsKeyPressed(B_KEY_D))
-            m_CameraRotation -= m_CameraRotationSpeed * deltaTime;
-
+        // Render
         Bell::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
         Bell::RenderCommand::Clear();
 
-        m_Camera.SetPosition(m_CameraPosition);
-        m_Camera.SetRotation(m_CameraRotation);
-        m_Camera.SetZoom(m_CameraZoom);
-
-        Bell::Renderer::BeginScene(m_Camera);
+        Bell::Renderer::BeginScene(m_CameraController.GetCamera());
 
         glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
@@ -137,18 +121,7 @@ public:
     }
 
     void OnEvent(Bell::Event& event) override {
-        if (event.GetEventType() == Bell::EventType::MouseScrolled)
-        {
-            Bell::MouseScrolledEvent& e = (Bell::MouseScrolledEvent&)event;
-            if (e.GetYOffset() <= -1)
-            {
-                m_CameraZoom -= m_CameraZoomSpeed;
-            }
-            if (e.GetYOffset() >= 1)
-            {
-                m_CameraZoom += m_CameraZoomSpeed;
-            }
-        }
+        m_CameraController.OnEvent(event);
     }
 
 private:
@@ -161,16 +134,8 @@ private:
 
     int m_SquareGridX = 20, m_SquareGridY = 20;
 
-    Bell::OrthographicCamera m_Camera;
-    glm::vec3 m_CameraPosition;
-    float m_CameraMoveSpeed = 5.0f;
-
-    float m_CameraRotation = 0.0f;
-    float m_CameraRotationSpeed = 45.0f;
-
-    float m_CameraZoom = 1.0f;
-    float m_CameraZoomSpeed = 0.1f;
-
+    Bell::OrthographicCameraController m_CameraController;
+    
     glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 };
 

@@ -23,13 +23,14 @@
 
 #include "Bell/Renderer/Renderer.h"
 #include "Bell/Renderer/RenderCommand.h"
+#include "Bell/Renderer/Camera/OrthographicCamera.h"
 
 #include "Bell/Renderer/Buffer.h"
 #include "Bell/Renderer/Shader.h"
 #include "Bell/Renderer/Texture.h"
 #include "Bell/Renderer/VertexArray.h"
 
-#include "Bell/Renderer/Camera/OrthographicCamera.h"
+#include "Bell/OrthographicCameraController.h"
 
 // ---- Entry Point Definition ----
 // --------------------------------

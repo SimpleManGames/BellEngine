@@ -1252,6 +1252,7 @@
       <Filter>src\Bell</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\OrthographicCameraController.h" />
+    <ClInclude Include="src\Bell\Renderer\Camera\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Application.cpp">
@@ -1327,5 +1328,6 @@
       <Filter>src\Bell\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Bell\OrthographicCameraController.cpp" />
+    <ClCompile Include="src\Bell\Renderer\Camera\Camera.cpp" />
   </ItemGroup>
 </Project>

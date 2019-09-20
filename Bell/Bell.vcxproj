@@ -162,6 +162,7 @@
     <ClInclude Include="src\Bell\Input\MouseButtonCodes.h" />
     <ClInclude Include="src\Bell\OrthographicCameraController.h" />
     <ClInclude Include="src\Bell\Renderer\Buffer.h" />
+    <ClInclude Include="src\Bell\Renderer\Camera\Camera.h" />
     <ClInclude Include="src\Bell\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Bell\Renderer\Camera\OrthographicCamera.h" />
     <ClInclude Include="src\Bell\Renderer\RenderCommand.h" />
@@ -553,6 +554,7 @@
     <ClCompile Include="src\Bell\Log.cpp" />
     <ClCompile Include="src\Bell\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Bell\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Bell\Renderer\Camera\Camera.cpp" />
     <ClCompile Include="src\Bell\Renderer\Camera\OrthographicCamera.cpp" />
     <ClCompile Include="src\Bell\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Bell\Renderer\Renderer.cpp" />

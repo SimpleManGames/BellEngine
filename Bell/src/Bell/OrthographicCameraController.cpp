@@ -7,35 +7,40 @@
 namespace Bell
 {
     OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotationEnabled)
-        : m_AspectRatio(aspectRatio), m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio* m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel), m_RotationEnabled(rotationEnabled)
+        : m_AspectRatio(aspectRatio), 
+        m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio* m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel), 
+        m_RotationEnabled(rotationEnabled)
     {
     }
 
     void OrthographicCameraController::OnUpdate(Timestep deltaTime)
     {
+        glm::vec3 position = GetPosition();
+        float rotation = GetRotation();
+
         // Camera
         if (Input::IsKeyPressed(B_KEY_A))
-            m_Position.x -= m_TranslationSpeed * deltaTime;
+            position.x -= m_TranslationSpeed * deltaTime;
         else if (Input::IsKeyPressed(B_KEY_D))
-            m_Position.x += m_TranslationSpeed * deltaTime;
+            position.x += m_TranslationSpeed * deltaTime;
 
         if (Input::IsKeyPressed(B_KEY_W))
-            m_Position.y += m_TranslationSpeed * deltaTime;
+            position.y += m_TranslationSpeed * deltaTime;
         else if (Input::IsKeyPressed(B_KEY_S))
-            m_Position.y -= m_TranslationSpeed * deltaTime;
+            position.y -= m_TranslationSpeed * deltaTime;
 
         if (m_RotationEnabled) {
             if (Input::IsKeyPressed(B_KEY_Q))
-                m_Rotation += m_RotationSpeed * deltaTime;
+                rotation += m_RotationSpeed * deltaTime;
             if (Input::IsKeyPressed(B_KEY_E))
-                m_Rotation -= m_RotationSpeed * deltaTime;
+                rotation -= m_RotationSpeed * deltaTime;
         }
 
         // Scale the speed by our far we are zoomed
         m_TranslationSpeed = m_ZoomLevel;
 
-        m_Camera.SetPosition(m_Position);
-        m_Camera.SetRotation(m_Rotation);
+        m_Camera.SetPosition(position);
+        m_Camera.SetRotation(rotation);
     }
 
     void OrthographicCameraController::OnEvent(Event& e)

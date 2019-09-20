@@ -20,6 +20,20 @@ namespace Bell
         OrthographicCamera& GetCamera() { return m_Camera; }
         const OrthographicCamera& GetCamera() const { return m_Camera; }
 
+        const glm::vec3& GetPosition() const { return m_Camera.GetPosition(); }
+        void SetPosition(const glm::vec3& position) { m_Camera.SetPosition(position); }
+
+        float& GetRotation() { return m_Camera.GetRotation(); }
+        const float& GetRotation() const { return m_Camera.GetRotation(); }
+        void SetRotation(const float rotation) { m_Camera.SetRotation(rotation); }
+
+        float& GetAspectRatio() { return m_AspectRatio; }
+        const float& GetAspectRatio() const { return m_AspectRatio; }
+
+        float& GetZoomLevel() { return m_ZoomLevel; }
+        const float& GetZoomLevel() const { return m_ZoomLevel; }
+        void SetZoomLevel(float zoomLevel) { m_ZoomLevel = zoomLevel; }
+
     private:
         bool OnMouseScrolled(MouseScrolledEvent& e);
         bool OnWindowResize(WindowResizeEvent& e);
@@ -32,9 +46,6 @@ namespace Bell
 
     private:
         OrthographicCamera m_Camera;
-
-        glm::vec3 m_Position = { 0.0f, 0.0f, 0.0f };
-        float m_Rotation = 0.0f;
         float m_TranslationSpeed = 5.0f, m_RotationSpeed = 180.0f;
     };
 }

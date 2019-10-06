@@ -6,7 +6,7 @@
 
 namespace Bell
 {
-    Bell::Scope<Input> Input::s_Instance(new WindowsInput());
+    Bell::Scope<Input> Input::s_Instance = CreateScope<WindowsInput>();
 
     bool WindowsInput::IsKeyPressedImpl(int keycode)
     {

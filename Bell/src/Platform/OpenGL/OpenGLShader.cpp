@@ -147,6 +147,8 @@ namespace Bell
             glShaderIDs[glShaderIDIndex++] = shader;
         }
 
+        m_RendererID = program;
+
         // Link our program
         glLinkProgram(program);
 
@@ -180,8 +182,6 @@ namespace Bell
             glDetachShader(program, id);
             glDeleteShader(id);
         }
-
-        m_RendererID = program;
     }
 
     void OpenGLShader::Bind() const

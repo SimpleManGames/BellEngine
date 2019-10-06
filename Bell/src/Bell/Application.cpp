@@ -34,7 +34,9 @@ namespace Bell {
 #endif
     }
 
-    Application::~Application() {}
+    Application::~Application() {
+        m_ApplicationState = ApplicationState::Destroying;
+    }
 
     void Application::OnEvent(Event& e) {
         // Makes a dispatcher

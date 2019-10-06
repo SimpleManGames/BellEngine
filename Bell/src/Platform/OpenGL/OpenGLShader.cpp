@@ -93,9 +93,11 @@ namespace Bell
 
             // Find next line
             size_t nextLinePos = source.find_first_not_of("\r\n", eol);
+            B_CORE_ASSERT(nextLinePos != std::string::npos, "Syntax Error");
             // Grab the info until the next token
             pos = source.find(typeToken, nextLinePos);
-            shaderSources[ShaderTypeFromString(type)] = source.substr(nextLinePos, pos - (nextLinePos == std::string::npos ? source.size() - 1 : nextLinePos));
+            shaderSources[ShaderTypeFromString(type)] = (pos == std::string::npos) ? 
+                source.substr(nextLinePos) : source.substr(nextLinePos, pos - nextLinePos);
         }
 
         return shaderSources;

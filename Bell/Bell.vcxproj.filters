@@ -16,11 +16,17 @@
     <Filter Include="src\Bell\ImGui">
       <UniqueIdentifier>{6561E604-512F-DA0A-3AC3-4A312630B66F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Bell\Input">
+      <UniqueIdentifier>{3A9CE704-266A-DB0A-0FFE-4B31FB6AB76F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Bell\Layer">
       <UniqueIdentifier>{07E91605-F3B6-0A0B-DC4A-7B31C8B7E66F}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Bell\Renderer">
       <UniqueIdentifier>{010AD218-6D20-D0AE-B697-5BD022EDA036}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Bell\Renderer\Camera">
+      <UniqueIdentifier>{593378FC-4558-C77C-6EA3-AC0C5A27C69A}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
@@ -87,6 +93,15 @@
     <ClInclude Include="src\Bell\ImGui\ImGuiLayer.h">
       <Filter>src\Bell\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\Bell\Input\Input.h">
+      <Filter>src\Bell\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Input\KeyCodes.h">
+      <Filter>src\Bell\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Input\MouseButtonCodes.h">
+      <Filter>src\Bell\Input</Filter>
+    </ClInclude>
     <ClInclude Include="src\Bell\Layer\Layer.h">
       <Filter>src\Bell\Layer</Filter>
     </ClInclude>
@@ -96,8 +111,17 @@
     <ClInclude Include="src\Bell\Log.h">
       <Filter>src\Bell</Filter>
     </ClInclude>
+    <ClInclude Include="src\Bell\OrthographicCameraController.h">
+      <Filter>src\Bell</Filter>
+    </ClInclude>
     <ClInclude Include="src\Bell\Renderer\Buffer.h">
       <Filter>src\Bell\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Renderer\Camera\Camera.h">
+      <Filter>src\Bell\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Renderer\Camera\OrthographicCamera.h">
+      <Filter>src\Bell\Renderer\Camera</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\Renderer\GraphicsContext.h">
       <Filter>src\Bell\Renderer</Filter>
@@ -1239,20 +1263,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Bell\Renderer\Camera\OrthographicCamera.h">
-      <Filter>src\Bell\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bell\Input\Input.h">
-      <Filter>src\Bell</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bell\Input\KeyCodes.h">
-      <Filter>src\Bell</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bell\Input\MouseButtonCodes.h">
-      <Filter>src\Bell</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bell\OrthographicCameraController.h" />
-    <ClInclude Include="src\Bell\Renderer\Camera\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Application.cpp">
@@ -1273,8 +1283,17 @@
     <ClCompile Include="src\Bell\Log.cpp">
       <Filter>src\Bell</Filter>
     </ClCompile>
+    <ClCompile Include="src\Bell\OrthographicCameraController.cpp">
+      <Filter>src\Bell</Filter>
+    </ClCompile>
     <ClCompile Include="src\Bell\Renderer\Buffer.cpp">
       <Filter>src\Bell\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bell\Renderer\Camera\Camera.cpp">
+      <Filter>src\Bell\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bell\Renderer\Camera\OrthographicCamera.cpp">
+      <Filter>src\Bell\Renderer\Camera</Filter>
     </ClCompile>
     <ClCompile Include="src\Bell\Renderer\RenderCommand.cpp">
       <Filter>src\Bell\Renderer</Filter>
@@ -1324,10 +1343,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Bell\Renderer\Camera\OrthographicCamera.cpp">
-      <Filter>src\Bell\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Bell\OrthographicCameraController.cpp" />
-    <ClCompile Include="src\Bell\Renderer\Camera\Camera.cpp" />
   </ItemGroup>
 </Project>

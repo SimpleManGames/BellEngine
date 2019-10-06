@@ -83,7 +83,6 @@ project "Bell"
 
         defines
         {
-            "B_PLATFORM_WINDOWS",
             "B_BUILD_DLL",
             "GLFW_INCLUDE_NONE",
             "UNICODE",
@@ -139,7 +138,6 @@ project "Sandbox"
 
         defines
         {
-            "B_PLATFORM_WINDOWS",
             "UNICODE",
             "_UNICODE"
         }

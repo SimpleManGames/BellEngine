@@ -71,7 +71,7 @@ namespace Bell {
                     layer->OnUpdate(deltaTime);
             }
 
-#if B_DEBUG
+#ifdef B_DEBUG
             m_ImGuiLayer->Begin();
             for (Layer* layer : m_LayerStack)
                 layer->OnImGuiRender();

@@ -5,7 +5,7 @@
 #define _EVENT_H
 
 #include "bpch.h"
-#include "Bell/Core.h"
+#include "Bell/Core/Core.h"
 
 namespace Bell {
 

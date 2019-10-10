@@ -5,7 +5,7 @@
 #ifndef _LAYER_STACK_H
 #define _LAYER_STACK_H
 
-#include "Bell/Core.h"
+#include "Bell/Core/Core.h"
 #include "Layer.h"
 
 #include <vector>

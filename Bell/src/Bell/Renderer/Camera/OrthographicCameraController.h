@@ -4,8 +4,8 @@
 #include "Bell/Renderer/Camera/OrthographicCamera.h"
 #include "Bell/Core/Timestep.h"
 
-#include "Bell/Events/ApplicationEvent.h"
-#include "Bell/Events/MouseEvent.h"
+#include "Bell/Core/Events/ApplicationEvent.h"
+#include "Bell/Core/Events/MouseEvent.h"
 
 namespace Bell
 {

@@ -5,9 +5,9 @@
 #ifndef _LAYER_H
 #define _LAYER_H
 
-#include "Bell/Core.h"
+#include "Bell/Core/Core.h"
 #include "Bell/Core/Timestep.h"
-#include "Bell/Events/Event.h"
+#include "Bell/Core/Events/Event.h"
 
 namespace Bell
 {

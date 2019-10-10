@@ -145,25 +145,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Bell.h" />
-    <ClInclude Include="src\Bell\Application.h" />
-    <ClInclude Include="src\Bell\Core.h" />
+    <ClInclude Include="src\Bell\Core\Application.h" />
+    <ClInclude Include="src\Bell\Core\Core.h" />
+    <ClInclude Include="src\Bell\Core\EntryPoint.h" />
+    <ClInclude Include="src\Bell\Core\Events\ApplicationEvent.h" />
+    <ClInclude Include="src\Bell\Core\Events\Event.h" />
+    <ClInclude Include="src\Bell\Core\Events\KeyEvent.h" />
+    <ClInclude Include="src\Bell\Core\Events\MouseEvent.h" />
+    <ClInclude Include="src\Bell\Core\Input\Input.h" />
+    <ClInclude Include="src\Bell\Core\Input\KeyCodes.h" />
+    <ClInclude Include="src\Bell\Core\Input\MouseButtonCodes.h" />
+    <ClInclude Include="src\Bell\Core\Log.h" />
     <ClInclude Include="src\Bell\Core\Timestep.h" />
-    <ClInclude Include="src\Bell\EntryPoint.h" />
-    <ClInclude Include="src\Bell\Events\ApplicationEvent.h" />
-    <ClInclude Include="src\Bell\Events\Event.h" />
-    <ClInclude Include="src\Bell\Events\KeyEvent.h" />
-    <ClInclude Include="src\Bell\Events\MouseEvent.h" />
+    <ClInclude Include="src\Bell\Core\Window.h" />
     <ClInclude Include="src\Bell\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\Bell\Input\Input.h" />
-    <ClInclude Include="src\Bell\Input\KeyCodes.h" />
-    <ClInclude Include="src\Bell\Input\MouseButtonCodes.h" />
     <ClInclude Include="src\Bell\Layer\Layer.h" />
     <ClInclude Include="src\Bell\Layer\LayerStack.h" />
-    <ClInclude Include="src\Bell\Log.h" />
-    <ClInclude Include="src\Bell\OrthographicCameraController.h" />
     <ClInclude Include="src\Bell\Renderer\Buffer.h" />
     <ClInclude Include="src\Bell\Renderer\Camera\Camera.h" />
     <ClInclude Include="src\Bell\Renderer\Camera\OrthographicCamera.h" />
+    <ClInclude Include="src\Bell\Renderer\Camera\OrthographicCameraController.h" />
     <ClInclude Include="src\Bell\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Bell\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Bell\Renderer\Renderer.h" />
@@ -171,7 +172,6 @@
     <ClInclude Include="src\Bell\Renderer\Shader.h" />
     <ClInclude Include="src\Bell\Renderer\Texture.h" />
     <ClInclude Include="src\Bell\Renderer\VertexArray.h" />
-    <ClInclude Include="src\Bell\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
@@ -546,16 +546,16 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Bell\Application.cpp" />
+    <ClCompile Include="src\Bell\Core\Application.cpp" />
+    <ClCompile Include="src\Bell\Core\Log.cpp" />
     <ClCompile Include="src\Bell\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Bell\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Bell\Layer\Layer.cpp" />
     <ClCompile Include="src\Bell\Layer\LayerStack.cpp" />
-    <ClCompile Include="src\Bell\Log.cpp" />
-    <ClCompile Include="src\Bell\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Bell\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Bell\Renderer\Camera\Camera.cpp" />
     <ClCompile Include="src\Bell\Renderer\Camera\OrthographicCamera.cpp" />
+    <ClCompile Include="src\Bell\Renderer\Camera\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Bell\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Bell\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Bell\Renderer\RendererAPI.cpp" />

@@ -1,7 +1,7 @@
 #include "bpch.h"
 #include "Application.h"
 
-#include "Bell/Log.h"
+#include "Bell/Core/Log.h"
 
 #include "Bell/Renderer/Renderer.h"
 
@@ -71,10 +71,12 @@ namespace Bell {
                     layer->OnUpdate(deltaTime);
             }
 
+#if B_DEBUG
             m_ImGuiLayer->Begin();
             for (Layer* layer : m_LayerStack)
                 layer->OnImGuiRender();
             m_ImGuiLayer->End();
+#endif
 
             m_Window->OnUpdate();
         }

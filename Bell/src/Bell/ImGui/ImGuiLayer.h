@@ -5,12 +5,12 @@
 #ifndef _IMGUI_LAYER_H
 #define _IMGUI_LAYER_H
 
-#include "Bell/Input/KeyCodes.h"
-#include "Bell/Input/MouseButtonCodes.h"
+#include "Bell/Core/Input/KeyCodes.h"
+#include "Bell/Core/Input/MouseButtonCodes.h"
 #include "Bell/Layer/Layer.h"
-#include "Bell/Events/KeyEvent.h"
-#include "Bell/Events/MouseEvent.h"
-#include "Bell/Events/ApplicationEvent.h"
+#include "Bell/Core/Events/KeyEvent.h"
+#include "Bell/Core/Events/MouseEvent.h"
+#include "Bell/Core/Events/ApplicationEvent.h"
 
 namespace Bell
 {

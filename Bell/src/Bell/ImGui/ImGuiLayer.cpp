@@ -4,8 +4,8 @@
 #include "imgui.h"
 #include "examples/imgui_impl_glfw.h"
 #include "examples/imgui_impl_opengl3.h"
-#include "Bell/Application.h"
-#include "Bell/Events/MouseEvent.h"
+#include "Bell/Core/Application.h"
+#include "Bell/Core/Events/MouseEvent.h"
 
 // TEMP
 #include <GLFW/glfw3.h>

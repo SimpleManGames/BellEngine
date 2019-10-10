@@ -4,7 +4,7 @@
 #ifndef _WINDOWS_WINDOW_H
 #define _WINDOWS_WINDOW_H
 
-#include "Bell/Window.h"
+#include "Bell/Core/Window.h"
 #include "Bell/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>

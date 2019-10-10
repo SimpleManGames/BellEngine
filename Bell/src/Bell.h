@@ -5,16 +5,16 @@
 #ifndef _BELL_H
 #define _BELL_H
 
-#include "Bell/Application.h"
+#include "Bell/Core/Application.h"
 #include "Bell/Layer/Layer.h"
-#include "Bell/Log.h"
+#include "Bell/Core/Log.h"
 
 #include "Bell/Core/Timestep.h"
 
 // Input
-#include "Bell/Input/Input.h"
-#include "Bell/Input/KeyCodes.h"
-#include "Bell/Input/MouseButtonCodes.h"
+#include "Bell/Core/Input/Input.h"
+#include "Bell/Core/Input/KeyCodes.h"
+#include "Bell/Core/Input/MouseButtonCodes.h"
 
 #include "Bell/ImGui/ImGuiLayer.h"
 
@@ -30,11 +30,11 @@
 #include "Bell/Renderer/Texture.h"
 #include "Bell/Renderer/VertexArray.h"
 
-#include "Bell/OrthographicCameraController.h"
+#include "Bell/Renderer/Camera/OrthographicCameraController.h"
 
 // ---- Entry Point Definition ----
 // --------------------------------
 
-#include "Bell/EntryPoint.h"
+#include "Bell/Core/EntryPoint.h"
 
 #endif _BELL_H

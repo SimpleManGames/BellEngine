@@ -10,14 +10,14 @@
     <Filter Include="src\Bell\Core">
       <UniqueIdentifier>{33F5DCE8-9FB5-581F-68F0-A19CD46F9DFB}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Bell\Events">
-      <UniqueIdentifier>{7F1F1199-EBAA-7E5D-F4BB-015260C6DA5D}</UniqueIdentifier>
+    <Filter Include="src\Bell\Core\Events">
+      <UniqueIdentifier>{B769AAB6-A3F8-3380-4C17-487B38854426}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Bell\Core\Input">
+      <UniqueIdentifier>{727FE462-DEE0-C170-674E-0823D3AEF82F}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Bell\ImGui">
       <UniqueIdentifier>{6561E604-512F-DA0A-3AC3-4A312630B66F}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Bell\Input">
-      <UniqueIdentifier>{3A9CE704-266A-DB0A-0FFE-4B31FB6AB76F}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Bell\Layer">
       <UniqueIdentifier>{07E91605-F3B6-0A0B-DC4A-7B31C8B7E66F}</UniqueIdentifier>
@@ -66,53 +66,53 @@
     <ClInclude Include="src\Bell.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Bell\Application.h">
-      <Filter>src\Bell</Filter>
+    <ClInclude Include="src\Bell\Core\Application.h">
+      <Filter>src\Bell\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Bell\Core.h">
-      <Filter>src\Bell</Filter>
+    <ClInclude Include="src\Bell\Core\Core.h">
+      <Filter>src\Bell\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Core\EntryPoint.h">
+      <Filter>src\Bell\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Core\Events\ApplicationEvent.h">
+      <Filter>src\Bell\Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Core\Events\Event.h">
+      <Filter>src\Bell\Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Core\Events\KeyEvent.h">
+      <Filter>src\Bell\Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Core\Events\MouseEvent.h">
+      <Filter>src\Bell\Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Core\Input\Input.h">
+      <Filter>src\Bell\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Core\Input\KeyCodes.h">
+      <Filter>src\Bell\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Core\Input\MouseButtonCodes.h">
+      <Filter>src\Bell\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Core\Log.h">
+      <Filter>src\Bell\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\Core\Timestep.h">
       <Filter>src\Bell\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Bell\EntryPoint.h">
-      <Filter>src\Bell</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bell\Events\ApplicationEvent.h">
-      <Filter>src\Bell\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bell\Events\Event.h">
-      <Filter>src\Bell\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bell\Events\KeyEvent.h">
-      <Filter>src\Bell\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bell\Events\MouseEvent.h">
-      <Filter>src\Bell\Events</Filter>
+    <ClInclude Include="src\Bell\Core\Window.h">
+      <Filter>src\Bell\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\ImGui\ImGuiLayer.h">
       <Filter>src\Bell\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bell\Input\Input.h">
-      <Filter>src\Bell\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bell\Input\KeyCodes.h">
-      <Filter>src\Bell\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bell\Input\MouseButtonCodes.h">
-      <Filter>src\Bell\Input</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\Layer\Layer.h">
       <Filter>src\Bell\Layer</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\Layer\LayerStack.h">
       <Filter>src\Bell\Layer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bell\Log.h">
-      <Filter>src\Bell</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bell\OrthographicCameraController.h">
-      <Filter>src\Bell</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\Renderer\Buffer.h">
       <Filter>src\Bell\Renderer</Filter>
@@ -121,6 +121,9 @@
       <Filter>src\Bell\Renderer\Camera</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\Renderer\Camera\OrthographicCamera.h">
+      <Filter>src\Bell\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Renderer\Camera\OrthographicCameraController.h">
       <Filter>src\Bell\Renderer\Camera</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\Renderer\GraphicsContext.h">
@@ -143,9 +146,6 @@
     </ClInclude>
     <ClInclude Include="src\Bell\Renderer\VertexArray.h">
       <Filter>src\Bell\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bell\Window.h">
-      <Filter>src\Bell</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
@@ -1265,8 +1265,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Bell\Application.cpp">
-      <Filter>src\Bell</Filter>
+    <ClCompile Include="src\Bell\Core\Application.cpp">
+      <Filter>src\Bell\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bell\Core\Log.cpp">
+      <Filter>src\Bell\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Bell\ImGui\ImGuiBuild.cpp">
       <Filter>src\Bell\ImGui</Filter>
@@ -1280,12 +1283,6 @@
     <ClCompile Include="src\Bell\Layer\LayerStack.cpp">
       <Filter>src\Bell\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="src\Bell\Log.cpp">
-      <Filter>src\Bell</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Bell\OrthographicCameraController.cpp">
-      <Filter>src\Bell</Filter>
-    </ClCompile>
     <ClCompile Include="src\Bell\Renderer\Buffer.cpp">
       <Filter>src\Bell\Renderer</Filter>
     </ClCompile>
@@ -1293,6 +1290,9 @@
       <Filter>src\Bell\Renderer\Camera</Filter>
     </ClCompile>
     <ClCompile Include="src\Bell\Renderer\Camera\OrthographicCamera.cpp">
+      <Filter>src\Bell\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bell\Renderer\Camera\OrthographicCameraController.cpp">
       <Filter>src\Bell\Renderer\Camera</Filter>
     </ClCompile>
     <ClCompile Include="src\Bell\Renderer\RenderCommand.cpp">

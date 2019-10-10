@@ -4,7 +4,7 @@
 #ifndef _WINDOWS_INPUT_H
 #define _WINDOWS_INPUT_H
 
-#include "Bell/Input/Input.h"
+#include "Bell/Core/Input/Input.h"
 
 namespace Bell
 {

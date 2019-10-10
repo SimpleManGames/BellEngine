@@ -1,9 +1,9 @@
 #include "bpch.h"
 #include "WindowsWindow.h"
 
-#include "Bell/Events/ApplicationEvent.h"
-#include "Bell/Events/MouseEvent.h"
-#include "Bell/Events/KeyEvent.h"
+#include "Bell/Core/Events/ApplicationEvent.h"
+#include "Bell/Core/Events/MouseEvent.h"
+#include "Bell/Core/Events/KeyEvent.h"
 
 #include "Platform/OpenGL/OpenGLContext.h"
 

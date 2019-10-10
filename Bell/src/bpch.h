@@ -8,7 +8,7 @@
 // ----- Common Engine Includes -----
 // ----------------------------------
 
-#include "Bell/Log.h"
+#include "Bell/Core/Log.h"
 
 // ----- Common C++ Includes -----
 // -------------------------------

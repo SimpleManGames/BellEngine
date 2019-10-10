@@ -1,8 +1,8 @@
 #include "bpch.h"
 #include "OrthographicCameraController.h"
 
-#include "Bell/Input/Input.h"
-#include "Bell/Input/KeyCodes.h"
+#include "Bell/Core/Input/Input.h"
+#include "Bell/Core/Input/KeyCodes.h"
 
 namespace Bell
 {

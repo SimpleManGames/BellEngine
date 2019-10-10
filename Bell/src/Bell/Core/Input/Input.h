@@ -5,7 +5,7 @@
 #ifndef _INPUT_H
 #define _INPUT_H
 
-#include "Bell/Core.h"
+#include "Bell/Core/Core.h"
 
 namespace Bell
 {

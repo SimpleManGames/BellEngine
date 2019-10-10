@@ -7,8 +7,8 @@
 
 #include "bpch.h"
 
-#include "Bell/Core.h"
-#include "Bell/Events/Event.h"
+#include "Bell/Core/Core.h"
+#include "Bell/Core/Events/Event.h"
 
 namespace Bell
 {

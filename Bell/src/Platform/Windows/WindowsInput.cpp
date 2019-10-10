@@ -1,7 +1,7 @@
 #include "bpch.h"
 #include "WindowsInput.h"
 
-#include "Bell/Application.h"
+#include "Bell/Core/Application.h"
 #include <GLFW/glfw3.h>
 
 namespace Bell

@@ -1,7 +1,7 @@
 #ifndef _TEXTURE_H
 #define _TEXTURE_H
 
-#include "Bell/Core.h"
+#include "Bell/Core/Core.h"
 #include <string>
 
 namespace Bell

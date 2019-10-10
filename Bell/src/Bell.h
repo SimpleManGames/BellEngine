@@ -32,7 +32,11 @@
 
 #include "Bell/Renderer/Camera/OrthographicCameraController.h"
 
+// ---- Entry Point Definition ----
+// --------------------------------
 
-
+#ifdef __MAIN_FILE__
+#include "Bell/Core/EntryPoint.h"
+#endif
 
 #endif _BELL_H

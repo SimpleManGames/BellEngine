@@ -1,5 +1,5 @@
+#define __MAIN_FILE__
 #include <Bell.h>
-#include <Bell/Core/EntryPoint.h>
 
 #include "Platform/OpenGL/OpenGLShader.h"
 

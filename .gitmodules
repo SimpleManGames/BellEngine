@@ -1,18 +1,23 @@
 [submodule "Bell/vendor/spdlog"]
 	path = Bell/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+	branch = v1.x
 
 [submodule "Bell/vendor/glfw"]
 	path = Bell/vendor/glfw
 	url = https://github.com/SimpleManGames/glfw
+	branch = master
 
 [submodule "Bell/vendor/imgui"]
 	path = Bell/vendor/imgui
 	url = https://github.com/SimpleManGames/imgui
+	branch = docking
 
 [submodule "Bell/vendor/glm"]
 	path = Bell/vendor/glm
 	url = https://github.com/g-truc/glm
+	branch = master
+
 [submodule "Bell/vendor/enet"]
 	path = Bell/vendor/enet
 	url = https://github.com/lsalzman/enet

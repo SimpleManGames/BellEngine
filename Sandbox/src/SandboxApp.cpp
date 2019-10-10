@@ -1,4 +1,5 @@
 #include <Bell.h>
+#include <Bell/Core/EntryPoint.h>
 
 #include "Platform/OpenGL/OpenGLShader.h"
 
@@ -7,13 +8,15 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Sandbox2D.h"
+
 class ExampleLayer : public Bell::Layer
 {
 public:
     ExampleLayer()
         : Layer("Example"), m_CameraController(1200.0f / 720.0f, false)
     {
-        m_VertexArray.reset(Bell::VertexArray::Create());
+        m_VertexArray = Bell::VertexArray::Create();
 
         float vertices[3 * 7] = {
             -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
@@ -44,7 +47,7 @@ public:
              -0.5f,  0.5f, 0.0f, 0.0f, 1.0f
         };
 
-        m_SquareVA.reset(Bell::VertexArray::Create());
+        m_SquareVA = Bell::VertexArray::Create();
 
         std::shared_ptr<Bell::VertexBuffer> squareVB;
         squareVB.reset(Bell::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
@@ -135,7 +138,7 @@ private:
     int m_SquareGridX = 20, m_SquareGridY = 20;
 
     Bell::OrthographicCameraController m_CameraController;
-    
+
     glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 };
 
@@ -144,7 +147,8 @@ class Sandbox : public Bell::Application {
 public:
     Sandbox()
     {
-        PushLayer(new ExampleLayer());
+        //PushLayer(new ExampleLayer());
+        PushLayer(new Sandbox2D());
     }
     ~Sandbox() { }
 };

@@ -18,8 +18,9 @@ namespace Bell {
         m_ApplicationState = ApplicationState::Constructing;
         s_Instance = this;
 
-        m_ApplicationState = ApplicationState::Initialiing;
+        m_ApplicationState = ApplicationState::Initializing;
 
+        B_CORE_INFO("Bell Engine Initializing");
         // Creates the unique pointer for our window
         m_Window = std::unique_ptr<Window>(Window::Create());
         // Sets the function we use for event handling

@@ -20,7 +20,7 @@ namespace Bell
     {
         Invalid,
         Constructing,
-        Initialiing,
+        Initializing,
         Running,
         Minimized,
         ShuttingDown,

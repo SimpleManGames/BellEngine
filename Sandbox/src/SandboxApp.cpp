@@ -1,3 +1,6 @@
+
+// __MAIN_FILE__ is only to be defined once in the file that
+// defines Bell::CreateApplication
 #define __MAIN_FILE__
 #include <Bell.h>
 
@@ -23,9 +26,7 @@ public:
              0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
              0.0f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f,
         };
-
-        Bell::Ref<Bell::VertexBuffer> vertexBuffer;
-        vertexBuffer.reset(Bell::VertexBuffer::Create(vertices, sizeof(vertices)));
+        Bell::Ref<Bell::VertexBuffer> vertexBuffer = Bell::VertexBuffer::Create(vertices, sizeof(vertices));
 
         Bell::BufferLayout layout = {
             { Bell::ShaderDataType::Float3, "a_Position" },
@@ -49,8 +50,8 @@ public:
 
         m_SquareVA = Bell::VertexArray::Create();
 
-        std::shared_ptr<Bell::VertexBuffer> squareVB;
-        squareVB.reset(Bell::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+        std::shared_ptr<Bell::VertexBuffer> squareVB = Bell::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
+
         squareVB->SetLayout({
             { Bell::ShaderDataType::Float3, "a_Position" },
             { Bell::ShaderDataType::Float2, "a_TexCoord" },
@@ -114,7 +115,7 @@ public:
 
     virtual void OnImGuiRender() override
     {
-        ImGui::Begin("Settings");
+        ImGui::Begin("Example Layer Settings");
 
         ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
         ImGui::DragInt("Grid X", &m_SquareGridX, 1.0f, 1, 100);

@@ -556,6 +556,7 @@
     <ClCompile Include="src\Bell\Renderer\Camera\Camera.cpp" />
     <ClCompile Include="src\Bell\Renderer\Camera\OrthographicCamera.cpp" />
     <ClCompile Include="src\Bell\Renderer\Camera\OrthographicCameraController.cpp" />
+    <ClCompile Include="src\Bell\Renderer\GraphicsContext.cpp" />
     <ClCompile Include="src\Bell\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Bell\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Bell\Renderer\RendererAPI.cpp" />

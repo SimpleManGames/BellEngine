@@ -22,8 +22,7 @@ void Sandbox2D::OnAttach()
 
     m_SquareVA = Bell::VertexArray::Create();
 
-    std::shared_ptr<Bell::VertexBuffer> squareVB;
-    squareVB.reset(Bell::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+    std::shared_ptr<Bell::VertexBuffer> squareVB = Bell::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
     squareVB->SetLayout({
         { Bell::ShaderDataType::Float3, "a_Position" },
         });
@@ -62,7 +61,7 @@ void Sandbox2D::OnUpdate(Bell::Timestep deltaTime)
 
 void Sandbox2D::OnImGuiRender()
 {
-    ImGui::Begin("Settings");
+    ImGui::Begin("Sandbox 2D Settings");
 
     ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 

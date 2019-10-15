@@ -14,7 +14,7 @@ namespace Bell
                 B_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
                 return nullptr;
             case RendererAPI::API::OpenGL:
-                return std::make_shared<OpenGLShader>(filePath);
+                return CreateRef<OpenGLShader>(filePath);
         }
 
         B_CORE_ASSERT(false, "Unknown RendererAPI");
@@ -29,7 +29,7 @@ namespace Bell
                 B_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
                 return nullptr;
             case RendererAPI::API::OpenGL:
-                return std::make_shared<OpenGLShader>(name, vertexSrc, fragmentSrc);
+                return CreateRef<OpenGLShader>(name, vertexSrc, fragmentSrc);
         }
 
         B_CORE_ASSERT(false, "Unknown RendererAPI");

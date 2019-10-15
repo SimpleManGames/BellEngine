@@ -24,7 +24,7 @@ namespace Bell
     // Creates a new Window OS window using the defined properties
     Scope<Window> Window::Create(const WindowProps& props)
     {
-        return std::make_unique<WindowsWindow>(props);
+        return CreateScope<WindowsWindow>(props);
     }
 
     // Initializes window with the defined properties 
@@ -63,7 +63,7 @@ namespace Bell
         m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
         CenterWindow();
 
-        m_Context = CreateScope<OpenGLContext>(m_Window);
+        m_Context = GraphicsContext::Create(m_Window);
         m_Context->Init();
 
         // Grabs a pointer for us to use

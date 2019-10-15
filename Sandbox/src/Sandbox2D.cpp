@@ -22,15 +22,14 @@ void Sandbox2D::OnAttach()
 
     m_SquareVA = Bell::VertexArray::Create();
 
-    std::shared_ptr<Bell::VertexBuffer> squareVB = Bell::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
+    Bell::Ref<Bell::VertexBuffer> squareVB = Bell::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
     squareVB->SetLayout({
         { Bell::ShaderDataType::Float3, "a_Position" },
         });
     m_SquareVA->AddVertexBuffer(squareVB);
 
     uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-    std::shared_ptr<Bell::IndexBuffer> squareIB;
-    squareIB.reset(Bell::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+    Bell::Ref<Bell::IndexBuffer> squareIB = Bell::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
     m_SquareVA->SetIndexBuffer(squareIB);
 
     m_FlatColorShader = Bell::Shader::Create("assets/shaders/FlatColor.glsl");

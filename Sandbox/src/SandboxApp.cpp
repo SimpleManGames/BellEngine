@@ -37,8 +37,7 @@ public:
         m_VertexArray->AddVertexBuffer(vertexBuffer);
 
         uint32_t indices[3] = { 0, 1, 2 };
-        Bell::Ref<Bell::IndexBuffer> indexBuffer;
-        indexBuffer.reset(Bell::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+        Bell::Ref<Bell::IndexBuffer> indexBuffer = Bell::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
         m_VertexArray->SetIndexBuffer(indexBuffer);
 
         float squareVertices[5 * 4] = {
@@ -59,8 +58,7 @@ public:
         m_SquareVA->AddVertexBuffer(squareVB);
 
         uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-        std::shared_ptr<Bell::IndexBuffer> squareIB;
-        squareIB.reset(Bell::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+        Bell::Ref<Bell::IndexBuffer> squareIB = Bell::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
         m_SquareVA->SetIndexBuffer(squareIB);
 
         auto vertexColorShader = m_ShaderLibrary.Load("VertexPosColor", "assets/shaders/VertexColor.glsl");

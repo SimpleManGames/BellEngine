@@ -50,7 +50,7 @@ namespace Bell
 
         virtual void* GetNativeWindow() const = 0;
 
-        static Window* Create(const WindowProps& props = WindowProps());
+        static Ref<Window> Create(const WindowProps& props = WindowProps());
     };
 }
 

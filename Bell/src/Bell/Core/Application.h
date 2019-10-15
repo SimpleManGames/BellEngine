@@ -54,7 +54,7 @@ namespace Bell
     private:
         ApplicationState m_ApplicationState = ApplicationState::Invalid;
 
-        Scope<Window> m_Window;
+        Ref<Window> m_Window;
         ImGuiLayer* m_ImGuiLayer;
         LayerStack m_LayerStack;
         float m_LastFrameTime = 0.0f;

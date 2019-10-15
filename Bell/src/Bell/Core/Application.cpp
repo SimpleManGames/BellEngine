@@ -22,7 +22,7 @@ namespace Bell {
 
         B_CORE_INFO("Bell Engine Initializing");
         // Creates the unique pointer for our window
-        m_Window = std::unique_ptr<Window>(Window::Create());
+        m_Window = Window::Create();
         // Sets the function we use for event handling
         m_Window->SetEventCallback(B_BIND_EVENT_FN(Application::OnEvent));
         m_Window->SetVSync(true);

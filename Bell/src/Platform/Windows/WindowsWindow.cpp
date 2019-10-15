@@ -22,9 +22,9 @@ namespace Bell
     }
 
     // Creates a new Window OS window using the defined properties
-    Window* Window::Create(const WindowProps& props)
+    Ref<Window> Window::Create(const WindowProps& props)
     {
-        return new WindowsWindow(props);
+        return std::make_shared<WindowsWindow>(props);
     }
 
     // Initializes window with the defined properties 

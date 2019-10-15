@@ -50,7 +50,7 @@ public:
 
         m_SquareVA = Bell::VertexArray::Create();
 
-        std::shared_ptr<Bell::VertexBuffer> squareVB = Bell::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
+        Bell::Ref<Bell::VertexBuffer> squareVB = Bell::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 
         squareVB->SetLayout({
             { Bell::ShaderDataType::Float3, "a_Position" },

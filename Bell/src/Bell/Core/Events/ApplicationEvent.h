@@ -10,7 +10,7 @@ namespace Bell
 {
     // Window Resize Event
     // Used to process and telegraph when a Window Resizing takes place
-    class BELL_API WindowResizeEvent : public Event
+    class WindowResizeEvent : public Event
     {
     public:
         WindowResizeEvent(unsigned int width, unsigned int height)
@@ -37,7 +37,7 @@ namespace Bell
 
     // Window Close Event
     // Used to process and telegraph when a Window Close takes place
-    class BELL_API WindowCloseEvent : public Event
+    class WindowCloseEvent : public Event
     {
     public:
         WindowCloseEvent() {}
@@ -48,7 +48,7 @@ namespace Bell
 
     // Application Tick Event
     // Used to process and telegraph when a Application Tick takes place
-    class BELL_API AppTickEvent : public Event
+    class AppTickEvent : public Event
     {
     public:
         AppTickEvent() {}
@@ -59,7 +59,7 @@ namespace Bell
 
     // Application Update Event
     // Used to process and telegraph when a Application Update takes place
-    class BELL_API AppUpdateEvent : public Event
+    class AppUpdateEvent : public Event
     {
     public:
         AppUpdateEvent() {}
@@ -70,7 +70,7 @@ namespace Bell
 
     // Application Render Event
     // Used to process and telegraph when a Application Render takes place
-    class BELL_API AppRenderEvent : public Event
+    class AppRenderEvent : public Event
     {
     public:
         AppRenderEvent() {}

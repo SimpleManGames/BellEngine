@@ -40,7 +40,7 @@ namespace Bell {
     // Abstracted Event Class
     // Inherit from this and use both, EVENT_CLASS_TYPE and EVENT_CLASS CATEGORY, defines
     // in order for your event to be seen by the Event Dispatcher 
-    class BELL_API Event {
+    class Event {
     public:
         // If this event has been handled and no longer should be used in other event
         bool Handled = false;

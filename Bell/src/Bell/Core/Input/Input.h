@@ -9,7 +9,7 @@
 
 namespace Bell
 {
-    class BELL_API Input
+    class Input
     {
     public:
         // Singleton

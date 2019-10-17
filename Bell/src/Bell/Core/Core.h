@@ -47,22 +47,6 @@
 #error "Unknown platform!"
 #endif // End of platform detection
 
-
-// DLL support
-#ifdef B_PLATFORM_WINDOWS
-#if B_DYNAMIC_LINK
-#ifdef B_BUILD_DLL
-#define BELL_API __declspec(dllexport)
-#else
-#define BELL_API __declspec(dllimport)
-#endif
-#else
-#define BELL_API
-#endif
-#else
-#error Bell only supports Windows!
-#endif // End of DLL support
-
 #ifdef B_DEBUG
 #define B_ENABLE_ASSERTS
 #endif // B_DEBUG

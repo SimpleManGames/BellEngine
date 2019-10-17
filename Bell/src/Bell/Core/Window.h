@@ -29,7 +29,7 @@ namespace Bell
 
     // Window Interface
     // Virtual class to be used for each OS type window
-    class BELL_API Window
+    class Window
     {
     public:
         using EventCallBackFn = std::function<void(Event&)>;

@@ -15,7 +15,7 @@ namespace Bell
     typedef std::vector<Layer*> LayerStackVec;
     typedef  std::vector<Layer*>::iterator LayerStackIt;
 
-    class BELL_API LayerStack
+    class LayerStack
     {
     public:
         LayerStack();

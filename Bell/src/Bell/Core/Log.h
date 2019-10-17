@@ -10,7 +10,7 @@
 
 namespace Bell 
 {
-    class BELL_API Log
+    class Log
     {
     public:
         // Sets up console logger

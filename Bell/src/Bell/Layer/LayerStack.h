@@ -18,7 +18,7 @@ namespace Bell
     class LayerStack
     {
     public:
-        LayerStack();
+        LayerStack() = default;
         ~LayerStack();
 
         // Add a layer to the front of the stack

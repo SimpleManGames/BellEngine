@@ -3,10 +3,6 @@
 
 namespace Bell
 {
-    LayerStack::LayerStack()
-    {
-
-    }
 
     LayerStack::~LayerStack()
     {

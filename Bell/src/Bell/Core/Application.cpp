@@ -58,7 +58,7 @@ namespace Bell {
     void Application::Run() {
         m_ApplicationState = ApplicationState::Running;
 
-        while (m_ApplicationState == ApplicationState::Running 
+        while (m_ApplicationState == ApplicationState::Running
             || m_ApplicationState == ApplicationState::Minimized)
         {
             // Calculate delta time

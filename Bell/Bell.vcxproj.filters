@@ -1263,6 +1263,7 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\Bell\Renderer\Renderer2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Core\Application.cpp">
@@ -1344,5 +1345,6 @@
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
     <ClCompile Include="src\Bell\Renderer\GraphicsContext.cpp" />
+    <ClCompile Include="src\Bell\Renderer\Renderer2D.cpp" />
   </ItemGroup>
 </Project>

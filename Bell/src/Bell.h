@@ -22,6 +22,7 @@
 // ---------------------------
 
 #include "Bell/Renderer/Renderer.h"
+#include "Bell/Renderer/Renderer2D.h"
 #include "Bell/Renderer/RenderCommand.h"
 #include "Bell/Renderer/Camera/OrthographicCamera.h"
 

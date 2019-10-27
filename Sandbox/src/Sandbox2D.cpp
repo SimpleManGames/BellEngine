@@ -29,7 +29,8 @@ void Sandbox2D::OnUpdate(Bell::Timestep deltaTime)
 
     Bell::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-    Bell::Renderer2D::DrawQuad({ 0,0 }, { 1,1 }, m_SquareColor);
+    Bell::Renderer2D::DrawQuad({ -0.5f,0 }, { 0.6f,0.6f }, m_SquareColor);
+    Bell::Renderer2D::DrawQuad({ 0,1.0f }, { 1,1 }, {  0.3f, 0.8f, 0.2f, 1.0f });
 
     Bell::Renderer2D::EndScene();
 }

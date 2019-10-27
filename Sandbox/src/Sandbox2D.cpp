@@ -39,7 +39,7 @@ void Sandbox2D::OnImGuiRender()
     ImGui::Begin("Sandbox 2D Settings");
 
     ImGui::DragFloat2("Square Position", glm::value_ptr(m_SquarePosition), 0.1f);
-    ImGui::DragFloat2("Square Scale", glm::value_ptr(m_SquareScale), 0.1f, 0.1f, sizeof(float_t));
+    ImGui::DragFloat2("Square Scale", glm::value_ptr(m_SquareScale), 0.1f, 0.1f, std::numeric_limits<float>::max());
     ImGui::SliderFloat("Rotation", &m_Rotation, 0.0f, 360.0f);
     ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 

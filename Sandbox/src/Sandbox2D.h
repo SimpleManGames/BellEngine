@@ -21,7 +21,10 @@ private:
     
     Bell::Ref<Bell::VertexArray> m_SquareVA;
     Bell::Ref<Bell::Shader> m_FlatColorShader;
+    glm::vec2 m_SquarePosition = { 0, 0 };
+    glm::vec2 m_SquareScale = { 1, 1 };
     glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
+    float m_Rotation = 0.0f;
 };
 
 #endif // !_SANDBOX2D_H

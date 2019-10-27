@@ -4,8 +4,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "Platform/OpenGL/OpenGLShader.h"
-
 Sandbox2D::Sandbox2D()
     : Layer("Sandbox2D"), m_CameraController(1200.0f / 720.0f, false)
 {
@@ -34,10 +32,6 @@ void Sandbox2D::OnUpdate(Bell::Timestep deltaTime)
     Bell::Renderer2D::DrawQuad({ 0,0 }, { 1,1 }, m_SquareColor);
 
     Bell::Renderer2D::EndScene();
-
-    // TODO: Add these func - Shader::SetMat4, Shader::SetFloat4
-    //OpenGLShaderCast(m_FlatColorShader)->Bind();
-    //OpenGLShaderCast(m_FlatColorShader)->UploadUniformFloat4("u_Color", m_SquareColor);
 }
 
 void Sandbox2D::OnImGuiRender()

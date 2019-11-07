@@ -37,6 +37,8 @@ namespace Bell {
 
     Application::~Application() {
         m_ApplicationState = ApplicationState::Destroying;
+
+        Renderer::Shutdown();
     }
 
     void Application::OnEvent(Event& e) {

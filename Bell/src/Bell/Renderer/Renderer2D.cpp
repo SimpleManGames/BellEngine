@@ -18,8 +18,8 @@ namespace Bell
     {
         // TODO: Should be scopes once we control memory
         Ref<VertexArray> QuadVertexArray;
-        Ref<Shader> FlatColorShader;
         Ref<Shader> TextureShader;
+        Ref<Texture2D> WhiteTexture;
     };
 
     static Renderer2DStorage* s_Data;
@@ -48,7 +48,10 @@ namespace Bell
         Ref<IndexBuffer> squareIB = IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
         s_Data->QuadVertexArray->SetIndexBuffer(squareIB);
 
-        s_Data->FlatColorShader = Shader::Create("assets/shaders/FlatColor.glsl");
+        s_Data->WhiteTexture = Texture2D::Create(1, 1);
+        uint32_t whiteTextureData = 0xffffffff;
+        s_Data->WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
+
         s_Data->TextureShader = Shader::Create("assets/shaders/Texture.glsl");
         s_Data->TextureShader->Bind();
         s_Data->TextureShader->SetInt("u_Texture", 0);
@@ -61,9 +64,6 @@ namespace Bell
 
     void Renderer2D::BeginScene(const OrthographicCamera& camera)
     {
-        s_Data->FlatColorShader->Bind();
-        s_Data->FlatColorShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
-
         s_Data->TextureShader->Bind();
         s_Data->TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
     }
@@ -79,44 +79,27 @@ namespace Bell
 
     void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color)
     {
-        s_Data->FlatColorShader->Bind();
-        s_Data->FlatColorShader->SetFloat4("u_Color", color);
-
-        // Calculate transform
-
-        glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-            * glm::rotate(glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f))
-            * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
-
-        s_Data->FlatColorShader->SetMat4("u_Transform", transform);
-
-        s_Data->QuadVertexArray->Bind();
-        RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
+        DrawQuad(position, size, rotation, s_Data->WhiteTexture, color, 1.0f);
     }
 
-    void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec4& colorTint, float textureScale)
+    void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec4& color, float textureScale)
     {
-        DrawQuad({ position.x, position.y , 0 }, size, rotation, texture, colorTint, textureScale);
+        DrawQuad({ position.x, position.y , 0 }, size, rotation, texture, color, textureScale);
     }
     
-    void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec4& colorTint, float textureScale)
+    void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec4& color, float textureScale)
     {
-        s_Data->TextureShader->Bind();
-
-        // Calculate transform
+        texture->Bind();
+        s_Data->TextureShader->SetFloat4("u_Color", color);
+        s_Data->TextureShader->SetFloat("u_TextureScale", textureScale);
 
         glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
             * glm::rotate(glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f))
             * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
         s_Data->TextureShader->SetMat4("u_Transform", transform);
-        s_Data->TextureShader->SetFloat4("u_ColorTint", colorTint);
-        s_Data->TextureShader->SetFloat("u_TextureScale", textureScale);
-
-        texture->Bind();
 
         s_Data->QuadVertexArray->Bind();
         RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
-
     }
 }

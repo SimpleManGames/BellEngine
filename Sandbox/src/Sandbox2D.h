@@ -1,7 +1,7 @@
 #ifndef _SANDBOX2D_H
 #define _SANDBOX2D_H
 
-#include "Bell.h"
+#include <Bell.h>
 
 class Sandbox2D : public Bell::Layer
 {

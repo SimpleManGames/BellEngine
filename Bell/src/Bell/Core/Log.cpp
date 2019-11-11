@@ -5,8 +5,8 @@
 
 namespace Bell {
 
-    Bell::Ref<spdlog::logger> Log::s_CoreLogger;
-    Bell::Ref<spdlog::logger> Log::s_ClientLogger;
+    Ref<spdlog::logger> Log::s_CoreLogger;
+    Ref<spdlog::logger> Log::s_ClientLogger;
 
     void Log::Init()
     {

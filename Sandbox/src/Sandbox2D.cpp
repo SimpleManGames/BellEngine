@@ -20,6 +20,8 @@ void Sandbox2D::OnDetach()
 
 void Sandbox2D::OnUpdate(Bell::Timestep deltaTime)
 {
+    Bell::Timer timer("Sandbox2D::OnUpdate");
+
     // Update
     m_CameraController.OnUpdate(deltaTime);
 

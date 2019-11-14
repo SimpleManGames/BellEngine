@@ -27,6 +27,14 @@ private:
     glm::vec4 m_SquareColor = { 1.0f, 0.8f, 0.8f, 1.0f };
     float m_Rotation = 0.0f;
     float m_TextureScale = 1.0f;
+
+    struct ProfileResult
+    {
+        const char* Name;
+        float Time;
+    };
+
+    std::vector<ProfileResult> m_ProfileResults;
 };
 
 #endif // !_SANDBOX2D_H

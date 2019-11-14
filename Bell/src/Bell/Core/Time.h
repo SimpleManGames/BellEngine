@@ -25,11 +25,12 @@ namespace Bell {
         float m_Time;
     };
 
+    template<typename Fn>
     class Timer
     {
     public:
-        Timer(const char* name)
-            : m_Name(name), m_Stopped(false)
+        Timer(const char* name, Fn&& func)
+            : m_Name(name), m_Func(func), m_Stopped(false)
         {
             m_StartTimepoint = std::chrono::high_resolution_clock::now();
         }
@@ -52,14 +53,18 @@ namespace Bell {
             // Micro to milliseconds for better decimal values
             float duration = (end - start) * 0.001f;
             std::cout << m_Name << ": " << duration << "ms" << std::endl;
+            m_Func({ m_Name, duration });
         }
 
     private:
         // Storing as a char* to avoid stack alloc
         const char* m_Name;
+        Fn m_Func;
         std::chrono::time_point<std::chrono::steady_clock> m_StartTimepoint;
         bool m_Stopped;
     };
+
+#define PROFILE_SCOPE(name) Bell::Timer timer##__LINE__(name, [&](ProfileResult profileResult){m_ProfileResults.push_back(profileResult); })
 }
 
 #endif // !_TIME_H

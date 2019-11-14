@@ -6,7 +6,7 @@
 #define _LAYER_H
 
 #include "Bell/Core/Core.h"
-#include "Bell/Core/Timestep.h"
+#include "Bell/Core/Time.h"
 #include "Bell/Core/Events/Event.h"
 
 namespace Bell

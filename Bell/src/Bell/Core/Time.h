@@ -1,8 +1,8 @@
 // Timestep Definition
 // -------------------
 
-#ifndef _TIMESTEP_H
-#define _TIMESTEP_H
+#ifndef _TIME_H
+#define _TIME_H
 
 namespace Bell {
 
@@ -25,4 +25,4 @@ namespace Bell {
 
 }
 
-#endif // !_TIMESTEP_H
+#endif // !_TIME_H

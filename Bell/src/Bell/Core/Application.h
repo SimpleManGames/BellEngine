@@ -10,7 +10,7 @@
 #include "Bell/Layer/LayerStack.h"
 #include "Events/ApplicationEvent.h"
 
-#include "Bell/Core/Timestep.h"
+#include "Bell/Core/Time.h"
 
 #include "Bell/ImGui/ImGuiLayer.h"
 

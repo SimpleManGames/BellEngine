@@ -9,7 +9,7 @@
 #include "Bell/Layer/Layer.h"
 #include "Bell/Core/Log.h"
 
-#include "Bell/Core/Timestep.h"
+#include "Bell/Core/Time.h"
 
 // Input
 #include "Bell/Core/Input/Input.h"

@@ -99,9 +99,6 @@
     <ClInclude Include="src\Bell\Core\Log.h">
       <Filter>src\Bell\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Bell\Core\Timestep.h">
-      <Filter>src\Bell\Core</Filter>
-    </ClInclude>
     <ClInclude Include="src\Bell\Core\Window.h">
       <Filter>src\Bell\Core</Filter>
     </ClInclude>
@@ -1264,6 +1261,9 @@
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\Renderer\Renderer2D.h" />
+    <ClInclude Include="src\Bell\Core\Time.h">
+      <Filter>src\Bell\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Core\Application.cpp">

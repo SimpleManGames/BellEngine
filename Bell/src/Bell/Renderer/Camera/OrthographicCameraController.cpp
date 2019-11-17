@@ -15,6 +15,7 @@ namespace Bell
 
     void OrthographicCameraController::OnUpdate(Timestep deltaTime)
     {
+        PROFILE_FUNCTION();
         glm::vec3 position = GetPosition();
         float rotation = GetRotation();
 

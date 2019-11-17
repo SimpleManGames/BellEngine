@@ -20,7 +20,7 @@ void Sandbox2D::OnDetach()
 
 void Sandbox2D::OnUpdate(Bell::Timestep deltaTime)
 {
-    PROFILE_SCOPE("Sandbox2D::OnUpdate");
+    PROFILE_FUNCTION();
 
     // Update
     {

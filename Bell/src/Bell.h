@@ -10,6 +10,7 @@
 #include "Bell/Core/Log.h"
 
 #include "Bell/Core/Time.h"
+#include "Bell/Core/Profiler/InstrumentatonTimer.h"
 
 // Input
 #include "Bell/Core/Input/Input.h"

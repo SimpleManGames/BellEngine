@@ -49,6 +49,7 @@
 
 #ifdef B_DEBUG
 #define B_ENABLE_ASSERTS
+#define B_ENABLE_PROFILING
 #endif // B_DEBUG
 
 #ifdef B_ENABLE_ASSERTS
@@ -59,6 +60,23 @@
 #define B_CORE_ASSERT(x, ...)
 #endif // B_ENABLE_ASSERTS
 
+#ifdef B_ENABLE_PROFILING
+#include "Bell/Core/Profiler/InstrumentatonTimer.h"
+
+#define PROFILER_BEGIN(name) Bell::Instrumentor::Get().BeginSession(name)
+#define PROFILER_BEGIN(name, filePath) Bell::Instrumentor::Get().BeginSession(name, filePath)
+#define PROFILER_END() Bell::Instrumentor::Get().EndSession();
+
+#define PROFILE_SCOPE(name) Bell::InstrumentationTimer timer##__LINE__(name)
+#define PROFILE_FUNCTION() PROFILE_SCOPE(__FUNCSIG__)
+#else
+#define PROFILER_BEGIN(name)
+#define PROFILER_BEGIN(name, filePath)
+#define PROFILER_END()
+
+#define PROFILE_SCOPE(name)
+#define PROFILE_FUNCTION()
+#endif
 #define BIT(x) (1 << x)
 
 #define B_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)

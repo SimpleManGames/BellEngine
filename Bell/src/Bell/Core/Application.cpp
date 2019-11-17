@@ -14,25 +14,40 @@ namespace Bell {
 
     Application::Application()
     {
-        B_CORE_ASSERT(!s_Instance, "There is already an instance of Application");
-        m_ApplicationState = ApplicationState::Constructing;
-        s_Instance = this;
+        PROFILER_BEGIN("Application Creation", "application.json");
 
-        m_ApplicationState = ApplicationState::Initializing;
+        {
+            PROFILE_SCOPE("Application Construction");
+            m_ApplicationState = ApplicationState::Constructing;
+            B_CORE_ASSERT(!s_Instance, "There is already an instance of Application");
+            s_Instance = this;
+        }
 
-        B_CORE_INFO("Bell Engine Initializing");
-        // Creates the unique pointer for our window
-        m_Window = Window::Create();
-        // Sets the function we use for event handling
-        m_Window->SetEventCallback(B_BIND_EVENT_FN(Application::OnEvent));
-        m_Window->SetVSync(true);
+        {
+            PROFILE_SCOPE("Application Initializing");
+            m_ApplicationState = ApplicationState::Initializing;
 
-        Renderer::Init();
+            B_CORE_INFO("Bell Engine Initializing");
+            // Creates the unique pointer for our window
+            {
+                PROFILE_SCOPE("Window Creation");
+                m_Window = Window::Create();
+                // Sets the function we use for event handling
+                m_Window->SetEventCallback(B_BIND_EVENT_FN(Application::OnEvent));
+                m_Window->SetVSync(true);
+            }
 
+            {
+                PROFILE_SCOPE("Renderer Init");
+                Renderer::Init();
+            }
+        }
 #ifdef B_DEBUG
         m_ImGuiLayer = new ImGuiLayer();
         PushOverlay(m_ImGuiLayer);
 #endif
+
+        PROFILER_END();
     }
 
     Application::~Application() {
@@ -58,6 +73,8 @@ namespace Bell {
     }
 
     void Application::Run() {
+        PROFILER_BEGIN("Application Run", "appRun.json");
+        PROFILE_FUNCTION();
         m_ApplicationState = ApplicationState::Running;
 
         while (m_ApplicationState == ApplicationState::Running
@@ -83,6 +100,8 @@ namespace Bell {
 
             m_Window->OnUpdate();
         }
+
+        PROFILER_END();
     }
 
     bool Application::OnWindowClose(WindowCloseEvent& e) {

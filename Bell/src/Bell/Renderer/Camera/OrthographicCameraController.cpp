@@ -11,6 +11,13 @@ namespace Bell
         m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio* m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel), 
         m_RotationEnabled(rotationEnabled)
     {
+        Input::Remap("camera_move_left", KeyAlternative(Keys::A));
+        Input::Remap("camera_move_right", KeyAlternative(Keys::D));
+        Input::Remap("camera_move_up", KeyAlternative(Keys::W));
+        Input::Remap("camera_move_down", KeyAlternative(Keys::S));
+
+        Input::Remap("camera_rotate_clockwise", KeyAlternative(Keys::E));
+        Input::Remap("camera_rotate_counter_clockwise", KeyAlternative(Keys::Q));
     }
 
     void OrthographicCameraController::OnUpdate(Timestep deltaTime)
@@ -20,20 +27,20 @@ namespace Bell
         float rotation = GetRotation();
 
         // Camera
-        if (Input::IsKeyPressed(B_KEY_A))
+        if (Input::IsInputPressed("camera_move_left"))
             position.x -= m_TranslationSpeed * deltaTime;
-        else if (Input::IsKeyPressed(B_KEY_D))
+        else if (Input::IsInputPressed("camera_move_right"))
             position.x += m_TranslationSpeed * deltaTime;
 
-        if (Input::IsKeyPressed(B_KEY_W))
+        if (Input::IsInputPressed("camera_move_up"))
             position.y += m_TranslationSpeed * deltaTime;
-        else if (Input::IsKeyPressed(B_KEY_S))
+        else if (Input::IsInputPressed("camera_move_down"))
             position.y -= m_TranslationSpeed * deltaTime;
 
         if (m_RotationEnabled) {
-            if (Input::IsKeyPressed(B_KEY_Q))
+            if (Input::IsInputPressed("camera_rotate_counter_clockwise"))
                 rotation += m_RotationSpeed * deltaTime;
-            if (Input::IsKeyPressed(B_KEY_E))
+            if (Input::IsInputPressed("camera_rotate_clockwise"))
                 rotation -= m_RotationSpeed * deltaTime;
         }
 

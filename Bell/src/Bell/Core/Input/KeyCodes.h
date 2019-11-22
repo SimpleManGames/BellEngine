@@ -3,7 +3,7 @@
 
 namespace Bell
 {
-    enum class Keys
+    enum class Keys : int
     {
         // From glfw3.h
         Unknown = -1,

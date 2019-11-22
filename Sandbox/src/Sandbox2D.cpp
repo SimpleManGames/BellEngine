@@ -12,6 +12,11 @@ Sandbox2D::Sandbox2D()
 void Sandbox2D::OnAttach()
 {
     m_Texture = Bell::Texture2D::Create("assets/textures/bigmisssteak.png");
+
+    Bell::Input::Remap("camera_move_left", Bell::KeyAlternative(Bell::Keys::A));
+    Bell::Input::Remap("camera_move_right", Bell::KeyAlternative(Bell::Keys::D));
+    Bell::Input::Remap("camera_move_up", Bell::KeyAlternative(Bell::Keys::W));
+    Bell::Input::Remap("camera_move_down", Bell::KeyAlternative(Bell::Keys::S));
 }
 
 void Sandbox2D::OnDetach()

@@ -3,7 +3,7 @@
 
 namespace Bell
 {
-    enum class MouseButtons
+    enum class Mouse
     {
         // From glfw3.h
         Button1 = 0,
@@ -25,14 +25,14 @@ namespace Bell
 
 // From glfw3.h
 
-#define B_MOUSE_BUTTON_1      0
-#define B_MOUSE_BUTTON_2      1
-#define B_MOUSE_BUTTON_3      2
-#define B_MOUSE_BUTTON_4      3
-#define B_MOUSE_BUTTON_5      4
-#define B_MOUSE_BUTTON_6      5
-#define B_MOUSE_BUTTON_7      6
-#define B_MOUSE_BUTTON_8      7
+#define B_MOUSE_BUTTON_1      ::Bell::Mouse::Button1
+#define B_MOUSE_BUTTON_2      ::Bell::Mouse::Button2
+#define B_MOUSE_BUTTON_3      ::Bell::Mouse::Button3
+#define B_MOUSE_BUTTON_4      ::Bell::Mouse::Button4
+#define B_MOUSE_BUTTON_5      ::Bell::Mouse::Button5
+#define B_MOUSE_BUTTON_6      ::Bell::Mouse::Button6
+#define B_MOUSE_BUTTON_7      ::Bell::Mouse::Button7
+#define B_MOUSE_BUTTON_8      ::Bell::Mouse::Button8
 #define B_MOUSE_BUTTON_LAST   B_MOUSE_BUTTON_8
 #define B_MOUSE_BUTTON_LEFT   B_MOUSE_BUTTON_1
 #define B_MOUSE_BUTTON_RIGHT  B_MOUSE_BUTTON_2

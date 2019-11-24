@@ -16,11 +16,11 @@ namespace Bell
     struct KeyAlternative
     {
         // Type-safe union
-        std::variant<Keys, MouseButtons> value;
+        std::variant<Keys, Mouse> value;
 
         KeyAlternative() = default;
         KeyAlternative(Keys key) { value = key; }
-        KeyAlternative(MouseButtons button) { value = button; }
+        KeyAlternative(Mouse button) { value = button; }
     };
 
     class Input
@@ -59,13 +59,13 @@ namespace Bell
             if (std::holds_alternative<Keys>(input.value))
                 return s_Instance->IsKeyPressedImpl((int)std::get<Keys>(input.value));
 
-            if (std::holds_alternative<MouseButtons>(input.value))
-                return s_Instance->IsKeyPressedImpl((int)std::get<MouseButtons>(input.value));
+            if (std::holds_alternative<Mouse>(input.value))
+                return s_Instance->IsKeyPressedImpl((int)std::get<Mouse>(input.value));
 
             B_CORE_WARN("Unknown KeyAlternative Input");
             return false;
         }
-        inline static bool IsMouseButtonPressed(MouseButtons button) { return s_Instance->IsMouseButtonPressedImpl((int)button); }
+        inline static bool IsMouseButtonPressed(Mouse button) { return s_Instance->IsMouseButtonPressedImpl((int)button); }
 
         inline static void Remap(const std::string& name, KeyAlternative input) { s_Instance->m_Mapping[name] = input; }
 

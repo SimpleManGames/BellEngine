@@ -11,7 +11,7 @@ extern Bell::Application* Bell::CreateApplication();
 
 int main(int argc, char** argv)
 {
-    B_PROFILE_BEGIN_SESSION("Startup", "BellProfile-Startup.json");
+    B_PROFILE_BEGIN_SESSION("Startup", "logs/BellProfile-Startup.json");
     // Initialize the logger
     Bell::Log::Init();
     B_CORE_INFO("Initialized Log!");
@@ -21,11 +21,11 @@ int main(int argc, char** argv)
     auto app = Bell::CreateApplication();
     B_PROFILE_END_SESSION();
 
-    B_PROFILE_BEGIN_SESSION("Runtime", "BellProfile-Runtime.json");
+    B_PROFILE_BEGIN_SESSION("Runtime", "logs/BellProfile-Runtime.json");
     app->Run();
     B_PROFILE_END_SESSION();
 
-    B_PROFILE_BEGIN_SESSION("Shutdown", "BellProfile-Shutdown.json");
+    B_PROFILE_BEGIN_SESSION("Shutdown", "logs/BellProfile-Shutdown.json");
     delete app;
     B_PROFILE_END_SESSION();
 }

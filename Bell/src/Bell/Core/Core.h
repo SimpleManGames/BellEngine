@@ -49,7 +49,7 @@
 
 #ifdef B_DEBUG
 #define B_ENABLE_ASSERTS
-#define B_ENABLE_PROFILING
+#define B_ENABLE_PROFILING 1
 #endif // B_DEBUG
 
 #ifdef B_ENABLE_ASSERTS
@@ -63,12 +63,23 @@
 #ifdef B_ENABLE_PROFILING
 #include "Bell/Core/Profiler/InstrumentatonTimer.h"
 
+#if defined(__func__)
+#define B_FUNCSIG __func__
+#elif defined(__FUNCSIG__)
+#define B_FUNCSIG __FUNCSIG__ // Visual Studio Define 
+#elif defined(__PRETTY_FUNCTION__)
+#define B_FUNCSIG __PRETTY_FUNCTION__ // GCC and Clank Define
+#else
+#define B_FUNCSIG __FUNCTION__ // Cross-compatible; Gives less information on the function though
+#endif
+
 #define B_PROFILER_BEGIN(name) Bell::Instrumentor::Get().BeginSession(name)
 #define B_PROFILER_BEGIN(name, filePath) Bell::Instrumentor::Get().BeginSession(name, filePath)
 #define B_PROFILER_END() Bell::Instrumentor::Get().EndSession();
 
 #define B_PROFILE_SCOPE(name) Bell::InstrumentationTimer timer##__LINE__(name)
-#define B_PROFILE_FUNCTION() B_PROFILE_SCOPE(__FUNCSIG__)
+/// __FUNCSIG__ should be switched to https://en.cppreference.com/w/cpp/utility/source_location With C++20
+#define B_PROFILE_FUNCTION() B_PROFILE_SCOPE(B_FUNCSIG)
 #else
 #define B_PROFILER_BEGIN(name)
 #define B_PROFILER_BEGIN(name, filePath)
@@ -94,7 +105,7 @@ namespace Bell
     {
         return std::make_unique<T>(std::forward<Args>(args)...);
     }
- 
+
     template<typename T>
     using Ref = std::shared_ptr<T>;
     template<typename T, typename ... Args>

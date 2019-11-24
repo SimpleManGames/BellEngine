@@ -41,8 +41,11 @@ namespace Bell {
             }
         }
 #ifdef B_DEBUG
-        m_ImGuiLayer = new ImGuiLayer();
-        PushOverlay(m_ImGuiLayer);
+        {
+            B_PROFILE_SCOPE("ImGuiLayer Creation");
+            m_ImGuiLayer = new ImGuiLayer();
+            PushOverlay(m_ImGuiLayer);
+        }
 #endif
     }
 
@@ -53,6 +56,7 @@ namespace Bell {
     }
 
     void Application::OnEvent(Event& e) {
+        B_PROFILE_FUNCTION();
         // Makes a dispatcher
         EventDispatcher dispatcher(e);
         // Listens and acts on window close events using the defined OnWindowClose function
@@ -83,14 +87,20 @@ namespace Bell {
             if (!(m_ApplicationState == ApplicationState::Minimized)) {
                 // Update each layer
                 for (Layer* layer : m_LayerStack)
+                {
+                    B_PROFILE_SCOPE(layer->GetName().c_str());
                     layer->OnUpdate(deltaTime);
+                }
             }
 
 #ifdef B_DEBUG
-            m_ImGuiLayer->Begin();
-            for (Layer* layer : m_LayerStack)
-                layer->OnImGuiRender();
-            m_ImGuiLayer->End();
+            {
+                B_PROFILE_SCOPE("ImGuiLayer Render");
+                m_ImGuiLayer->Begin();
+                for (Layer* layer : m_LayerStack)
+                    layer->OnImGuiRender();
+                m_ImGuiLayer->End();
+            }
 #endif
 
             m_Window->OnUpdate();

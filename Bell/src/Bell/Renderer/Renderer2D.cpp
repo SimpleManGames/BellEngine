@@ -26,6 +26,8 @@ namespace Bell
 
     void Renderer2D::Init()
     {
+        B_PROFILE_FUNCTION();
+
         s_Data = new Renderer2DStorage();
 
         s_Data->QuadVertexArray = Bell::VertexArray::Create();
@@ -59,17 +61,20 @@ namespace Bell
 
     void Renderer2D::Shutdown()
     {
+        B_PROFILE_FUNCTION();
         delete s_Data;
     }
 
     void Renderer2D::BeginScene(const OrthographicCamera& camera)
     {
+        B_PROFILE_FUNCTION();
         s_Data->DefaultShader->Bind();
         s_Data->DefaultShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
     }
 
     void Renderer2D::EndScene()
     {
+        B_PROFILE_FUNCTION();
     }
 
     void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const glm::vec4& color)
@@ -89,6 +94,8 @@ namespace Bell
     
     void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec4& color, float textureScale)
     {
+        B_PROFILE_FUNCTION();
+
         texture->Bind();
         s_Data->DefaultShader->SetFloat4("u_Color", color);
         s_Data->DefaultShader->SetFloat("u_TextureScale", textureScale);

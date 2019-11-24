@@ -14,23 +14,23 @@ namespace Bell {
 
     Application::Application()
     {
-        PROFILER_BEGIN("Application Creation", "application.json");
+        B_PROFILER_BEGIN("Application Creation", "application.json");
 
         {
-            PROFILE_SCOPE("Application Construction");
+            B_PROFILE_SCOPE("Application Construction");
             m_ApplicationState = ApplicationState::Constructing;
             B_CORE_ASSERT(!s_Instance, "There is already an instance of Application");
             s_Instance = this;
         }
 
         {
-            PROFILE_SCOPE("Application Initializing");
+            B_PROFILE_SCOPE("Application Initializing");
             m_ApplicationState = ApplicationState::Initializing;
 
             B_CORE_INFO("Bell Engine Initializing");
             // Creates the unique pointer for our window
             {
-                PROFILE_SCOPE("Window Creation");
+                B_PROFILE_SCOPE("Window Creation");
                 m_Window = Window::Create();
                 // Sets the function we use for event handling
                 m_Window->SetEventCallback(B_BIND_EVENT_FN(Application::OnEvent));
@@ -38,7 +38,7 @@ namespace Bell {
             }
 
             {
-                PROFILE_SCOPE("Renderer Init");
+                B_PROFILE_SCOPE("Renderer Init");
                 Renderer::Init();
             }
         }
@@ -47,7 +47,7 @@ namespace Bell {
         PushOverlay(m_ImGuiLayer);
 #endif
 
-        PROFILER_END();
+        B_PROFILER_END();
     }
 
     Application::~Application() {
@@ -73,8 +73,8 @@ namespace Bell {
     }
 
     void Application::Run() {
-        PROFILER_BEGIN("Application Run", "appRun.json");
-        PROFILE_FUNCTION();
+        B_PROFILER_BEGIN("Application Run", "appRun.json");
+        B_PROFILE_FUNCTION();
         m_ApplicationState = ApplicationState::Running;
 
         while (m_ApplicationState == ApplicationState::Running
@@ -101,7 +101,7 @@ namespace Bell {
             m_Window->OnUpdate();
         }
 
-        PROFILER_END();
+        B_PROFILER_END();
     }
 
     bool Application::OnWindowClose(WindowCloseEvent& e) {

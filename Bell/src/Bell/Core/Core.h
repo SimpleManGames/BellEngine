@@ -76,7 +76,8 @@
 
 #define B_PROFILE_SCOPE(name)
 #define B_PROFILE_FUNCTION()
-#endif
+#endif // B_ENABLE_PROFILING
+
 #define BIT(x) (1 << x)
 
 #define B_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)

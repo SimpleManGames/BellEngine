@@ -25,23 +25,23 @@ void Sandbox2D::OnDetach()
 
 void Sandbox2D::OnUpdate(Bell::Timestep deltaTime)
 {
-    PROFILE_FUNCTION();
+    B_PROFILE_FUNCTION();
 
     // Update
     {
-        PROFILE_SCOPE("CameraController::OnUpdate");
+        B_PROFILE_SCOPE("CameraController::OnUpdate");
         m_CameraController.OnUpdate(deltaTime);
     }
 
     // Render
     {
-        PROFILE_SCOPE("Renderer Prep");
+        B_PROFILE_SCOPE("Renderer Prep");
         Bell::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
         Bell::RenderCommand::Clear();
     }
 
     {
-        PROFILE_SCOPE("Renderer Draw");
+        B_PROFILE_SCOPE("Renderer Draw");
         Bell::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
         //Bell::Renderer2D::DrawQuad(m_SquarePosition, m_SquareScale, m_Rotation, m_SquareColor);

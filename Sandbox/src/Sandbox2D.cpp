@@ -53,6 +53,7 @@ void Sandbox2D::OnUpdate(Bell::Timestep deltaTime)
 
 void Sandbox2D::OnImGuiRender()
 {
+    B_PROFILE_FUNCTION();
     ImGui::Begin("Sandbox 2D Settings");
 
     ImGui::DragFloat2("Square Position", glm::value_ptr(m_SquarePosition), 0.1f);

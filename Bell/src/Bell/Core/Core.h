@@ -63,6 +63,7 @@
 #ifdef B_ENABLE_PROFILING
 #include "Bell/Debug/InstrumentatonTimer.h"
 
+/// Defining B_FUNCSIG
 #if defined(__func__)
 #define B_FUNCSIG __func__
 #elif defined(__FUNCSIG__)
@@ -73,11 +74,12 @@
 #define B_FUNCSIG __FUNCTION__ // Cross-compatible; Gives less information on the function though
 #endif
 
-#define B_PROFILE_BEGIN_SESSION(name) Bell::Instrumentor::Get().BeginSession(name)
-#define B_PROFILE_BEGIN_SESSION(name, filePath) Bell::Instrumentor::Get().BeginSession(name, filePath)
-#define B_PROFILE_END_SESSION() Bell::Instrumentor::Get().EndSession();
+/// Profiling Macros
+#define B_PROFILE_BEGIN_SESSION(name) ::Bell::Instrumentor::Get().BeginSession(name)
+#define B_PROFILE_BEGIN_SESSION(name, filePath) ::Bell::Instrumentor::Get().BeginSession(name, filePath)
+#define B_PROFILE_END_SESSION() ::Bell::Instrumentor::Get().EndSession();
 
-#define B_PROFILE_SCOPE(name) Bell::InstrumentationTimer timer##__LINE__(name)
+#define B_PROFILE_SCOPE(name) ::Bell::InstrumentationTimer timer##__LINE__(name)
 /// __FUNCSIG__ should be switched to https://en.cppreference.com/w/cpp/utility/source_location With C++20
 #define B_PROFILE_FUNCTION() B_PROFILE_SCOPE(B_FUNCSIG)
 #else

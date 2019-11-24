@@ -14,8 +14,6 @@ namespace Bell {
 
     Application::Application()
     {
-        B_PROFILER_BEGIN("Application Creation", "application.json");
-
         {
             B_PROFILE_SCOPE("Application Construction");
             m_ApplicationState = ApplicationState::Constructing;
@@ -46,8 +44,6 @@ namespace Bell {
         m_ImGuiLayer = new ImGuiLayer();
         PushOverlay(m_ImGuiLayer);
 #endif
-
-        B_PROFILER_END();
     }
 
     Application::~Application() {
@@ -73,7 +69,6 @@ namespace Bell {
     }
 
     void Application::Run() {
-        B_PROFILER_BEGIN("Application Run", "appRun.json");
         B_PROFILE_FUNCTION();
         m_ApplicationState = ApplicationState::Running;
 
@@ -100,8 +95,6 @@ namespace Bell {
 
             m_Window->OnUpdate();
         }
-
-        B_PROFILER_END();
     }
 
     bool Application::OnWindowClose(WindowCloseEvent& e) {

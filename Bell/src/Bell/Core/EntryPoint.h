@@ -11,6 +11,7 @@ extern Bell::Application* Bell::CreateApplication();
 
 int main(int argc, char** argv)
 {
+    B_PROFILE_BEGIN_SESSION("Startup", "BellProfile-Startup.json");
     // Initialize the logger
     Bell::Log::Init();
     B_CORE_INFO("Initialized Log!");
@@ -18,8 +19,15 @@ int main(int argc, char** argv)
 
     // Create app using the app user's function
     auto app = Bell::CreateApplication();
+    B_PROFILE_END_SESSION();
+
+    B_PROFILE_BEGIN_SESSION("Runtime", "BellProfile-Runtime.json");
     app->Run();
+    B_PROFILE_END_SESSION();
+
+    B_PROFILE_BEGIN_SESSION("Shutdown", "BellProfile-Shutdown.json");
     delete app;
+    B_PROFILE_END_SESSION();
 }
 
 #endif // !B_PLATFORM_WINDOWS

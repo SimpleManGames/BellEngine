@@ -3,7 +3,7 @@
 
 namespace Bell
 {
-    enum class Keys : int16_t
+    typedef enum class Keys : int16_t
     {
         // From glfw3.h
         Unknown = -1,
@@ -131,7 +131,7 @@ namespace Bell
         Menu =           348,
 
         KeyLast =        Menu,
-    };
+    } Key;
 }
 
 // From glfw3.h

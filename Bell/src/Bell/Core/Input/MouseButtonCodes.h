@@ -3,7 +3,7 @@
 
 namespace Bell
 {
-    enum class Mouse
+    enum class Mouse : int16_t
     {
         // From glfw3.h
         Button1 = 0,

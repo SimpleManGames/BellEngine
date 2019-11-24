@@ -48,7 +48,7 @@
 #endif // End of platform detection
 
 #ifdef B_DEBUG
-#define B_ENABLE_ASSERTS
+#define B_ENABLE_ASSERTS 1
 #define B_ENABLE_PROFILING 1
 #endif // B_DEBUG
 
@@ -61,7 +61,7 @@
 #endif // B_ENABLE_ASSERTS
 
 #ifdef B_ENABLE_PROFILING
-#include "Bell/Core/Profiler/InstrumentatonTimer.h"
+#include "Bell/Debug/InstrumentatonTimer.h"
 
 #if defined(__func__)
 #define B_FUNCSIG __func__
@@ -73,17 +73,17 @@
 #define B_FUNCSIG __FUNCTION__ // Cross-compatible; Gives less information on the function though
 #endif
 
-#define B_PROFILER_BEGIN(name) Bell::Instrumentor::Get().BeginSession(name)
-#define B_PROFILER_BEGIN(name, filePath) Bell::Instrumentor::Get().BeginSession(name, filePath)
-#define B_PROFILER_END() Bell::Instrumentor::Get().EndSession();
+#define B_PROFILE_BEGIN_SESSION(name) Bell::Instrumentor::Get().BeginSession(name)
+#define B_PROFILE_BEGIN_SESSION(name, filePath) Bell::Instrumentor::Get().BeginSession(name, filePath)
+#define B_PROFILE_END_SESSION() Bell::Instrumentor::Get().EndSession();
 
 #define B_PROFILE_SCOPE(name) Bell::InstrumentationTimer timer##__LINE__(name)
 /// __FUNCSIG__ should be switched to https://en.cppreference.com/w/cpp/utility/source_location With C++20
 #define B_PROFILE_FUNCTION() B_PROFILE_SCOPE(B_FUNCSIG)
 #else
-#define B_PROFILER_BEGIN(name)
-#define B_PROFILER_BEGIN(name, filePath)
-#define B_PROFILER_END()
+#define B_PROFILE_BEGIN_SESSION(name)
+#define B_PROFILE_BEGIN_SESSION(name, filePath)
+#define B_PROFILE_END_SESSION()
 
 #define B_PROFILE_SCOPE(name)
 #define B_PROFILE_FUNCTION()

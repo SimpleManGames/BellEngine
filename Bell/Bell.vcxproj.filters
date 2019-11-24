@@ -1264,7 +1264,7 @@
     <ClInclude Include="src\Bell\Core\Time.h">
       <Filter>src\Bell\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Bell\Core\Profiler\InstrumentatonTimer.h" />
+    <ClInclude Include="src\Bell\Debug\InstrumentatonTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Core\Application.cpp">

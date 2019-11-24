@@ -63,19 +63,19 @@
 #ifdef B_ENABLE_PROFILING
 #include "Bell/Core/Profiler/InstrumentatonTimer.h"
 
-#define PROFILER_BEGIN(name) Bell::Instrumentor::Get().BeginSession(name)
-#define PROFILER_BEGIN(name, filePath) Bell::Instrumentor::Get().BeginSession(name, filePath)
-#define PROFILER_END() Bell::Instrumentor::Get().EndSession();
+#define B_PROFILER_BEGIN(name) Bell::Instrumentor::Get().BeginSession(name)
+#define B_PROFILER_BEGIN(name, filePath) Bell::Instrumentor::Get().BeginSession(name, filePath)
+#define B_PROFILER_END() Bell::Instrumentor::Get().EndSession();
 
-#define PROFILE_SCOPE(name) Bell::InstrumentationTimer timer##__LINE__(name)
-#define PROFILE_FUNCTION() PROFILE_SCOPE(__FUNCSIG__)
+#define B_PROFILE_SCOPE(name) Bell::InstrumentationTimer timer##__LINE__(name)
+#define B_PROFILE_FUNCTION() B_PROFILE_SCOPE(__FUNCSIG__)
 #else
-#define PROFILER_BEGIN(name)
-#define PROFILER_BEGIN(name, filePath)
-#define PROFILER_END()
+#define B_PROFILER_BEGIN(name)
+#define B_PROFILER_BEGIN(name, filePath)
+#define B_PROFILER_END()
 
-#define PROFILE_SCOPE(name)
-#define PROFILE_FUNCTION()
+#define B_PROFILE_SCOPE(name)
+#define B_PROFILE_FUNCTION()
 #endif
 #define BIT(x) (1 << x)
 

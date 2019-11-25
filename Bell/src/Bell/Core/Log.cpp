@@ -10,6 +10,7 @@ namespace Bell {
 
     void Log::Init()
     {
+        B_PROFILE_FUNCTION();
         // Set spdlog definition for the way displayed in the console
         // [Time] LoggerName: Message
         spdlog::set_pattern("%^[%T] %n: %v%$");

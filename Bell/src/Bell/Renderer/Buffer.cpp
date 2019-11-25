@@ -9,6 +9,7 @@ namespace Bell
 {
     Ref<VertexBuffer> VertexBuffer::Create(float* vertices, uint32_t size)
     {
+        B_PROFILE_FUNCTION();
         switch (Renderer::GetAPI())
         {
             case RendererAPI::API::None:
@@ -23,6 +24,7 @@ namespace Bell
 
     Ref<IndexBuffer> IndexBuffer::Create(uint32_t* indices, uint32_t size)
     {
+        B_PROFILE_FUNCTION();
         switch (Renderer::GetAPI())
         {
             case RendererAPI::API::None:

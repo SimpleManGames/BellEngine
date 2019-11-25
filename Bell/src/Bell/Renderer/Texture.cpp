@@ -8,6 +8,7 @@ namespace Bell
 {
     Ref<Texture2D> Texture2D::Create(uint32_t width, uint32_t height)
     {
+        B_PROFILE_FUNCTION();
         switch (Renderer::GetAPI())
         {
             case RendererAPI::API::None:
@@ -22,6 +23,7 @@ namespace Bell
 
     Ref<Texture2D> Texture2D::Create(const std::string& path)
     {
+        B_PROFILE_FUNCTION();
         switch (Renderer::GetAPI())
         {
             case RendererAPI::API::None:

@@ -9,6 +9,7 @@ namespace Bell
     
     Scope<RendererAPI> RendererAPI::Create()
     {
+        B_PROFILE_FUNCTION();
         switch (s_API)
         {
             case Bell::RendererAPI::API::None:

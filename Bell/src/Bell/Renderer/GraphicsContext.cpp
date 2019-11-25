@@ -8,6 +8,7 @@ namespace Bell
 {
     Scope<GraphicsContext> GraphicsContext::Create(void* window)
     {
+        B_PROFILE_FUNCTION();
         switch (Renderer::GetAPI())
         {
             case RendererAPI::API::None:

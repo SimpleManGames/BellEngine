@@ -8,6 +8,7 @@ namespace Bell
 {
     Ref<Shader> Shader::Create(const std::string& filePath)
     {
+        B_PROFILE_FUNCTION();
         switch (Renderer::GetAPI())
         {
             case RendererAPI::API::None:
@@ -23,6 +24,7 @@ namespace Bell
 
     Ref<Shader> Shader::Create(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
     {
+        B_PROFILE_FUNCTION();
         switch (Renderer::GetAPI())
         {
             case RendererAPI::API::None:
@@ -38,18 +40,21 @@ namespace Bell
     
     void ShaderLibrary::Add(const std::string& name, const Ref<Shader>& shader)
     {
+        B_PROFILE_FUNCTION();
         B_CORE_ASSERT(!Exists(name), "Shader already exists!");
         m_Shaders[name] = shader;
     }
 
     void ShaderLibrary::Add(const Ref<Shader>& shader)
     {
+        B_PROFILE_FUNCTION();
         auto& name = shader->GetName();
         Add(name, shader);
     }
 
     Ref<Shader> ShaderLibrary::Load(const std::string& filePath)
     {
+        B_PROFILE_FUNCTION();
         auto shader = Shader::Create(filePath);
         Add(shader);
         return shader;
@@ -57,6 +62,7 @@ namespace Bell
 
     Ref<Shader> ShaderLibrary::Load(const std::string& name, const std::string& filePath)
     {
+        B_PROFILE_FUNCTION();
         auto shader = Shader::Create(filePath);
         Add(name, shader);
         return shader;
@@ -64,11 +70,13 @@ namespace Bell
 
     Ref<Shader> ShaderLibrary::Get(const std::string& name)
     {
+        B_PROFILE_FUNCTION();
         B_CORE_ASSERT(Exists(name), "Shader not found!");
         return m_Shaders[name];
     }
     bool ShaderLibrary::Exists(const std::string& name) const
     {
+        B_PROFILE_FUNCTION();
         return m_Shaders.find(name) != m_Shaders.end();
     }
 }

@@ -32,7 +32,7 @@ namespace Bell {
                 m_Window = Window::Create();
                 // Sets the function we use for event handling
                 m_Window->SetEventCallback(B_BIND_EVENT_FN(Application::OnEvent));
-                m_Window->SetVSync(true);
+                m_Window->SetVSync(false);
             }
 
             {
@@ -108,11 +108,13 @@ namespace Bell {
     }
 
     bool Application::OnWindowClose(WindowCloseEvent& e) {
+        B_PROFILE_FUNCTION();
         m_ApplicationState = ApplicationState::ShuttingDown;
         return false;
     }
 
     bool Application::OnWindowResize(WindowResizeEvent& e) {
+        B_PROFILE_FUNCTION();
         if (e.GetWidth() == 0 || e.GetHeight() == 0)
         {
             m_ApplicationState = ApplicationState::Minimized;
@@ -127,11 +129,13 @@ namespace Bell {
     }
 
     void Application::PushLayer(Layer* layer) {
+        B_PROFILE_FUNCTION();
         m_LayerStack.PushLayer(layer);
         layer->OnAttach();
     }
 
     void Application::PushOverlay(Layer* layer) {
+        B_PROFILE_FUNCTION();
         m_LayerStack.PushOverlay(layer);
         layer->OnAttach();
     }

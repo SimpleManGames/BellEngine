@@ -10,6 +10,7 @@ namespace Bell {
 
     static uint32_t ShaderDataTypeSize(ShaderDataType type)
     {
+        B_PROFILE_FUNCTION();
         switch (type)
         {
             case ShaderDataType::Float:  return 4;
@@ -51,6 +52,7 @@ namespace Bell {
 
         uint32_t GetComponentCount() const
         {
+            B_PROFILE_FUNCTION();
             switch (Type)
             {
                 case ShaderDataType::Float:  return 1;
@@ -92,6 +94,7 @@ namespace Bell {
     private:
         void CalculateOffsetAndStride()
         {
+            B_PROFILE_FUNCTION();
             uint32_t offset = 0;
             m_Stride = 0;
             for (auto& element : m_Elements)

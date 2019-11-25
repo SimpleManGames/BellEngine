@@ -24,6 +24,7 @@ namespace Bell
 
     void ImGuiLayer::OnAttach()
     {
+        B_PROFILE_FUNCTION();
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
         ImGuiIO& io = ImGui::GetIO(); (void)io;
@@ -52,6 +53,7 @@ namespace Bell
 
     void ImGuiLayer::OnDetach()
     {
+        B_PROFILE_FUNCTION();
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
@@ -59,6 +61,7 @@ namespace Bell
 
     void ImGuiLayer::Begin()
     {
+        B_PROFILE_FUNCTION();
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
@@ -66,6 +69,7 @@ namespace Bell
 
     void ImGuiLayer::End()
     {
+        B_PROFILE_FUNCTION();
         ImGuiIO& io = ImGui::GetIO();
         Application& app = Application::Get();
         io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(), (float)app.GetWindow().GetHeight());

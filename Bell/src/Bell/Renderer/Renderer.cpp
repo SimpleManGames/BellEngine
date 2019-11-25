@@ -22,6 +22,7 @@ namespace Bell
 
     void Renderer::OnWindowResize(uint32_t width, uint32_t height)
     {
+        B_PROFILE_FUNCTION();
         RenderCommand::SetViewport(0, 0, width, height);
     }
 
@@ -34,6 +35,7 @@ namespace Bell
 
     void Renderer::EndScene()
     {
+        B_PROFILE_FUNCTION();
     }
 
     void Renderer::Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4 transform)

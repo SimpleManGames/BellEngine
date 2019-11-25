@@ -11,6 +11,7 @@ namespace Bell
         m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio* m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel), 
         m_RotationEnabled(rotationEnabled)
     {
+        B_PROFILE_FUNCTION();
         Input::Remap("camera_move_left", KeyAlternative(Keys::A));
         Input::Remap("camera_move_right", KeyAlternative(Keys::D));
         Input::Remap("camera_move_up", KeyAlternative(Keys::W));
@@ -53,6 +54,7 @@ namespace Bell
 
     void OrthographicCameraController::OnEvent(Event& e)
     {
+        B_PROFILE_FUNCTION();
         EventDispatcher dispatcher(e);
         dispatcher.Dispatch<MouseScrolledEvent>(B_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
         dispatcher.Dispatch<WindowResizeEvent>(B_BIND_EVENT_FN(OrthographicCameraController::OnWindowResize));
@@ -60,6 +62,7 @@ namespace Bell
     
     bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
     {
+        B_PROFILE_FUNCTION();
         m_ZoomLevel -= e.GetYOffset() * 0.25f;
         m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
         m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
@@ -69,6 +72,7 @@ namespace Bell
     
     bool OrthographicCameraController::OnWindowResize(WindowResizeEvent& e)
     {
+        B_PROFILE_FUNCTION();
         m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
         m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
         return false;

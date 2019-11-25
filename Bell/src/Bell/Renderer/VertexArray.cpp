@@ -6,7 +6,9 @@
 
 namespace Bell
 {
-    Ref<VertexArray> VertexArray::Create() {
+    Ref<VertexArray> VertexArray::Create()
+    {
+        B_PROFILE_FUNCTION();
         switch (Renderer::GetAPI())
         {
             case RendererAPI::API::None:

@@ -11,6 +11,7 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
+    B_PROFILE_FUNCTION();
     m_Texture = Bell::Texture2D::Create("assets/textures/bigmisssteak.png");
 
     Bell::Input::Remap("camera_move_left", Bell::KeyAlternative(Bell::Keys::A));
@@ -21,6 +22,7 @@ void Sandbox2D::OnAttach()
 
 void Sandbox2D::OnDetach()
 {
+    B_PROFILE_FUNCTION();
 }
 
 void Sandbox2D::OnUpdate(Bell::Timestep deltaTime)
@@ -62,19 +64,11 @@ void Sandbox2D::OnImGuiRender()
     ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
     ImGui::SliderFloat("Texture Scale", &m_TextureScale, 0.0f, 10.0f);
 
-    for (auto& result : m_ProfileResults)
-    {
-        char label[50];
-        strcpy(label, "  %.3fms ");
-        strcat(label, result.Name);
-        ImGui::Text(label, result.Time);
-    }
-    m_ProfileResults.clear();
-
     ImGui::End();
 }
 
 void Sandbox2D::OnEvent(Bell::Event& event)
 {
+    B_PROFILE_FUNCTION();
     m_CameraController.OnEvent(event);
 }

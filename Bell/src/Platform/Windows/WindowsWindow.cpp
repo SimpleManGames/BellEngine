@@ -61,7 +61,10 @@ namespace Bell
         }
 
         // Create the window
-        m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+        {
+            B_PROFILE_SCOPE("glfwCreateWindow");
+            m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+        }
         CenterWindow();
         {
             B_PROFILE_SCOPE("Window Context Init");

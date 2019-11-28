@@ -181,6 +181,8 @@ namespace Bell
     // Destroys the glfw window
     void WindowsWindow::Shutdown()
     {
+        B_PROFILE_FUNCTION();
+
         glfwDestroyWindow(m_Window);
     }
 
@@ -255,12 +257,15 @@ namespace Bell
     // Checks for glfw events and swap buffers
     void WindowsWindow::OnUpdate()
     {
+        B_PROFILE_FUNCTION();
+
         glfwPollEvents();
         m_Context->SwapBuffers();
     }
 
     void WindowsWindow::SetVSync(bool enabled)
     {
+        B_PROFILE_FUNCTION();
         if (enabled)
             glfwSwapInterval(1);
         else

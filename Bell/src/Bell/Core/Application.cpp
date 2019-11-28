@@ -14,6 +14,7 @@ namespace Bell {
 
     Application::Application()
     {
+        B_PROFILE_FUNCTION();
         {
             B_PROFILE_SCOPE("Application Construction");
             m_ApplicationState = ApplicationState::Constructing;
@@ -79,12 +80,15 @@ namespace Bell {
         while (m_ApplicationState == ApplicationState::Running
             || m_ApplicationState == ApplicationState::Minimized)
         {
+            B_PROFILE_SCOPE("Run Loop");
+
             // Calculate delta time
             float time = (float)glfwGetTime();
             Timestep deltaTime = time - m_LastFrameTime;
             m_LastFrameTime = time;
 
-            if (!(m_ApplicationState == ApplicationState::Minimized)) {
+            if (!(m_ApplicationState == ApplicationState::Minimized)) 
+            {
                 // Update each layer
                 for (Layer* layer : m_LayerStack)
                 {

@@ -95,7 +95,6 @@ namespace Bell
     void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec4& color, float textureScale)
     {
         B_PROFILE_FUNCTION();
-
         texture->Bind();
         s_Data->DefaultShader->SetFloat4("u_Color", color);
         s_Data->DefaultShader->SetFloat("u_TextureScale", textureScale);

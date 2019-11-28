@@ -36,6 +36,7 @@ namespace Bell
 
     void OpenGLContext::SwapBuffers()
     {
+        B_PROFILE_FUNCTION();
         glfwSwapBuffers(m_WindowHandle);
     }
 }

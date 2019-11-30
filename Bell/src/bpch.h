@@ -4,12 +4,6 @@
 #ifndef _BPCH_H
 #define _BPCH_H
 
-
-// ----- Common Engine Includes -----
-// ----------------------------------
-
-#include "Bell/Core/Log.h"
-
 // ----- Common C++ Includes -----
 // -------------------------------
 
@@ -33,5 +27,12 @@
 #ifdef B_PLATFORM_WINDOWS
     #include <Windows.h>
 #endif
+
+
+// ----- Common Engine Includes -----
+// ----------------------------------
+
+#include "Bell/Core/Log.h"
+#include "Bell/Debug/InstrumentatonTimer.h"
 
 #endif // !_BPCH_H

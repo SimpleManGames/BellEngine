@@ -11,12 +11,12 @@ extern Bell::Application* Bell::CreateApplication();
 
 int main(int argc, char** argv)
 {
-    B_PROFILE_BEGIN_SESSION("Startup", "logs/BellProfile-Startup.json");
     // Initialize the logger
     Bell::Log::Init();
     B_CORE_INFO("Initialized Log!");
     B_INFO("Initialized Log!");
 
+    B_PROFILE_BEGIN_SESSION("Startup", "logs/BellProfile-Startup.json");
     // Create app using the app user's function
     auto app = Bell::CreateApplication();
     B_PROFILE_END_SESSION();

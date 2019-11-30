@@ -4,7 +4,7 @@
 #ifndef _LOG_H
 #define _LOG_H
 
-#include "Core.h"
+#include "Bell/Core/Core.h"
 #include "spdlog/spdlog.h"
 #include "spdlog/fmt/ostr.h"
 

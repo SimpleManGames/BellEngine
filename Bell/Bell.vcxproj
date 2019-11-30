@@ -156,7 +156,7 @@
     <ClInclude Include="src\Bell\Core\Input\KeyCodes.h" />
     <ClInclude Include="src\Bell\Core\Input\MouseButtonCodes.h" />
     <ClInclude Include="src\Bell\Core\Log.h" />
-    <ClInclude Include="src\Bell\Debug\InstrumentatonTimer.h" />
+    <ClInclude Include="src\Bell\Debug\Instrumentor.h" />
     <ClInclude Include="src\Bell\Core\Time.h" />
     <ClInclude Include="src\Bell\Core\Window.h" />
     <ClInclude Include="src\Bell\ImGui\ImGuiLayer.h" />

@@ -33,6 +33,6 @@
 // ----------------------------------
 
 #include "Bell/Core/Log.h"
-#include "Bell/Debug/InstrumentatonTimer.h"
+#include "Bell/Debug/Instrumentor.h"
 
 #endif // !_BPCH_H

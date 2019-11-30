@@ -10,7 +10,7 @@
 #include "Bell/Core/Log.h"
 
 #include "Bell/Core/Time.h"
-#include "Bell/Debug/InstrumentatonTimer.h"
+#include "Bell/Debug/Instrumentor.h"
 
 // Input
 #include "Bell/Core/Input/Input.h"

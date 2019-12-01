@@ -25,11 +25,6 @@ namespace Bell
 
     class Instrumentor
     {
-    private:
-        std::mutex m_Mutex;
-        InstrumentationSession* m_CurrentSession;
-        std::ofstream m_OutputStream;
-        int m_ProfileCount;
     public:
         Instrumentor()
             : m_CurrentSession(nullptr), m_ProfileCount(0)
@@ -44,10 +39,12 @@ namespace Bell
                 // newly opened session instead.  That's better than having badly formatted
                 // profiling output.
                 if (::Bell::Log::GetCoreLogger()) { // Edge case: BeginSession() might be before Log::Init()
-                    //B_CORE_ERROR("Instrumentor::BeginSession('{0}') when session '{1}' already open.", name, m_CurrentSession->Name);
+                    B_CORE_ERROR("Instrumentor::BeginSession('{0}') when session '{1}' already open.", name, m_CurrentSession->Name);
                 }
                 EndSession();
             }
+            B_CORE_TRACE("Beginning Session for '{0}'.", name);
+            
             std::lock_guard lock(m_Mutex);
             m_OutputStream.open(filepath);
             if (m_OutputStream.is_open()) {
@@ -55,12 +52,14 @@ namespace Bell
                 WriteHeader();
             }
             else {
-                //B_CORE_ERROR("Instrumentor could not open results file '{0}'.", filepath);
+                B_CORE_ERROR("Instrumentor could not open results file '{0}'.", filepath);
             }
+            
         }
 
         void EndSession()
         {
+            B_CORE_TRACE("Ending Session for '{0}'.", m_CurrentSession->Name);
             std::lock_guard lock(m_Mutex);
             if (m_CurrentSession) {
                 WriteFooter();
@@ -94,11 +93,17 @@ namespace Bell
                 m_OutputStream.flush();
             }
         }
-
+        
         static Instrumentor& Get() {
             static Instrumentor instance;
             return instance;
         }
+
+    private:
+        std::mutex m_Mutex;
+        InstrumentationSession* m_CurrentSession;
+        std::ofstream m_OutputStream;
+        int m_ProfileCount;
 
     private:
         void WriteHeader()

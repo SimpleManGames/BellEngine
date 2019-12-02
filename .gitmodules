@@ -21,3 +21,6 @@
 [submodule "Bell/vendor/enet"]
 	path = Bell/vendor/enet
 	url = https://github.com/lsalzman/enet
+[submodule "Bell/vendor/--force"]
+	path = Bell/vendor/--force
+	url = https://github.com/SimpleManGames/glfw

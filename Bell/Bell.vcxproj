@@ -152,13 +152,14 @@
     <ClInclude Include="src\Bell\Core\Events\Event.h" />
     <ClInclude Include="src\Bell\Core\Events\KeyEvent.h" />
     <ClInclude Include="src\Bell\Core\Events\MouseEvent.h" />
+    <ClInclude Include="src\Bell\Core\Input\GamepadCodes.h" />
     <ClInclude Include="src\Bell\Core\Input\Input.h" />
     <ClInclude Include="src\Bell\Core\Input\KeyCodes.h" />
     <ClInclude Include="src\Bell\Core\Input\MouseButtonCodes.h" />
     <ClInclude Include="src\Bell\Core\Log.h" />
-    <ClInclude Include="src\Bell\Debug\Instrumentor.h" />
     <ClInclude Include="src\Bell\Core\Time.h" />
     <ClInclude Include="src\Bell\Core\Window.h" />
+    <ClInclude Include="src\Bell\Debug\Instrumentor.h" />
     <ClInclude Include="src\Bell\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Bell\Layer\Layer.h" />
     <ClInclude Include="src\Bell\Layer\LayerStack.h" />

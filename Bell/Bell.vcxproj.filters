@@ -16,6 +16,9 @@
     <Filter Include="src\Bell\Core\Input">
       <UniqueIdentifier>{727FE462-DEE0-C170-674E-0823D3AEF82F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Bell\Debug">
+      <UniqueIdentifier>{B1F68704-9DC4-7B0A-8658-EC3072C5576F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Bell\ImGui">
       <UniqueIdentifier>{6561E604-512F-DA0A-3AC3-4A312630B66F}</UniqueIdentifier>
     </Filter>
@@ -87,6 +90,9 @@
     <ClInclude Include="src\Bell\Core\Events\MouseEvent.h">
       <Filter>src\Bell\Core\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Bell\Core\Input\GamepadCodes.h">
+      <Filter>src\Bell\Core\Input</Filter>
+    </ClInclude>
     <ClInclude Include="src\Bell\Core\Input\Input.h">
       <Filter>src\Bell\Core\Input</Filter>
     </ClInclude>
@@ -99,8 +105,14 @@
     <ClInclude Include="src\Bell\Core\Log.h">
       <Filter>src\Bell\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Bell\Core\Time.h">
+      <Filter>src\Bell\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\Bell\Core\Window.h">
       <Filter>src\Bell\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Debug\Instrumentor.h">
+      <Filter>src\Bell\Debug</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\ImGui\ImGuiLayer.h">
       <Filter>src\Bell\ImGui</Filter>
@@ -130,6 +142,9 @@
       <Filter>src\Bell\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\Renderer\Renderer.h">
+      <Filter>src\Bell\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Renderer\Renderer2D.h">
       <Filter>src\Bell\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\Renderer\RendererAPI.h">
@@ -1260,11 +1275,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Bell\Renderer\Renderer2D.h" />
-    <ClInclude Include="src\Bell\Core\Time.h">
-      <Filter>src\Bell\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bell\Debug\Instrumentor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Core\Application.cpp">
@@ -1297,10 +1307,16 @@
     <ClCompile Include="src\Bell\Renderer\Camera\OrthographicCameraController.cpp">
       <Filter>src\Bell\Renderer\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="src\Bell\Renderer\GraphicsContext.cpp">
+      <Filter>src\Bell\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Bell\Renderer\RenderCommand.cpp">
       <Filter>src\Bell\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Bell\Renderer\Renderer.cpp">
+      <Filter>src\Bell\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bell\Renderer\Renderer2D.cpp">
       <Filter>src\Bell\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Bell\Renderer\RendererAPI.cpp">
@@ -1345,7 +1361,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Bell\Renderer\GraphicsContext.cpp" />
-    <ClCompile Include="src\Bell\Renderer\Renderer2D.cpp" />
   </ItemGroup>
 </Project>

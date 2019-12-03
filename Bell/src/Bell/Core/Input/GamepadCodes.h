@@ -24,7 +24,7 @@ namespace Bell
         J16, G16 = 15,
         Last = J16,
     } Gamepad;
-    typedef Iterator<Joystick, Joystick::J1, Joystick::Last> JoystickIterator;
+    //typedef Iterator<Joystick, Joystick::J1, Joystick::Last> JoystickIterator;
 
     /// May want to these enums later
     typedef enum class GamepadButtons : int16_t

@@ -90,9 +90,6 @@
     <ClInclude Include="src\Bell\Core\Events\MouseEvent.h">
       <Filter>src\Bell\Core\Events</Filter>
     </ClInclude>
-    <ClInclude Include="src\Bell\Core\Input\GamepadCodes.h">
-      <Filter>src\Bell\Core\Input</Filter>
-    </ClInclude>
     <ClInclude Include="src\Bell\Core\Input\Input.h">
       <Filter>src\Bell\Core\Input</Filter>
     </ClInclude>
@@ -1275,6 +1272,7 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\Bell\Core\Input\GamepadCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Core\Application.cpp">

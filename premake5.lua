@@ -18,15 +18,16 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
-IncludeDir["GLFW"] = "Bell/vendor/GLFW/include"
-IncludeDir["Glad"] = "Bell/vendor/Glad/include"
+IncludeDir["GLFW"] = "Bell/vendor/glfw/include"
+IncludeDir["Glad"] = "Bell/vendor/glad/include"
 IncludeDir["ImGui"] = "Bell/vendor/imgui"
 IncludeDir["glm"] = "Bell/vendor/glm"
 IncludeDir["stb_image"] = "Bell/vendor/stb_image"
+IncludeDir["enet"] = "Bell/vendor/enet/include"
 
 group "Dependencies"
-    include "Bell/vendor/GLFW"
-    include "Bell/vendor/Glad"
+    include "Bell/vendor/glfw"
+    include "Bell/vendor/glad"
     include "Bell/vendor/imgui"
 
 group ""
@@ -67,7 +68,8 @@ project "Bell"
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}",
         "%{IncludeDir.glm}",
-        "%{IncludeDir.stb_image}"
+        "%{IncludeDir.stb_image}",
+        "%{IncludeDir.enet}"
     }
 
     links 

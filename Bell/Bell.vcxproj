@@ -163,6 +163,7 @@
     <ClInclude Include="src\Bell\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Bell\Layer\Layer.h" />
     <ClInclude Include="src\Bell\Layer\LayerStack.h" />
+    <ClInclude Include="src\Bell\Networking\Network.h" />
     <ClInclude Include="src\Bell\Renderer\Buffer.h" />
     <ClInclude Include="src\Bell\Renderer\Camera\Camera.h" />
     <ClInclude Include="src\Bell\Renderer\Camera\OrthographicCamera.h" />
@@ -555,6 +556,7 @@
     <ClCompile Include="src\Bell\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Bell\Layer\Layer.cpp" />
     <ClCompile Include="src\Bell\Layer\LayerStack.cpp" />
+    <ClCompile Include="src\Bell\Networking\Network.cpp" />
     <ClCompile Include="src\Bell\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Bell\Renderer\Camera\Camera.cpp" />
     <ClCompile Include="src\Bell\Renderer\Camera\OrthographicCamera.cpp" />

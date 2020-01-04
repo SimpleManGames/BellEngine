@@ -18,7 +18,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
-IncludeDir["GLFW"] = "Bell/vendor/glfw/include"
+IncludeDir["GLFW"] = "Bell/vendor/GLFW/include"
 IncludeDir["Glad"] = "Bell/vendor/glad/include"
 IncludeDir["ImGui"] = "Bell/vendor/imgui"
 IncludeDir["glm"] = "Bell/vendor/glm"

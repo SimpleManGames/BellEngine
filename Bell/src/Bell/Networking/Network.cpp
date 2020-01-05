@@ -21,6 +21,12 @@ namespace Bell
     void Network::LaunchServer(const ServerConfig& config)
     {
         B_CORE_INFO("Launching Server");
-        // TODO:
+        // TODO: 
+        // Flag this application as a server in order to remove
+        // pointless funcs like renderering from the loop
+        
+        // New Thread
+        // Start the server
+        
     }
 }

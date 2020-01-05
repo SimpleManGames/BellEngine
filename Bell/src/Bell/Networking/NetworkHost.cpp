@@ -68,4 +68,9 @@ namespace Bell
         }
         return id;
     }
+
+    ENetPacket* CreatePacket(const void* data, uint32_t flags)
+    {
+        return enet_packet_create(data, sizeof(data), flags);
+    }
 }

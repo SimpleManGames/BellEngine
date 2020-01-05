@@ -1,6 +1,7 @@
 #include "bpch.h"
 #include "NetworkHost.h"
 
+#include "Bell/Networking/NetworkCommand.h"
 #include "Bell/Networking/NetworkConstants.h"
 
 namespace Bell
@@ -44,5 +45,27 @@ namespace Bell
             enet_peer_reset(peer);
             return nullptr;
         }
+    }
+
+    int GetPeerIDFromServer(ENetHost* host)
+    {
+        int id = -1;
+        ENetEvent event;
+
+        // Wait 2 seconds for an event
+        while (enet_host_service(host, &event, 2000) > 0 && event.type == ENET_EVENT_TYPE_RECEIVE)
+        {
+            ClientCommand command;
+            ENetPacket* packet = enet_packet_create(event.packet->data, event.packet->dataLength + 1, ENET_PACKET_FLAG_RELIABLE);
+            *packet >> command;
+            if (command == ClientCommand::PeerID)
+            {
+                peer_id_t peerID;
+                *packet >> peerID;
+                id = peerID;
+                break;
+            }
+        }
+        return id;
     }
 }

@@ -32,14 +32,14 @@ namespace Bell
         // Start the server
         
     }
-    ENetHost* CreateHost(const ENetAddress* address, int connections)
+    ENetHost* Network::CreateHost(const ENetAddress* address, int connections)
     {
         B_PROFILE_FUNCTION();
         // http://enet.bespin.org/group__host.html#ga5567a95d7a45521dc9cba93a9066c940
         return enet_host_create(address, connections, 2, 0, 0);
     }
 
-    ENetPeer* ConnectHostTo(ENetHost* host, const std::string& ip)
+    ENetPeer* Network::ConnectHostTo(ENetHost* host, const std::string& ip)
     {
         // http://enet.bespin.org/Tutorial.html#Connecting
 
@@ -73,7 +73,7 @@ namespace Bell
         }
     }
 
-    int GetPeerIDFromServer(ENetHost* host)
+    int Network::GetPeerIDFromServer(ENetHost* host)
     {
         int id = -1;
         ENetEvent event;
@@ -95,7 +95,7 @@ namespace Bell
         return id;
     }
 
-    ENetPacket* CreatePacket(const void* data, uint32_t flags)
+    ENetPacket* Network::CreatePacket(const void* data, uint32_t flags)
     {
         return enet_packet_create(data, sizeof(data), flags);
     }

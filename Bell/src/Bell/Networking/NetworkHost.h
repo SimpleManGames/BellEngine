@@ -32,7 +32,11 @@ namespace Bell
         NON_MOVABLE(NetworkHost)
 
     public:
-        NetworkHost(std::string &&name);
+        NetworkHost(std::string&& name)
+            : m_Name(std::move(name))
+        {
+
+        }
         virtual ~NetworkHost();
 
         /// Runs one tick of the host
@@ -45,6 +49,7 @@ namespace Bell
         /// Creates this NetworkHost as a Server
         bool CreateAsServer(int maxConnections);
 
+        void DisconnectFromPeer(ENetPeer* peer);
         /// Disconnects all current peers
         void DisconnectAllPeers();
 
@@ -53,7 +58,7 @@ namespace Bell
         int GetMaxConnections() const;
 
     protected:
-        void SendToPeer(ENetPeer* peer, ENetPacket& packet, uint8_t channel, uint32_t flags);
+        void SendToPeer(ENetPeer* peer, const void * packet, uint8_t channel, uint32_t flags);
         void BroadcastToPeers(ENetPacket& packet, uint8_t channel, uint32_t flags);
 
     private:

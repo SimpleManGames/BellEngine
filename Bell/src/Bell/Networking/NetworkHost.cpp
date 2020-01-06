@@ -120,13 +120,23 @@ namespace Bell
         return m_MaxConnections;
     }
 
-    void NetworkHost::SendToPeer(ENetPeer* peer, const void * packet, uint8_t channel, uint32_t flags)
+    void NetworkHost::QueueSendToPeer(ENetPeer* peer, const void * packet, uint8_t channel, uint32_t flags)
     {
         ENetPacket* ePacket = Network::CreatePacket(packet, flags);
         QueuedPacket qPacket;
         qPacket.packet = ePacket;
         qPacket.peer = peer;
         qPacket.style = QueuedPacket::Style::One;
+        qPacket.channel = channel;
+        m_Queue.push_back(qPacket);
+    }
+
+    void NetworkHost::QueueBroadcastToPeers(const void * packet, uint8_t channel, uint32_t flags)
+    {
+        ENetPacket* ePacket = Network::CreatePacket(packet, flags);
+        QueuedPacket qPacket;
+        qPacket.packet = ePacket;
+        qPacket.style = QueuedPacket::Style::Broadcast;
         qPacket.channel = channel;
         m_Queue.push_back(qPacket);
     }

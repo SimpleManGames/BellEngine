@@ -1,6 +1,7 @@
 #include "bpch.h"
 #include "NetworkHost.h"
 
+#include "Bell/Networking/Packet.h"
 #include "Bell/Networking/Network.h"
 #include "Bell/Networking/NetworkTypes.h"
 #include "Bell/Networking/NetworkCommand.h"
@@ -153,8 +154,12 @@ namespace Bell
         }
     }
      
-    void NetworkHost::OnCommandRecieve(ENetPeer* peer, const ENetPacket& packet)
+    void NetworkHost::OnCommandRecieve(ENetPeer* peer, const ENetPacket& ePacket)
     {
+        // Convert from our packet to enet packet
+
+        Packet packet;
+        packet.Append(ePacket.data, ePacket.dataLength);
         command_t command;
         packet >> command;
         OnCommandReceive(peer, packet, command);

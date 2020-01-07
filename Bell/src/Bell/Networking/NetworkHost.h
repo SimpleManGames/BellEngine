@@ -66,10 +66,9 @@ namespace Bell
         virtual void OnPeerConnect(ENetPeer* peer) = 0;
         virtual void OnPeerDisconnect(ENetPeer* peer) = 0;
         virtual void OnPeerTimeout(ENetPeer* peer) = 0;
-        virtual void OnCommandReceive(ENetPeer* peer, ENetPacket& packet, command_t command) = 0;
+        virtual void OnCommandReceive(ENetPeer* peer, Packet & packet, command_t command) = 0;
 
         void OnCommandRecieve(ENetPeer* peer, const ENetPacket& packet);
-
 
         void Flush();
 

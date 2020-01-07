@@ -3,6 +3,7 @@
 
 #include "Bell/Networking/Network.h"
 #include "Bell/Networking/NetworkTypes.h"
+#include "Bell/Networking/NetworkCommand.h"
 #include "Bell/Networking/NetworkConstants.h"
 
 namespace Bell
@@ -139,6 +140,30 @@ namespace Bell
         qPacket.style = QueuedPacket::Style::Broadcast;
         qPacket.channel = channel;
         m_Queue.push_back(qPacket);
+    }
+
+    void NetworkHost::RemovePeerFromPacketQueue(ENetPeer* peer)
+    {
+        for (auto itr = m_Queue.cbegin(); itr != m_Queue.cend();)
+        {
+            if (itr->style == QueuedPacket::Style::One && itr->peer->connectID == peer->connectID)
+                itr = m_Queue.erase(itr);
+            else
+                itr++;
+        }
+    }
+
+    void NetworkHost::OnCommandRecieve(ENetPeer* peer, const ENetPacket& packet)
+    {
+        command_t command;
+        packet >> command;
+        OnCommandReceive(peer, packet, command);
+    }
+
+    void NetworkHost::Flush()
+    {
+        /// http://enet.bespin.org/group__host.html#gac8f53bcdbd540043f87e7d59048559fa
+        enet_host_flush(mp_Host);
     }
 
 }

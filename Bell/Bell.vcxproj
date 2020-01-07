@@ -145,6 +145,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Bell.h" />
+    <ClInclude Include="src\Bell\Common\macros.h" />
     <ClInclude Include="src\Bell\Core\Application.h" />
     <ClInclude Include="src\Bell\Core\Core.h" />
     <ClInclude Include="src\Bell\Core\EntryPoint.h" />
@@ -163,7 +164,15 @@
     <ClInclude Include="src\Bell\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Bell\Layer\Layer.h" />
     <ClInclude Include="src\Bell\Layer\LayerStack.h" />
+    <ClInclude Include="src\Bell\Networking\Client\ClientConfig.h" />
     <ClInclude Include="src\Bell\Networking\Network.h" />
+    <ClInclude Include="src\Bell\Networking\NetworkCommand.h" />
+    <ClInclude Include="src\Bell\Networking\NetworkConstants.h" />
+    <ClInclude Include="src\Bell\Networking\NetworkHost.h" />
+    <ClInclude Include="src\Bell\Networking\NetworkTypes.h" />
+    <ClInclude Include="src\Bell\Networking\Packet.h" />
+    <ClInclude Include="src\Bell\Networking\Server\Server.h" />
+    <ClInclude Include="src\Bell\Networking\Server\ServerConfig.h" />
     <ClInclude Include="src\Bell\Renderer\Buffer.h" />
     <ClInclude Include="src\Bell\Renderer\Camera\Camera.h" />
     <ClInclude Include="src\Bell\Renderer\Camera\OrthographicCamera.h" />
@@ -557,6 +566,9 @@
     <ClCompile Include="src\Bell\Layer\Layer.cpp" />
     <ClCompile Include="src\Bell\Layer\LayerStack.cpp" />
     <ClCompile Include="src\Bell\Networking\Network.cpp" />
+    <ClCompile Include="src\Bell\Networking\NetworkHost.cpp" />
+    <ClCompile Include="src\Bell\Networking\Packet.cpp" />
+    <ClCompile Include="src\Bell\Networking\Server\Server.cpp" />
     <ClCompile Include="src\Bell\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Bell\Renderer\Camera\Camera.cpp" />
     <ClCompile Include="src\Bell\Renderer\Camera\OrthographicCamera.cpp" />

@@ -1276,6 +1276,15 @@
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\Networking\Network.h" />
+    <ClInclude Include="src\Bell\Networking\Client\ClientConfig.h" />
+    <ClInclude Include="src\Bell\Networking\Server\ServerConfig.h" />
+    <ClInclude Include="src\Bell\Networking\Server\Server.h" />
+    <ClInclude Include="src\Bell\Common\macros.h" />
+    <ClInclude Include="src\Bell\Networking\NetworkHost.h" />
+    <ClInclude Include="src\Bell\Networking\NetworkTypes.h" />
+    <ClInclude Include="src\Bell\Networking\NetworkConstants.h" />
+    <ClInclude Include="src\Bell\Networking\NetworkCommand.h" />
+    <ClInclude Include="src\Bell\Networking\Packet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Core\Application.cpp">
@@ -1363,5 +1372,8 @@
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
     <ClCompile Include="src\Bell\Networking\Network.cpp" />
+    <ClCompile Include="src\Bell\Networking\Server\Server.cpp" />
+    <ClCompile Include="src\Bell\Networking\NetworkHost.cpp" />
+    <ClCompile Include="src\Bell\Networking\Packet.cpp" />
   </ItemGroup>
 </Project>

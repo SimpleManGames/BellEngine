@@ -152,7 +152,7 @@ namespace Bell
                 itr++;
         }
     }
-
+     
     void NetworkHost::OnCommandRecieve(ENetPeer* peer, const ENetPacket& packet)
     {
         command_t command;

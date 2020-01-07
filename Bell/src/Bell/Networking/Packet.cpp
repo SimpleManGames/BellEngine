@@ -54,6 +54,7 @@ namespace Bell
     {
         return m_IsValid ? &Packet::CheckSize : NULL;
     }
+
     Packet& Packet::operator >>(bool& data)
     {
         Uint8 value;

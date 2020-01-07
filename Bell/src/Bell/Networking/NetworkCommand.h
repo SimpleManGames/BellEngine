@@ -24,18 +24,16 @@ namespace Bell
     {
         B_PROFILE_FUNCTION();
         command_t commandID;
-        // May need + 1, I don't know since it don't think they use a terminating value
-        enet_packet_resize(packet, packet.dataLength + sizeof(commandID));
-        packet.data = packet.data + commandID;
+        packet >> commandID;
         command = static_cast<CommandType>(commandID);
         return packet;
     }
 
     template<typename CommandType>
-    ENetPacket& operator<<(ENetPacket& packet, CommandType& command)
+    ENetPacket& operator<<(ENetPacket& packet, CommandType command)
     {
         B_PROFILE_FUNCTION();
-        packet << static_cast<command_t(command);
+        packet << static_cast<command_t>(command);
         return packet;
     }
 }

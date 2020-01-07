@@ -36,7 +36,6 @@ namespace Bell
         static ENetPeer* ConnectHostTo(ENetHost* host, const std::string& ip);
         static int GetPeerIDFromServer(ENetHost* host);
         static ENetPacket* CreatePacket(const void* data, uint32_t flags);
-        static void AppendToPacket(ENetPacket* packet, const void* data, std::size_t sizeInBtyes);
     };
 }
 

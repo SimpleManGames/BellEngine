@@ -99,15 +99,4 @@ namespace Bell
     {
         return enet_packet_create(data, sizeof(data), flags);
     }
-    
-    void Network::AppendToPacket(ENetPacket* packet, const void* data, std::size_t sizeInBtyes)
-    {
-        if (data && (sizeInBtyes > 0))
-        {
-            std::size_t start = packet->dataLength;
-            enet_packet_resize(packet, start + sizeInBtyes);
-            // Copy data to the end of the packet
-            std::memcpy(&packet->data[start], data, sizeInBtyes);
-        }
-    }
 }

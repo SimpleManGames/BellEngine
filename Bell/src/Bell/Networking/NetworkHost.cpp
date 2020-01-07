@@ -14,6 +14,62 @@ namespace Bell
         enet_host_destroy(mp_Host);
     }
 
+    void NetworkHost::Tick()
+    {
+        const int MAX_SEND_LIMIT = 1024;
+
+        int bytesSent = 0;
+
+        while (!m_Queue.empty())
+        {
+            auto qPacket = m_Queue.front();
+            m_Queue.pop_front();
+            bytesSent += qPacket.packet->dataLength;
+
+            switch (qPacket.style)
+            {
+                case QueuedPacket::Style::Broadcast:
+                    enet_host_broadcast(mp_Host, qPacket.channel, qPacket.packet);
+                    break;
+                case QueuedPacket::Style::One:
+                    enet_peer_send(qPacket.peer, qPacket.channel, qPacket.packet);
+                    break;
+
+                default:
+                    break;
+            }
+
+            Flush();
+            if (bytesSent > MAX_SEND_LIMIT)
+                break;
+        }
+        
+        B_CORE_ASSERT(mp_Host, "Network Host is invalid!");
+        ENetEvent event;
+        while (enet_host_service(mp_Host, &event, 0) > 0)
+        {
+            switch (event.type)
+            {
+                case ENET_EVENT_TYPE_CONNECT:
+                    OnPeerConnect(event.peer);
+                    break;
+                case ENET_EVENT_TYPE_RECEIVE:
+                    OnCommandRecieve(event.peer, *event.packet);
+                    enet_packet_destroy(event.packet);
+                    break;
+                case ENET_EVENT_TYPE_DISCONNECT:
+                    RemovePeerFromPacketQueue(event.peer);
+                    OnPeerDisconnect(event.peer);
+                    break;
+                case ENET_EVENT_TYPE_NONE:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
     std::optional<ENetPeer*> NetworkHost::CreateAsClient(const std::string& ip)
     {
         /// http://enet.bespin.org/Tutorial.html#CreateClient

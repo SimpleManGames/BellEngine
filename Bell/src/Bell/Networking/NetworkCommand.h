@@ -20,7 +20,7 @@ namespace Bell
     };
 
     template<typename CommandType>
-    ENetPacket& operator>>(ENetPacket& packet, CommandType& command)
+    Packet& operator>>(Packet& packet, CommandType& command)
     {
         B_PROFILE_FUNCTION();
         command_t commandID;
@@ -30,7 +30,7 @@ namespace Bell
     }
 
     template<typename CommandType>
-    ENetPacket& operator<<(ENetPacket& packet, CommandType command)
+    Packet& operator<<(Packet& packet, CommandType command)
     {
         B_PROFILE_FUNCTION();
         packet << static_cast<command_t>(command);

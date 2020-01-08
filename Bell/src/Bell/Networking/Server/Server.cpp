@@ -85,11 +85,13 @@ namespace Bell
             >> m_Entities[id].position.y 
             >> m_Entities[id].position.z;
     }
+    
     int Server::FindEmptySlot() const
     {
         for (int i = 0; i < NetworkHost::GetMaxConnections(); i++)
-            if(!m_ConnectedClients[i].connected)
-                return i
+            if (!m_ConnectedClients[i].connected)
+                return i;
+
         return -1;
     }
 

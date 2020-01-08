@@ -58,8 +58,8 @@ namespace Bell
         int GetMaxConnections() const;
 
     protected:
-        void QueueSendToPeer(ENetPeer* peer, const void * packet, uint8_t channel, uint32_t flags);
-        void QueueBroadcastToPeers(const void * packet, uint8_t channel, uint32_t flags);
+        void QueueSendToPeer(ENetPeer* peer, Packet packet, uint8_t channel, uint32_t flags);
+        void QueueBroadcastToPeers(Packet packet, uint8_t channel, uint32_t flags);
 
     private:
         void RemovePeerFromPacketQueue(ENetPeer* peer);

@@ -27,10 +27,10 @@ namespace Bell
         // TODO: 
         // Flag this application as a server in order to remove
         // pointless funcs like renderering from the loop
-        
+
         // New Thread
         // Start the server
-        
+
     }
     ENetHost* Network::CreateHost(const ENetAddress* address, int connections)
     {
@@ -82,12 +82,13 @@ namespace Bell
         while (enet_host_service(host, &event, 2000) > 0 && event.type == ENET_EVENT_TYPE_RECEIVE)
         {
             ClientCommand command;
-            ENetPacket* packet = enet_packet_create(event.packet->data, event.packet->dataLength + 1, ENET_PACKET_FLAG_RELIABLE);
-            *packet >> command;
+            Packet packet;
+            packet.Append(event.packet->data, event.packet->dataLength);
+            packet >> command;
             if (command == ClientCommand::PeerID)
             {
                 peer_id_t peerID;
-                *packet >> peerID;
+                packet >> peerID;
                 id = peerID;
                 break;
             }

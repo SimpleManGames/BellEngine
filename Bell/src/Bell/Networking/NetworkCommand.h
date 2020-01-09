@@ -1,6 +1,7 @@
 #ifndef _NETWORK_COMMAND_H
 #define _NETWORK_COMMAND_H
 
+#include "Bell/Networking/Packet.h"
 #include "Bell/Networking/NetworkConstants.h"
 
 namespace Bell
@@ -19,20 +20,18 @@ namespace Bell
         PlayerPosition
     };
 
-    template<typename CommandType>
+    template <typename CommandType>
     Packet& operator>>(Packet& packet, CommandType& command)
     {
-        B_PROFILE_FUNCTION();
-        command_t commandID;
-        packet >> commandID;
-        command = static_cast<CommandType>(commandID);
+        command_t commandId;
+        packet >> commandId;
+        command = static_cast<CommandType>(commandId);
         return packet;
     }
 
-    template<typename CommandType>
+    template <typename CommandType>
     Packet& operator<<(Packet& packet, CommandType command)
     {
-        B_PROFILE_FUNCTION();
         packet << static_cast<command_t>(command);
         return packet;
     }

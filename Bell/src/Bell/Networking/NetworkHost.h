@@ -8,6 +8,7 @@
 
 #include <Bell.h>
 #include "Bell/Common/macros.h"
+#include "Bell/Networking/Packet.h"
 #include "Bell/Networking/NetworkTypes.h"
 
 namespace Bell
@@ -29,7 +30,7 @@ namespace Bell
     class NetworkHost
     {
         NON_COPYABLE(NetworkHost)
-        NON_MOVABLE(NetworkHost)
+            NON_MOVABLE(NetworkHost)
 
     public:
         NetworkHost(std::string&& name)
@@ -58,15 +59,15 @@ namespace Bell
         int GetMaxConnections() const;
 
     protected:
-        void QueueSendToPeer(ENetPeer* peer, Packet packet, uint8_t channel, uint32_t flags);
-        void QueueBroadcastToPeers(Packet packet, uint8_t channel, uint32_t flags);
+        void QueueSendToPeer(ENetPeer* peer, Packet& packet, uint8_t channel, uint32_t flags);
+        void QueueBroadcastToPeers(Packet& packet, uint8_t channel, uint32_t flags);
 
     private:
         void RemovePeerFromPacketQueue(ENetPeer* peer);
         virtual void OnPeerConnect(ENetPeer* peer) = 0;
         virtual void OnPeerDisconnect(ENetPeer* peer) = 0;
         virtual void OnPeerTimeout(ENetPeer* peer) = 0;
-        virtual void OnCommandReceive(ENetPeer* peer, Packet & packet, command_t command) = 0;
+        virtual void OnCommandReceive(ENetPeer* peer, Packet& packet, command_t command) = 0;
 
         void OnCommandRecieve(ENetPeer* peer, const ENetPacket& packet);
 

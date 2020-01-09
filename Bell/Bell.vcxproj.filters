@@ -1285,6 +1285,7 @@
     <ClInclude Include="src\Bell\Networking\NetworkConstants.h" />
     <ClInclude Include="src\Bell\Networking\NetworkCommand.h" />
     <ClInclude Include="src\Bell\Networking\Packet.h" />
+    <ClInclude Include="src\Bell\Networking\Client\Client.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Core\Application.cpp">
@@ -1375,5 +1376,6 @@
     <ClCompile Include="src\Bell\Networking\Server\Server.cpp" />
     <ClCompile Include="src\Bell\Networking\NetworkHost.cpp" />
     <ClCompile Include="src\Bell\Networking\Packet.cpp" />
+    <ClCompile Include="src\Bell\Networking\Client\Client.cpp" />
   </ItemGroup>
 </Project>

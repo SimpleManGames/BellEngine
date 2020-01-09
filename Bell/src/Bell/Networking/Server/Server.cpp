@@ -108,7 +108,7 @@ namespace Bell
         auto itr = std::find_if(
             m_ConnectedClients.begin(), m_ConnectedClients.end(), [this, &connectionID](auto& conn)
             {
-                return conn.peer && conn.peer->connectID == connectionID
+                return conn.peer && conn.peer->connectID == connectionID;
             });
 
         B_CORE_ASSERT(itr != m_ConnectedClients.cend(), "Couldn't find Peer to remove");

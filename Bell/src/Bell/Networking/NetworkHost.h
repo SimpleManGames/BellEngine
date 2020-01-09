@@ -8,7 +8,7 @@
 
 #include <Bell.h>
 #include "Bell/Common/macros.h"
-#include "Bell/Networking/Packet.h"
+#include "Bell/Networking/Packet/Packet.h"
 #include "Bell/Networking/NetworkTypes.h"
 
 namespace Bell

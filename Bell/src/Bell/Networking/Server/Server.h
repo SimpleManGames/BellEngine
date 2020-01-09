@@ -2,7 +2,7 @@
 #define _SERVER_H
 
 #include "Bell/Networking/NetworkConstants.h"
-#include "Bell/Networking/Packet.h"
+#include "Bell/Networking/Packet/Packet.h"
 #include "Bell/Networking/NetworkHost.h"
 
 namespace Bell

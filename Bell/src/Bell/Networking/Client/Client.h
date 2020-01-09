@@ -1,7 +1,7 @@
 #ifndef _CLIENT_H
 #define _CLIENT_H
 
-#include "Bell/Networking/Packet.h"
+#include "Bell/Networking/Packet/Packet.h"
 #include "Bell/Networking/NetworkHost.h"
 
 namespace Bell

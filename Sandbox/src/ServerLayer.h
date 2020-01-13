@@ -4,6 +4,7 @@
 #include <atomic>
 
 #include <Bell.h>
+#include <Bell/Networking/Server/Server.h>
 
 class ServerLayer : public Bell::Layer
 {
@@ -16,7 +17,7 @@ public:
 
     void OnUpdate(Bell::Timestep deltaTime) override;
 private:
-    //Bell::Server m_Server;
+    Bell::Server m_Server;
     std::atomic<bool> m_ServerRunning = true;
     std::atomic<bool> m_ServerConsoleRunning = true;
 };

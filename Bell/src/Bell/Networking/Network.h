@@ -2,27 +2,11 @@
 #define _NETWORK_H
 
 #include <enet/enet.h>
-#include <Bell\Networking\Server\ServerConfig.h>
-#include <Bell\Networking\Client\ClientConfig.h>
+#include "Bell/Core/Config.h"
 #include "Bell/Networking/NetworkConstants.h"
 
 namespace Bell
 {
-    enum class LaunchType
-    {
-        Server,
-        Client,
-        Both
-    };
-
-    struct Config
-    {
-        LaunchType launchType = LaunchType::Both;
-
-        ServerConfig serverOptions;
-        ClientConfig clientOptions;
-    };
-
     class Network
     {
     public:

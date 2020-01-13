@@ -11,6 +11,8 @@ namespace Bell
 
         if (enet_initialize() != 0)
             B_CORE_ERROR("An error has occurred while initializing Enet!");
+
+        B_CORE_INFO("Initialized ENet successfully");
     }
 
     void Network::Shutdown()

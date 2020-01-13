@@ -9,10 +9,22 @@
 
 #include <GLFW/glfw3.h>
 
-namespace Bell {
+namespace Bell
+{
     Application* Application::s_Instance = nullptr;
 
     Application::Application()
+    {
+        Init();
+    }
+
+    Application::~Application() {
+        m_ApplicationState = ApplicationState::Destroying;
+
+        Renderer::Shutdown();
+    }
+
+    void Application::Init()
     {
         B_PROFILE_FUNCTION();
         {
@@ -29,18 +41,21 @@ namespace Bell {
             B_CORE_INFO("Bell Engine Initializing");
             // Creates the unique pointer for our window
             {
-                B_PROFILE_SCOPE("Window Creation");
-                m_Window = Window::Create();
-                // Sets the function we use for event handling
-                m_Window->SetEventCallback(B_BIND_EVENT_FN(Application::OnEvent));
-                m_Window->SetVSync(false);
-            }
+                {
+                    B_PROFILE_SCOPE("Window Creation");
+                    m_Window = Window::Create();
+                    // Sets the function we use for event handling
+                    m_Window->SetEventCallback(B_BIND_EVENT_FN(Application::OnEvent));
+                    m_Window->SetVSync(false);
+                }
 
-            {
-                B_PROFILE_SCOPE("Renderer Init");
-                Renderer::Init();
+                {
+                    B_PROFILE_SCOPE("Renderer Init");
+                    Renderer::Init();
+                }
             }
         }
+
 #ifdef B_DEBUG
         {
             B_PROFILE_SCOPE("ImGuiLayer Creation");
@@ -48,12 +63,6 @@ namespace Bell {
             PushOverlay(m_ImGuiLayer);
         }
 #endif
-    }
-
-    Application::~Application() {
-        m_ApplicationState = ApplicationState::Destroying;
-
-        Renderer::Shutdown();
     }
 
     void Application::OnEvent(Event& e) {
@@ -87,14 +96,15 @@ namespace Bell {
             Timestep deltaTime = time - m_LastFrameTime;
             m_LastFrameTime = time;
 
-            if (!(m_ApplicationState == ApplicationState::Minimized)) 
+            if (!(m_ApplicationState == ApplicationState::Minimized))
             {
-                // Update each layer
-                for (Layer* layer : m_LayerStack)
-                {
-                    B_PROFILE_SCOPE(layer->GetName().c_str());
-                    layer->OnUpdate(deltaTime);
-                }
+                if (m_LayerStack)
+                    // Update each layer
+                    for (Layer* layer : m_LayerStack)
+                    {
+                        B_PROFILE_SCOPE(layer->GetName().c_str());
+                        layer->OnUpdate(deltaTime);
+                    }
             }
 
 #ifdef B_DEBUG

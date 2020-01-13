@@ -147,6 +147,7 @@
     <ClInclude Include="src\Bell.h" />
     <ClInclude Include="src\Bell\Common\macros.h" />
     <ClInclude Include="src\Bell\Core\Application.h" />
+    <ClInclude Include="src\Bell\Core\Config.h" />
     <ClInclude Include="src\Bell\Core\Core.h" />
     <ClInclude Include="src\Bell\Core\EntryPoint.h" />
     <ClInclude Include="src\Bell\Core\Events\ApplicationEvent.h" />

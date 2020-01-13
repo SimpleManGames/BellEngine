@@ -12,6 +12,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Sandbox2D.h"
+#include "ServerLayer.h"
 
 class ExampleLayer : public Bell::Layer
 {
@@ -152,8 +153,22 @@ public:
     ~Sandbox() { }
 };
 
-// Application side function for defining entry point
-Bell::Application* Bell::CreateApplication()
+class SandboxServer : public Bell::Application
 {
-    return new Sandbox();
+public:
+    SandboxServer()
+    {
+        PushLayer(new ServerLayer());
+    }
+    ~SandboxServer() {}
+};
+
+// Application side function for defining entry point
+Bell::Application* Bell::CreateApplication(Bell::Config config)
+{
+    if (config.launchType == Bell::LaunchType::Server)
+        return new SandboxServer();
+
+    if (config.launchType == Bell::LaunchType::None)
+        return new Sandbox();
 }

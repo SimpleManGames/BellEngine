@@ -56,4 +56,8 @@ namespace Bell
             m_Layers.erase(it);
         }
     }
+    LayerStack::operator bool() const
+    {
+        return m_Layers.empty();
+    }
 }

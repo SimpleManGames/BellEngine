@@ -9,6 +9,7 @@
 #include "Events/Event.h"
 #include "Bell/Layer/LayerStack.h"
 #include "Events/ApplicationEvent.h"
+#include "Bell/Core/Config.h"
 
 #include "Bell/Core/Time.h"
 
@@ -33,6 +34,8 @@ namespace Bell
         Application();
         virtual ~Application();
 
+        void Init();
+
         // Run loop using m_Running
         void Run();
 
@@ -48,6 +51,8 @@ namespace Bell
 
         inline ApplicationState GetApplicationState() { return m_ApplicationState; }
     private:
+
+
         bool OnWindowClose(WindowCloseEvent& e);
         bool OnWindowResize(WindowResizeEvent& e);
 
@@ -64,7 +69,7 @@ namespace Bell
     };
 
     // To be defined in client
-    Application* CreateApplication();
+    Application* CreateApplication(Bell::Config config);
 }
 
 #endif // !_APPLICATION_H

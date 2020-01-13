@@ -90,6 +90,9 @@
     <ClInclude Include="src\Bell\Core\Application.h">
       <Filter>src\Bell\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Bell\Core\Config.h">
+      <Filter>src\Bell\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\Bell\Core\Core.h">
       <Filter>src\Bell\Core</Filter>
     </ClInclude>

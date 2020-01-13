@@ -37,6 +37,8 @@ namespace Bell
         LayerStackIt begin() { return m_Layers.begin(); }
         LayerStackIt end() { return m_Layers.end(); }
 
+        operator bool() const;
+
     private:
         LayerStackVec m_Layers;
         // Iterator used to determine were we are placing layers onto the stack

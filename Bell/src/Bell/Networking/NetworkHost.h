@@ -4,21 +4,22 @@
 #include <deque>
 #include <string>
 #include <optional>
-#include <enet/enet.h>
 
 #include <Bell.h>
 #include "Bell/Common/macros.h"
-#include "Bell/Networking/Packet/Packet.h"
-#include "Bell/Networking/NetworkTypes.h"
+#include <enet/enet.h>
+#include <Bell\Networking\NetworkTypes.h>
 
 namespace Bell
 {
+    class Packet;
+
     struct QueuedPacket
     {
         enum class Style
         {
             One,
-            Broadcast
+            Broadcast,
         };
 
         ENetPeer* peer = nullptr;

@@ -7,6 +7,9 @@
     <Filter Include="src\Bell">
       <UniqueIdentifier>{FB1B1CCF-E7E8-76DA-1002-6582FC2DAC68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Bell\Common">
+      <UniqueIdentifier>{D380EC93-3F0C-5A58-481D-DD4CB427B658}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Bell\Core">
       <UniqueIdentifier>{33F5DCE8-9FB5-581F-68F0-A19CD46F9DFB}</UniqueIdentifier>
     </Filter>
@@ -24,6 +27,18 @@
     </Filter>
     <Filter Include="src\Bell\Layer">
       <UniqueIdentifier>{07E91605-F3B6-0A0B-DC4A-7B31C8B7E66F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Bell\Networking">
+      <UniqueIdentifier>{3292C6DC-9EF3-A3EA-2761-EA9C93C1DAA9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Bell\Networking\Client">
+      <UniqueIdentifier>{00566278-EC65-0E49-551F-7367414EFDE1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Bell\Networking\Packet">
+      <UniqueIdentifier>{B926EB95-A536-9766-0EF0-FB84FA1E86FF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Bell\Networking\Server">
+      <UniqueIdentifier>{186B3B9D-047B-E76D-6D34-4C8C5963D606}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Bell\Renderer">
       <UniqueIdentifier>{010AD218-6D20-D0AE-B697-5BD022EDA036}</UniqueIdentifier>
@@ -68,6 +83,9 @@
   <ItemGroup>
     <ClInclude Include="src\Bell.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Common\macros.h">
+      <Filter>src\Bell\Common</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\Core\Application.h">
       <Filter>src\Bell\Core</Filter>
@@ -122,6 +140,36 @@
     </ClInclude>
     <ClInclude Include="src\Bell\Layer\LayerStack.h">
       <Filter>src\Bell\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Networking\Client\Client.h">
+      <Filter>src\Bell\Networking\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Networking\Client\ClientConfig.h">
+      <Filter>src\Bell\Networking\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Networking\Network.h">
+      <Filter>src\Bell\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Networking\NetworkCommand.h">
+      <Filter>src\Bell\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Networking\NetworkConstants.h">
+      <Filter>src\Bell\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Networking\NetworkHost.h">
+      <Filter>src\Bell\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Networking\NetworkTypes.h">
+      <Filter>src\Bell\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Networking\Packet\Packet.h">
+      <Filter>src\Bell\Networking\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Networking\Server\Server.h">
+      <Filter>src\Bell\Networking\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bell\Networking\Server\ServerConfig.h">
+      <Filter>src\Bell\Networking\Server</Filter>
     </ClInclude>
     <ClInclude Include="src\Bell\Renderer\Buffer.h">
       <Filter>src\Bell\Renderer</Filter>
@@ -1275,17 +1323,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Bell\Networking\Network.h" />
-    <ClInclude Include="src\Bell\Networking\Client\ClientConfig.h" />
-    <ClInclude Include="src\Bell\Networking\Server\ServerConfig.h" />
-    <ClInclude Include="src\Bell\Networking\Server\Server.h" />
-    <ClInclude Include="src\Bell\Common\macros.h" />
-    <ClInclude Include="src\Bell\Networking\NetworkHost.h" />
-    <ClInclude Include="src\Bell\Networking\NetworkTypes.h" />
-    <ClInclude Include="src\Bell\Networking\NetworkConstants.h" />
-    <ClInclude Include="src\Bell\Networking\NetworkCommand.h" />
-    <ClInclude Include="src\Bell\Networking\Packet.h" />
-    <ClInclude Include="src\Bell\Networking\Client\Client.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Core\Application.cpp">
@@ -1305,6 +1342,21 @@
     </ClCompile>
     <ClCompile Include="src\Bell\Layer\LayerStack.cpp">
       <Filter>src\Bell\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bell\Networking\Client\Client.cpp">
+      <Filter>src\Bell\Networking\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bell\Networking\Network.cpp">
+      <Filter>src\Bell\Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bell\Networking\NetworkHost.cpp">
+      <Filter>src\Bell\Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bell\Networking\Packet\Packet.cpp">
+      <Filter>src\Bell\Networking\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bell\Networking\Server\Server.cpp">
+      <Filter>src\Bell\Networking\Server</Filter>
     </ClCompile>
     <ClCompile Include="src\Bell\Renderer\Buffer.cpp">
       <Filter>src\Bell\Renderer</Filter>
@@ -1372,10 +1424,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Bell\Networking\Network.cpp" />
-    <ClCompile Include="src\Bell\Networking\Server\Server.cpp" />
-    <ClCompile Include="src\Bell\Networking\NetworkHost.cpp" />
-    <ClCompile Include="src\Bell\Networking\Packet.cpp" />
-    <ClCompile Include="src\Bell\Networking\Client\Client.cpp" />
   </ItemGroup>
 </Project>

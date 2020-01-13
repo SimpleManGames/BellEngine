@@ -1,6 +1,6 @@
 #include "bpch.h"
 #include "Client.h"
-#include "Bell\Networking\NetworkCommand.h"
+#include <Bell\Networking\NetworkCommand.h>
 
 namespace Bell
 {

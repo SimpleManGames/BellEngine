@@ -1,8 +1,7 @@
 #include "bpch.h"
 #include "Network.h"
 
-#include "Bell/Networking/NetworkCommand.h"
-#include "Bell/Networking/NetworkConstants.h"
+#include <Bell\Networking\NetworkCommand.h>
 
 namespace Bell
 {

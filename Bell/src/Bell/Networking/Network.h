@@ -2,8 +2,9 @@
 #define _NETWORK_H
 
 #include <enet/enet.h>
-#include "Bell/Networking/Client/ClientConfig.h"
-#include "Bell/Networking/Server/ServerConfig.h"
+#include <Bell\Networking\Server\ServerConfig.h>
+#include <Bell\Networking\Client\ClientConfig.h>
+#include "Bell/Networking/NetworkConstants.h"
 
 namespace Bell
 {

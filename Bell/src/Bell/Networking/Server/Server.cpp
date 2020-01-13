@@ -1,16 +1,10 @@
 #include "bpch.h"
 #include "Server.h"
 
-#include "Bell/Networking/NetworkCommand.h"
+#include <Bell\Networking\NetworkCommand.h>
 
 namespace Bell
 {
-    Server::Server()
-        : NetworkHost("Server")
-    {
-
-    }
-
     void Server::Update()
     {
         Packet packet;

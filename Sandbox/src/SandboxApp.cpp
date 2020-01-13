@@ -155,11 +155,5 @@ public:
 // Application side function for defining entry point
 Bell::Application* Bell::CreateApplication()
 {
-    // Main engine won't be server/client
-    // The start point of server/client will be here
-    // In the app
-
-    // 
-
     return new Sandbox();
 }

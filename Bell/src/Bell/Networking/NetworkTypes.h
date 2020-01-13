@@ -1,6 +1,8 @@
 #ifndef _NETWORK_TYPES_H
 #define _NETWORK_TYPES_H
 
+#include <cstdint>
+
 namespace Bell
 {
     using port_t = uint16_t;

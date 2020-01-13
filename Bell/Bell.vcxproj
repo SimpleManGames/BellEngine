@@ -90,7 +90,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;ws2_32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -115,7 +115,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;ws2_32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -140,7 +140,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;ws2_32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -171,7 +171,7 @@
     <ClInclude Include="src\Bell\Networking\NetworkConstants.h" />
     <ClInclude Include="src\Bell\Networking\NetworkHost.h" />
     <ClInclude Include="src\Bell\Networking\NetworkTypes.h" />
-    <ClInclude Include="src\Bell\Networking\Packet.h" />
+    <ClInclude Include="src\Bell\Networking\Packet\Packet.h" />
     <ClInclude Include="src\Bell\Networking\Server\Server.h" />
     <ClInclude Include="src\Bell\Networking\Server\ServerConfig.h" />
     <ClInclude Include="src\Bell\Renderer\Buffer.h" />
@@ -569,7 +569,7 @@
     <ClCompile Include="src\Bell\Networking\Client\Client.cpp" />
     <ClCompile Include="src\Bell\Networking\Network.cpp" />
     <ClCompile Include="src\Bell\Networking\NetworkHost.cpp" />
-    <ClCompile Include="src\Bell\Networking\Packet.cpp" />
+    <ClCompile Include="src\Bell\Networking\Packet\Packet.cpp" />
     <ClCompile Include="src\Bell\Networking\Server\Server.cpp" />
     <ClCompile Include="src\Bell\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Bell\Renderer\Camera\Camera.cpp" />
@@ -605,6 +605,9 @@
     </ProjectReference>
     <ProjectReference Include="vendor\imgui\ImGui.vcxproj">
       <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vendor\enet\enet.vcxproj">
+      <Project>{3153967C-1D8A-970D-C676-7D10B28C130F}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -24,6 +24,7 @@
 // ----- Common Platform Specific Includes -----
 // ---------------------------------------------
 
+#define _WINSOCKAPI_
 #ifdef B_PLATFORM_WINDOWS
     #include <Windows.h>
 #endif

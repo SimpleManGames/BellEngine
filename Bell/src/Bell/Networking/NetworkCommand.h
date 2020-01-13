@@ -1,8 +1,8 @@
 #ifndef _NETWORK_COMMAND_H
 #define _NETWORK_COMMAND_H
 
-#include "Bell/Networking/Packet/Packet.h"
-#include "Bell/Networking/NetworkConstants.h"
+#include <Bell\Networking\Packet\Packet.h>
+#include "Bell/Networking/NetworkTypes.h"
 
 namespace Bell
 {

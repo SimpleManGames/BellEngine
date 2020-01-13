@@ -21,6 +21,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Bell/vendor/GLFW/include"
 IncludeDir["Glad"] = "Bell/vendor/glad/include"
 IncludeDir["ImGui"] = "Bell/vendor/imgui"
+
 IncludeDir["glm"] = "Bell/vendor/glm"
 IncludeDir["stb_image"] = "Bell/vendor/stb_image"
 IncludeDir["enet"] = "Bell/vendor/enet/include"
@@ -29,6 +30,7 @@ group "Dependencies"
     include "Bell/vendor/glfw"
     include "Bell/vendor/glad"
     include "Bell/vendor/imgui"
+    include "Bell/vendor/enet"
 
 group ""
 
@@ -52,7 +54,7 @@ project "Bell"
         "%{prj.name}/vendor/stb_image/**.h",
         "%{prj.name}/vendor/stb_image/**.cpp",
         "%{prj.name}/vendor/glm/glm/**.hpp",
-        "%{prj.name}/vendor/glm/glm/**.inl",
+        "%{prj.name}/vendor/glm/glm/**.inl"
     }
 
     defines
@@ -77,7 +79,10 @@ project "Bell"
         "GLFW",
         "Glad",
         "ImGui",
-        "opengl32.lib"
+        "opengl32.lib",
+        "ws2_32.lib",
+        "winmm.lib",
+        "enet"
     }
 
     filter "system:windows"
@@ -127,7 +132,8 @@ project "Sandbox"
         "Bell/vendor/spdlog/include",
         "Bell/src",
         "Bell/vendor",
-        "%{IncludeDir.glm}"
+        "%{IncludeDir.glm}",
+        "%{IncludeDir.enet}"
     }
 
     links

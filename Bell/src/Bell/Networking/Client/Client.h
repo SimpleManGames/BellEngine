@@ -1,7 +1,6 @@
 #ifndef _CLIENT_H
 #define _CLIENT_H
 
-#include "Bell/Networking/Packet/Packet.h"
 #include "Bell/Networking/NetworkHost.h"
 
 namespace Bell
@@ -14,7 +13,11 @@ namespace Bell
 
     class Client : public NetworkHost
     {
-        Client();
+        Client()
+            : NetworkHost("Client")
+        {
+
+        }
 
     private:
         virtual void OnPeerConnect(ENetPeer* peer) override;

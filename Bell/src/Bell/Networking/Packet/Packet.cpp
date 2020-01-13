@@ -1,10 +1,6 @@
 #include "bpch.h"
 #include "Packet.h"
 
-#include <winsock.h>
-#include <cstring>
-#include <cwchar>
-
 namespace Bell
 {
     Packet::Packet()
@@ -422,6 +418,16 @@ namespace Bell
         }
 
         return *this;
+    }
+
+    bool Packet::operator==(const Packet& right) const
+    {
+        return false;
+    }
+
+    bool Packet::operator!=(const Packet& right) const
+    {
+        return false;
     }
 
     bool Packet::CheckSize(std::size_t size)

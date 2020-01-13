@@ -1,9 +1,8 @@
 #ifndef _SERVER_H
 #define _SERVER_H
 
-#include "Bell/Networking/NetworkConstants.h"
-#include "Bell/Networking/Packet/Packet.h"
 #include "Bell/Networking/NetworkHost.h"
+#include "Bell/Networking/NetworkConstants.h"
 
 namespace Bell
 {
@@ -23,7 +22,11 @@ namespace Bell
     class Server : public NetworkHost
     {
     public:
-        Server();
+        Server()
+            : NetworkHost("Server")
+        {
+
+        }
         void Update();
 
     private:

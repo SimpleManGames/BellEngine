@@ -1,6 +1,7 @@
 #ifndef _PACKET_H
 #define _PACKET_H
 
+#include <winsock2.h>
 #include <string>
 #include <vector>
 

@@ -17,6 +17,8 @@ public:
 
     void OnUpdate(Bell::Timestep deltaTime) override;
 private:
+
+    float m_Clock = 0;
     Bell::Server m_Server;
     std::atomic<bool> m_ServerRunning = true;
     std::atomic<bool> m_ServerConsoleRunning = true;

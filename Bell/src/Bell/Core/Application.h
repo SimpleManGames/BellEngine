@@ -34,10 +34,10 @@ namespace Bell
         Application();
         virtual ~Application();
 
-        void Init();
+        virtual void Init();
 
         // Run loop using m_Running
-        void Run();
+        virtual void Run();
 
         // Function used for window event callbacks
         // Handles event dispatching
@@ -51,20 +51,19 @@ namespace Bell
 
         inline ApplicationState GetApplicationState() { return m_ApplicationState; }
     private:
-
-
         bool OnWindowClose(WindowCloseEvent& e);
         bool OnWindowResize(WindowResizeEvent& e);
 
-    private:
+    protected:
         ApplicationState m_ApplicationState = ApplicationState::Invalid;
+        LayerStack m_LayerStack;
 
+    private:
         Scope<Window> m_Window;
         ImGuiLayer* m_ImGuiLayer;
-        LayerStack m_LayerStack;
         float m_LastFrameTime = 0.0f;
 
-    private:
+    protected:
         static Application* s_Instance;
     };
 

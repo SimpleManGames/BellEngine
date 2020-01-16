@@ -4,8 +4,11 @@
 #include "Bell/Core/Log.h"
 
 #include "Bell/Renderer/Renderer.h"
-
 #include "Input/Input.h"
+
+#ifdef B_SERVER
+#include "Bell/Networking/Network.h"
+#endif
 
 #include <GLFW/glfw3.h>
 
@@ -38,9 +41,10 @@ namespace Bell
             B_PROFILE_SCOPE("Application Initializing");
             m_ApplicationState = ApplicationState::Initializing;
 
-            B_CORE_INFO("Bell Engine Initializing");
-            // Creates the unique pointer for our window
             {
+                B_CORE_INFO("Bell Engine Initializing");
+#ifdef B_CLIENT
+                // Creates the unique pointer for our window
                 {
                     B_PROFILE_SCOPE("Window Creation");
                     m_Window = Window::Create();
@@ -51,12 +55,22 @@ namespace Bell
 
                 {
                     B_PROFILE_SCOPE("Renderer Init");
+                    B_CORE_INFO("Renderer Initializing");
                     Renderer::Init();
                 }
+#endif
+
+#ifdef B_SERVER
+                {
+                    B_PROFILE_SCOPE("Network Init");
+                    B_CORE_INFO("Network Initializing");
+                    Network::Init();
+                }
+#endif
             }
         }
 
-#ifdef B_DEBUG
+#if defined(B_DEBUG) && defined(B_CLIENT)
         {
             B_PROFILE_SCOPE("ImGuiLayer Creation");
             m_ImGuiLayer = new ImGuiLayer();
@@ -98,13 +112,12 @@ namespace Bell
 
             if (!(m_ApplicationState == ApplicationState::Minimized))
             {
-                if (m_LayerStack)
-                    // Update each layer
-                    for (Layer* layer : m_LayerStack)
-                    {
-                        B_PROFILE_SCOPE(layer->GetName().c_str());
-                        layer->OnUpdate(deltaTime);
-                    }
+                // Update each layer
+                for (Layer* layer : m_LayerStack)
+                {
+                    B_PROFILE_SCOPE(layer->GetName().c_str());
+                    layer->OnUpdate(deltaTime);
+                }
             }
 
 #ifdef B_DEBUG
@@ -117,7 +130,9 @@ namespace Bell
             }
 #endif
 
+#ifdef B_CLIENT
             m_Window->OnUpdate();
+#endif
         }
     }
 

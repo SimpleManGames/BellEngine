@@ -9,7 +9,6 @@ ServerLayer::ServerLayer()
 
 void ServerLayer::OnAttach()
 {
-    Bell::Network::Init();
     if (!m_Server.CreateAsServer(2))
     {
         B_ASSERT(true, "Failed to create server!");
@@ -19,24 +18,24 @@ void ServerLayer::OnAttach()
 
 void ServerLayer::OnDetach()
 {
-    Bell::Network::Shutdown();
+    
 }
 
 void ServerLayer::OnUpdate(Bell::Timestep deltaTime)
 {
-    float clock = 0;
-    while (m_ServerRunning)
-    {
-        std::this_thread::sleep_for(std::chrono::milliseconds(20));
-    
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+
+    if (m_ServerRunning) {
+        B_TRACE("Server Running");
         m_Server.Tick();
         m_Server.Update();
-    
-        clock += deltaTime.GetMilliseconds();
+
+        m_Clock += deltaTime.GetMilliseconds();
         if (m_Server.GetConnectedPeerCount() == 0)
-            m_ServerRunning = clock < 8000;
+            m_ServerRunning = m_Clock < 8000;
         else
-            clock = 0;
+            m_Clock = 0;
     }
-    m_Server.DisconnectAllPeers();
+    else
+        m_Server.DisconnectAllPeers();
 }

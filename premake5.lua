@@ -5,7 +5,9 @@ workspace "Bell"
     configurations
     {
         "Debug",
+        "Debug_Server",
         "Release",
+        "Release_Server",
         "Dist"
     }
     
@@ -97,12 +99,22 @@ project "Bell"
         }
 
     filter "configurations:Debug"
-        defines "B_DEBUG"
+        defines { "B_DEBUG", "B_CLIENT" }
+        runtime "Debug"
+        symbols "on"
+
+    filter "configurations:Debug_Server"
+        defines { "B_DEBUG", "B_SERVER" }
         runtime "Debug"
         symbols "on"
 
     filter "configurations:Release"
-        defines "B_RELEASE"
+        defines { "B_RELEASE", "B_CLIENT" }
+        runtime "Release"
+        optimize "on"
+
+    filter "configurations:Release_Server"
+        defines { "B_RELEASE", "B_SERVER" }
         runtime "Release"
         optimize "on"
 
@@ -151,12 +163,22 @@ project "Sandbox"
         }
 
     filter "configurations:Debug"
-        defines "B_DEBUG"
+        defines { "B_DEBUG", "B_CLIENT" }
+        runtime "Debug"
+        symbols "on"
+
+    filter "configurations:Debug_Server"
+        defines { "B_DEBUG", "B_SERVER" }
         runtime "Debug"
         symbols "on"
 
     filter "configurations:Release"
-        defines "B_RELEASE"
+        defines { "B_RELEASE", "B_CLIENT" }
+        runtime "Release"
+        optimize "on"
+
+    filter "configurations:Release_Server"
+        defines { "B_RELEASE", "B_SERVER" }
         runtime "Release"
         optimize "on"
 

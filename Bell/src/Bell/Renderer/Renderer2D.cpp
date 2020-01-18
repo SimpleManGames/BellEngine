@@ -54,7 +54,7 @@ namespace Bell
         uint32_t whiteTextureData = 0xffffffff;
         s_Data->WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
 
-        s_Data->DefaultShader = Shader::Create("assets/shaders/Default.glsl");
+        s_Data->DefaultShader = Shader::Create("../assets/shaders/Default.glsl");
         s_Data->DefaultShader->Bind();
         s_Data->DefaultShader->SetInt("u_Texture", 0);
     }

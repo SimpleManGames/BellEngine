@@ -71,8 +71,8 @@ namespace Bell
     {
         /// http://enet.bespin.org/Tutorial.html#CreateClient
 
-        mp_Host = Network::CreateHost(0, 1);
-        if (!mp_Host)
+        mp_Host = Network::CreateHost(NULL, 1);
+        if (mp_Host == NULL)
         {
             B_CORE_ERROR("Failed to CreateHost");
             return {};

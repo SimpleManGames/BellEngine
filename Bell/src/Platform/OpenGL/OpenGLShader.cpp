@@ -33,9 +33,9 @@ namespace Bell
         lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
 
         auto lastDot = filePath.rfind('.');
-        auto count = lastDot == std::string::npos ? filePath.size() - lastSlash : lastDot- lastSlash;
+        auto count = lastDot == std::string::npos ? filePath.size() - lastSlash : lastDot - lastSlash;
         m_Name = filePath.substr(lastSlash, count);
-        
+
     }
 
     OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
@@ -109,7 +109,7 @@ namespace Bell
             B_CORE_ASSERT(nextLinePos != std::string::npos, "Syntax Error");
             // Grab the info until the next token
             pos = source.find(typeToken, nextLinePos);
-            shaderSources[ShaderTypeFromString(type)] = (pos == std::string::npos) ? 
+            shaderSources[ShaderTypeFromString(type)] = (pos == std::string::npos) ?
                 source.substr(nextLinePos) : source.substr(nextLinePos, pos - nextLinePos);
         }
 
@@ -121,7 +121,7 @@ namespace Bell
         B_PROFILE_FUNCTION();
         GLuint program = glCreateProgram();
         B_CORE_ASSERT(shaderSources.size() <= 2, "Only support 2 shaders for now.")
-        std::array<GLenum, 2> glShaderIDs;
+            std::array<GLenum, 2> glShaderIDs;
         int glShaderIDIndex = 0;
 
         for (auto& kv : shaderSources)
@@ -170,7 +170,7 @@ namespace Bell
 
         // Note the different functions here: glGetProgram* instead of glGetShader*.
         GLint isLinked = 0;
-        glGetProgramiv(program, GL_LINK_STATUS, (int*)& isLinked);
+        glGetProgramiv(program, GL_LINK_STATUS, (int*)&isLinked);
         if (isLinked == GL_FALSE)
         {
             GLint maxLength = 0;

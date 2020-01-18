@@ -13,6 +13,7 @@
 
 #include "Sandbox2D.h"
 #include "ServerLayer.h"
+#include "ClientLayer.h"
 
 class ExampleLayer : public Bell::Layer
 {
@@ -148,7 +149,7 @@ public:
     Sandbox()
     {
         //PushLayer(new ExampleLayer());
-        PushLayer(new Sandbox2D());
+        PushLayer(new ClientLayer());
     }
     ~Sandbox() { }
 };
@@ -169,6 +170,13 @@ Bell::Application* Bell::CreateApplication(Bell::Config config)
     if (config.launchType == Bell::LaunchType::Server)
         return new SandboxServer();
 
-    if (config.launchType == Bell::LaunchType::None)
+    if (config.launchType == Bell::LaunchType::Client)
         return new Sandbox();
+
+#ifdef B_CLIENT
+    return new Sandbox();
+#endif
+#ifdef B_SERVER
+    return new SandboxServer();
+#endif
 }

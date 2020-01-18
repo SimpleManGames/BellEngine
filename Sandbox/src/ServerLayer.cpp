@@ -5,6 +5,7 @@
 ServerLayer::ServerLayer()
     : Layer("Server Layer")
 {
+    
 }
 
 void ServerLayer::OnAttach()
@@ -14,6 +15,8 @@ void ServerLayer::OnAttach()
         B_ASSERT(true, "Failed to create server!");
         return;
     }
+
+    B_TRACE("Successfully created Server");
 }
 
 void ServerLayer::OnDetach()
@@ -26,7 +29,6 @@ void ServerLayer::OnUpdate(Bell::Timestep deltaTime)
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
 
     if (m_ServerRunning) {
-        B_TRACE("Server Running");
         m_Server.Tick();
         m_Server.Update();
 

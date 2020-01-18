@@ -6,9 +6,7 @@
 #include "Bell/Renderer/Renderer.h"
 #include "Input/Input.h"
 
-#ifdef B_SERVER
 #include "Bell/Networking/Network.h"
-#endif
 
 #include <GLFW/glfw3.h>
 
@@ -43,6 +41,8 @@ namespace Bell
 
             {
                 B_CORE_INFO("Bell Engine Initializing");
+
+                Network::Init();
 #ifdef B_CLIENT
                 // Creates the unique pointer for our window
                 {
@@ -64,7 +64,6 @@ namespace Bell
                 {
                     B_PROFILE_SCOPE("Network Init");
                     B_CORE_INFO("Network Initializing");
-                    Network::Init();
                 }
 #endif
             }

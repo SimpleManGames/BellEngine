@@ -3,6 +3,8 @@
 
 #include "Bell/Networking/NetworkHost.h"
 
+extern class ClientLayer;
+
 namespace Bell
 {
     // TODO: Make proper Entity
@@ -18,6 +20,8 @@ namespace Bell
         {
 
         }
+
+        friend class ClientLayer;
 
     private:
         virtual void OnPeerConnect(ENetPeer* peer) override;

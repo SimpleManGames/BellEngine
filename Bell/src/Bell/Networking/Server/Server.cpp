@@ -1,7 +1,9 @@
 #include "bpch.h"
 #include "Server.h"
 
+#include "Bell/Networking/Network.h"
 #include <Bell\Networking\NetworkCommand.h>
+#include <Bell/Networking/Packet/PacketFuncHandler.h>
 
 namespace Bell
 {
@@ -63,12 +65,13 @@ namespace Bell
 
     void Server::OnCommandReceive(ENetPeer* peer, Packet& packet, command_t command)
     {
-        switch (static_cast<ServerCommand>(command))
-        {
-            case ServerCommand::PlayerPosition:
-                HandleCommandPlayerPosition(packet);
-                break;
-        }
+        Network::GetPacketFunctionHandler().GetPacketFunction(command)(packet);
+        //switch (static_cast<ServerCommand>(command))
+        //{
+        //    case ServerCommand::PlayerPosition:
+        //        HandleCommandPlayerPosition(packet);
+        //        break;
+        //}
     }
 
     void Server::HandleCommandPlayerPosition(Packet& packet)

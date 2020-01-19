@@ -6,6 +6,8 @@
 #include <Bell.h>
 #include <Bell/Networking/Server/Server.h>
 
+class Bell::Packet;
+
 class ServerLayer : public Bell::Layer
 {
 public:
@@ -22,6 +24,8 @@ private:
     Bell::Server m_Server;
     std::atomic<bool> m_ServerRunning = true;
     std::atomic<bool> m_ServerConsoleRunning = true;
+
+    void HandlePlayerPosition(Bell::Packet& packet);
 };
 
 #endif // !_SERVER_LAYER_H

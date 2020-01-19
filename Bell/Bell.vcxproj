@@ -257,6 +257,7 @@
     <ClInclude Include="src\Bell\Networking\NetworkConstants.h" />
     <ClInclude Include="src\Bell\Networking\NetworkHost.h" />
     <ClInclude Include="src\Bell\Networking\NetworkTypes.h" />
+    <ClInclude Include="src\Bell\Networking\Packet\PacketFuncHandler.h" />
     <ClInclude Include="src\Bell\Networking\Packet\Packet.h" />
     <ClInclude Include="src\Bell\Networking\Server\Server.h" />
     <ClInclude Include="src\Bell\Networking\Server\ServerConfig.h" />

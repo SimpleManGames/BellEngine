@@ -206,7 +206,7 @@ namespace Bell
                 itr++;
         }
     }
-     
+
     void NetworkHost::OnCommandRecieve(ENetPeer* peer, const ENetPacket& ePacket)
     {
         // Convert from our packet to enet packet

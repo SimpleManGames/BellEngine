@@ -5,6 +5,8 @@
 
 namespace Bell
 {
+    PacketFuncHandler& Network::m_PacketFuncHandler = PacketFuncHandler();
+
     void Network::Init()
     {
         B_PROFILE_FUNCTION();

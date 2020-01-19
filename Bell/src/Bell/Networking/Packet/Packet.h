@@ -48,6 +48,7 @@ namespace Bell
         Packet& operator >>(wchar_t* data);
         Packet& operator >>(std::wstring& data);
 
+        // Write
         Packet& operator <<(bool data);
 
         Packet& operator <<(Int8 data);

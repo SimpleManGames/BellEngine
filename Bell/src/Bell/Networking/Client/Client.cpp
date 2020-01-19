@@ -1,6 +1,8 @@
 #include "bpch.h"
 #include "Client.h"
+#include "Bell/Networking/Network.h"
 #include <Bell\Networking\NetworkCommand.h>
+#include "Bell/Networking/Packet/PacketFuncHandler.h"
 
 namespace Bell
 {
@@ -19,18 +21,21 @@ namespace Bell
 
     void Client::OnCommandReceive(ENetPeer* peer, Packet& packet, command_t command)
     {
-        switch (static_cast<ClientCommand>(command))
-        {
-            case ClientCommand::PlayerJoin:
-                OnPlayerJoin(packet);
-                break;
-            case ClientCommand::PlayerLeave:
-                OnPlayerLeave(packet);
-                break;
-            case ClientCommand::Snapshot:
-                OnSnapshot(packet);
-                break;
-        }
+        Network::GetPacketFunctionHandler().GetPacketFunction(command)(packet);
+        //switch (static_cast<ClientCommand>(command))
+        //{
+        //    case ClientCommand::PlayerJoin:
+        //        OnPlayerJoin(packet);
+        //        break;
+        //    case ClientCommand::PlayerLeave:
+        //        OnPlayerLeave(packet);
+        //        break;
+        //    case ClientCommand::Snapshot:
+        //        OnSnapshot(packet);
+        //        break;
+        //    default:
+        //        break;
+        //}
     }
 
     void Client::OnPlayerJoin(Packet& packet)

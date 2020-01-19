@@ -17,6 +17,14 @@ public:
 
     void OnUpdate(Bell::Timestep deltaTime) override;
     void OnEvent(Bell::Event& e) override;
+
+    void OnPlayerJoin(Bell::Packet& packet);
+    void OnPlayerLeave(Bell::Packet& packet);
+    void OnSnapshot(Bell::Packet& packet);
+
+    void OnSpawnPoint(Bell::Packet& packet);
+
+    void SendPlayerPosition(const glm::vec3& position);
 private:
     Bell::Client m_Client;
 };

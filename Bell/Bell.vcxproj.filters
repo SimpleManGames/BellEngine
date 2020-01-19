@@ -1326,6 +1326,7 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\Bell\Networking\Packet\PacketFuncHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bell\Core\Application.cpp">

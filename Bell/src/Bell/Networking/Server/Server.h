@@ -4,6 +4,8 @@
 #include "Bell/Networking/NetworkHost.h"
 #include "Bell/Networking/NetworkConstants.h"
 
+extern class ServerLayer;
+
 namespace Bell
 {
     struct ServerEntity
@@ -21,6 +23,8 @@ namespace Bell
 
     class Server : public NetworkHost
     {
+        friend ServerLayer;
+
     public:
         Server()
             : NetworkHost("Server")

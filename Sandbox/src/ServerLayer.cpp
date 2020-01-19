@@ -1,16 +1,18 @@
 #include "ServerLayer.h"
 
 #include "Bell/Networking/Network.h"
+#include "Bell/Networking/Packet/PacketFuncHandler.h"
+#include "Bell/Networking/Packet/Packet.h"
 
 ServerLayer::ServerLayer()
     : Layer("Server Layer")
 {
-    
+    B_PACKET_FUNCTION_DEF(Bell::ServerCommand::PlayerPosition, ServerLayer::HandlePlayerPosition);
 }
 
 void ServerLayer::OnAttach()
 {
-    if (!m_Server.CreateAsServer(2))
+    if (!m_Server.CreateAsServer(4))
     {
         B_ASSERT(true, "Failed to create server!");
         return;
@@ -40,4 +42,13 @@ void ServerLayer::OnUpdate(Bell::Timestep deltaTime)
     }
     else
         m_Server.DisconnectAllPeers();
+}
+
+void ServerLayer::HandlePlayerPosition(Bell::Packet& packet)
+{
+    Bell::peer_id_t id;
+    packet >> id;
+    packet >> m_Server.m_Entities[id].position.x
+        >> m_Server.m_Entities[id].position.y
+        >> m_Server.m_Entities[id].position.z;
 }

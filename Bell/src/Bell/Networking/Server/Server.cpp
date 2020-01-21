@@ -7,6 +7,7 @@
 
 namespace Bell
 {
+    /// TODO: Move this into ServerLayer so end users have control over it
     void Server::Update()
     {
         Packet packet;
@@ -18,6 +19,7 @@ namespace Bell
             {
                 packet << static_cast<peer_id_t>(i)
                     << m_Entities[i].position.x
+                    << m_Entities[i].position.y
                     << m_Entities[i].position.y;
             }
         }

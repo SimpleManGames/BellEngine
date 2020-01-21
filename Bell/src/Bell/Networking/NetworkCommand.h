@@ -17,7 +17,8 @@ namespace Bell
 
     enum class ServerCommand : command_t
     {
-        PlayerPosition = 100U
+        PlayerPosition = 100U,
+        PlayerScale = 101U
     };
 
     template <typename CommandType>

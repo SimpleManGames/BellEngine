@@ -11,6 +11,7 @@ namespace Bell
     struct ServerEntity
     {
         glm::vec3 position{ 0.0f };
+        glm::vec3 scale{ 1.0f };
         bool active = false;
     };
 

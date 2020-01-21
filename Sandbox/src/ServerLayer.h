@@ -26,6 +26,7 @@ private:
     std::atomic<bool> m_ServerConsoleRunning = true;
 
     void HandlePlayerPosition(Bell::Packet& packet);
+    void HandlePlayerScale(Bell::Packet& packet);
 };
 
 #endif // !_SERVER_LAYER_H

@@ -22,7 +22,6 @@ ClientLayer::ClientLayer()
 void ClientLayer::OnAttach()
 {
     auto peer = m_Client.CreateAsClient(Bell::LOCAL_HOST);
-    //B_ASSERT(!peer, "Peer could not be created as Client");
 
     m_Client.mp_ServerPeer = *peer;
 
@@ -47,17 +46,21 @@ void ClientLayer::OnUpdate(Bell::Timestep deltaTime)
     m_SquarePosition.x += Bell::Input::IsKeyPressed((int)Bell::Key::D) * deltaTime * 1.0f;
     m_SquarePosition.x -= Bell::Input::IsKeyPressed((int)Bell::Key::A) * deltaTime * 1.0f;
 
+    m_SquareScale += Bell::Input::IsKeyPressed((int)Bell::Key::Equal) * deltaTime;
+    m_SquareScale -= Bell::Input::IsKeyPressed((int)Bell::Key::Minus) * deltaTime;
+
     Bell::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
     Bell::RenderCommand::Clear();
 
     SendPlayerPosition({ m_SquarePosition.x, m_SquarePosition.y, 0 });
+    SendPlayerScale({ m_SquareScale.x, m_SquareScale.y, 1 });
 
     Bell::Renderer2D::BeginScene(m_CameraController.GetCamera());
     for (auto& ent : m_Client.m_Entities)
     {
         if (ent.active && &ent != m_Client.mp_Player)
         {
-            Bell::Renderer2D::DrawQuad(ent.position, m_SquareScale, m_Rotation, m_Texture, m_SquareColor, m_TextureScale);
+            Bell::Renderer2D::DrawQuad(ent.position, ent.scale, m_Rotation, m_Texture, m_SquareColor, m_TextureScale);
         }
     }
 
@@ -71,12 +74,15 @@ void ClientLayer::OnEvent(Bell::Event& e)
 
 void ClientLayer::OnImGuiRender()
 {
-    ImGui::Begin("Sandbox 2D Settings");
+    ImGui::Begin("Network Info");
 
     for (auto& ent : m_Client.m_Entities)
     {
-        if (ent.active && &ent != m_Client.mp_Player)
+        if (ent.active && &ent != m_Client.mp_Player) {
             ImGui::DragFloat3("Entity position: ", glm::value_ptr(ent.position), 0.01f);
+
+            ImGui::DragFloat3("Entity Scale: ", glm::value_ptr(ent.scale), 0.01f);
+        }
     }
 
     ImGui::End();
@@ -109,12 +115,15 @@ void ClientLayer::OnSnapshot(Bell::Packet& packet)
     {
         Bell::peer_id_t id = 0;
         float x, y, z;
+        float sx, sy, sz;
         packet >> id;
         packet >> x >> y >> z;
+        packet >> sx >> sy >> sz;
         if (id != m_Client.GetPeerID())
         {
             auto* p = &m_Client.m_Entities[id];
             p->position = { x, y, z };
+            p->scale = { sx, sy, sz };
             p->active = true;
         }
     }
@@ -136,6 +145,16 @@ void ClientLayer::SendPlayerPosition(const glm::vec3& position)
     packet << Bell::ServerCommand::PlayerPosition
         << m_Client.GetPeerID()
         << position.x << position.y << position.z;
+
+    m_Client.QueueSendToPeer(m_Client.mp_ServerPeer, packet, 0, 0);
+}
+
+void ClientLayer::SendPlayerScale(const glm::vec3& scale)
+{
+    Bell::Packet packet;
+    packet << Bell::ServerCommand::PlayerScale
+        << m_Client.GetPeerID()
+        << scale.x << scale.y << scale.z;
 
     m_Client.QueueSendToPeer(m_Client.mp_ServerPeer, packet, 0, 0);
 }

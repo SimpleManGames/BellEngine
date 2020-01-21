@@ -24,8 +24,9 @@ public:
     void OnSnapshot(Bell::Packet& packet);
 
     void OnSpawnPoint(Bell::Packet& packet);
-
+private:
     void SendPlayerPosition(const glm::vec3& position);
+    void SendPlayerScale(const glm::vec3& scale);
 private:
     Bell::Client m_Client;
 

@@ -18,8 +18,7 @@ namespace Bell
             {
                 packet << static_cast<peer_id_t>(i)
                     << m_Entities[i].position.x
-                    << m_Entities[i].position.y
-                    << m_Entities[i].position.z;
+                    << m_Entities[i].position.y;
             }
         }
 
@@ -66,21 +65,6 @@ namespace Bell
     void Server::OnCommandReceive(ENetPeer* peer, Packet& packet, command_t command)
     {
         Network::GetPacketFunctionHandler().GetPacketFunction(command)(packet);
-        //switch (static_cast<ServerCommand>(command))
-        //{
-        //    case ServerCommand::PlayerPosition:
-        //        HandleCommandPlayerPosition(packet);
-        //        break;
-        //}
-    }
-
-    void Server::HandleCommandPlayerPosition(Packet& packet)
-    {
-        peer_id_t id;
-        packet >> id;
-        packet >> m_Entities[id].position.x 
-            >> m_Entities[id].position.y 
-            >> m_Entities[id].position.z;
     }
     
     int Server::FindEmptySlot() const

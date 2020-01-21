@@ -19,7 +19,6 @@ namespace Bell
         {
             std::size_t start = m_Data.size();
             m_Data.resize(start + sizeInBytes);
-            // Copy data to the end of the packet
             std::memcpy(&m_Data[start], data, sizeInBytes);
         }
     }

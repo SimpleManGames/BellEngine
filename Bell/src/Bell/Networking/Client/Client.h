@@ -22,16 +22,12 @@ namespace Bell
         }
 
         friend class ClientLayer;
-
+        
     private:
         virtual void OnPeerConnect(ENetPeer* peer) override;
         virtual void OnPeerDisconnect(ENetPeer* peer) override;
         virtual void OnPeerTimeout(ENetPeer* peer) override;
         virtual void OnCommandReceive(ENetPeer* peer, Packet& packet, command_t command) override;
-
-        void OnPlayerJoin(Packet& packet);
-        void OnPlayerLeave(Packet& packet);
-        void OnSnapshot(Packet& packet);
 
         ENetPeer* mp_ServerPeer = nullptr;
         std::array<Entity, 512> m_Entities;

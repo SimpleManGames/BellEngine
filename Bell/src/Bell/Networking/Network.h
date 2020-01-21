@@ -21,7 +21,7 @@ namespace Bell
         static ENetHost* CreateHost(const ENetAddress* address, int connections);
         static ENetPeer* ConnectHostTo(ENetHost* host, const std::string& ip);
         static int GetPeerIDFromServer(ENetHost* host);
-        static ENetPacket* CreatePacket(const void* data, uint32_t flags);
+        static ENetPacket* CreatePacket(Packet packet, uint32_t flags);
 
         static PacketFuncHandler& GetPacketFunctionHandler() { return m_PacketFuncHandler; }
 

@@ -99,8 +99,8 @@ namespace Bell
         return id;
     }
 
-    ENetPacket* Network::CreatePacket(const void* data, uint32_t flags)
+    ENetPacket* Network::CreatePacket(Packet packet, uint32_t flags)
     {
-        return enet_packet_create(data, sizeof(data), flags);
+        return enet_packet_create(packet.GetData(), packet.GetDataSize(), flags);
     }
 }

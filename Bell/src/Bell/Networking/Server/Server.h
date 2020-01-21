@@ -39,8 +39,6 @@ namespace Bell
         virtual void OnPeerTimeout(ENetPeer* peer) override;
         virtual void OnCommandReceive(ENetPeer* peer, Packet& packet, command_t command) override;
 
-        void HandleCommandPlayerPosition(Packet& packet);
-
         int FindEmptySlot() const;
 
         void AddPeer(ENetPeer* peer, peer_id_t id);

@@ -49,6 +49,5 @@ void ServerLayer::HandlePlayerPosition(Bell::Packet& packet)
     Bell::peer_id_t id;
     packet >> id;
     packet >> m_Server.m_Entities[id].position.x
-        >> m_Server.m_Entities[id].position.y
-        >> m_Server.m_Entities[id].position.z;
+        >> m_Server.m_Entities[id].position.y;
 }

@@ -177,7 +177,7 @@ namespace Bell
 
     void NetworkHost::QueueSendToPeer(ENetPeer* peer, Packet& packet, uint8_t channel, uint32_t flags)
     {
-        ENetPacket* ePacket = Network::CreatePacket(packet.GetData() , flags);
+        ENetPacket* ePacket = Network::CreatePacket(packet, flags);
         QueuedPacket qPacket;
         qPacket.packet = ePacket;
         qPacket.peer = peer;
@@ -188,7 +188,7 @@ namespace Bell
 
     void NetworkHost::QueueBroadcastToPeers(Packet& packet, uint8_t channel, uint32_t flags)
     {
-        ENetPacket* ePacket = Network::CreatePacket(packet.GetData(), flags);
+        ENetPacket* ePacket = Network::CreatePacket(packet, flags);
         QueuedPacket qPacket;
         qPacket.packet = ePacket;
         qPacket.style = QueuedPacket::Style::Broadcast;
@@ -209,8 +209,6 @@ namespace Bell
 
     void NetworkHost::OnCommandRecieve(ENetPeer* peer, const ENetPacket& ePacket)
     {
-        // Convert from our packet to enet packet
-
         Packet packet;
         packet.Append(ePacket.data, ePacket.dataLength);
         command_t command;

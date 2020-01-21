@@ -16,7 +16,7 @@ namespace Bell
         Input::Remap("camera_move_right", KeyAlternative(Keys::D));
         Input::Remap("camera_move_up", KeyAlternative(Keys::W));
         Input::Remap("camera_move_down", KeyAlternative(Keys::S));
-
+        
         Input::Remap("camera_rotate_clockwise", KeyAlternative(Keys::E));
         Input::Remap("camera_rotate_counter_clockwise", KeyAlternative(Keys::Q));
     }

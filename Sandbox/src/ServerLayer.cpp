@@ -9,6 +9,7 @@ ServerLayer::ServerLayer()
 {
     B_PACKET_FUNCTION_DEF(Bell::ServerCommand::PlayerPosition, ServerLayer::HandlePlayerPosition);
     B_PACKET_FUNCTION_DEF(Bell::ServerCommand::PlayerScale, ServerLayer::HandlePlayerScale);
+    B_PACKET_FUNCTION_DEF(Bell::ServerCommand::PlayerRotation, ServerLayer::HandlePlayerRotation);
 }
 
 void ServerLayer::OnAttach()
@@ -61,4 +62,11 @@ void ServerLayer::HandlePlayerScale(Bell::Packet& packet)
     packet >> m_Server.m_Entities[id].scale.x
         >> m_Server.m_Entities[id].scale.y
         >> m_Server.m_Entities[id].scale.z;
+}
+
+void ServerLayer::HandlePlayerRotation(Bell::Packet& packet)
+{
+    Bell::peer_id_t id;
+    packet >> id;
+    packet >> m_Server.m_Entities[id].rotation;
 }

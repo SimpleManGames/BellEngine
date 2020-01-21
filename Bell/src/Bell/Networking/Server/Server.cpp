@@ -26,7 +26,9 @@ namespace Bell
 
                     << m_Entities[i].scale.x
                     << m_Entities[i].scale.y
-                    << m_Entities[i].scale.y;
+                    << m_Entities[i].scale.y
+
+                    << m_Entities[i].rotation;
             }
         }
 

@@ -27,6 +27,7 @@ private:
 
     void HandlePlayerPosition(Bell::Packet& packet);
     void HandlePlayerScale(Bell::Packet& packet);
+    void HandlePlayerRotation(Bell::Packet& packet);
 };
 
 #endif // !_SERVER_LAYER_H

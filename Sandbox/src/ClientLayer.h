@@ -27,6 +27,8 @@ public:
 private:
     void SendPlayerPosition(const glm::vec3& position);
     void SendPlayerScale(const glm::vec3& scale);
+    void SendPlayerRotation(float& rotation);
+
 private:
     Bell::Client m_Client;
 

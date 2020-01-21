@@ -111,7 +111,6 @@ void ClientLayer::OnSnapshot(Bell::Packet& packet)
         float x, y;
         packet >> id;
         packet >> x >> y;
-        B_INFO("Snapshot Info: {0}, {1}, {2}", id, x, y);
         if (id != m_Client.GetPeerID())
         {
             auto* p = &m_Client.m_Entities[id];

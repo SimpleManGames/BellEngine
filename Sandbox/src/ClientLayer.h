@@ -39,6 +39,3 @@ private:
 };
 
 #endif // !_CLIENT_LAYER_H
-
-/// Write a ImGui for this layer and debug all entites
-/// Check to see if >> << operators are functioning correctly

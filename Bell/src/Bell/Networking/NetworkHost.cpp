@@ -21,7 +21,7 @@ namespace Bell
         {
             auto qPacket = m_Queue.front();
             m_Queue.pop_front();
-            bytesSent += qPacket.packet->dataLength;
+            bytesSent += (int)qPacket.packet->dataLength;
 
             switch (qPacket.style)
             {
@@ -162,7 +162,7 @@ namespace Bell
 
     int NetworkHost::GetConnectedPeerCount() const
     {
-        return mp_Host->connectedPeers;
+        return (int)mp_Host->connectedPeers;
     }
 
     peer_id_t NetworkHost::GetPeerID() const

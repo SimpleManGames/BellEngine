@@ -3,7 +3,7 @@
 
 #include "Bell/Networking/NetworkHost.h"
 
-extern class ClientLayer;
+class ClientLayer;
 
 namespace Bell
 {

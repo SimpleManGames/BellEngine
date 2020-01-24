@@ -4,7 +4,7 @@
 #include "Bell/Networking/NetworkHost.h"
 #include "Bell/Networking/NetworkConstants.h"
 
-extern class ServerLayer;
+class ServerLayer;
 
 namespace Bell
 {
@@ -19,7 +19,7 @@ namespace Bell
     struct ConnectedClient
     {
         ENetPeer* peer = nullptr;
-        peer_id_t entityID;
+        peer_id_t entityID = -1;
         bool connected = false;
     };
 

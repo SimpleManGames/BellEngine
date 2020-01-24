@@ -79,8 +79,29 @@ Bell::Config CreateConfigFromArgs(int argc, char** argv)
             }
         }
         else if (option.first == "-client")
+        {
             config.launchType = Bell::LaunchType::Client;
-        else 
+
+            try
+            {
+                std::string ip = option.second;
+                if (!ip.empty()) 
+                {
+                    if (ip == "LOCAL_HOST")
+                    {
+                        ip = Bell::LOCAL_HOST;
+                    }
+                }
+                else
+                    throw std::invalid_argument("IP is empty.\n");
+            }
+            catch (const std::invalid_argument & e)
+            {
+                B_CORE_WARN("IP could not be set for client. Reason: {0}", e.what());
+                config.serverOptions.maxConnections = 4;
+            }
+        }
+        else
             config.launchType = Bell::LaunchType::None;
     }
 

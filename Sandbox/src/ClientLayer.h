@@ -9,7 +9,7 @@ class ClientLayer : public Bell::Layer
     friend class Bell::Client;
 
 public:
-    ClientLayer();
+    ClientLayer(const std::string ip);
     virtual ~ClientLayer() = default;
 
     virtual void OnAttach();

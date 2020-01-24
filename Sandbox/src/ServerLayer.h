@@ -11,7 +11,7 @@ class Bell::Packet;
 class ServerLayer : public Bell::Layer
 {
 public:
-    ServerLayer();
+    ServerLayer(unsigned int maxConnections);
     virtual ~ServerLayer() = default;
 
     virtual void OnAttach();

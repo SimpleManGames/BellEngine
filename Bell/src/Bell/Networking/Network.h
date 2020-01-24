@@ -14,10 +14,6 @@ namespace Bell
         static void Init();
         static void Shutdown();
 
-        static void LaunchServer(const ServerConfig& config);
-        static void LaunchClient(const ClientConfig& config);
-        static void LaunchBoth(const Config& config);
-
         static ENetHost* CreateHost(const ENetAddress* address, int connections);
         static ENetPeer* ConnectHostTo(ENetHost* host, const std::string& ip);
         static int GetPeerIDFromServer(ENetHost* host);

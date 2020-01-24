@@ -9,7 +9,7 @@
 #include "Bell/Networking/Packet/Packet.h"
 #include "Bell/Networking/Packet/PacketFuncHandler.h"
 
-ClientLayer::ClientLayer()
+ClientLayer::ClientLayer(const std::string ip)
     : Layer("Client Layer"), m_CameraController(1200.0f / 720.0f, false)
 {
     B_PACKET_FUNCTION_DEF(Bell::ClientCommand::PlayerJoin, ClientLayer::OnPlayerJoin);
@@ -17,21 +17,20 @@ ClientLayer::ClientLayer()
     B_PACKET_FUNCTION_DEF(Bell::ClientCommand::Snapshot, ClientLayer::OnSnapshot);
 
     B_PACKET_FUNCTION_DEF(Bell::ClientCommand::SpawnPoint, ClientLayer::OnSpawnPoint);
+
+    auto peer = m_Client.CreateAsClient(ip);
+    m_Client.mp_ServerPeer = *peer;
+    m_Client.mp_Player = &m_Client.m_Entities[m_Client.GetPeerID()];
 }
 
 void ClientLayer::OnAttach()
 {
-    auto peer = m_Client.CreateAsClient(Bell::LOCAL_HOST);
-
-    m_Client.mp_ServerPeer = *peer;
-
-    m_Client.mp_Player = &m_Client.m_Entities[m_Client.GetPeerID()];
-
     m_Texture = Bell::Texture2D::Create("assets/textures/bigmisssteak.png");
 }
 
 void ClientLayer::OnDetach()
 {
+    m_Client.DisconnectFromPeer(m_Client.mp_ServerPeer);
 }
 
 void ClientLayer::OnUpdate(Bell::Timestep deltaTime)

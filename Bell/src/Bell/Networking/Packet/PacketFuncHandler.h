@@ -2,17 +2,19 @@
 #define _PACKET_FUNC_HANDLER_H
 
 #include <map>
+
 #include "Bell/Networking/Network.h"
 #include "Bell/Networking/NetworkTypes.h"
 #include "Bell/Networking/NetworkCommand.h"
-#include <Bell\Networking\Server\Server.h>
+#include "Bell/Networking/Server/Server.h"
 
 #define B_PACKET_FUNCTION_DEF(command, func) Bell::Network::GetPacketFunctionHandler().AddFunctionToMap((Bell::command_t)command, std::bind(&func, this, std::placeholders::_1))
 
 namespace Bell
 {
-    class Packet;
+    /// Pre-defines
 
+    class Packet;
     typedef std::function<void(Packet&)> PacketFunc;
 
     class PacketFuncHandler

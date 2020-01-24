@@ -4,17 +4,14 @@
 #include "Bell/Networking/Packet/PacketFuncHandler.h"
 #include "Bell/Networking/Packet/Packet.h"
 
-ServerLayer::ServerLayer()
+ServerLayer::ServerLayer(unsigned int maxConnections)
     : Layer("Server Layer")
 {
     B_PACKET_FUNCTION_DEF(Bell::ServerCommand::PlayerPosition, ServerLayer::HandlePlayerPosition);
     B_PACKET_FUNCTION_DEF(Bell::ServerCommand::PlayerScale, ServerLayer::HandlePlayerScale);
     B_PACKET_FUNCTION_DEF(Bell::ServerCommand::PlayerRotation, ServerLayer::HandlePlayerRotation);
-}
 
-void ServerLayer::OnAttach()
-{
-    if (!m_Server.CreateAsServer(4))
+    if (!m_Server.CreateAsServer(maxConnections))
     {
         B_ASSERT(true, "Failed to create server!");
         return;
@@ -23,16 +20,21 @@ void ServerLayer::OnAttach()
     B_TRACE("Successfully created Server");
 }
 
+void ServerLayer::OnAttach()
+{
+}
+
 void ServerLayer::OnDetach()
 {
-    
+
 }
 
 void ServerLayer::OnUpdate(Bell::Timestep deltaTime)
 {
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
 
-    if (m_ServerRunning) {
+    if (m_ServerRunning) 
+    {
         m_Server.Tick();
         m_Server.Update();
 
@@ -43,7 +45,10 @@ void ServerLayer::OnUpdate(Bell::Timestep deltaTime)
             m_Clock = 0;
     }
     else
+    {
         m_Server.DisconnectAllPeers();
+        B_INFO("Server Timed Out. Disconnecting peers.");
+    }
 }
 
 void ServerLayer::HandlePlayerPosition(Bell::Packet& packet)

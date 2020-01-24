@@ -24,17 +24,6 @@ namespace Bell
         atexit(enet_deinitialize);
     }
 
-    void Network::LaunchServer(const ServerConfig& config)
-    {
-        B_CORE_INFO("Launching Server");
-        // TODO: 
-        // Flag this application as a server in order to remove
-        // pointless funcs like renderering from the loop
-
-        // New Thread
-        // Start the server
-
-    }
     ENetHost* Network::CreateHost(const ENetAddress* address, int connections)
     {
         B_PROFILE_FUNCTION();
@@ -101,6 +90,7 @@ namespace Bell
 
     ENetPacket* Network::CreatePacket(Packet packet, uint32_t flags)
     {
+        B_PROFILE_FUNCTION();
         return enet_packet_create(packet.GetData(), packet.GetDataSize(), flags);
     }
 }

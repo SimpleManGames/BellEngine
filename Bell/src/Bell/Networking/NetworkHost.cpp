@@ -81,7 +81,7 @@ namespace Bell
         auto server = Network::ConnectHostTo(mp_Host, ip);
         if (!server)
         {
-            B_CORE_ERROR("Failed to connect to server! (Game Full)");
+            B_CORE_ERROR("Failed to connect to server!");
             return {};
         }
         Flush();
@@ -93,6 +93,7 @@ namespace Bell
             return {};
         }
 
+        B_CORE_INFO("Created Client with IP Address of {0}", ip);
         m_PeerID = static_cast<peer_id_t>(id);
         return server;
     }

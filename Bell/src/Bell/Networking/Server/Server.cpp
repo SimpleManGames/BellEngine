@@ -2,8 +2,8 @@
 #include "Server.h"
 
 #include "Bell/Networking/Network.h"
-#include <Bell\Networking\NetworkCommand.h>
-#include <Bell/Networking/Packet/PacketFuncHandler.h>
+#include "Bell/Networking/NetworkCommand.h"
+#include "Bell/Networking/Packet/PacketFuncHandler.h"
 
 namespace Bell
 {

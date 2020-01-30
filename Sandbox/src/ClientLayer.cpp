@@ -19,8 +19,8 @@ ClientLayer::ClientLayer(const std::string ip)
     B_PACKET_FUNCTION_DEF(Bell::ClientCommand::SpawnPoint, ClientLayer::OnSpawnPoint);
 
     auto peer = m_Client.CreateAsClient(ip);
-    m_Client.mp_ServerPeer = *peer;
-    m_Client.mp_Player = &m_Client.m_Entities[m_Client.GetPeerID()];
+    m_Client.m_ServerPeer = *peer;
+    m_Client.m_Player = &m_Client.m_Entities[m_Client.GetPeerID()];
 }
 
 void ClientLayer::OnAttach()
@@ -30,7 +30,7 @@ void ClientLayer::OnAttach()
 
 void ClientLayer::OnDetach()
 {
-    m_Client.DisconnectFromPeer(m_Client.mp_ServerPeer);
+    m_Client.DisconnectFromPeer(m_Client.m_ServerPeer);
 }
 
 void ClientLayer::OnUpdate(Bell::Timestep deltaTime)
@@ -61,7 +61,7 @@ void ClientLayer::OnUpdate(Bell::Timestep deltaTime)
     Bell::Renderer2D::BeginScene(m_CameraController.GetCamera());
     for (auto& ent : m_Client.m_Entities)
     {
-        if (ent.active && &ent != m_Client.mp_Player)
+        if (ent.active && &ent != m_Client.m_Player)
         {
             Bell::Renderer2D::DrawQuad(ent.position, ent.scale, ent.rotation, m_Texture, m_SquareColor, m_TextureScale);
         }
@@ -81,7 +81,7 @@ void ClientLayer::OnImGuiRender()
 
     for (auto& ent : m_Client.m_Entities)
     {
-        if (ent.active && &ent != m_Client.mp_Player) {
+        if (ent.active && &ent != m_Client.m_Player) {
             ImGui::DragFloat3("Entity position: ", glm::value_ptr(ent.position), 0.01f);
             ImGui::DragFloat3("Entity Scale: ", glm::value_ptr(ent.scale), 0.01f);
             ImGui::DragFloat("Entity Scale: ", &ent.rotation, 0.01f);
@@ -138,11 +138,11 @@ void ClientLayer::OnSnapshot(Bell::Packet& packet)
 
 void ClientLayer::OnSpawnPoint(Bell::Packet& packet)
 {
-    if (m_Client.mp_Player)
+    if (m_Client.m_Player)
     {
-        packet >> m_Client.mp_Player->position.x
-            >> m_Client.mp_Player->position.y
-            >> m_Client.mp_Player->position.z;
+        packet >> m_Client.m_Player->position.x
+            >> m_Client.m_Player->position.y
+            >> m_Client.m_Player->position.z;
     }
 }
 
@@ -153,7 +153,7 @@ void ClientLayer::SendPlayerPosition(const glm::vec3& position)
         << m_Client.GetPeerID()
         << position.x << position.y << position.z;
 
-    m_Client.QueueSendToPeer(m_Client.mp_ServerPeer, packet, 0, 0);
+    m_Client.QueueSendToPeer(m_Client.m_ServerPeer, packet, 0, 0);
 }
 
 void ClientLayer::SendPlayerScale(const glm::vec3& scale)
@@ -163,7 +163,7 @@ void ClientLayer::SendPlayerScale(const glm::vec3& scale)
         << m_Client.GetPeerID()
         << scale.x << scale.y << scale.z;
 
-    m_Client.QueueSendToPeer(m_Client.mp_ServerPeer, packet, 0, 0);
+    m_Client.QueueSendToPeer(m_Client.m_ServerPeer, packet, 0, 0);
 }
 
 void ClientLayer::SendPlayerRotation(float& rotation)
@@ -173,5 +173,5 @@ void ClientLayer::SendPlayerRotation(float& rotation)
         << m_Client.GetPeerID()
         << rotation;
 
-    m_Client.QueueSendToPeer(m_Client.mp_ServerPeer, packet, 0, 0);
+    m_Client.QueueSendToPeer(m_Client.m_ServerPeer, packet, 0, 0);
 }

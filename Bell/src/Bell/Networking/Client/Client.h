@@ -31,9 +31,9 @@ namespace Bell
         virtual void OnPeerTimeout(ENetPeer* peer) override;
         virtual void OnCommandReceive(ENetPeer* peer, Packet& packet, command_t command) override;
 
-        ENetPeer* mp_ServerPeer = nullptr;
+        ENetPeer* m_ServerPeer = nullptr;
         std::array<Entity, 512> m_Entities;
-        Entity* mp_Player = nullptr;
+        Entity* m_Player = nullptr;
     };
 }
 

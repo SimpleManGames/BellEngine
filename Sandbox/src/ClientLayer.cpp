@@ -25,7 +25,7 @@ ClientLayer::ClientLayer(const std::string ip)
 
 void ClientLayer::OnAttach()
 {
-    m_Texture = Bell::Texture2D::Create("assets/textures/bigmisssteak.png");
+    m_Texture = Bell::Texture2D::Create("../assets/textures/bigmisssteak.png");
 }
 
 void ClientLayer::OnDetach()

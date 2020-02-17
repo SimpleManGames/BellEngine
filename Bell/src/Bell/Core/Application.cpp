@@ -42,7 +42,10 @@ namespace Bell
             {
                 B_CORE_INFO("Bell Engine Initializing");
 
-                Network::Init();
+                {
+                    B_PROFILE_SCOPE("Network Initializing");
+                    Network::Init();
+                }
 #ifdef B_CLIENT
                 // Creates the unique pointer for our window
                 {

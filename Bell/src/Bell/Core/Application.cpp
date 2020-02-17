@@ -4,7 +4,7 @@
 #include "Bell/Core/Log.h"
 
 #include "Bell/Renderer/Renderer.h"
-#include "Input/Input.h"
+#include "Bell/Core/Input/Input.h"
 
 #include "Bell/Networking/Network.h"
 
@@ -14,9 +14,9 @@ namespace Bell
 {
     Application* Application::s_Instance = nullptr;
 
-    Application::Application()
+    Application::Application(const WindowProps& props)
     {
-        Init();
+        Init(props);
     }
 
     Application::~Application() {
@@ -25,7 +25,7 @@ namespace Bell
         Renderer::Shutdown();
     }
 
-    void Application::Init()
+    void Application::Init(const WindowProps& props)
     {
         B_PROFILE_FUNCTION();
         {
@@ -50,7 +50,7 @@ namespace Bell
                 // Creates the unique pointer for our window
                 {
                     B_PROFILE_SCOPE("Window Creation");
-                    m_Window = Window::Create();
+                    m_Window = Window::Create(props);
                     // Sets the function we use for event handling
                     m_Window->SetEventCallback(B_BIND_EVENT_FN(Application::OnEvent));
                     m_Window->SetVSync(false);

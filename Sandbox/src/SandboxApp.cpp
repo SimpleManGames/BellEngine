@@ -146,7 +146,8 @@ private:
 // Default class for entry point
 class SandboxClient : public Bell::Application {
 public:
-    SandboxClient(const std::string ip)
+    SandboxClient(const std::string ip, const Bell::WindowProps& props)
+        : Application(props)
     {
         //PushLayer(new ExampleLayer());
         PushLayer(new ClientLayer(ip));
@@ -157,7 +158,8 @@ public:
 class SandboxServer : public Bell::Application
 {
 public:
-    SandboxServer(unsigned int maxConnections)
+    SandboxServer(unsigned int maxConnections, const Bell::WindowProps& props)
+        : Application(props)
     {
         PushLayer(new ServerLayer(maxConnections));
     }
@@ -168,10 +170,14 @@ public:
 Bell::Application* Bell::CreateApplication(Bell::Config config)
 {
     if (config.launchType == Bell::LaunchType::Server)
-        return new SandboxServer(config.serverOptions.maxConnections);
+        return new SandboxServer(config.serverOptions.maxConnections,
+            {});
 
     if (config.launchType == Bell::LaunchType::Client)
-        return new SandboxClient(config.clientOptions.serverIP);
+        return new SandboxClient(config.clientOptions.serverIP,
+            {
+                "Client", 640, 480
+            });
 
 #ifdef B_SERVER
     return new SandboxServer(config.serverOptions.maxConnections);

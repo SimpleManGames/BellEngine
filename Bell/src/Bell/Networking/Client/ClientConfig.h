@@ -9,6 +9,10 @@ namespace Bell
     {
         // Will hold client options when supported
         std::string serverIP = LOCAL_HOST;
+
+        std::string title;
+        unsigned int width;
+        unsigned int height;
     };
 }
 

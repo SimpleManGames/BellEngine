@@ -31,10 +31,10 @@ namespace Bell
     class Application
     {
     public:
-        Application();
+        Application(const WindowProps& props);
         virtual ~Application();
 
-        virtual void Init();
+        virtual void Init(const WindowProps& props);
 
         // Run loop using m_Running
         virtual void Run();

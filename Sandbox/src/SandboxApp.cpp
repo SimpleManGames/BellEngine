@@ -180,9 +180,13 @@ Bell::Application* Bell::CreateApplication(Bell::Config config)
             });
 
 #ifdef B_SERVER
-    return new SandboxServer(config.serverOptions.maxConnections);
+    return new SandboxServer(config.serverOptions.maxConnections,
+        {});
 #endif
 #ifdef B_CLIENT
-    return new SandboxClient(config.clientOptions.serverIP);
+    return new SandboxClient(config.clientOptions.serverIP,
+        {
+            "Client", 640, 480
+        });
 #endif
 }

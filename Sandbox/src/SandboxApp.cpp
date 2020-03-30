@@ -65,7 +65,7 @@ public:
 
         auto vertexColorShader = m_ShaderLibrary.Load("VertexPosColor", "assets/shaders/VertexColor.glsl");
         auto flatColorShader = m_ShaderLibrary.Load("FlatColor", "assets/shaders/FlatColor.glsl");
-        auto textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
+        auto textureShader = m_ShaderLibrary.Load("assets/shaders/Default.glsl");
 
         m_Texture = Bell::Texture2D::Create("assets/textures/bigmisssteak.png");
         m_AlphaImageTest = Bell::Texture2D::Create("assets/textures/sheet.png");
@@ -102,7 +102,7 @@ public:
             }
         }
 
-        auto textureShader = m_ShaderLibrary.Get("Texture");
+        auto textureShader = m_ShaderLibrary.Get("Default");
 
         m_Texture->Bind();
         Bell::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
@@ -149,8 +149,8 @@ public:
     SandboxClient(const std::string ip, const Bell::WindowProps& props)
         : Application(props)
     {
-        //PushLayer(new ExampleLayer());
-        PushLayer(new ClientLayer(ip));
+        PushLayer(new ExampleLayer());
+        //PushLayer(new ClientLayer(ip));
     }
     ~SandboxClient() { }
 };

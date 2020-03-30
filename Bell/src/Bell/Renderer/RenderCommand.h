@@ -30,10 +30,10 @@ namespace Bell
             B_PROFILE_FUNCTION();
             s_RendererAPI->Clear();
         }
-        inline static void DrawIndexed(const Ref<VertexArray>& vertexArray)
+        inline static void DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t count = 0)
         {
             B_PROFILE_FUNCTION();
-            s_RendererAPI->DrawIndexed(vertexArray);
+            s_RendererAPI->DrawIndexed(vertexArray, count);
         }
 
     private:

@@ -15,6 +15,7 @@ namespace Bell
 
         static void BeginScene(const OrthographicCamera& camera);
         static void EndScene();
+        static void Flush();
 
         // Primitives
         static void DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const glm::vec4& color);

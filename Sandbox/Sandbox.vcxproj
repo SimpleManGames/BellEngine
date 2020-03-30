@@ -227,6 +227,8 @@
   <ItemGroup>
     <ClInclude Include="src\ClientLayer.h" />
     <ClInclude Include="src\Sandbox2D.h" />
+    <ClInclude Include="src\SandboxClient.h" />
+    <ClInclude Include="src\SandboxServer.h" />
     <ClInclude Include="src\ServerLayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

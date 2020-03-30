@@ -14,55 +14,56 @@
 
 namespace Bell
 {
-    struct Renderer2DStorage
+    struct Renderer2DData
     {
+        const uint32_t MaxPerDrawCallQuads = 10000;
+        const uint32_t MaxPerDrawCallVertices = MaxPerDrawCallQuads * 4;
+        const uint32_t MaxPerDrawCallIndices = MaxPerDrawCallQuads * 6;
+
         // TODO: Should be scopes once we control memory
         Ref<VertexArray> QuadVertexArray;
         Ref<Shader> DefaultShader;
         Ref<Texture2D> WhiteTexture;
     };
 
-    static Renderer2DStorage* s_StorageData;
+    static Renderer2DData s_Data;
 
     void Renderer2D::Init()
     {
         B_PROFILE_FUNCTION();
 
-        s_StorageData = new Renderer2DStorage();
-
-        s_StorageData->QuadVertexArray = Bell::VertexArray::Create();
+        s_Data.QuadVertexArray = Bell::VertexArray::Create();
 
         Ref<VertexBuffer> squareVB = VertexBuffer::Create();
         squareVB->SetLayout({
             { ShaderDataType::Float3, "a_Position" },
             { ShaderDataType::Float2, "a_TexCoord" }
             });
-        s_StorageData->QuadVertexArray->AddVertexBuffer(squareVB);
+        s_Data.QuadVertexArray->AddVertexBuffer(squareVB);
 
         uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
         Ref<IndexBuffer> squareIB = IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
-        s_StorageData->QuadVertexArray->SetIndexBuffer(squareIB);
+        s_Data.QuadVertexArray->SetIndexBuffer(squareIB);
 
-        s_StorageData->WhiteTexture = Texture2D::Create(1, 1);
+        s_Data.WhiteTexture = Texture2D::Create(1, 1);
         uint32_t whiteTextureData = 0xffffffff;
-        s_StorageData->WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
+        s_Data.WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
 
-        s_StorageData->DefaultShader = Shader::Create("../assets/shaders/Default.glsl");
-        s_StorageData->DefaultShader->Bind();
-        s_StorageData->DefaultShader->SetInt("u_Texture", 0);
+        s_Data.DefaultShader = Shader::Create("../assets/shaders/Default.glsl");
+        s_Data.DefaultShader->Bind();
+        s_Data.DefaultShader->SetInt("u_Texture", 0);
     }
 
     void Renderer2D::Shutdown()
     {
         B_PROFILE_FUNCTION();
-        delete s_StorageData;
     }
 
     void Renderer2D::BeginScene(const OrthographicCamera& camera)
     {
         B_PROFILE_FUNCTION();
-        s_StorageData->DefaultShader->Bind();
-        s_StorageData->DefaultShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
+        s_Data.DefaultShader->Bind();
+        s_Data.DefaultShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
     }
 
     void Renderer2D::EndScene()
@@ -77,7 +78,7 @@ namespace Bell
 
     void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color)
     {
-        DrawQuad(position, size, rotation, s_StorageData->WhiteTexture, color, 1.0f);
+        DrawQuad(position, size, rotation, s_Data.WhiteTexture, color, 1.0f);
     }
 
     void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec4& color, float textureScale)
@@ -89,16 +90,16 @@ namespace Bell
     {
         B_PROFILE_FUNCTION();
         texture->Bind();
-        s_StorageData->DefaultShader->SetFloat4("u_Color", color);
-        s_StorageData->DefaultShader->SetFloat("u_TextureScale", textureScale);
+        s_Data.DefaultShader->SetFloat4("u_Color", color);
+        s_Data.DefaultShader->SetFloat("u_TextureScale", textureScale);
 
         glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
             * glm::rotate(glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f))
             * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
-        s_StorageData->DefaultShader->SetMat4("u_Transform", transform);
+        s_Data.DefaultShader->SetMat4("u_Transform", transform);
 
-        s_StorageData->QuadVertexArray->Bind();
-        RenderCommand::DrawIndexed(s_StorageData->QuadVertexArray);
+        s_Data.QuadVertexArray->Bind();
+        RenderCommand::DrawIndexed(s_Data.QuadVertexArray);
     }
 }

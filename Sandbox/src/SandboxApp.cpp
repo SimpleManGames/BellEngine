@@ -12,8 +12,11 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Sandbox2D.h"
-#include "ServerLayer.h"
+#include "SandboxServer.h"
+#include "SandboxClient.h"
 #include "ClientLayer.h"
+
+#undef B_CLIENT
 
 class ExampleLayer : public Bell::Layer
 {
@@ -144,49 +147,38 @@ private:
 };
 
 // Default class for entry point
-class SandboxClient : public Bell::Application {
-public:
-    SandboxClient(const std::string ip, const Bell::WindowProps& props)
-        : Application(props)
-    {
-        PushLayer(new Sandbox2D());
-        //PushLayer(new ClientLayer(ip));
-    }
-    ~SandboxClient() { }
-};
 
-class SandboxServer : public Bell::Application
+class Sandbox : public Bell::Application
 {
 public:
-    SandboxServer(unsigned int maxConnections, const Bell::WindowProps& props)
-        : Application(props)
+    Sandbox()
     {
-        PushLayer(new ServerLayer(maxConnections));
+        PushLayer(new Sandbox2D());
     }
-    ~SandboxServer() {}
 };
 
 // Application side function for defining entry point
 Bell::Application* Bell::CreateApplication(Bell::Config config)
 {
     if (config.launchType == Bell::LaunchType::Server)
-        return new SandboxServer(config.serverOptions.maxConnections,
-            {});
+    {
+        return new SandboxServer(config.serverOptions.maxConnections);
+    }
+    else if (config.launchType == Bell::LaunchType::Client)
+    {
+        return new SandboxClient(config.clientOptions.serverIP);
+    }
+    else
+    {
+        return new Sandbox();
+    }
 
-    if (config.launchType == Bell::LaunchType::Client)
-        return new SandboxClient(config.clientOptions.serverIP,
-            {
-                "Client", 640, 480
-            });
+#if B_SERVER
+    return new SandboxServer(config.serverOptions.maxConnections);
+#elif B_CLIENT
+    return new SandboxClient(config.clientOptions.serverIP);
+#else
+    return new Sandbox();
+#endif
 
-#ifdef B_SERVER
-    return new SandboxServer(config.serverOptions.maxConnections,
-        {});
-#endif
-#ifdef B_CLIENT
-    return new SandboxClient(config.clientOptions.serverIP,
-        {
-            "Client", 640, 480
-        });
-#endif
 }

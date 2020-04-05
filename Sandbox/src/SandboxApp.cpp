@@ -152,6 +152,7 @@ class Sandbox : public Bell::Application
 {
 public:
     Sandbox()
+        : Application({})
     {
         PushLayer(new Sandbox2D());
     }
@@ -160,18 +161,18 @@ public:
 // Application side function for defining entry point
 Bell::Application* Bell::CreateApplication(Bell::Config config)
 {
-    if (config.launchType == Bell::LaunchType::Server)
-    {
-        return new SandboxServer(config.serverOptions.maxConnections);
-    }
-    else if (config.launchType == Bell::LaunchType::Client)
-    {
-        return new SandboxClient(config.clientOptions.serverIP);
-    }
-    else
-    {
-        return new Sandbox();
-    }
+    //if (config.launchType == Bell::LaunchType::Server)
+    //{
+    //    return new SandboxServer(config.serverOptions.maxConnections);
+    //}
+    //else if (config.launchType == Bell::LaunchType::Client)
+    //{
+    //    return new SandboxClient(config.clientOptions.serverIP);
+    //}
+    //else
+    //{
+    //    return new Sandbox();
+    //}
 
 #if B_SERVER
     return new SandboxServer(config.serverOptions.maxConnections);

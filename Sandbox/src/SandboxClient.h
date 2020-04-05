@@ -7,6 +7,7 @@
 class SandboxClient : public Bell::Application {
 public:
     SandboxClient(const std::string ip)
+        : Application({})
     {
         //PushLayer(new ExampleLayer());
         PushLayer(new ClientLayer(ip));

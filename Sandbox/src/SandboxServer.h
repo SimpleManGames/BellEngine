@@ -8,6 +8,7 @@ class SandboxServer : public Bell::Application
 {
 public:
     SandboxServer(unsigned int maxConnections)
+        : Application({})
     {
         PushLayer(new ServerLayer(maxConnections));
     }

@@ -19,7 +19,7 @@ namespace Bell
         glm::vec3 Position;
         glm::vec4 Color;
         glm::vec2 TexCoord;
-        float TexIndex;
+        // TODO: texid
     };
 
     struct Renderer2DData
@@ -27,8 +27,6 @@ namespace Bell
         const uint32_t MaxQuadsPerDrawCall = 10000;
         const uint32_t MaxVerticesPerDrawCall = MaxQuadsPerDrawCall * 4;
         const uint32_t MaxIndicesPerDrawCall = MaxQuadsPerDrawCall * 6;
-        // Currently assuming we have 32 slots on our GPU
-        static const uint32_t MaxTextureSlots = 32; // TODO: RenderCaps
 
         // TODO: Should be scopes once we control memory
         Ref<VertexArray> QuadVertexArray;
@@ -39,10 +37,6 @@ namespace Bell
         uint32_t QuadIndexCount = 0;
         QuadVertex* QuadVertexBufferBase = nullptr;
         QuadVertex* QuadVertexBufferPtr = nullptr;
-
-        // TODO: Switch to Asset Handle when implemented
-        std::array<Ref<Texture2D>, MaxTextureSlots> TextureSlots;
-        uint32_t TextureSlotIndex = 1; // 0 = White Texture
     };
 
     static Renderer2DData s_Data;
@@ -57,9 +51,8 @@ namespace Bell
         s_Data.QuadVertexBuffer->SetLayout({
             { ShaderDataType::Float3, "a_Position" },
             { ShaderDataType::Float4, "a_Color" },
-            { ShaderDataType::Float2, "a_TexCoord" },
-            { ShaderDataType::Float, "a_TexIndex" }
-            });
+            { ShaderDataType::Float2, "a_TexCoord" }
+        });
         s_Data.QuadVertexArray->AddVertexBuffer(s_Data.QuadVertexBuffer);
 
         s_Data.QuadVertexBufferBase = new QuadVertex[s_Data.MaxVerticesPerDrawCall];
@@ -89,17 +82,9 @@ namespace Bell
         uint32_t whiteTextureData = 0xffffffff;
         s_Data.WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
 
-        int32_t samplers[s_Data.MaxTextureSlots];
-        for (uint32_t i = 0; i < s_Data.MaxTextureSlots; i++)
-        {
-            samplers[i] = i;
-        }
-
-        s_Data.DefaultShader = Shader::Create("assets/shaders/Default.glsl");
+        s_Data.DefaultShader = Shader::Create("../assets/shaders/Default.glsl");
         s_Data.DefaultShader->Bind();
-        s_Data.DefaultShader->SetIntArray("u_Texture", samplers, s_Data.MaxTextureSlots);
-
-        s_Data.TextureSlots[0] = s_Data.WhiteTexture;
+        s_Data.DefaultShader->SetInt("u_Texture", 0);
     }
 
     void Renderer2D::Shutdown()
@@ -115,9 +100,6 @@ namespace Bell
 
         s_Data.QuadIndexCount = 0;
         s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
-
-        // Set to 1 in order not to over right the white texture
-        s_Data.TextureSlotIndex = 1;
     }
 
     void Renderer2D::EndScene()
@@ -133,11 +115,6 @@ namespace Bell
     void Renderer2D::Flush()
     {
         B_PROFILE_FUNCTION();
-
-        for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
-        {
-            s_Data.TextureSlots[i]->Bind(i);
-        }
 
         RenderCommand::DrawIndexed(s_Data.QuadVertexArray, s_Data.QuadIndexCount);
     }
@@ -156,53 +133,29 @@ namespace Bell
     {
         DrawQuad({ position.x, position.y , 0 }, size, rotation, texture, color, textureScale);
     }
-
+    
     void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec4& color, float textureScale)
     {
         B_PROFILE_FUNCTION();
 
-        float textureIndex = 0.0f;
-
-        // Only go up to the currently asigned texture slot to avoid iterating
-        // Through all empty slots
-        for (uint32_t i = 1; i < s_Data.TextureSlotIndex; i++)
-        {
-            // Get the de-reference texture from a shared pointer
-            if (*s_Data.TextureSlots[i].get() == *texture.get())
-            {
-                textureIndex = (float)i;
-                break;
-            }
-        }
-
-        if (textureIndex == 0.0f)
-        {
-            textureIndex = (float)s_Data.TextureSlotIndex;
-            s_Data.TextureSlots[s_Data.TextureSlotIndex] = texture;
-        }
-
         s_Data.QuadVertexBufferPtr->Position = position;
         s_Data.QuadVertexBufferPtr->Color = color;
         s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 0.0f };
-        s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
         s_Data.QuadVertexBufferPtr++;
-
+        
         s_Data.QuadVertexBufferPtr->Position = { position.x + size.x, position.y, 0.0f };
         s_Data.QuadVertexBufferPtr->Color = color;
         s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 0.0f };
-        s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
         s_Data.QuadVertexBufferPtr++;
-
+        
         s_Data.QuadVertexBufferPtr->Position = { position.x + size.x, position.y + size.y, 0.0f };
         s_Data.QuadVertexBufferPtr->Color = color;
         s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 1.0f };
-        s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
         s_Data.QuadVertexBufferPtr++;
 
         s_Data.QuadVertexBufferPtr->Position = { position.x, position.y + size.y, 0.0f };
         s_Data.QuadVertexBufferPtr->Color = color;
         s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 1.0f };
-        s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
         s_Data.QuadVertexBufferPtr++;
 
         s_Data.QuadIndexCount += 6;

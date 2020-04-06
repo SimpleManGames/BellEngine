@@ -48,7 +48,14 @@ void Sandbox2D::OnUpdate(Bell::Timestep deltaTime)
 
         //Bell::Renderer2D::DrawQuad(m_SquarePosition, m_SquareScale, m_Rotation, m_SquareColor);
         Bell::Renderer2D::DrawQuad(m_SquarePosition, m_SquareScale, 0, m_Texture, m_SquareColor, m_TilingFactor);
-        Bell::Renderer2D::DrawQuad({ 1,1,1 }, { 1, 1 }, 0, m_SquareColor);
+
+        for (int x = 0; x < m_GridSize.x; x++)
+        {
+            for (int y = 0; y < m_GridSize.y; y++)
+            {
+                Bell::Renderer2D::DrawQuad({ x, y, 1 }, { 1, 1 }, 0, m_SquareColor);
+            }
+        }
 
         Bell::Renderer2D::EndScene();
     }
@@ -64,6 +71,8 @@ void Sandbox2D::OnImGuiRender()
     ImGui::SliderFloat("Rotation", &m_Rotation, 0.0f, 360.0f);
     ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
     ImGui::SliderFloat("Tiling Factor", &m_TilingFactor, 0.0f, 10.0f);
+
+    ImGui::DragFloat2("Grid Size", glm::value_ptr(m_GridSize), 1.0f);
 
     ImGui::End();
 }

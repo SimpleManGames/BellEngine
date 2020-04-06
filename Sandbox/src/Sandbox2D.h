@@ -27,6 +27,8 @@ private:
     glm::vec4 m_SquareColor = { 1.0f, 0.8f, 0.8f, 1.0f };
     float m_Rotation = 0.0f;
     float m_TilingFactor = 1.0f;
+
+    glm::vec2 m_GridSize = { 1, 1 };
 };
 
 #endif // !_SANDBOX2D_H

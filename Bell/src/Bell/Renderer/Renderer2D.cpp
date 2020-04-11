@@ -14,6 +14,7 @@
 
 namespace Bell
 {
+    // Describes the content of each Quad Vertex
     struct QuadVertex
     {
         glm::vec3 Position;
@@ -23,37 +24,68 @@ namespace Bell
         float TilingFactor;
     };
 
+    // Holds info about the Renderer2D
     struct Renderer2DData
     {
+        // Max Quads Per Draw Call
+        // This will be used to detect if a new batch is needed
+        // TODO: Switch this from being const to getting it from
+        //      the GPU
         const uint32_t MaxQuadsPerDrawCall = 10000;
+        // Max Vertices Per Draw Call
+        // Stores the value of the max vertices to be quickly
+        //      accessed later
         const uint32_t MaxVerticesPerDrawCall = MaxQuadsPerDrawCall * 4;
+        // Max Indices Per Draw Call
+        // Stores the value of the max indices to be quickly
+        //      accessed later
         const uint32_t MaxIndicesPerDrawCall = MaxQuadsPerDrawCall * 6;
+        // Max Texture Slots each batch can hold
         // Currently assuming we have 32 slots on our GPU
+        // TODO: Switch this from static const to getting it from
+        //      the GPU
         static const uint32_t MaxTextureSlots = 32; // TODO: RenderCaps
 
         // TODO: Should be scopes once we control memory
+        // VAO
         Ref<VertexArray> QuadVertexArray;
+        // VBO
         Ref<VertexBuffer> QuadVertexBuffer;
+        // Default shader we use when user doesn't specify one
         Ref<Shader> DefaultShader;
+
+        // Stores a 1x1 white texture that we create
+        //      in order to use it for color tinting
         Ref<Texture2D> WhiteTexture;
 
+        // Keeps count of how many Indicies are in the current batch
         uint32_t QuadIndexCount = 0;
+        // Stores the pointer to beginning of the Vertex Buffer
         QuadVertex* QuadVertexBufferBase = nullptr;
+        // Stores the current location we are adding to in the
+        //      Vertex Buffer
         QuadVertex* QuadVertexBufferPtr = nullptr;
 
+        // The current Textures loaded for the batch
         // TODO: Switch to Asset Handle when implemented
         std::array<Ref<Texture2D>, MaxTextureSlots> TextureSlots;
+        // Current spot in the TextureSlots array to load additional
+        //      textures to the batch
+        // Starts at one since we always want the white texture loaded
         uint32_t TextureSlotIndex = 1; // 0 = White Texture
 
+        // Defines positions used for matrix math
         glm::vec4 QuadVertexPositions[4];
     };
 
+    // Access point to the data
     static Renderer2DData s_Data;
 
     void Renderer2D::Init()
     {
         B_PROFILE_FUNCTION();
 
+        // Create and set up the VBO and VAO
         s_Data.QuadVertexArray = Bell::VertexArray::Create();
 
         s_Data.QuadVertexBuffer = VertexBuffer::Create(s_Data.MaxVerticesPerDrawCall * sizeof(QuadVertex));
@@ -89,22 +121,29 @@ namespace Bell
 
         delete[] quadIndices;
 
+        // Create the white texture used for color tinting
         s_Data.WhiteTexture = Texture2D::Create(1, 1);
         uint32_t whiteTextureData = 0xffffffff;
         s_Data.WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
 
+        // Load samplers id
         int32_t samplers[s_Data.MaxTextureSlots];
         for (uint32_t i = 0; i < s_Data.MaxTextureSlots; i++)
         {
             samplers[i] = i;
         }
 
+        // Load the default shader
         s_Data.DefaultShader = Shader::Create("assets/shaders/Default.glsl");
         s_Data.DefaultShader->Bind();
+
+        // Pass the sampler to the shader
         s_Data.DefaultShader->SetIntArray("u_Texture", samplers, s_Data.MaxTextureSlots);
 
+        // Set the zero index to the white texture
         s_Data.TextureSlots[0] = s_Data.WhiteTexture;
 
+        // Set the vertex positions to the middle of the object
         s_Data.QuadVertexPositions[0] = { -0.5f, -0.5f , 0.0f, 1.0f };
         s_Data.QuadVertexPositions[1] = {  0.5f, -0.5f , 0.0f, 1.0f };
         s_Data.QuadVertexPositions[2] = {  0.5f,  0.5f , 0.0f, 1.0f };
@@ -122,6 +161,7 @@ namespace Bell
         s_Data.DefaultShader->Bind();
         s_Data.DefaultShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 
+        // Reset batch counts
         s_Data.QuadIndexCount = 0;
         s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
 
@@ -136,6 +176,7 @@ namespace Bell
         uint32_t dataSize = (uint8_t*)s_Data.QuadVertexBufferPtr - (uint8_t*)s_Data.QuadVertexBufferBase;
         s_Data.QuadVertexBuffer->SetData(s_Data.QuadVertexBufferBase, dataSize);
 
+        // Draw to the screen
         Flush();
     }
 
@@ -143,11 +184,13 @@ namespace Bell
     {
         B_PROFILE_FUNCTION();
 
+        // Bind the textures we loaded for the batch
         for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
         {
             s_Data.TextureSlots[i]->Bind(i);
         }
 
+        // Draw
         RenderCommand::DrawIndexed(s_Data.QuadVertexArray, s_Data.QuadIndexCount);
     }
 
@@ -160,23 +203,21 @@ namespace Bell
     {
         B_PROFILE_FUNCTION();
 
-        float textureIndex = 0.0f;
         float textureIndex = -1.0f;
 
         // Only go up to the currently asigned texture slot to avoid iterating
         // Through all empty slots
-        for (uint32_t i = 1; i < s_Data.TextureSlotIndex; i++)
         for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
         {
             // Get the de-reference texture from a shared pointer
             if (*s_Data.TextureSlots[i].get() == *texture.get())
             {
+                // Found the texture already loaded
                 textureIndex = (float)i;
                 break;
             }
         }
 
-        if (textureIndex == 0.0f)
         if (textureIndex == -1.0f)
         {
             textureIndex = (float)s_Data.TextureSlotIndex;
@@ -184,6 +225,7 @@ namespace Bell
             s_Data.TextureSlotIndex++;
         }
 
+        // Transform matrix set up with the values we were passed
         glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
             * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
             * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });

@@ -161,10 +161,12 @@ namespace Bell
         B_PROFILE_FUNCTION();
 
         float textureIndex = 0.0f;
+        float textureIndex = -1.0f;
 
         // Only go up to the currently asigned texture slot to avoid iterating
         // Through all empty slots
         for (uint32_t i = 1; i < s_Data.TextureSlotIndex; i++)
+        for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
         {
             // Get the de-reference texture from a shared pointer
             if (*s_Data.TextureSlots[i].get() == *texture.get())
@@ -175,6 +177,7 @@ namespace Bell
         }
 
         if (textureIndex == 0.0f)
+        if (textureIndex == -1.0f)
         {
             textureIndex = (float)s_Data.TextureSlotIndex;
             s_Data.TextureSlots[s_Data.TextureSlotIndex] = texture;

@@ -153,17 +153,7 @@ namespace Bell
 
     void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color)
     {
-        DrawQuad({ position.x, position.y , 0 }, size, rotation, color);
-    }
-
-    void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color)
-    {
         DrawQuad(position, size, rotation, s_Data.WhiteTexture, color, 1.0f);
-    }
-
-    void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec4& color, float tilingFactor)
-    {
-        DrawQuad(position, size, rotation, texture, color, tilingFactor);
     }
 
     void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec4& color, float tilingFactor)

@@ -215,19 +215,5 @@ namespace Bell
         s_Data.QuadVertexBufferPtr++;
 
         s_Data.QuadIndexCount += 6;
-
-        /*
-        texture->Bind();
-        s_Data.DefaultShader->SetFloat("u_TextureScale", textureScale);
-
-        glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-            * glm::rotate(glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f))
-            * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
-
-        s_Data.DefaultShader->SetMat4("u_Transform", transform);
-
-        s_Data.QuadVertexArray->Bind();
-        RenderCommand::DrawIndexed(s_Data.QuadVertexArray);
-        */
     }
 }

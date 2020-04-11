@@ -47,7 +47,7 @@ void Sandbox2D::OnUpdate(Bell::Timestep deltaTime)
         Bell::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
         //Bell::Renderer2D::DrawQuad(m_SquarePosition, m_SquareScale, m_Rotation, m_SquareColor);
-        Bell::Renderer2D::DrawQuad(m_SquarePosition, m_SquareScale, 0, m_Texture, m_SquareColor, m_TilingFactor);
+        Bell::Renderer2D::DrawQuad(m_SquarePosition, m_SquareScale, m_Rotation, m_Texture, m_SquareColor, m_TilingFactor);
 
         for (int x = 0; x < m_GridSize.x; x++)
         {

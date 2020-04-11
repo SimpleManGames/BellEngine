@@ -44,6 +44,8 @@ namespace Bell
         // TODO: Switch to Asset Handle when implemented
         std::array<Ref<Texture2D>, MaxTextureSlots> TextureSlots;
         uint32_t TextureSlotIndex = 1; // 0 = White Texture
+
+        glm::vec4 QuadVertexPositions[4];
     };
 
     static Renderer2DData s_Data;
@@ -102,6 +104,11 @@ namespace Bell
         s_Data.DefaultShader->SetIntArray("u_Texture", samplers, s_Data.MaxTextureSlots);
 
         s_Data.TextureSlots[0] = s_Data.WhiteTexture;
+
+        s_Data.QuadVertexPositions[0] = { -0.5f, -0.5f , 0.0f, 1.0f };
+        s_Data.QuadVertexPositions[1] = {  0.5f, -0.5f , 0.0f, 1.0f };
+        s_Data.QuadVertexPositions[2] = {  0.5f,  0.5f , 0.0f, 1.0f };
+        s_Data.QuadVertexPositions[3] = { -0.5f,  0.5f , 0.0f, 1.0f };
     }
 
     void Renderer2D::Shutdown()
@@ -184,28 +191,33 @@ namespace Bell
             s_Data.TextureSlotIndex++;
         }
 
-        s_Data.QuadVertexBufferPtr->Position = position;
+        glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
+            * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
+            * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+
+
+        s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[0];
         s_Data.QuadVertexBufferPtr->Color = color;
         s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 0.0f };
         s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
         s_Data.QuadVertexBufferPtr->TilingFactor = tilingFactor;
         s_Data.QuadVertexBufferPtr++;
 
-        s_Data.QuadVertexBufferPtr->Position = { position.x + size.x, position.y, 0.0f };
+        s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[1];
         s_Data.QuadVertexBufferPtr->Color = color;
         s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 0.0f };
         s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
         s_Data.QuadVertexBufferPtr->TilingFactor = tilingFactor;
         s_Data.QuadVertexBufferPtr++;
 
-        s_Data.QuadVertexBufferPtr->Position = { position.x + size.x, position.y + size.y, 0.0f };
+        s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[2];
         s_Data.QuadVertexBufferPtr->Color = color;
         s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 1.0f };
         s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
         s_Data.QuadVertexBufferPtr->TilingFactor = tilingFactor;
         s_Data.QuadVertexBufferPtr++;
 
-        s_Data.QuadVertexBufferPtr->Position = { position.x, position.y + size.y, 0.0f };
+        s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[3];
         s_Data.QuadVertexBufferPtr->Color = color;
         s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 1.0f };
         s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;

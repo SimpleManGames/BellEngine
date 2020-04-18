@@ -31,17 +31,14 @@ namespace Bell
         // This will be used to detect if a new batch is needed
         // TODO: Switch this from being const to getting it from
         //      the GPU
-        const uint32_t MaxQuadsPerDrawCall = 10000;
         static const uint32_t MaxQuadsPerDrawCall = 1000;
         // Max Vertices Per Draw Call
         // Stores the value of the max vertices to be quickly
         //      accessed later
-        const uint32_t MaxVerticesPerDrawCall = MaxQuadsPerDrawCall * 4;
         static const uint32_t MaxVerticesPerDrawCall = MaxQuadsPerDrawCall * 4;
         // Max Indices Per Draw Call
         // Stores the value of the max indices to be quickly
         //      accessed later
-        const uint32_t MaxIndicesPerDrawCall = MaxQuadsPerDrawCall * 6;
         static const uint32_t MaxIndicesPerDrawCall = MaxQuadsPerDrawCall * 6;
         // Max Texture Slots each batch can hold
         // Currently assuming we have 32 slots on our GPU
@@ -79,6 +76,8 @@ namespace Bell
 
         // Defines positions used for matrix math
         glm::vec4 QuadVertexPositions[4];
+
+        Renderer2D::Statistics Stats;
     };
 
     // Access point to the data
@@ -148,8 +147,8 @@ namespace Bell
 
         // Set the vertex positions to the middle of the object
         s_Data.QuadVertexPositions[0] = { -0.5f, -0.5f , 0.0f, 1.0f };
-        s_Data.QuadVertexPositions[1] = {  0.5f, -0.5f , 0.0f, 1.0f };
-        s_Data.QuadVertexPositions[2] = {  0.5f,  0.5f , 0.0f, 1.0f };
+        s_Data.QuadVertexPositions[1] = { 0.5f, -0.5f , 0.0f, 1.0f };
+        s_Data.QuadVertexPositions[2] = { 0.5f,  0.5f , 0.0f, 1.0f };
         s_Data.QuadVertexPositions[3] = { -0.5f,  0.5f , 0.0f, 1.0f };
     }
 
@@ -206,6 +205,9 @@ namespace Bell
 
         // Draw
         RenderCommand::DrawIndexed(s_Data.QuadVertexArray, s_Data.QuadIndexCount);
+
+        // TODO: Add #if
+        s_Data.Stats.DrawCalls++;
     }
 
     void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color)
@@ -279,6 +281,11 @@ namespace Bell
         s_Data.QuadVertexBufferPtr++;
 
         s_Data.QuadIndexCount += 6;
+
+        // TODO: Add #if
+        s_Data.Stats.QuadCount++;
+    }
+
     Renderer2D::Statistics Bell::Renderer2D::GetStats()
     {
         return s_Data.Stats;

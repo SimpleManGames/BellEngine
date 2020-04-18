@@ -21,6 +21,13 @@ namespace Bell
         static void DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 
         static void DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec4& colorTint = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), float textureScale = 1.0f);
+    private:
+        /// Ends current scene and starts a new batch without needed
+        ///     to set camera and bind shaders
+        static void FlushAndReset();
+
+        /// Resets current batch in order to flush
+        static void ResetBatchValues();
     };
 }
 

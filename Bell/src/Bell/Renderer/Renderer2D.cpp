@@ -32,14 +32,17 @@ namespace Bell
         // TODO: Switch this from being const to getting it from
         //      the GPU
         const uint32_t MaxQuadsPerDrawCall = 10000;
+        static const uint32_t MaxQuadsPerDrawCall = 1000;
         // Max Vertices Per Draw Call
         // Stores the value of the max vertices to be quickly
         //      accessed later
         const uint32_t MaxVerticesPerDrawCall = MaxQuadsPerDrawCall * 4;
+        static const uint32_t MaxVerticesPerDrawCall = MaxQuadsPerDrawCall * 4;
         // Max Indices Per Draw Call
         // Stores the value of the max indices to be quickly
         //      accessed later
         const uint32_t MaxIndicesPerDrawCall = MaxQuadsPerDrawCall * 6;
+        static const uint32_t MaxIndicesPerDrawCall = MaxQuadsPerDrawCall * 6;
         // Max Texture Slots each batch can hold
         // Currently assuming we have 32 slots on our GPU
         // TODO: Switch this from static const to getting it from
@@ -161,12 +164,7 @@ namespace Bell
         s_Data.DefaultShader->Bind();
         s_Data.DefaultShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 
-        // Reset batch counts
-        s_Data.QuadIndexCount = 0;
-        s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
-
-        // Set to 1 in order not to over right the white texture
-        s_Data.TextureSlotIndex = 1;
+        ResetBatchValues();
     }
 
     void Renderer2D::EndScene()
@@ -178,6 +176,22 @@ namespace Bell
 
         // Draw to the screen
         Flush();
+    }
+
+    void Bell::Renderer2D::FlushAndReset()
+    {
+        EndScene();
+        ResetBatchValues();
+    }
+
+    void Bell::Renderer2D::ResetBatchValues()
+    {
+        // Reset batch counts
+        s_Data.QuadIndexCount = 0;
+        s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
+
+        // Set to 1 in order not to over right the white texture
+        s_Data.TextureSlotIndex = 1;
     }
 
     void Renderer2D::Flush()
@@ -202,6 +216,11 @@ namespace Bell
     void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec4& color, float tilingFactor)
     {
         B_PROFILE_FUNCTION();
+
+        if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndicesPerDrawCall)
+        {
+            FlushAndReset();
+        }
 
         float textureIndex = -1.0f;
 
@@ -260,5 +279,13 @@ namespace Bell
         s_Data.QuadVertexBufferPtr++;
 
         s_Data.QuadIndexCount += 6;
+    Renderer2D::Statistics Bell::Renderer2D::GetStats()
+    {
+        return s_Data.Stats;
+    }
+
+    void Bell::Renderer2D::ResetStats()
+    {
+        memset(&s_Data.Stats, 0, sizeof(Renderer2D::Statistics));
     }
 }

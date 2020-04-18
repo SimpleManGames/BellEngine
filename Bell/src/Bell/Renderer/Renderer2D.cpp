@@ -31,7 +31,7 @@ namespace Bell
         // This will be used to detect if a new batch is needed
         // TODO: Switch this from being const to getting it from
         //      the GPU
-        static const uint32_t MaxQuadsPerDrawCall = 1000;
+        static const uint32_t MaxQuadsPerDrawCall = 10000;
         // Max Vertices Per Draw Call
         // Stores the value of the max vertices to be quickly
         //      accessed later
@@ -219,8 +219,9 @@ namespace Bell
     {
         B_PROFILE_FUNCTION();
 
-        if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndicesPerDrawCall)
+        if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndicesPerDrawCall || s_Data.TextureSlotIndex >= Renderer2DData::MaxTextureSlots)
         {
+            B_CORE_INFO("New Batch started mid DrawQuad");
             FlushAndReset();
         }
 
@@ -230,6 +231,13 @@ namespace Bell
         // Through all empty slots
         for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
         {
+            if (texture == nullptr)
+            {
+                textureIndex = 1.0f;
+                B_CORE_ERROR("Texture that was passed in is NULL!");
+                break;
+            }
+
             // Get the de-reference texture from a shared pointer
             if (*s_Data.TextureSlots[i].get() == *texture.get())
             {
@@ -244,6 +252,11 @@ namespace Bell
             textureIndex = (float)s_Data.TextureSlotIndex;
             s_Data.TextureSlots[s_Data.TextureSlotIndex] = texture;
             s_Data.TextureSlotIndex++;
+
+            // TODO: Add #if
+            // Minus one since the TextureSlotIndex describes the next slot
+            //      to be used
+            s_Data.Stats.UsedTextureSlots = s_Data.TextureSlotIndex - 1;
         }
 
         // Transform matrix set up with the values we were passed
@@ -286,7 +299,7 @@ namespace Bell
         s_Data.Stats.QuadCount++;
     }
 
-    Renderer2D::Statistics Bell::Renderer2D::GetStats()
+    Renderer2D::Statistics const Bell::Renderer2D::GetStats()
     {
         return s_Data.Stats;
     }

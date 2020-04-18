@@ -29,12 +29,15 @@ namespace Bell
             uint32_t DrawCalls = 0;
             // Amount of quads per reset
             uint32_t QuadCount = 0;
+            // TODO: Change this to textures loaded across all batches
+            // Amount of used texture slots in the current batch
+            uint32_t UsedTextureSlots;
 
             uint32_t GetTotalVertexCount() { return QuadCount * 4; }
             uint32_t GetTotalIndexCount() { return QuadCount * 6; }
         };
 
-        static Statistics GetStats();
+        static Statistics const GetStats();
         static void ResetStats();
 
     private:

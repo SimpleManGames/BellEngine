@@ -219,9 +219,10 @@ namespace Bell
     {
         B_PROFILE_FUNCTION();
 
-        if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndicesPerDrawCall || s_Data.TextureSlotIndex >= Renderer2DData::MaxTextureSlots)
+        // If our index count is over our max per batch start a new batch
+        if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndicesPerDrawCall)
         {
-            B_CORE_INFO("New Batch started mid DrawQuad");
+            B_CORE_INFO("Went over MaxIndicesPerDrawCall; Starting new batch");
             FlushAndReset();
         }
 
@@ -247,10 +248,21 @@ namespace Bell
             }
         }
 
+        // Texture not found
         if (textureIndex == -1.0f)
         {
+            // Can't add anymore textures into a slot so start a new batch
+            if(s_Data.TextureSlotIndex >= Renderer2DData::MaxTextureSlots)
+            { 
+                B_CORE_INFO("Went over MaxTextureSlots; Starting new batch!");
+                FlushAndReset();
+            }
+
+            // Set the texture index to the next open slot
             textureIndex = (float)s_Data.TextureSlotIndex;
-            s_Data.TextureSlots[s_Data.TextureSlotIndex] = texture;
+            // Set the texture slot at index to our new texture
+            s_Data.TextureSlots[textureIndex] = texture;
+            // Increment were the next slot is
             s_Data.TextureSlotIndex++;
 
             // TODO: Add #if

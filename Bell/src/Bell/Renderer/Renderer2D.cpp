@@ -226,6 +226,9 @@ namespace Bell
             FlushAndReset();
         }
 
+        constexpr uint32_t quadVertexCount = 4;
+        constexpr glm::vec2 textureCoords[] = { { 0.0, 0.0}, { 1.0, 0.0 }, { 1.0, 1.0 }, { 0.0, 1.0 } };
+
         float textureIndex = -1.0f;
 
         // Only go up to the currently asigned texture slot to avoid iterating
@@ -252,8 +255,8 @@ namespace Bell
         if (textureIndex == -1.0f)
         {
             // Can't add anymore textures into a slot so start a new batch
-            if(s_Data.TextureSlotIndex >= Renderer2DData::MaxTextureSlots)
-            { 
+            if (s_Data.TextureSlotIndex >= Renderer2DData::MaxTextureSlots)
+            {
                 B_CORE_INFO("Went over MaxTextureSlots; Starting new batch!");
                 FlushAndReset();
             }
@@ -276,34 +279,16 @@ namespace Bell
             * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
             * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
+        for (int i = 0; i < quadVertexCount; i++)
+        {
 
-        s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[0];
-        s_Data.QuadVertexBufferPtr->Color = color;
-        s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 0.0f };
-        s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
-        s_Data.QuadVertexBufferPtr->TilingFactor = tilingFactor;
-        s_Data.QuadVertexBufferPtr++;
-
-        s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[1];
-        s_Data.QuadVertexBufferPtr->Color = color;
-        s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 0.0f };
-        s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
-        s_Data.QuadVertexBufferPtr->TilingFactor = tilingFactor;
-        s_Data.QuadVertexBufferPtr++;
-
-        s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[2];
-        s_Data.QuadVertexBufferPtr->Color = color;
-        s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 1.0f };
-        s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
-        s_Data.QuadVertexBufferPtr->TilingFactor = tilingFactor;
-        s_Data.QuadVertexBufferPtr++;
-
-        s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[3];
-        s_Data.QuadVertexBufferPtr->Color = color;
-        s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 1.0f };
-        s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
-        s_Data.QuadVertexBufferPtr->TilingFactor = tilingFactor;
-        s_Data.QuadVertexBufferPtr++;
+            s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[i];
+            s_Data.QuadVertexBufferPtr->Color = color;
+            s_Data.QuadVertexBufferPtr->TexCoord = textureCoords[i];
+            s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
+            s_Data.QuadVertexBufferPtr->TilingFactor = tilingFactor;
+            s_Data.QuadVertexBufferPtr++;
+        }
 
         s_Data.QuadIndexCount += 6;
 

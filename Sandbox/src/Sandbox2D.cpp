@@ -44,6 +44,8 @@ void Sandbox2D::OnUpdate(Bell::Timestep deltaTime)
 
     // Render
     Bell::Renderer2D::ResetStats();
+    Bell::Renderer2D::StatsBeginFrame();
+
     {
         B_PROFILE_SCOPE("Renderer Prep");
         Bell::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
@@ -72,6 +74,7 @@ void Sandbox2D::OnUpdate(Bell::Timestep deltaTime)
             }
         }
         Bell::Renderer2D::EndScene();
+        Bell::Renderer2D::StatsEndFrame();
     }
 }
 
@@ -95,6 +98,13 @@ void Sandbox2D::OnImGuiRender()
     ImGui::Text("Texture Slots Used: %d", stats.UsedTextureSlots);
     ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
     ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
+
+    ImGui::Text("Frame Info!");
+    ImGui::Text("Frame count: %d", stats.FrameCount);
+
+    float averageRenderTime = stats.TotalFrameRenderTime / stats.FrameRenderTime.size();
+    float averageFPS = 1.0f / averageRenderTime;
+    ImGui::Text("Average frame render time: %8.5f (%5.0f fps)", averageRenderTime, averageFPS);
 
     ImGui::End();
 }

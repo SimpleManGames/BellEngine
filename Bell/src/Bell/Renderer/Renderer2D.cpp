@@ -12,6 +12,8 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <GLFW/glfw3.h>
+
 namespace Bell
 {
     // Describes the content of each Quad Vertex
@@ -294,6 +296,20 @@ namespace Bell
 
         // TODO: Add #if
         s_Data.Stats.QuadCount++;
+    }
+
+    void Renderer2D::StatsBeginFrame()
+    {
+        s_Data.Stats.CurrentFrameBeginTime = (float)glfwGetTime();
+    }
+
+    void Renderer2D::StatsEndFrame()
+    {
+        s_Data.Stats.FrameRenderTime[s_Data.Stats.FrameCount] = (float)glfwGetTime() - s_Data.Stats.CurrentFrameBeginTime;
+        s_Data.Stats.TotalFrameRenderTime += (s_Data.Stats.FrameRenderTime[s_Data.Stats.FrameCount] - s_Data.Stats.FrameRenderTime[((int)s_Data.Stats.FrameCount + 1) % s_Data.Stats.FrameRenderTime.size()]);
+        if (++s_Data.Stats.FrameCount == s_Data.Stats.FrameRenderTime.size()) {
+            s_Data.Stats.FrameCount = 0;
+        }
     }
 
     Renderer2D::Statistics const Bell::Renderer2D::GetStats()

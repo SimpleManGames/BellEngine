@@ -33,9 +33,22 @@ namespace Bell
             // Amount of used texture slots in the current batch
             uint32_t UsedTextureSlots;
 
+            /// Frame Counter Data
+
+            // Records multiple frames of render time
+            std::array<float, 100> FrameRenderTime;
+            uint32_t FrameCount = 0;
+            float CurrentFrameBeginTime = 0.0f;
+            float TotalFrameRenderTime = 0.0f;
+
+            /// Helper Functions
+
             uint32_t GetTotalVertexCount() { return QuadCount * 4; }
             uint32_t GetTotalIndexCount() { return QuadCount * 6; }
         };
+
+        static void StatsBeginFrame();
+        static void StatsEndFrame();
 
         static Statistics const GetStats();
         static void ResetStats();

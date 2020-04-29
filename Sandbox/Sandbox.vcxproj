@@ -214,9 +214,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bell\Bell.vcxproj">
-      <Project>{84FC827C-7033-840D-1920-6A100536000F}</Project>
-    </ProjectReference>
+    <ClInclude Include="src\ClientLayer.h" />
+    <ClInclude Include="src\Sandbox2D.h" />
+    <ClInclude Include="src\SandboxClient.h" />
+    <ClInclude Include="src\SandboxServer.h" />
+    <ClInclude Include="src\ServerLayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ClientLayer.cpp" />
@@ -225,11 +227,9 @@
     <ClCompile Include="src\ServerLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ClientLayer.h" />
-    <ClInclude Include="src\Sandbox2D.h" />
-    <ClInclude Include="src\SandboxClient.h" />
-    <ClInclude Include="src\SandboxServer.h" />
-    <ClInclude Include="src\ServerLayer.h" />
+    <ProjectReference Include="..\Bell\Bell.vcxproj">
+      <Project>{84FC827C-7033-840D-1920-6A100536000F}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

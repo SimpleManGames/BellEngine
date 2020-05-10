@@ -214,12 +214,12 @@ namespace Bell
         s_Data.Stats.DrawCalls++;
     }
 
-    void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color)
+    void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotationInRadian, const glm::vec4& color)
     {
-        DrawQuad(position, size, rotation, s_Data.WhiteTexture, color, 1.0f);
+        DrawQuad(position, size, rotationInRadian, s_Data.WhiteTexture, color, 1.0f);
     }
 
-    void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec4& color, float tilingFactor)
+    void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotationInRadian, const Ref<Texture2D>& texture, const glm::vec4& color, float tilingFactor)
     {
         B_PROFILE_FUNCTION();
 
@@ -280,7 +280,7 @@ namespace Bell
 
         // Transform matrix set up with the values we were passed
         glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-            * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
+            * glm::rotate(glm::mat4(1.0f), rotationInRadian, { 0.0f, 0.0f, 1.0f })
             * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
         for (int i = 0; i < quadVertexCount; i++)

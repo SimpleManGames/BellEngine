@@ -57,7 +57,7 @@ void Sandbox2D::OnUpdate(Bell::Timestep deltaTime)
         Bell::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
         //Bell::Renderer2D::DrawQuad(m_SquarePosition, m_SquareScale, m_Rotation, m_SquareColor);
-        Bell::Renderer2D::DrawQuad(m_SquarePosition, m_SquareScale, m_Rotation, m_Texture, m_SquareColor, m_TilingFactor);
+        Bell::Renderer2D::DrawQuad(m_SquarePosition, m_SquareScale, glm::radians(m_Rotation), m_Texture, m_SquareColor, m_TilingFactor);
 
         //Bell::Renderer2D::EndScene();
         //
@@ -69,7 +69,7 @@ void Sandbox2D::OnUpdate(Bell::Timestep deltaTime)
                 for (int y = 0; y < m_GridSize.y; y++)
                 {
                     glm::vec4 color = { x / m_GridSize.x, 0.4f, y / m_GridSize.y, 0.8f };
-                    Bell::Renderer2D::DrawQuad({ x, y, 1 }, { 1.0, 1.0 }, 0, m_TextureSlotTest[(x + y) % 31]);
+                    Bell::Renderer2D::DrawQuad({ x, y, 1 }, { 1.0, 1.0 }, glm::radians(0), m_TextureSlotTest[(x + y) % 31]);
                 }
             }
         }

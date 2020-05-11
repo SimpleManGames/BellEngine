@@ -9,6 +9,15 @@
 
 namespace Bell
 {
+    struct OrthographicCameraBounds
+    {
+        float Left, Right;
+        float Bottom, Top;
+
+        float GetWidth() { return Right - Left; }
+        float GetHeight() { return Top - Bottom; }
+    };
+
     class OrthographicCameraController
     {
     public:
@@ -34,6 +43,8 @@ namespace Bell
         const float& GetZoomLevel() const { return m_ZoomLevel; }
         void SetZoomLevel(float zoomLevel) { m_ZoomLevel = zoomLevel; }
 
+        OrthographicCameraBounds& GetBounds() { return m_Bounds; }
+
     private:
         bool OnMouseScrolled(MouseScrolledEvent& e);
         bool OnWindowResize(WindowResizeEvent& e);
@@ -45,6 +56,7 @@ namespace Bell
         bool m_RotationEnabled;
 
     private:
+        OrthographicCameraBounds m_Bounds;
         OrthographicCamera m_Camera;
         float m_TranslationSpeed = 5.0f, m_RotationSpeed = 180.0f;
     };

@@ -13,6 +13,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <GLFW/glfw3.h>
+#include <glad/glad.h>
+
+#define GL_GPU_MEM_INFO_TOTAL_AVAILABLE_MEM_NVX 0x9048
+#define GL_GPU_MEM_INFO_CURRENT_AVAILABLE_MEM_NVX 0x9049
 
 namespace Bell
 {
@@ -152,6 +156,16 @@ namespace Bell
         s_Data.QuadVertexPositions[1] = { 0.5f, -0.5f , 0.0f, 1.0f };
         s_Data.QuadVertexPositions[2] = { 0.5f,  0.5f , 0.0f, 1.0f };
         s_Data.QuadVertexPositions[3] = { -0.5f,  0.5f , 0.0f, 1.0f };
+
+        GLint total_mem_kb = 0;
+        glGetIntegerv(GL_GPU_MEM_INFO_TOTAL_AVAILABLE_MEM_NVX, &total_mem_kb);
+
+        s_Data.Stats.TotalMemoryInKB = total_mem_kb;
+
+        GLint cur_avail_mem_kb = 0;
+        glGetIntegerv(GL_GPU_MEM_INFO_CURRENT_AVAILABLE_MEM_NVX, &cur_avail_mem_kb);
+
+        s_Data.Stats.CurrentAvailableMemoryInKB = cur_avail_mem_kb;
     }
 
     void Renderer2D::Shutdown()
@@ -307,6 +321,16 @@ namespace Bell
 
     void Renderer2D::StatsEndFrame()
     {
+        GLint total_mem_kb = 0;
+        glGetIntegerv(GL_GPU_MEM_INFO_TOTAL_AVAILABLE_MEM_NVX, &total_mem_kb);
+
+        s_Data.Stats.TotalMemoryInKB = total_mem_kb;
+
+        GLint cur_avail_mem_kb = 0;
+        glGetIntegerv(GL_GPU_MEM_INFO_CURRENT_AVAILABLE_MEM_NVX, &cur_avail_mem_kb);
+
+        s_Data.Stats.CurrentAvailableMemoryInKB = cur_avail_mem_kb;
+
         s_Data.Stats.FrameRenderTime[s_Data.Stats.FrameCount] = (float)glfwGetTime() - s_Data.Stats.CurrentFrameBeginTime;
         s_Data.Stats.TotalFrameRenderTime += (s_Data.Stats.FrameRenderTime[s_Data.Stats.FrameCount] - s_Data.Stats.FrameRenderTime[((int)s_Data.Stats.FrameCount + 1) % s_Data.Stats.FrameRenderTime.size()]);
         if (++s_Data.Stats.FrameCount == s_Data.Stats.FrameRenderTime.size()) {

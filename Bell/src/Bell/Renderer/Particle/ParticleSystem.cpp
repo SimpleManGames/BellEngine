@@ -77,7 +77,7 @@ void Bell::ParticleSystem::OnImGuiRender()
     int i = 0;
     for (auto& particle : m_ParticlePool)
     {
-        i++;
+        i++; 
         if (ImGui::CollapsingHeader(("Particle %d", std::to_string(i)).c_str()))
         {
             ImGui::Text("Active: %s", (particle.IsActive) ? "True" : "False");

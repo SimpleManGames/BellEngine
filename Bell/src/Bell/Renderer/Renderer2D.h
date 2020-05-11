@@ -41,6 +41,11 @@ namespace Bell
             float CurrentFrameBeginTime = 0.0f;
             float TotalFrameRenderTime = 0.0f;
 
+            /// VRam Memory
+            // Only working with NVIDIA right now
+            uint32_t TotalMemoryInKB = 0;
+            uint32_t CurrentAvailableMemoryInKB = 0;
+
             /// Helper Functions
 
             uint32_t GetTotalVertexCount() { return QuadCount * 4; }

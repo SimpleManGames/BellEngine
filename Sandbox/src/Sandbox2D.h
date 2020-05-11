@@ -28,9 +28,12 @@ private:
     float m_Rotation = 0.0f;
     float m_TilingFactor = 1.0f;
 
+    Bell::ParticleSystem m_ParticleSystem;
+    Bell::ParticleProperties m_Particles;
+
     // Stress test
     glm::vec2 m_GridSize = { 20, 20 };
-    Bell::Ref<Bell::Texture2D> m_TextureSlotTest[32];
+    //Bell::Ref<Bell::Texture2D> m_TextureSlotTest[32];
 };
 
 #endif // !_SANDBOX2D_H

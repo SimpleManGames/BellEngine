@@ -34,6 +34,8 @@
 
 #include "Bell/Renderer/Camera/OrthographicCameraController.h"
 
+#include "Bell/Renderer/Particle/ParticleSystem.h"
+
 // ---- Network Includes ----
 // --------------------------
 

@@ -14,12 +14,12 @@ void Sandbox2D::OnAttach()
     B_PROFILE_FUNCTION();
     m_Texture = Bell::Texture2D::Create("assets/textures/bigmisssteak.png");
 
-    //for (int i = 0; i < 31; i++)
-    //{
-    //    m_TextureSlotTest[i] = Bell::Texture2D::Create(1, 1);
-    //    uint32_t randomHex = 0xffffffff * (i + 1);
-    //    m_TextureSlotTest[i]->SetData(&randomHex, sizeof(uint32_t));
-    //}
+    for (int i = 0; i < 31; i++)
+    {
+        m_TextureSlotTest[i] = Bell::Texture2D::Create(1, 1);
+        uint32_t randomHex = 0xffffffff * (i + 1);
+        m_TextureSlotTest[i]->SetData(&randomHex, sizeof(uint32_t));
+    }
 
     Bell::Input::Remap("camera_move_left", Bell::KeyAlternative(Bell::Keys::A));
     Bell::Input::Remap("camera_move_right", Bell::KeyAlternative(Bell::Keys::D));
@@ -68,17 +68,19 @@ void Sandbox2D::OnUpdate(Bell::Timestep deltaTime)
 
         {
             B_PROFILE_SCOPE("Grid Stress Test");
-            //for (int x = 0; x < m_GridSize.x; x++)
-            //{
-            //    for (int y = 0; y < m_GridSize.y; y++)
-            //    {
-            //        glm::vec4 color = { x / m_GridSize.x, 0.4f, y / m_GridSize.y, 0.8f };
-            //        Bell::Renderer2D::DrawQuad({ x, y, 1 }, { 1.0, 1.0 }, 0, m_TextureSlotTest[(x + y) % 31]);
-            //    }
-            //}
+            for (int x = 0; x < m_GridSize.x; x++)
+            {
+                for (int y = 0; y < m_GridSize.y; y++)
+                {
+                    glm::vec4 color = { x / m_GridSize.x, 0.4f, y / m_GridSize.y, 0.8f };
+                    Bell::Renderer2D::DrawQuad({ x, y, 1 }, { 1.0, 1.0 }, 0, m_TextureSlotTest[(x + y) % 31]);
+                }
+            }
         }
 
         Bell::Renderer2D::EndScene();
+
+        m_ParticleSystem.OnRender(m_CameraController.GetCamera());
 
         if (Bell::Input::IsMouseButtonPressed(B_MOUSE_BUTTON_LEFT))
         {
@@ -96,9 +98,6 @@ void Sandbox2D::OnUpdate(Bell::Timestep deltaTime)
                 m_ParticleSystem.Emit(m_Particles);
             }
         }
-
-        m_ParticleSystem.OnUpdate(deltaTime);
-        m_ParticleSystem.OnRender(m_CameraController.GetCamera());
 
         Bell::Renderer2D::StatsEndFrame();
     }

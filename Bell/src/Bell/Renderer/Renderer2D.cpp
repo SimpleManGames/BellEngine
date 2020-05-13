@@ -345,6 +345,13 @@ namespace Bell
 
     void Bell::Renderer2D::ResetStats()
     {
+        B_PROFILE_FUNCTION();
+        auto frameRenderTime = s_Data.Stats.FrameRenderTime;
+        auto frameCount = s_Data.Stats.FrameCount;
+        auto totalFrameRenderTime = s_Data.Stats.TotalFrameRenderTime;
         memset(&s_Data.Stats, 0, sizeof(Renderer2D::Statistics));
+        s_Data.Stats.FrameRenderTime = frameRenderTime;
+        s_Data.Stats.FrameCount = frameCount;
+        s_Data.Stats.TotalFrameRenderTime = totalFrameRenderTime;
     }
 }

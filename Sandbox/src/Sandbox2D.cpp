@@ -134,7 +134,7 @@ void Sandbox2D::OnImGuiRender()
 
     float averageRenderTime = stats.TotalFrameRenderTime / stats.FrameRenderTime.size();
     float averageFPS = 1.0f / averageRenderTime;
-    ImGui::Text("Average frame render time: %f (%f fps)", averageRenderTime, averageFPS);
+    ImGui::Text("Average frame render time: %8.5f (%5.0f fps)", averageRenderTime, averageFPS);
 
     ImGui::End();
 

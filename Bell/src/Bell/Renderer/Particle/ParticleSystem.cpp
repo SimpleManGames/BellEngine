@@ -9,7 +9,7 @@
 #include "imgui.h"
 #include <glm/gtc/type_ptr.hpp>
 
-Bell::ParticleSystem::ParticleSystem(int maxParticles)
+Bell::ParticleSystem::ParticleSystem(int32_t maxParticles)
     : m_MaxParticles(maxParticles)
 {
     m_ParticlePool.resize(m_MaxParticles - 1);

@@ -23,7 +23,7 @@ namespace Bell
     class ParticleSystem
     {
     public:
-        ParticleSystem(int maxParticles = 1000);
+        ParticleSystem(int32_t maxParticles = 1000);
         ~ParticleSystem();
 
         void OnUpdate(Bell::Timestep timeStep);
@@ -52,7 +52,7 @@ namespace Bell
             bool IsActive = false;
         };
 
-        int m_MaxParticles;
+        int32_t m_MaxParticles;
         std::vector<Particle> m_ParticlePool;
         uint32_t m_PoolIndex = 0;
 

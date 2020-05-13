@@ -32,8 +32,8 @@ private:
     Bell::ParticleProperties m_Particles;
 
     // Stress test
-    glm::vec2 m_GridSize = { 20, 20 };
-    //Bell::Ref<Bell::Texture2D> m_TextureSlotTest[32];
+    glm::vec2 m_GridSize = { 1, 1 };
+    Bell::Ref<Bell::Texture2D> m_TextureSlotTest[32];
 };
 
 #endif // !_SANDBOX2D_H

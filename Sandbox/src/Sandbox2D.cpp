@@ -49,6 +49,10 @@ void Sandbox2D::OnUpdate(Bell::Timestep deltaTime)
         B_PROFILE_SCOPE("CameraController::OnUpdate");
         m_CameraController.OnUpdate(deltaTime);
     }
+    {
+        B_PROFILE_SCOPE("ParticleSystem::OnUpdate");
+        m_ParticleSystem.OnUpdate(deltaTime);
+    }
 
     // Render
     Bell::Renderer2D::ResetStats();

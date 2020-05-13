@@ -113,6 +113,7 @@ namespace Bell
         uint32_t offset = 0;
         for (uint32_t i = 0; i < s_Data.MaxIndicesPerDrawCall; i += 6)
         {
+            B_PROFILE_SCOPE("Setting Quad Indices");
             quadIndices[i + 0] = offset + 0;
             quadIndices[i + 1] = offset + 1;
             quadIndices[i + 2] = offset + 2;
@@ -138,6 +139,7 @@ namespace Bell
         int32_t samplers[s_Data.MaxTextureSlots];
         for (uint32_t i = 0; i < s_Data.MaxTextureSlots; i++)
         {
+            B_PROFILE_SCOPE("Setting samplers ids");
             samplers[i] = i;
         }
 
@@ -203,6 +205,7 @@ namespace Bell
 
     void Bell::Renderer2D::ResetBatchValues()
     {
+        B_PROFILE_FUNCTION();
         // Reset batch counts
         s_Data.QuadIndexCount = 0;
         s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
@@ -218,6 +221,7 @@ namespace Bell
         // Bind the textures we loaded for the batch
         for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
         {
+            B_PROFILE_SCOPE("Binding Textures");
             s_Data.TextureSlots[i]->Bind(i);
         }
 
@@ -253,6 +257,7 @@ namespace Bell
         // Through all empty slots
         for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
         {
+            B_PROFILE_SCOPE("Texture Lookup");
             if (texture == nullptr)
             {
                 textureIndex = 1.0f;
@@ -299,7 +304,7 @@ namespace Bell
 
         for (int i = 0; i < quadVertexCount; i++)
         {
-
+            B_PROFILE_SCOPE("Quad Vertex Setting");
             s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[i];
             s_Data.QuadVertexBufferPtr->Color = color;
             s_Data.QuadVertexBufferPtr->TexCoord = textureCoords[i];
@@ -316,11 +321,13 @@ namespace Bell
 
     void Renderer2D::StatsBeginFrame()
     {
+        B_PROFILE_FUNCTION();
         s_Data.Stats.CurrentFrameBeginTime = (float)glfwGetTime();
     }
 
     void Renderer2D::StatsEndFrame()
     {
+        B_PROFILE_FUNCTION();
         GLint total_mem_kb = 0;
         glGetIntegerv(GL_GPU_MEM_INFO_TOTAL_AVAILABLE_MEM_NVX, &total_mem_kb);
 
@@ -340,6 +347,7 @@ namespace Bell
 
     Renderer2D::Statistics const Bell::Renderer2D::GetStats()
     {
+        B_PROFILE_FUNCTION();
         return s_Data.Stats;
     }
 

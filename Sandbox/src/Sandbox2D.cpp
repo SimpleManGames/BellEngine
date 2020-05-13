@@ -144,5 +144,9 @@ void Sandbox2D::OnImGuiRender()
 void Sandbox2D::OnEvent(Bell::Event& event)
 {
     B_PROFILE_FUNCTION();
+
+    if (event.Handled)
+        return;
+
     m_CameraController.OnEvent(event);
 }

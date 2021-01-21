@@ -1,0 +1,3 @@
+[submodule "BellEngine/libs/spdlog"]
+	path = BellEngine/libs/spdlog
+	url = https://github.com/gabime/spdlog.git

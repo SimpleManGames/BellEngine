@@ -1,3 +1,16 @@
 [submodule "BellEngine/libs/spdlog"]
 	path = BellEngine/libs/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "BellEngine/libs/glm"]
+	path = BellEngine/libs/glm
+	url = https://github.com/g-truc/glm
+[submodule "BellEngine/libs/glfw"]
+	path = BellEngine/libs/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "BellEngine/libs/imgui"]
+	path = BellEngine/libs/imgui
+	url = https://github.com/ocornut/imgui
+	branch = docking
+[submodule "BellEngine/libs/glad"]
+	path = BellEngine/libs/glad
+	url = https://github.com/Dav1dde/glad.git

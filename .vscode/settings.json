@@ -1,0 +1,7 @@
+{
+    "cmake.sourceDirectory": "${workspaceFolder}/Sandbox",
+    "files.associations": {
+        "mutex": "cpp",
+        "variant": "cpp"
+    }
+}

@@ -6,8 +6,6 @@ set(ASSET_FOLDER_NAME assets)
 
 project(${SANDBOX_PROJECT} VERSION 1.0 DESCRIPTION "Sandbox Environment for Developing Bell" LANGUAGES CXX)
 
-# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../BellEngine ${CMAKE_CURRENT_BINARY_DIR}/BellEngine)
-
 set(SANDBOX_SOURCE
     "${CMAKE_CURRENT_SOURCE_DIR}/src/SandboxApp.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/Sandbox2D.cpp"
@@ -30,7 +28,6 @@ set_target_properties(${SANDBOX_PROJECT} PROPERTIES CXX_STANDARD 17)
 target_include_directories(${SANDBOX_PROJECT} PUBLIC include)
 
 target_link_libraries(${SANDBOX_PROJECT} PRIVATE Bell)
-
 
 # Move the assets folder next to the EXE
 add_custom_command(

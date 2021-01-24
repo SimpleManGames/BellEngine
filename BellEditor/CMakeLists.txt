@@ -4,8 +4,6 @@ set(EDITOR_PROJECT_NAME BellEditor)
 
 project(${EDITOR_PROJECT_NAME} VERSION 1.0 DESCRIPTION "Editting Environment for creating applications with Bell" LANGUAGES CXX)
 
-# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../BellEngine ${CMAKE_CURRENT_BINARY_DIR}/BellEngine)
-
 set(EDITOR_SOURCE
     "${CMAKE_CURRENT_SOURCE_DIR}/src/BellEditorApp.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/EditorLayer.cpp"

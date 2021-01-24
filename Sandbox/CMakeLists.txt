@@ -1,6 +1,10 @@
 # cmake_minimum_required(VERSION 3.19.3)
 
-project(Sandbox VERSION 1.0 DESCRIPTION "Sandbox Environment for Developing Bell" LANGUAGES CXX)
+set(SANDBOX_PROJECT Sandbox)
+# Folder name of the location we store the app assets
+set(ASSET_FOLDER_NAME assets)
+
+project(${SANDBOX_PROJECT} VERSION 1.0 DESCRIPTION "Sandbox Environment for Developing Bell" LANGUAGES CXX)
 
 # add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../BellEngine ${CMAKE_CURRENT_BINARY_DIR}/BellEngine)
 
@@ -19,11 +23,19 @@ set(IMGUI_SOURCE
 
 include_directories(include)
 
-add_executable(Sandbox ${SANDBOX_SOURCE} ${IMGUI_SOURCE})
+add_executable(${SANDBOX_PROJECT} ${SANDBOX_SOURCE} ${IMGUI_SOURCE})
 
-set_target_properties(Sandbox PROPERTIES CXX_STANDARD 17)
+set_target_properties(${SANDBOX_PROJECT} PROPERTIES CXX_STANDARD 17)
 
-target_include_directories(Sandbox 
-    PUBLIC include)
+target_include_directories(${SANDBOX_PROJECT} PUBLIC include)
 
-target_link_libraries(Sandbox PRIVATE Bell)
+target_link_libraries(${SANDBOX_PROJECT} PRIVATE Bell)
+
+
+# Move the assets folder next to the EXE
+add_custom_command(
+    TARGET ${SANDBOX_PROJECT} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_CURRENT_SOURCE_DIR}/${ASSET_FOLDER_NAME}
+    $<TARGET_FILE_DIR:${SANDBOX_PROJECT}>/${ASSET_FOLDER_NAME}
+)

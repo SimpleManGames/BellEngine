@@ -1,7 +1,9 @@
 {
+    "cmake.buildDirectory": "${workspaceFolder}/build/${workspaceRootFolderName}/${buildType}",
     "cmake.sourceDirectory": "${workspaceFolder}",
     "files.associations": {
         "mutex": "cpp",
         "variant": "cpp"
-    }
+    },
+    "C_Cpp.intelliSenseEngineFallback": "Enabled"
 }

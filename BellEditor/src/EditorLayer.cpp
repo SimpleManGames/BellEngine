@@ -17,8 +17,8 @@ namespace Bell
         m_Texture = Bell::Texture2D::Create("assets/textures/bigmisssteak.png");
         m_SpriteSheet = Bell::Texture2D::Create("assets/textures/sheet.png");
 
-        m_SubTexture = Bell::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 8, 3 }, { 16, 16 });
-        m_TreeSubTexture = Bell::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 2, 0 }, { 16, 16 }, { 5, 8 });
+        m_SubTexture = Bell::SubTexture2D::CreateFromCoords(m_SpriteSheet, {8, 3}, {16, 16});
+        m_TreeSubTexture = Bell::SubTexture2D::CreateFromCoords(m_SpriteSheet, {2, 0}, {16, 16}, {5, 8});
 
         for (int i = 0; i < 31; i++)
         {
@@ -32,17 +32,9 @@ namespace Bell
         Bell::Input::Remap("camera_move_up", Bell::KeyAlternative(Bell::Keys::W));
         Bell::Input::Remap("camera_move_down", Bell::KeyAlternative(Bell::Keys::S));
 
-        //m_Particles.ColorBegin = { 254 / 255.0f, 212 / 255.0f, 123 / 255.0f, 1.0f };
-        //m_Particles.ColorEnd = { 254 / 255.0f, 109 / 255.0f, 123 / 255.0f, 1.0f };
-        //m_Particles.SizeBegin = 0.5f, m_Particles.SizeVariation = 0.3f, m_Particles.SizeEnd = 0.0f;
-        //m_Particles.LifeTime = 1.0f;
-        //m_Particles.Velocity = { 0.0f, 0.0f, 0.0f };
-        //m_Particles.VelocityVariation = { 3.0f, 3.0f, 0.0f };
-        //m_Particles.Postion = { 0.0f, 0.0f, 0.0f };
-
         Bell::FrameBufferSpecification fbSpec;
-        fbSpec.Width = 1080;//Bell::Application::Get().GetWindow().GetWidth();
-        fbSpec.Height = 720;//Bell::Application::Get().GetWindow().GetHeight();
+        fbSpec.Width = 1080; //Bell::Application::Get().GetWindow().GetWidth();
+        fbSpec.Height = 720; //Bell::Application::Get().GetWindow().GetHeight();
         m_FrameBuffer = Bell::FrameBuffer::Create(fbSpec);
 
         m_CameraController.SetZoomLevel(5.0f);
@@ -75,7 +67,7 @@ namespace Bell
             B_PROFILE_SCOPE("Renderer Prep");
             m_FrameBuffer->Bind();
 
-            Bell::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+            Bell::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
             Bell::RenderCommand::Clear();
         }
 
@@ -91,8 +83,8 @@ namespace Bell
                 {
                     for (int y = 0; y < m_GridSize.y; y++)
                     {
-                        glm::vec4 color = { x / m_GridSize.x, 0.4f, y / m_GridSize.y, 0.8f };
-                        Bell::Renderer2D::DrawQuad({ x, y, 1 }, { 1.0, 1.0 }, 0, m_TextureSlotTest[(x + y) % 31]);
+                        glm::vec4 color = {x / m_GridSize.x, 0.4f, y / m_GridSize.y, 0.8f};
+                        Bell::Renderer2D::DrawQuad({x, y, 1}, {1.0, 1.0}, 0, m_TextureSlotTest[(x + y) % 31]);
                     }
                 }
             }
@@ -124,8 +116,8 @@ namespace Bell
         }
 
         Bell::Renderer2D::BeginScene(m_CameraController.GetCamera());
-        Bell::Renderer2D::DrawQuad({ 2, 0, 0 }, { 1, 1 }, 0, m_SubTexture);
-        Bell::Renderer2D::DrawQuad({ 0, 0, 0 }, { 5, 9 }, 0, m_TreeSubTexture);
+        Bell::Renderer2D::DrawQuad({2, 0, 0}, {1, 1}, 0, m_SubTexture);
+        Bell::Renderer2D::DrawQuad({0, 0, 0}, {5, 9}, 0, m_TreeSubTexture);
         Bell::Renderer2D::EndScene();
         m_FrameBuffer->Unbind();
     }
@@ -164,10 +156,18 @@ namespace Bell
 
         ImGui::End();
 
-        //m_ParticleSystem.OnImGuiRender();
+        ImGui::Begin("Viewport");
+
+        ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
+
+        uint32_t textureID = m_FrameBuffer->GetColorAttachmentRendererID();
+        ImGui::Image((void*)textureID, ImVec2{1280, 720} , ImVec2{0,1}, ImVec2{1,0});
+
+        ImGui::End(); // Viewport
+
     }
 
-    void EditorLayer::OnEvent(Bell::Event& event)
+    void EditorLayer::OnEvent(Bell::Event &event)
     {
         B_PROFILE_FUNCTION();
 
@@ -176,4 +176,4 @@ namespace Bell
 
         m_CameraController.OnEvent(event);
     }
-}
+} // namespace Bell

@@ -23,6 +23,9 @@ namespace Bell
 
         virtual void Bind() = 0;
         virtual void Unbind() = 0;
+
+        /// Resizes this FrameBuffer to a new size with width and height
+        virtual void Resize(uint32_t width, uint32_t height) = 0;
     };
 }
 

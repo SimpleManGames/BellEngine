@@ -5,7 +5,7 @@
 
 namespace Bell
 {
-    OpenGLFrameBuffer::OpenGLFrameBuffer(const FrameBufferSpecification& spec)
+    OpenGLFrameBuffer::OpenGLFrameBuffer(const FrameBufferSpecification &spec)
         : m_Spec(spec)
     {
         Invalidate();
@@ -20,6 +20,8 @@ namespace Bell
 
     void OpenGLFrameBuffer::Invalidate()
     {
+        // Check to see wether we have created this frame buffer before
+        // If so, then we are rebuilding it and need to get rid of the old information
         if (m_RendererID)
         {
             glDeleteFramebuffers(1, &m_RendererID);
@@ -53,9 +55,18 @@ namespace Bell
         glBindFramebuffer(GL_FRAMEBUFFER, m_RendererID);
         glViewport(0, 0, m_Spec.Width, m_Spec.Height);
     }
-    
+
     void OpenGLFrameBuffer::Unbind()
     {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
-}
+
+    void OpenGLFrameBuffer::Resize(uint32_t width, uint32_t height)
+    {   
+        // Store the new width and height
+        m_Spec.Width = width;
+        m_Spec.Height = height;
+        // Rebuild the frame buffer
+        Invalidate();
+    }
+} // namespace Bell

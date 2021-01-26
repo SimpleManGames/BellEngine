@@ -48,6 +48,7 @@ namespace Bell
         }
 
         OrthographicCameraBounds& GetBounds() { return m_Bounds; }
+        void OnResize(float width, float height);
 
     private:
         void CalculateView();

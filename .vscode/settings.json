@@ -3,7 +3,8 @@
     "cmake.sourceDirectory": "${workspaceFolder}",
     "files.associations": {
         "mutex": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "xstring": "cpp"
     },
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
     "workbench.iconTheme": "vs-minimal"

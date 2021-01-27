@@ -44,6 +44,8 @@ namespace Bell {
     // in order for your event to be seen by the Event Dispatche
     class Event {
     public:
+        virtual ~Event() = default;
+
         // If this event has been handled and no longer should be used in other event
         bool Handled = false;
 

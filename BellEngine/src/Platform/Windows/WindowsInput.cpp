@@ -68,4 +68,14 @@ namespace Bell
         return false;
     }
 
+    bool Input::IsMouseButtonPressed(Mouse button)
+    {
+        return IsMouseButtonPressed((int)button);
+    }
+
+    void Input::Remap(const std::string &name, KeyAlternative input)
+    {
+        m_Mapping[name] = input;
+    }
+
 } // namespace Bell

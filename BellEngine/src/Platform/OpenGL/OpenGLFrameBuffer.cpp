@@ -5,6 +5,9 @@
 
 namespace Bell
 {
+    // TODO: Set this by looking at the GPUs max frame buffer size
+    static const uint32_t s_MaxFrameBufferSize = 8192;
+
     OpenGLFrameBuffer::OpenGLFrameBuffer(const FrameBufferSpecification &spec)
         : m_Spec(spec)
     {
@@ -61,12 +64,19 @@ namespace Bell
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
-    void OpenGLFrameBuffer::Resize(uint32_t width, uint32_t height)
-    {   
+    bool OpenGLFrameBuffer::Resize(uint32_t width, uint32_t height)
+    {
+        if (width == 0 || height == 0 || width > s_MaxFrameBufferSize || height > s_MaxFrameBufferSize)
+        {
+            B_CORE_WARN("Attempted to resize a FrameBuffer to X:{0}/Y:{1}!", width, height);
+            return false;
+        }
+
         // Store the new width and height
         m_Spec.Width = width;
         m_Spec.Height = height;
         // Rebuild the frame buffer
         Invalidate();
+        return true;
     }
 } // namespace Bell

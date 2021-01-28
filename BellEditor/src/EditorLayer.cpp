@@ -198,17 +198,23 @@ namespace Bell
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{0, 0});
         ImGui::Begin("Viewport");
 
+        // Check to see if this ImGui scope is focused/hovered
         m_ViewportFocused = ImGui::IsWindowFocused();
         m_ViewportHovered = ImGui::IsWindowHovered();
+        // Block events so that we aren't affect them on ImGui windows and in the scene view
         Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportFocused || !m_ViewportHovered);
 
+        // Getting the size of this ImGui scope to adjust our frame buffer that we render here
         ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
+        // Check to see if last frame's viewport was a different size
         if (m_ViewportSize != *((glm::vec2 *)&viewportPanelSize))
         {
-            m_FrameBuffer->Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
-            m_ViewportSize = {viewportPanelSize.x, viewportPanelSize.y};
-
-            m_CameraController.OnResize(viewportPanelSize.x, viewportPanelSize.y);
+            // Attempt to resize the buffer and set relevant variables
+            if (m_FrameBuffer->Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y))
+            {
+                m_ViewportSize = {viewportPanelSize.x, viewportPanelSize.y};
+                m_CameraController.OnResize(viewportPanelSize.x, viewportPanelSize.y);
+            }
         }
 
         uint32_t textureID = m_FrameBuffer->GetColorAttachmentRendererID();

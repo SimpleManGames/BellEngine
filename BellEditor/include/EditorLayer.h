@@ -39,6 +39,7 @@ namespace Bell
         Bell::Ref<Bell::FrameBuffer> m_FrameBuffer;
 
         glm::vec2 m_ViewportSize = {0, 0};
+        bool m_ViewportFocused = false , m_ViewportHovered = false;
 
         // Stress test
         glm::vec2 m_GridSize = {1, 1};

@@ -51,12 +51,11 @@ namespace Bell
 
         // Update
         {
-            B_PROFILE_SCOPE("CameraController::OnUpdate");
-            m_CameraController.OnUpdate(deltaTime);
-        }
-        {
-            B_PROFILE_SCOPE("ParticleSystem::OnUpdate");
-            //m_ParticleSystem.OnUpdate(deltaTime);
+            if (m_ViewportFocused)
+            {
+                B_PROFILE_SCOPE("CameraController::OnUpdate");
+                m_CameraController.OnUpdate(deltaTime);
+            }
         }
 
         // Render
@@ -90,29 +89,7 @@ namespace Bell
             }
 
             Bell::Renderer2D::EndScene();
-
-            {
-                //m_ParticleSystem.OnRender(m_CameraController.GetCamera());
-
-                //if (Bell::Input::IsMouseButtonPressed(B_MOUSE_BUTTON_LEFT))
-                //{
-                //    auto [x, y] = Bell::Input::GetMousePosition();
-                //    auto width = Bell::Application::Get().GetWindow().GetWidth();
-                //    auto height = Bell::Application::Get().GetWindow().GetHeight();
-
-                //    auto bounds = m_CameraController.GetBounds();
-                //    auto pos = m_CameraController.GetCamera().GetPosition();
-                //    x = (x / width) * bounds.GetWidth() - bounds.GetWidth() * 0.5f;
-                //    y = bounds.GetHeight() * 0.5f - (y / height) * bounds.GetHeight();
-                //    m_Particles.Postion = { x + pos.x, y + pos.y, 0.2f };
-                //    for (int i = 0; i < 5; i++)
-                //    {
-                //        m_ParticleSystem.Emit(m_Particles);
-                //    }
-                //}
-
-                Bell::Renderer2D::StatsEndFrame();
-            }
+            Bell::Renderer2D::StatsEndFrame();
         }
 
         Bell::Renderer2D::BeginScene(m_CameraController.GetCamera());
@@ -220,6 +197,10 @@ namespace Bell
 
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{0, 0});
         ImGui::Begin("Viewport");
+
+        m_ViewportFocused = ImGui::IsWindowFocused();
+        m_ViewportHovered = ImGui::IsWindowHovered();
+        Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportFocused || !m_ViewportHovered);
 
         ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
         if (m_ViewportSize != *((glm::vec2 *)&viewportPanelSize))

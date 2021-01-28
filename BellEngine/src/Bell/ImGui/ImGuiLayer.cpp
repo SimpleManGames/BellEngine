@@ -27,7 +27,8 @@ namespace Bell
         B_PROFILE_FUNCTION();
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
-        ImGuiIO& io = ImGui::GetIO(); (void)io;
+        ImGuiIO &io = ImGui::GetIO();
+        (void)io;
         io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
         //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
@@ -37,15 +38,15 @@ namespace Bell
 
         ImGui::StyleColorsDark();
 
-        ImGuiStyle& style = ImGui::GetStyle();
+        ImGuiStyle &style = ImGui::GetStyle();
         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
         {
             style.WindowRounding = 0.0f;
             style.Colors[ImGuiCol_WindowBg].w = 1.0f;
         }
 
-        Application& app = Application::Get();
-        GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
+        Application &app = Application::Get();
+        GLFWwindow *window = static_cast<GLFWwindow *>(app.GetWindow().GetNativeWindow());
 
         ImGui_ImplGlfw_InitForOpenGL(window, true);
         ImGui_ImplOpenGL3_Init("#version 410");
@@ -59,11 +60,14 @@ namespace Bell
         ImGui::DestroyContext();
     }
 
-    void ImGuiLayer::OnEvent(Event& e)
+    void ImGuiLayer::OnEvent(Event &e)
     {
-        ImGuiIO& io = ImGui::GetIO();
-        e.Handled |= e.IsInCategory(EventCategory::EventCategoryMouse) & io.WantCaptureMouse;
-        e.Handled |= e.IsInCategory(EventCategory::EventCategoryKeyboard) & io.WantCaptureKeyboard;
+        if (m_BlockEvents)
+        {
+            ImGuiIO &io = ImGui::GetIO();
+            e.Handled |= e.IsInCategory(EventCategory::EventCategoryMouse) & io.WantCaptureMouse;
+            e.Handled |= e.IsInCategory(EventCategory::EventCategoryKeyboard) & io.WantCaptureKeyboard;
+        }
     }
 
     void ImGuiLayer::Begin()
@@ -77,8 +81,8 @@ namespace Bell
     void ImGuiLayer::End()
     {
         B_PROFILE_FUNCTION();
-        ImGuiIO& io = ImGui::GetIO();
-        Application& app = Application::Get();
+        ImGuiIO &io = ImGui::GetIO();
+        Application &app = Application::Get();
         io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(), (float)app.GetWindow().GetHeight());
 
         ImGui::Render();
@@ -86,7 +90,7 @@ namespace Bell
 
         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
         {
-            GLFWwindow* backup_current_context = glfwGetCurrentContext();
+            GLFWwindow *backup_current_context = glfwGetCurrentContext();
             ImGui::UpdatePlatformWindows();
             ImGui::RenderPlatformWindowsDefault();
             glfwMakeContextCurrent(backup_current_context);
@@ -98,4 +102,4 @@ namespace Bell
         //static bool show = false;
         //ImGui::ShowDemoWindow(&show);
     }
-}
+} // namespace Bell

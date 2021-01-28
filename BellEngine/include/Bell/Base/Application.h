@@ -50,6 +50,8 @@ namespace Bell
 
         void Close();
 
+        ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; }
+
         inline ApplicationState GetApplicationState() { return m_ApplicationState; }
     private:
         bool OnWindowClose(WindowCloseEvent& e);

@@ -6,6 +6,8 @@
 
 #include <memory>
 
+// TODO: Move these definitions to the build system
+
 // Platform detection using predefined macros
 #ifdef _WIN32
     /* Windows x64/x86 */
@@ -52,6 +54,8 @@
 #define B_ENABLE_PROFILING 1
 #endif // B_DEBUG
 
+
+// TODO: Create a macro for no arguments other than the condition
 #ifdef B_ENABLE_ASSERTS
 #define B_ASSERT(x, ...) { if (!(x)) { B_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #define B_CORE_ASSERT(x, ...) { if (!(x)) { B_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }

@@ -14,3 +14,6 @@
 [submodule "BellEngine/libs/glad"]
 	path = BellEngine/libs/glad
 	url = https://github.com/Dav1dde/glad.git
+[submodule "BellEngine/libs/entt"]
+	path = BellEngine/libs/entt
+	url = https://github.com/skypjack/entt.git

@@ -2,6 +2,7 @@
 #define _SANDBOX2D_H
 
 #include <Bell.h>
+#include "entt.hpp"
 
 class Sandbox2D : public Bell::Layer
 {

@@ -70,22 +70,32 @@ endif()
 
 add_subdirectory(libs/glad)
 
+#   EnTT
+if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/libs/entt/CMakeLists.txt")
+    message(FATAL_ERROR "The EnTT submodules was not downloaded! GIT_SUBMODULE was turned off or failed. Please update submodules and try again.")
+endif()
+
+add_subdirectory(libs/entt)
+
 target_include_directories(Bell 
     PUBLIC include
     PUBLIC libs/spdlog/include
     PUBLIC libs/glm
     PUBLIC libs/glfw/include
     PUBLIC libs/imgui/examples
-    PUBLIC libs/imgui)
+    PUBLIC libs/imgui
+    PUBLIC libs/entt/single_include/entt)
 
 target_link_directories(Bell
     PUBLIC libs/spdlog/src
     PUBLIC libs/glfw/src
     PUBLIC libs/imgui/examples
-    PUBLIC libs/imgui)
+    PUBLIC libs/imgui
+    PUBLIC libs/entt/src)
 
 target_link_libraries(Bell 
     PUBLIC spdlog 
     PUBLIC glm 
     PUBLIC glfw
-    PUBLIC glad)
+    PUBLIC glad
+    PUBLIC EnTT)

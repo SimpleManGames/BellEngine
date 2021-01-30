@@ -14,30 +14,35 @@ namespace Bell
     void EditorLayer::OnAttach()
     {
         B_PROFILE_FUNCTION();
-        m_Texture = Bell::Texture2D::Create("assets/textures/bigmisssteak.png");
-        m_SpriteSheet = Bell::Texture2D::Create("assets/textures/sheet.png");
+        m_Texture = Texture2D::Create("assets/textures/bigmisssteak.png");
+        m_SpriteSheet = Texture2D::Create("assets/textures/sheet.png");
 
-        m_SubTexture = Bell::SubTexture2D::CreateFromCoords(m_SpriteSheet, {8, 3}, {16, 16});
-        m_TreeSubTexture = Bell::SubTexture2D::CreateFromCoords(m_SpriteSheet, {2, 0}, {16, 16}, {5, 8});
+        m_SubTexture = SubTexture2D::CreateFromCoords(m_SpriteSheet, {8, 3}, {16, 16});
+        m_TreeSubTexture = SubTexture2D::CreateFromCoords(m_SpriteSheet, {2, 0}, {16, 16}, {5, 8});
 
         for (int i = 0; i < 31; i++)
         {
-            m_TextureSlotTest[i] = Bell::Texture2D::Create(1, 1);
+            m_TextureSlotTest[i] = Texture2D::Create(1, 1);
             uint32_t randomHex = 0xffffffff * (i + 1);
             m_TextureSlotTest[i]->SetData(&randomHex, sizeof(uint32_t));
         }
 
-        Bell::Input::Remap("camera_move_left", Bell::KeyAlternative(Bell::Keys::A));
-        Bell::Input::Remap("camera_move_right", Bell::KeyAlternative(Bell::Keys::D));
-        Bell::Input::Remap("camera_move_up", Bell::KeyAlternative(Bell::Keys::W));
-        Bell::Input::Remap("camera_move_down", Bell::KeyAlternative(Bell::Keys::S));
+        Input::Remap("camera_move_left", KeyAlternative(Keys::A));
+        Input::Remap("camera_move_right", KeyAlternative(Keys::D));
+        Input::Remap("camera_move_up", KeyAlternative(Keys::W));
+        Input::Remap("camera_move_down", KeyAlternative(Keys::S));
 
-        Bell::FrameBufferSpecification fbSpec;
-        fbSpec.Width = 1080; //Bell::Application::Get().GetWindow().GetWidth();
-        fbSpec.Height = 720; //Bell::Application::Get().GetWindow().GetHeight();
-        m_FrameBuffer = Bell::FrameBuffer::Create(fbSpec);
+        FrameBufferSpecification fbSpec;
+        fbSpec.Width = 1080; //Application::Get().GetWindow().GetWidth();
+        fbSpec.Height = 720; //Application::Get().GetWindow().GetHeight();
+        m_FrameBuffer = FrameBuffer::Create(fbSpec);
 
         m_CameraController.SetZoomLevel(5.0f);
+
+        m_ActiveScene = CreateRef<Scene>();
+
+        m_Square = m_ActiveScene->CreateEntity("Square");
+        m_Square.AddComponent<SpriteRendererComponent>(glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
     }
 
     void EditorLayer::OnDetach()
@@ -45,7 +50,7 @@ namespace Bell
         B_PROFILE_FUNCTION();
     }
 
-    void EditorLayer::OnUpdate(Bell::Timestep deltaTime)
+    void EditorLayer::OnUpdate(Timestep deltaTime)
     {
         B_PROFILE_FUNCTION();
 
@@ -59,43 +64,27 @@ namespace Bell
         }
 
         // Render
-        Bell::Renderer2D::ResetStats();
-        Bell::Renderer2D::StatsBeginFrame();
+        Renderer2D::ResetStats();
+        Renderer2D::StatsBeginFrame();
 
         {
             B_PROFILE_SCOPE("Renderer Prep");
             m_FrameBuffer->Bind();
 
-            Bell::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
-            Bell::RenderCommand::Clear();
+            RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
+            RenderCommand::Clear();
         }
 
         {
             B_PROFILE_SCOPE("Renderer Draw");
-            Bell::Renderer2D::BeginScene(m_CameraController.GetCamera());
+            Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-            Bell::Renderer2D::DrawQuad(m_SquarePosition, m_SquareScale, glm::radians(m_Rotation), m_Texture, m_SquareColor, m_TilingFactor);
+            // Update Scene
+            m_ActiveScene->OnUpdate(deltaTime);
 
-            {
-                B_PROFILE_SCOPE("Grid Stress Test");
-                for (int x = 0; x < m_GridSize.x; x++)
-                {
-                    for (int y = 0; y < m_GridSize.y; y++)
-                    {
-                        glm::vec4 color = {x / m_GridSize.x, 0.4f, y / m_GridSize.y, 0.8f};
-                        Bell::Renderer2D::DrawQuad({x, y, 1}, {1.0, 1.0}, 0, m_TextureSlotTest[(x + y) % 31]);
-                    }
-                }
-            }
-
-            Bell::Renderer2D::EndScene();
-            Bell::Renderer2D::StatsEndFrame();
+            Renderer2D::EndScene();
+            Renderer2D::StatsEndFrame();
         }
-
-        Bell::Renderer2D::BeginScene(m_CameraController.GetCamera());
-        Bell::Renderer2D::DrawQuad({2, 0, 0}, {1, 1}, 0, m_SubTexture);
-        Bell::Renderer2D::DrawQuad({0, 0, 0}, {5, 9}, 0, m_TreeSubTexture);
-        Bell::Renderer2D::EndScene();
         m_FrameBuffer->Unbind();
     }
 
@@ -157,7 +146,7 @@ namespace Bell
                 //ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
 
                 if (ImGui::MenuItem("Exit"))
-                    Bell::Application::Get().Close();
+                    Application::Get().Close();
                 ImGui::EndMenu();
             }
 
@@ -169,12 +158,20 @@ namespace Bell
         ImGui::DragFloat3("Square Position", glm::value_ptr(m_SquarePosition), 0.1f);
         ImGui::DragFloat2("Square Scale", glm::value_ptr(m_SquareScale), 0.1f, 0.1f, std::numeric_limits<float>::max());
         ImGui::SliderFloat("Rotation", &m_Rotation, 0.0f, 360.0f);
-        ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
+
+        if (m_Square)
+        {
+            ImGui::Separator();
+            ImGui::Text("%s", m_Square.GetComponent<TagComponent>().Tag.c_str());
+            auto &entitySquareColor = m_Square.GetComponent<SpriteRendererComponent>().Color;
+            ImGui::ColorEdit4("Square Color", glm::value_ptr(entitySquareColor));
+            ImGui::Separator();
+        }
         ImGui::SliderFloat("Tiling Factor", &m_TilingFactor, 0.0f, 10.0f);
 
         ImGui::DragFloat2("Grid Size", glm::value_ptr(m_GridSize), 1.0f);
 
-        auto stats = Bell::Renderer2D::GetStats();
+        auto stats = Renderer2D::GetStats();
         ImGui::Text("Renderer2D Stats:");
         ImGui::Text("Draw Calls: %d", stats.DrawCalls);
         ImGui::Text("Quad Count: %d", stats.QuadCount);
@@ -226,7 +223,7 @@ namespace Bell
         ImGui::End(); // DockSpace
     }
 
-    void EditorLayer::OnEvent(Bell::Event &event)
+    void EditorLayer::OnEvent(Event &event)
     {
         B_PROFILE_FUNCTION();
 

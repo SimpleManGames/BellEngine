@@ -84,7 +84,7 @@ target_include_directories(Bell
     PUBLIC libs/glfw/include
     PUBLIC libs/imgui/examples
     PUBLIC libs/imgui
-    PUBLIC libs/entt/single_include/entt)
+    PUBLIC libs/entt/single_include)
 
 target_link_directories(Bell
     PUBLIC libs/spdlog/src

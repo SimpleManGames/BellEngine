@@ -19,6 +19,13 @@
 
 #include "Bell/ImGui/ImGuiLayer.h"
 
+// ---- ESC Includes ----
+// ----------------------
+
+#include "Bell/Scene/Scene.h"
+#include "Bell/Scene/Entity.h"
+#include "Bell/Scene/Components.h"
+
 // ---- Renderer Includes ----
 // ---------------------------
 

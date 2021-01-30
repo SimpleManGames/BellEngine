@@ -20,7 +20,7 @@
 
 namespace Bell
 {
-    glm::vec2 Renderer2D::DefaultTexCoords[] = { { 0.0, 0.0}, { 1.0, 0.0 }, { 1.0, 1.0 }, { 0.0, 1.0 } };
+    glm::vec2 Renderer2D::DefaultTexCoords[] = {{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}, {0.0, 1.0}};
 
     // Describes the content of each Quad Vertex
     struct QuadVertex
@@ -69,10 +69,10 @@ namespace Bell
         // Keeps count of how many Indicies are in the current batch
         uint32_t QuadIndexCount = 0;
         // Stores the pointer to beginning of the Vertex Buffer
-        QuadVertex* QuadVertexBufferBase = nullptr;
+        QuadVertex *QuadVertexBufferBase = nullptr;
         // Stores the current location we are adding to in the
         //      Vertex Buffer
-        QuadVertex* QuadVertexBufferPtr = nullptr;
+        QuadVertex *QuadVertexBufferPtr = nullptr;
 
         // The current Textures loaded for the batch
         // TODO: Switch to Asset Handle when implemented
@@ -84,12 +84,11 @@ namespace Bell
 
         // Defines positions used for matrix math
         glm::vec4 QuadVertexPositions[4] =
-        {
-            { -0.5f, -0.5f , 0.0f, 1.0f },
-            { 0.5f, -0.5f , 0.0f, 1.0f },
-            { 0.5f,  0.5f , 0.0f, 1.0f },
-            { -0.5f,  0.5f , 0.0f, 1.0f }
-        };
+            {
+                {-0.5f, -0.5f, 0.0f, 1.0f},
+                {0.5f, -0.5f, 0.0f, 1.0f},
+                {0.5f, 0.5f, 0.0f, 1.0f},
+                {-0.5f, 0.5f, 0.0f, 1.0f}};
 
         Renderer2D::Statistics Stats;
     };
@@ -105,18 +104,16 @@ namespace Bell
         s_Data.QuadVertexArray = Bell::VertexArray::Create();
 
         s_Data.QuadVertexBuffer = VertexBuffer::Create(s_Data.MaxVerticesPerDrawCall * sizeof(QuadVertex));
-        s_Data.QuadVertexBuffer->SetLayout({
-            { ShaderDataType::Float3, "a_Position" },
-            { ShaderDataType::Float4, "a_Color" },
-            { ShaderDataType::Float2, "a_TexCoord" },
-            { ShaderDataType::Float, "a_TexIndex" },
-            { ShaderDataType::Float, "a_TilingFactor" }
-            });
+        s_Data.QuadVertexBuffer->SetLayout({{ShaderDataType::Float3, "a_Position"},
+                                            {ShaderDataType::Float4, "a_Color"},
+                                            {ShaderDataType::Float2, "a_TexCoord"},
+                                            {ShaderDataType::Float, "a_TexIndex"},
+                                            {ShaderDataType::Float, "a_TilingFactor"}});
         s_Data.QuadVertexArray->AddVertexBuffer(s_Data.QuadVertexBuffer);
 
         s_Data.QuadVertexBufferBase = new QuadVertex[s_Data.MaxVerticesPerDrawCall];
 
-        uint32_t* quadIndices = new uint32_t[s_Data.MaxIndicesPerDrawCall];
+        uint32_t *quadIndices = new uint32_t[s_Data.MaxIndicesPerDrawCall];
 
         uint32_t offset = 0;
         for (uint32_t i = 0; i < s_Data.MaxIndicesPerDrawCall; i += 6)
@@ -162,10 +159,10 @@ namespace Bell
         s_Data.TextureSlots[0] = s_Data.WhiteTexture;
 
         // Set the vertex positions to the middle of the object
-        s_Data.QuadVertexPositions[0] = { -0.5f, -0.5f , 0.0f, 1.0f };
-        s_Data.QuadVertexPositions[1] = { 0.5f, -0.5f , 0.0f, 1.0f };
-        s_Data.QuadVertexPositions[2] = { 0.5f,  0.5f , 0.0f, 1.0f };
-        s_Data.QuadVertexPositions[3] = { -0.5f,  0.5f , 0.0f, 1.0f };
+        s_Data.QuadVertexPositions[0] = {-0.5f, -0.5f, 0.0f, 1.0f};
+        s_Data.QuadVertexPositions[1] = {0.5f, -0.5f, 0.0f, 1.0f};
+        s_Data.QuadVertexPositions[2] = {0.5f, 0.5f, 0.0f, 1.0f};
+        s_Data.QuadVertexPositions[3] = {-0.5f, 0.5f, 0.0f, 1.0f};
 
         GLint total_mem_kb = 0;
         glGetIntegerv(GL_GPU_MEM_INFO_TOTAL_AVAILABLE_MEM_NVX, &total_mem_kb);
@@ -185,7 +182,7 @@ namespace Bell
         delete[] s_Data.QuadVertexBufferBase;
     }
 
-    void Renderer2D::BeginScene(const OrthographicCamera& camera)
+    void Renderer2D::BeginScene(const OrthographicCamera &camera)
     {
         B_PROFILE_FUNCTION();
         s_Data.DefaultShader->Bind();
@@ -198,7 +195,7 @@ namespace Bell
     {
         B_PROFILE_FUNCTION();
 
-        uint32_t dataSize = (uint8_t*)s_Data.QuadVertexBufferPtr - (uint8_t*)s_Data.QuadVertexBufferBase;
+        uint32_t dataSize = (uint8_t *)s_Data.QuadVertexBufferPtr - (uint8_t *)s_Data.QuadVertexBufferBase;
         s_Data.QuadVertexBuffer->SetData(s_Data.QuadVertexBufferBase, dataSize);
 
         // Draw to the screen
@@ -246,17 +243,28 @@ namespace Bell
         s_Data.Stats.DrawCalls++;
     }
 
-    void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotationInRadian, const glm::vec4& color)
+    void Renderer2D::DrawQuad(const glm::vec3 &position, const glm::vec2 &size, float rotationInRadian, const glm::vec4 &color)
     {
         DrawQuad(position, size, rotationInRadian, s_Data.WhiteTexture, color, 1.0f);
     }
 
-    void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotationInRadian, const Ref<SubTexture2D>& subTexture, const glm::vec4& colorTint, float textureScale)
+    void Renderer2D::DrawQuad(const glm::vec3 &position, const glm::vec2 &size, float rotationInRadian, const Ref<SubTexture2D> &subTexture, const glm::vec4 &colorTint, float textureScale)
     {
         DrawQuad(position, size, rotationInRadian, subTexture->GetTexture(), colorTint, textureScale, subTexture->GetTexCoords());
     }
 
-    void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotationInRadian, const Ref<Texture2D>& texture, const glm::vec4& color, float tilingFactor, const glm::vec2* texCoords)
+    void Renderer2D::DrawQuad(const glm::vec3 &position, const glm::vec2 &size, float rotationInRadian, const Ref<Texture2D> &texture, const glm::vec4 &color, float tilingFactor, const glm::vec2 *texCoords)
+    {
+        glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::rotate(glm::mat4(1.0f), rotationInRadian, {0.0f, 0.0f, 1.0f}) * glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f});
+        DrawQuad(transform, texture, color, tilingFactor, texCoords);
+    }
+
+    void Renderer2D::DrawQuad(const glm::mat4 &transform, const glm::vec4 &color)
+    {
+        DrawQuad(transform, s_Data.WhiteTexture, color, 1.0f, Renderer2D::DefaultTexCoords);
+    }
+
+    void Renderer2D::DrawQuad(const glm::mat4 &transform, const Ref<Texture2D> &texture, const glm::vec4 &color, float tilingFactor, const glm::vec2 *texCoords)
     {
         B_PROFILE_FUNCTION();
 
@@ -317,11 +325,6 @@ namespace Bell
             s_Data.Stats.UsedTextureSlots = s_Data.TextureSlotIndex - 1;
         }
 
-        // Transform matrix set up with the values we were passed
-        glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-            * glm::rotate(glm::mat4(1.0f), rotationInRadian, { 0.0f, 0.0f, 1.0f })
-            * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
-
         for (int i = 0; i < quadVertexCount; i++)
         {
             B_PROFILE_SCOPE("Quad Vertex Setting");
@@ -360,7 +363,8 @@ namespace Bell
 
         s_Data.Stats.FrameRenderTime[s_Data.Stats.FrameCount] = (float)glfwGetTime() - s_Data.Stats.CurrentFrameBeginTime;
         s_Data.Stats.TotalFrameRenderTime += (s_Data.Stats.FrameRenderTime[s_Data.Stats.FrameCount] - s_Data.Stats.FrameRenderTime[(s_Data.Stats.FrameCount + (uint32_t)1) % s_Data.Stats.FrameRenderTime.size()]);
-        if (++s_Data.Stats.FrameCount == s_Data.Stats.FrameRenderTime.size()) {
+        if (++s_Data.Stats.FrameCount == s_Data.Stats.FrameRenderTime.size())
+        {
             s_Data.Stats.FrameCount = 0;
         }
     }
@@ -382,4 +386,4 @@ namespace Bell
         s_Data.Stats.FrameCount = frameCount;
         s_Data.Stats.TotalFrameRenderTime = totalFrameRenderTime;
     }
-}
+} // namespace Bell

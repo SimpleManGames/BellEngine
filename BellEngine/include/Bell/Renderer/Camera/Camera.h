@@ -8,7 +8,7 @@ namespace Bell
     class Camera
     {
     public:
-        Camera(glm::mat4 &projectionMatrix);
+        Camera(const glm::mat4 &projectionMatrix);
 
         const glm::mat4 GetProjectionMatrix() const { return m_ProjectionMatrix; }
 

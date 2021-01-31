@@ -14,27 +14,13 @@ namespace Bell
     void EditorLayer::OnAttach()
     {
         B_PROFILE_FUNCTION();
-        m_Texture = Texture2D::Create("assets/textures/bigmisssteak.png");
-        m_SpriteSheet = Texture2D::Create("assets/textures/sheet.png");
-
-        m_SubTexture = SubTexture2D::CreateFromCoords(m_SpriteSheet, {8, 3}, {16, 16});
-        m_TreeSubTexture = SubTexture2D::CreateFromCoords(m_SpriteSheet, {2, 0}, {16, 16}, {5, 8});
-
-        for (int i = 0; i < 31; i++)
-        {
-            m_TextureSlotTest[i] = Texture2D::Create(1, 1);
-            uint32_t randomHex = 0xffffffff * (i + 1);
-            m_TextureSlotTest[i]->SetData(&randomHex, sizeof(uint32_t));
-        }
 
         Input::Remap("camera_move_left", KeyAlternative(Keys::A));
         Input::Remap("camera_move_right", KeyAlternative(Keys::D));
         Input::Remap("camera_move_up", KeyAlternative(Keys::W));
         Input::Remap("camera_move_down", KeyAlternative(Keys::S));
 
-        FrameBufferSpecification fbSpec;
-        fbSpec.Width = 1080; //Application::Get().GetWindow().GetWidth();
-        fbSpec.Height = 720; //Application::Get().GetWindow().GetHeight();
+        FrameBufferSpecification fbSpec{1080, 720};
         m_FrameBuffer = FrameBuffer::Create(fbSpec);
 
         m_CameraController.SetZoomLevel(5.0f);
@@ -153,11 +139,7 @@ namespace Bell
             ImGui::EndMenuBar();
         }
 
-        ImGui::Begin("Sandbox 2D Settings");
-
-        ImGui::DragFloat3("Square Position", glm::value_ptr(m_SquarePosition), 0.1f);
-        ImGui::DragFloat2("Square Scale", glm::value_ptr(m_SquareScale), 0.1f, 0.1f, std::numeric_limits<float>::max());
-        ImGui::SliderFloat("Rotation", &m_Rotation, 0.0f, 360.0f);
+        ImGui::Begin("Entity Info");
 
         if (m_Square)
         {
@@ -167,9 +149,10 @@ namespace Bell
             ImGui::ColorEdit4("Square Color", glm::value_ptr(entitySquareColor));
             ImGui::Separator();
         }
-        ImGui::SliderFloat("Tiling Factor", &m_TilingFactor, 0.0f, 10.0f);
 
-        ImGui::DragFloat2("Grid Size", glm::value_ptr(m_GridSize), 1.0f);
+        ImGui::End(); // Entity Info
+
+        ImGui::Begin("Renderer Info");
 
         auto stats = Renderer2D::GetStats();
         ImGui::Text("Renderer2D Stats:");
@@ -190,7 +173,7 @@ namespace Bell
         float averageFPS = 1.0f / averageRenderTime;
         ImGui::Text("Average frame render time: %8.5f (%5.0f fps)", averageRenderTime, averageFPS);
 
-        ImGui::End(); // Sandbox 2D Settings
+        ImGui::End(); // Renderer Info
 
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{0, 0});
         ImGui::Begin("Viewport");

@@ -16,7 +16,21 @@ namespace Bell
         Scene();
         ~Scene();
 
+        /**
+         * @brief Handles all scene related code such as submitting to the render,
+         * updating entities and their interactions
+         * 
+         * @param ts Delta Time
+         */
         void OnUpdate(Timestep ts);
+
+        /**
+         * @brief Processes if the viewport has changed and will update entities accordingly
+         * 
+         * @param width New Viewport width
+         * @param height New Viewport height
+         */
+        void OnViewportResize(uint32_t width, uint32_t height);
 
         /**
          * @brief Create a Entity object
@@ -35,6 +49,8 @@ namespace Bell
         // Registry that stores and manages Entities in this scene
         // Heap alloc'd so clean we be handled automatically
         entt::registry m_Registry;
+
+        uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
 
         friend class Entity;
     };

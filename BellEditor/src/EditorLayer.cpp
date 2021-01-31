@@ -31,7 +31,7 @@ namespace Bell
         m_Square.AddComponent<SpriteRendererComponent>(glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
 
         m_CameraEntity = m_ActiveScene->CreateEntity("Camera Entity");
-        m_CameraEntity.AddComponent<CameraComponent>(glm::ortho(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
+        m_CameraEntity.AddComponent<CameraComponent>();
     }
 
     void EditorLayer::OnDetach()
@@ -42,6 +42,16 @@ namespace Bell
     void EditorLayer::OnUpdate(Timestep deltaTime)
     {
         B_PROFILE_FUNCTION();
+
+        if (FrameBufferSpecification spec = m_FrameBuffer->GetSpecification();
+            m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f && // zero sized framebuffer is invalid
+            (spec.Width != m_ViewportSize.x || spec.Height != m_ViewportSize.y))
+        {
+            m_FrameBuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+            m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
+
+            m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+        }
 
         // Update
         {
@@ -187,16 +197,7 @@ namespace Bell
 
         // Getting the size of this ImGui scope to adjust our frame buffer that we render here
         ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
-        // Check to see if last frame's viewport was a different size
-        if (m_ViewportSize != *((glm::vec2 *)&viewportPanelSize))
-        {
-            // Attempt to resize the buffer and set relevant variables
-            if (m_FrameBuffer->Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y))
-            {
-                m_ViewportSize = {viewportPanelSize.x, viewportPanelSize.y};
-                m_CameraController.OnResize(viewportPanelSize.x, viewportPanelSize.y);
-            }
-        }
+        m_ViewportSize = {viewportPanelSize.x, viewportPanelSize.y};
 
         uint32_t textureID = m_FrameBuffer->GetColorAttachmentRendererID();
         ImGui::Image((void *)((size_t)textureID), ImVec2{m_ViewportSize.x, m_ViewportSize.y}, ImVec2{0, 1}, ImVec2{1, 0});

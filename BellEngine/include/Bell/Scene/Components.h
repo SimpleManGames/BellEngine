@@ -3,7 +3,7 @@
 
 #include <glm/glm.hpp>
 
-#include "Bell/Renderer/Camera/Camera.h"
+#include "Bell/Scene/SceneCamera.h"
 
 namespace Bell
 {
@@ -65,13 +65,22 @@ namespace Bell
      */
     struct CameraComponent
     {
-        Bell::Camera Camera;
+        SceneCamera Camera;
+        /**
+         * @brief Used to determine if the Scene should use this camera as Main Camera
+         * 
+         */
         bool Primary = true;
+        /**
+         * @brief Sets wether or not this Camera's aspect ratio will adjust with the viewport changes.
+         * 
+         * @param true Will update when the current viewport is resized.
+         * @param false Will ignore viewport resizes and stay at the set ratio.
+         * 
+         */
+        bool FixedAspectRatio = false;
 
         CameraComponent() = default;
-        CameraComponent(glm::mat4 &projection)
-            : Camera(projection) {}
-
         ~CameraComponent() = default;
         CameraComponent(const CameraComponent &) = default;
     };

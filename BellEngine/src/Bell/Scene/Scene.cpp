@@ -54,6 +54,23 @@ namespace Bell
         Renderer2D::EndScene();
     }
 
+    void Scene::OnViewportResize(uint32_t width, uint32_t height)
+    {
+        m_ViewportWidth = width;
+        m_ViewportHeight = height;
+
+        // Resize the non-fixed aspect ratio cameras within the scene
+        auto view = m_Registry.view<CameraComponent>();
+        for (auto entity : view)
+        {
+            if (auto &camera = view.get<CameraComponent>(entity);
+                !camera.FixedAspectRatio)
+            {
+                camera.Camera.SetViewportSize(width, height);
+            }
+        }
+    }
+
     Entity Scene::CreateEntity(const std::string &tag, const glm::mat4 &transform)
     {
         Entity entity = {m_Registry.create(), this};

@@ -1,5 +1,5 @@
-// Logger Wrap
-// -----------
+// Logger Wrapper
+// --------------
 
 #ifndef _LOG_H
 #define _LOG_H
@@ -13,14 +13,35 @@ namespace Bell
     class Log
     {
     public:
-        // Sets up console logger
+        /**
+         * @brief Sets up console logger
+         * 
+         */
         static void Init();
 
+        /**
+         * @brief Gets the Core Logger which is used for internal messages
+         * 
+         * @return Ref<spdlog::logger>& 
+         */
         inline static Ref<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
+        /**
+         * @brief Get the Client Logger which is used for external messages
+         * 
+         * @return Ref<spdlog::logger>& 
+         */
         inline static Ref<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 
     private:
+        /**
+         * @brief Core Logger which is used for internal messages
+         * 
+         */
         static Ref<spdlog::logger> s_CoreLogger;
+        /**
+         * @brief Client Logger which is used for external messages
+         * 
+         */
         static Ref<spdlog::logger> s_ClientLogger;
     };
 

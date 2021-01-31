@@ -191,6 +191,18 @@ namespace Bell
         ResetBatchValues();
     }
 
+    void Renderer2D::BeginScene(const Camera &camera, const glm::mat4 &transform)
+    {
+        B_PROFILE_FUNCTION();
+
+        glm::mat4 viewProj = camera.GetProjectionMatrix() * glm::inverse(transform);
+
+        s_Data.DefaultShader->Bind();
+        s_Data.DefaultShader->SetMat4("u_ViewProjection", viewProj);
+
+        ResetBatchValues();
+    }
+
     void Renderer2D::EndScene()
     {
         B_PROFILE_FUNCTION();

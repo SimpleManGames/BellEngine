@@ -29,6 +29,9 @@ namespace Bell
 
         m_Square = m_ActiveScene->CreateEntity("Square");
         m_Square.AddComponent<SpriteRendererComponent>(glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
+
+        m_CameraEntity = m_ActiveScene->CreateEntity("Camera Entity");
+        m_CameraEntity.AddComponent<CameraComponent>(glm::ortho(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
     }
 
     void EditorLayer::OnDetach()
@@ -63,12 +66,10 @@ namespace Bell
 
         {
             B_PROFILE_SCOPE("Renderer Draw");
-            Renderer2D::BeginScene(m_CameraController.GetCamera());
 
             // Update Scene
             m_ActiveScene->OnUpdate(deltaTime);
 
-            Renderer2D::EndScene();
             Renderer2D::StatsEndFrame();
         }
         m_FrameBuffer->Unbind();

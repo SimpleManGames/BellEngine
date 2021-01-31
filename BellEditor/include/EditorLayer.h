@@ -21,6 +21,9 @@ namespace Bell
     private:
         OrthographicCameraController m_CameraController;
         Ref<Scene> m_ActiveScene;
+        Entity m_CameraEntity;
+
+        // Test
         Entity m_Square;
 
         Ref<FrameBuffer> m_FrameBuffer;

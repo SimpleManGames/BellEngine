@@ -38,6 +38,7 @@ namespace Bell
         ~TransformComponent() = default;
         TransformComponent(const TransformComponent &) = default;
 
+        // Operator for easier usage and cleaner code
         operator glm::mat4 &() { return Transform; }
         operator const glm::mat4 &() const { return Transform; }
     };
@@ -65,6 +66,7 @@ namespace Bell
     struct CameraComponent
     {
         Bell::Camera Camera;
+        bool Primary = true;
 
         CameraComponent() = default;
         CameraComponent(glm::mat4 &projection)

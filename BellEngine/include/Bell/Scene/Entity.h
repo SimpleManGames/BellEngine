@@ -81,7 +81,7 @@ namespace Bell
         template <typename T>
         T &GetComponent()
         {
-            B_CORE_ASSERT(HasComponent<T>(), "Entity you are trying to get a component from does NOT have Component Type: {0}", typeof(T));
+            B_CORE_ASSERT(HasComponent<T>(), "Entity you are trying to get a component from does NOT have Component Type");
             return m_Scene->m_Registry.get<T>(m_EntityHandle);
         }
 

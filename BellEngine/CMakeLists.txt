@@ -5,10 +5,10 @@ file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS
     "include/*.h"
     "libs/stb_image/stb_image.h")
 
-#           DEFINITIONS
-add_definitions(-DB_DEBUG) # B_DEBUG
-
 add_library(Bell STATIC ${SOURCES} ${HEADERS})
+
+#           DEFINITIONS
+target_compile_definitions(Bell PUBLIC B_DEBUG=1) # B_DEBUG
 
 target_precompile_headers(Bell PUBLIC include/bpch.h)
 

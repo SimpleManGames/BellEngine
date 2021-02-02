@@ -15,20 +15,21 @@
 
 // Default class for entry point
 
-namespace Bell {
+namespace Bell
+{
     class BellEditorApp : public Application
     {
     public:
         BellEditorApp()
             : Application(WindowProps("Bell Editor"))
         {
-            PushLayer(new EditorLayer());
+            PushLayer(new Editor::EditorLayer());
         }
     };
 
     // Application side function for defining entry point
-    Bell::Application* Bell::CreateApplication()
+    Bell::Application *Bell::CreateApplication()
     {
         return new BellEditorApp();
     }
-}
+} // namespace Bell::Editor

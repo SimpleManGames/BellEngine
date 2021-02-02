@@ -103,6 +103,7 @@ namespace Bell
         // Temp solution until we handle our own ref counting
         Scene *m_Scene = nullptr;
     };
+
 } // namespace Bell
 
 #endif // ENTITY_H

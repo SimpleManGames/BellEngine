@@ -4,7 +4,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-namespace Bell
+#include "Scripts/EditorCamera.h"
+
+namespace Bell::Editor
 {
     EditorLayer::EditorLayer()
         : Layer("EditorLayer"), m_CameraController(1200.0f / 720.0f, false)
@@ -14,11 +16,6 @@ namespace Bell
     void EditorLayer::OnAttach()
     {
         B_PROFILE_FUNCTION();
-
-        Input::Remap("camera_move_left", KeyAlternative(Keys::A));
-        Input::Remap("camera_move_right", KeyAlternative(Keys::D));
-        Input::Remap("camera_move_up", KeyAlternative(Keys::W));
-        Input::Remap("camera_move_down", KeyAlternative(Keys::S));
 
         FrameBufferSpecification fbSpec{1080, 720};
         m_FrameBuffer = FrameBuffer::Create(fbSpec);
@@ -32,6 +29,7 @@ namespace Bell
 
         m_CameraEntity = m_ActiveScene->CreateEntity("Camera Entity");
         m_CameraEntity.AddComponent<CameraComponent>();
+        m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<EditorCamera>();
     }
 
     void EditorLayer::OnDetach()

@@ -24,6 +24,7 @@
 
 #include "Bell/Scene/Scene.h"
 #include "Bell/Scene/Entity.h"
+#include "Bell/Scene/ScriptableEntity.h"
 #include "Bell/Scene/Components.h"
 
 // ---- Renderer Includes ----

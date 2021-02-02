@@ -3,7 +3,7 @@
 
 #include <Bell.h>
 
-namespace Bell
+namespace Bell::Editor
 {
     class EditorLayer : public Layer
     {
@@ -31,5 +31,5 @@ namespace Bell
         glm::vec2 m_ViewportSize = {0, 0};
         bool m_ViewportFocused = false , m_ViewportHovered = false;
     };
-} // namespace Bell
+} // namespace Bell::Editor
 #endif // !_EDITORLAYER_H

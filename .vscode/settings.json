@@ -4,7 +4,11 @@
     "files.associations": {
         "mutex": "cpp",
         "variant": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "functional": "cpp",
+        "algorithm": "cpp",
+        "locale": "cpp",
+        "regex": "cpp"
     },
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
     "workbench.iconTheme": "vs-minimal"

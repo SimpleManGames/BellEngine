@@ -39,9 +39,9 @@ namespace Bell
         ~TransformComponent() = default;
         TransformComponent(const TransformComponent &) = default;
 
-        float& X() { return Transform[3][0]; }
-        float& Y() { return Transform[3][1]; }
-        float& Z() { return Transform[3][2]; }
+        float &X() { return Transform[3][0]; }
+        float &Y() { return Transform[3][1]; }
+        float &Z() { return Transform[3][2]; }
 
         // Operator for easier usage and cleaner code
         operator glm::mat4 &() { return Transform; }
@@ -99,33 +99,20 @@ namespace Bell
     {
         ScriptableEntity *Instance = nullptr;
 
+        using InstantiateScript = ScriptableEntity *(*)();
         /**
          * @brief Function Pointer for creating the component class
          * Component must have a Default Constructor
          */
-        std::function<void()> InstantiateFunction;
+        InstantiateScript InstantiateScriptFunction;
+
+        using DestroyScript = void(*)(NativeScriptComponent*);
         /**
          * @brief Function Pointer for destroying the component class
          * Instance will be set to nullptr
          * 
          */
-        std::function<void()> DestroyInstanceFunction;
-
-        /**
-         * @brief Function Pointer for what happens when creating the entity
-         * 
-         */
-        std::function<void(ScriptableEntity *)> OnCreateFunction;
-        /**
-         * @brief Function Pointer for this scripts behaviors
-         * 
-         */
-        std::function<void(ScriptableEntity *, Timestep)> OnUpdateFunction;
-        /**
-         * @brief Function Pointer for destroying the entity
-         * 
-         */
-        std::function<void(ScriptableEntity *)> OnDestroyFunction;
+        DestroyScript DestroyScriptFunction;
 
         /**
          * @brief Binds the function of class T to this Component
@@ -136,13 +123,8 @@ namespace Bell
         void Bind()
         {
             // We define what happens during Instantiate and Destroy functions
-            InstantiateFunction = [&]() { Instance = new T(); };
-            DestroyInstanceFunction = [&]() { delete (T *)Instance; Instance = nullptr; };
-
-            // User defined pointers for script logic
-            OnCreateFunction = [](ScriptableEntity *instance) { ((T *)instance)->OnCreate(); };
-            OnUpdateFunction = [](ScriptableEntity *instance, Timestep deltaTime) { ((T *)instance)->OnUpdate(deltaTime); };
-            OnDestroyFunction = [](ScriptableEntity *instance) { ((T *)instance)->OnDestroy(); };
+            InstantiateScriptFunction = []() { return static_cast<ScriptableEntity*>(new T()); };
+            DestroyScriptFunction = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
         }
     };
 

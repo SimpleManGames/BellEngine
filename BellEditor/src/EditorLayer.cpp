@@ -30,6 +30,8 @@ namespace Bell::Editor
         m_CameraEntity = m_ActiveScene->CreateEntity("Camera Entity");
         m_CameraEntity.AddComponent<CameraComponent>();
         m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<EditorCamera>();
+
+        m_HierarchyPanel.SetContext(m_ActiveScene);
     }
 
     void EditorLayer::OnDetach()
@@ -147,6 +149,8 @@ namespace Bell::Editor
 
             ImGui::EndMenuBar();
         }
+
+        m_HierarchyPanel.OnImGuiRender();
 
         ImGui::Begin("Entity Info");
 

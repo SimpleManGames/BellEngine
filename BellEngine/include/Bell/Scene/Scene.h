@@ -9,6 +9,10 @@
 namespace Bell
 {
     class Entity;
+    namespace Editor
+    {
+        class SceneHierarchyPanel;
+    }
 
     class Scene
     {
@@ -53,6 +57,7 @@ namespace Bell
         uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
 
         friend class Entity;
+        friend class Editor::SceneHierarchyPanel;
     };
 } // namespace Bell
 

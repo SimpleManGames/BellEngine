@@ -7,6 +7,7 @@ project(${EDITOR_PROJECT_NAME} VERSION 1.0 DESCRIPTION "Editting Environment for
 set(EDITOR_SOURCE
     "${CMAKE_CURRENT_SOURCE_DIR}/src/BellEditorApp.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/EditorLayer.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/Panels/SceneHierarchyPanel.cpp"
 )
 
 set(IMGUI_SOURCE
@@ -23,7 +24,8 @@ set_target_properties(${EDITOR_PROJECT_NAME} PROPERTIES CXX_STANDARD 17)
 
 target_include_directories(
     ${EDITOR_PROJECT_NAME} 
-    PUBLIC include)
+    PUBLIC include
+    PUBLIC include/Panels)
 
 target_link_libraries(
     ${EDITOR_PROJECT_NAME}

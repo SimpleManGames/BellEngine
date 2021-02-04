@@ -39,11 +39,28 @@ namespace Bell
         ~TransformComponent() = default;
         TransformComponent(const TransformComponent &) = default;
 
+        /**
+         * @brief Gets the X coord from the Transform Matrix
+         * 
+         * @return float& X value from the matrix
+         */
         float &X() { return Transform[3][0]; }
+        /**
+         * @brief Gets the Y coord from the Transform Matrix
+         * 
+         * @return float& Y value from the matrix
+         */
         float &Y() { return Transform[3][1]; }
+        /**
+         * @brief Gets the Z coord from the Transform Matrix
+         * 
+         * @return float& Z value from the matrix
+         */
         float &Z() { return Transform[3][2]; }
 
-        // Operator for easier usage and cleaner code
+        // Operators for easier usage and cleaner code
+        //
+
         operator glm::mat4 &() { return Transform; }
         operator const glm::mat4 &() const { return Transform; }
     };
@@ -106,7 +123,7 @@ namespace Bell
          */
         InstantiateScript InstantiateScriptFunction;
 
-        using DestroyScript = void(*)(NativeScriptComponent*);
+        using DestroyScript = void (*)(NativeScriptComponent *);
         /**
          * @brief Function Pointer for destroying the component class
          * Instance will be set to nullptr
@@ -123,8 +140,8 @@ namespace Bell
         void Bind()
         {
             // We define what happens during Instantiate and Destroy functions
-            InstantiateScriptFunction = []() { return static_cast<ScriptableEntity*>(new T()); };
-            DestroyScriptFunction = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
+            InstantiateScriptFunction = []() { return static_cast<ScriptableEntity *>(new T()); };
+            DestroyScriptFunction = [](NativeScriptComponent *nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
         }
     };
 

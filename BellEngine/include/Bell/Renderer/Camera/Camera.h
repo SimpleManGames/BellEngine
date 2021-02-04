@@ -8,6 +8,7 @@ namespace Bell
     class Camera
     {
     public:
+
         Camera() = default;
         Camera(const glm::mat4 &projectionMatrix);
 

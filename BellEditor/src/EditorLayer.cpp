@@ -152,19 +152,6 @@ namespace Bell::Editor
 
         m_HierarchyPanel.OnImGuiRender();
 
-        ImGui::Begin("Entity Info");
-
-        if (m_Square)
-        {
-            ImGui::Separator();
-            ImGui::Text("%s", m_Square.GetComponent<TagComponent>().Tag.c_str());
-            auto &entitySquareColor = m_Square.GetComponent<SpriteRendererComponent>().Color;
-            ImGui::ColorEdit4("Square Color", glm::value_ptr(entitySquareColor));
-            ImGui::Separator();
-        }
-
-        ImGui::End(); // Entity Info
-
         ImGui::Begin("Renderer Info");
 
         auto stats = Renderer2D::GetStats();

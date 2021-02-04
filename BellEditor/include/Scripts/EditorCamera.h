@@ -25,20 +25,20 @@ namespace Bell::Editor
 
             if (Input::IsInputPressed("camera_move_left"))
             {
-                transform.X() -= m_MoveSpeed * deltaTime;
+                transform.Translation.x -= m_MoveSpeed * deltaTime;
             }
             if (Input::IsInputPressed("camera_move_right"))
             {
-                transform.X() += m_MoveSpeed * deltaTime;
+                transform.Translation.x += m_MoveSpeed * deltaTime;
             }
 
             if (Input::IsInputPressed("camera_move_up"))
             {
-                transform.Y() += m_MoveSpeed * deltaTime;
+                transform.Translation.y += m_MoveSpeed * deltaTime;
             }
             if (Input::IsInputPressed("camera_move_down"))
             {
-                transform.Y() -= m_MoveSpeed * deltaTime;
+                transform.Translation.y -= m_MoveSpeed * deltaTime;
             }
         }
 

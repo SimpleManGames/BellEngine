@@ -34,7 +34,7 @@ namespace Bell
 
         // Render Scene
         Camera *mainCamera = nullptr;
-        glm::mat4 *mainCameraTransform = nullptr;
+        glm::mat4 mainCameraTransform;
         {
             auto group = m_Registry.group<CameraComponent>(entt::get<TransformComponent>);
             for (auto entity : group)
@@ -44,7 +44,7 @@ namespace Bell
                 if (camera.Primary)
                 {
                     mainCamera = &camera.Camera;
-                    mainCameraTransform = &transform.Transform;
+                    mainCameraTransform = transform.GetTransform();
                     break;
                 }
             }
@@ -56,14 +56,14 @@ namespace Bell
             return;
         }
 
-        Renderer2D::BeginScene(mainCamera->GetProjectionMatrix(), *mainCameraTransform);
+        Renderer2D::BeginScene(mainCamera->GetProjectionMatrix(), mainCameraTransform);
 
         auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
         for (auto entity : group)
         {
             auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
-            Renderer2D::DrawQuad(transform, sprite.Color);
+            Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
         }
 
         Renderer2D::EndScene();
@@ -86,10 +86,10 @@ namespace Bell
         }
     }
 
-    Entity Scene::CreateEntity(const std::string &tag, const glm::mat4 &transform)
+    Entity Scene::CreateEntity(const std::string &tag, const glm::vec3 &translation)
     {
         Entity entity = {m_Registry.create(), this};
-        entity.AddComponent<TransformComponent>(transform);
+        entity.AddComponent<TransformComponent>(translation);
         entity.AddComponent<TagComponent>(tag);
 
         return entity;

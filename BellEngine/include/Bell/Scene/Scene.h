@@ -42,12 +42,12 @@ namespace Bell
          * 
          * @param tag Set the tag component's value during Entity creation - 
          * Defaults to an empty string.
-         * @param transform Set the transform of the Entity during creation - 
+         * @param translation Set the translation of the Entity during creation - 
          * Defaults to an Identity Matrix
          * 
          * @return Newly created Entity
          */
-        Entity CreateEntity(const std::string &tag = "Entity", const glm::mat4 &transform = glm::mat4(1.0f));
+        Entity CreateEntity(const std::string &tag = "Entity", const glm::vec3 &translation = glm::vec3(0.0f));
 
     private:
         // Registry that stores and manages Entities in this scene

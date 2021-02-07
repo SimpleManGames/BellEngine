@@ -48,8 +48,17 @@ namespace Bell
          * @return Newly created Entity
          */
         Entity CreateEntity(const std::string &tag = "Entity", const glm::vec3 &translation = glm::vec3(0.0f));
+        /**
+         * @brief Removes a given entity from the scene
+         * 
+         * @param entity Entity to be removed
+         */
+        void DestroyEntity(Entity entity);
 
     private:
+        template<typename T>
+        void OnComponentAdded(Entity entity, T& component);
+
         // Registry that stores and manages Entities in this scene
         // Heap alloc'd so clean we be handled automatically
         entt::registry m_Registry;

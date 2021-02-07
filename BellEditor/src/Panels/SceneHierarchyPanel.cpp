@@ -31,6 +31,17 @@ namespace Bell::Editor
             m_SeletectionContext = {};
         }
 
+        // Right click menu on blank space
+        if (ImGui::BeginPopupContextWindow(0, 1, false))
+        {
+            if (ImGui::MenuItem("Create Empty Entity"))
+            {
+                m_Context->CreateEntity("Empty Entity");
+            }
+
+            ImGui::EndPopup();
+        }
+
         ImGui::End(); // Scene Hierarchy
 
         ImGui::Begin("Properties");
@@ -38,6 +49,28 @@ namespace Bell::Editor
         if (m_SeletectionContext)
         {
             DrawComponents(m_SeletectionContext);
+
+            if (ImGui::Button("Add Component"))
+            {
+                ImGui::OpenPopup("AddComponent");
+            }
+
+            if (ImGui::BeginPopup("AddComponent"))
+            {
+                if (ImGui::MenuItem("Camera"))
+                {
+                    m_SeletectionContext.AddComponent<CameraComponent>();
+                    ImGui::CloseCurrentPopup();
+                }
+
+                if (ImGui::MenuItem("Sprite Renderer"))
+                {
+                    m_SeletectionContext.AddComponent<SpriteRendererComponent>();
+                    ImGui::CloseCurrentPopup();
+                }
+
+                ImGui::EndPopup();
+            }
         }
 
         ImGui::End(); // Properties
@@ -52,13 +85,26 @@ namespace Bell::Editor
         // Use the id from entt as the ptr value for the tree
         bool opened = ImGui::TreeNodeEx((void *)(uint64_t)(uint32_t)entity, flags, tag.c_str());
         if (ImGui::IsItemClicked())
-        {
             m_SeletectionContext = entity;
+
+        // Deffer deletion later so that we don't throw ImGui errors
+        bool entityDeleted = false;
+        if (ImGui::BeginPopupContextItem())
+        {
+            if (ImGui::MenuItem("Delete Entity"))
+                entityDeleted = true;
+
+            ImGui::EndPopup();
         }
 
         if (opened)
-        {
             ImGui::TreePop();
+
+        if (entityDeleted)
+        {
+            m_Context->DestroyEntity(entity);
+            if (m_SeletectionContext == entity)
+                m_SeletectionContext = {};
         }
     }
 
@@ -82,7 +128,7 @@ namespace Bell::Editor
         ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{0.8f, 0.1f, 0.15f, 1.0f});
         ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4{0.9f, 0.2f, 0.25f, 1.0f});
         ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{0.8f, 0.1f, 0.15f, 1.0f});
-        if(ImGui::Button("X", buttonSize))
+        if (ImGui::Button("X", buttonSize))
         {
             values.x = resetValue;
         }
@@ -93,11 +139,10 @@ namespace Bell::Editor
         ImGui::PopItemWidth();
         ImGui::SameLine();
 
-        
         ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{0.2f, 0.7f, 0.2f, 1.0f});
         ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4{0.3f, 0.8f, 0.3f, 1.0f});
         ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{0.2f, 0.7f, 0.2f, 1.0f});
-        if(ImGui::Button("Y", buttonSize))
+        if (ImGui::Button("Y", buttonSize))
         {
             values.y = resetValue;
         }
@@ -107,11 +152,11 @@ namespace Bell::Editor
         ImGui::DragFloat("##Y", &values.y, 0.1f, 0.0f, 0.0f, "%.2f");
         ImGui::PopItemWidth();
         ImGui::SameLine();
-        
+
         ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{0.1f, 0.25f, 0.8f, 1.0f});
         ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4{0.2f, 0.35f, 0.9f, 1.0f});
         ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{0.1f, 0.25f, 0.8f, 1.0f});
-        if(ImGui::Button("Z", buttonSize))
+        if (ImGui::Button("Z", buttonSize))
         {
             values.z = resetValue;
         }
@@ -129,6 +174,8 @@ namespace Bell::Editor
 
     void SceneHierarchyPanel::DrawComponents(Entity entity)
     {
+        const ImGuiTreeNodeFlags treeNodeFlags = ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_AllowItemOverlap;
+
         if (entity.HasComponent<TagComponent>())
         {
             auto &tag = entity.GetComponent<TagComponent>().Tag;
@@ -144,7 +191,7 @@ namespace Bell::Editor
 
         if (entity.HasComponent<TransformComponent>())
         {
-            if (ImGui::TreeNodeEx((void *)typeid(TransformComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Transform"))
+            if (ImGui::TreeNodeEx((void *)typeid(TransformComponent).hash_code(), treeNodeFlags, "Transform"))
             {
                 auto &transformComponent = entity.GetComponent<TransformComponent>();
                 DrawVec3Control("Translation", transformComponent.Translation);
@@ -160,7 +207,26 @@ namespace Bell::Editor
 
         if (entity.HasComponent<CameraComponent>())
         {
-            if (ImGui::TreeNodeEx((void *)typeid(CameraComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Camera"))
+            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{4, 4});
+
+            bool open = ImGui::TreeNodeEx((void *)typeid(CameraComponent).hash_code(), treeNodeFlags, "Camera");
+            ImGui::SameLine(ImGui::GetWindowWidth() - 25.0f);
+            if (ImGui::Button("+", ImVec2{20, 20}))
+            {
+                ImGui::OpenPopup("ComponentSettings");
+            }
+            ImGui::PopStyleVar();
+
+            bool removeComponent = false;
+            if (ImGui::BeginPopup("ComponentSettings"))
+            {
+                if (ImGui::MenuItem("Remove Component"))
+                    removeComponent = true;
+
+                ImGui::EndPopup();
+            }
+
+            if (open)
             {
                 auto &cameraComponent = entity.GetComponent<CameraComponent>();
                 auto &camera = cameraComponent.Camera;
@@ -229,11 +295,33 @@ namespace Bell::Editor
 
                 ImGui::TreePop();
             }
+
+            if (removeComponent)
+                entity.RemoveComponent<CameraComponent>();
         }
 
         if (entity.HasComponent<SpriteRendererComponent>())
         {
-            if (ImGui::TreeNodeEx((void *)typeid(SpriteRendererComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Sprite"))
+            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{4, 4});
+
+            bool open = ImGui::TreeNodeEx((void *)typeid(SpriteRendererComponent).hash_code(), treeNodeFlags, "Sprite");
+            ImGui::SameLine(ImGui::GetWindowWidth() - 25.0f);
+            if (ImGui::Button("+", ImVec2{20, 20}))
+            {
+                ImGui::OpenPopup("ComponentSettings");
+            }
+            ImGui::PopStyleVar();
+
+            bool removeComponent = false;
+            if (ImGui::BeginPopup("ComponentSettings"))
+            {
+                if (ImGui::MenuItem("Remove Component"))
+                    removeComponent = true;
+
+                ImGui::EndPopup();
+            }
+
+            if (open)
             {
                 auto &spriteComponent = entity.GetComponent<SpriteRendererComponent>();
                 auto &color = spriteComponent.Color;
@@ -242,6 +330,9 @@ namespace Bell::Editor
 
                 ImGui::TreePop();
             }
+
+            if (removeComponent)
+                entity.RemoveComponent<SpriteRendererComponent>();
         }
     }
 

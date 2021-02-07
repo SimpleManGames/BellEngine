@@ -8,7 +8,9 @@
         "functional": "cpp",
         "algorithm": "cpp",
         "locale": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "system_error": "cpp",
+        "xlocale": "cpp"
     },
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
     "workbench.iconTheme": "vs-minimal"

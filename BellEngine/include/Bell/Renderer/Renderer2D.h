@@ -22,7 +22,6 @@ namespace Bell
         static void EndScene();
         static void Flush();
 
-        // Primitives
         static void DrawQuad(const glm::vec3 &position, const glm::vec2 &size, float rotationInRadian, const glm::vec4 &color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
         static void DrawQuad(const glm::vec3 &position, const glm::vec2 &size, float rotationInRadian, const Ref<SubTexture2D> &subTexture, const glm::vec4 &colorTint = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), float textureScale = 1.0f);
         static void DrawQuad(const glm::vec3 &position, const glm::vec2 &size, float rotationInRadian, const Ref<Texture2D> &texture, const glm::vec4 &colorTint = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), float textureScale = 1.0f, const glm::vec2 *texCoords = Renderer2D::DefaultTexCoords);
@@ -30,15 +29,28 @@ namespace Bell
         static void DrawQuad(const glm::mat4 &transform, const glm::vec4 &color);
         static void DrawQuad(const glm::mat4 &transform, const Ref<Texture2D> &texture, const glm::vec4 &colorTint = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), float textureScale = 1.0f, const glm::vec2 *texCoords = Renderer2D::DefaultTexCoords);
 
-        // Render stats for debugging
+        /**
+         * @brief Render stats for debugging
+         * 
+         */
         struct Statistics
         {
-            // Amount of draw calls per reset
+            /**
+             * @brief Amount of draw calls per reset
+             * 
+             */
             uint32_t DrawCalls = 0;
-            // Amount of quads per reset
+            /**
+             * @brief Amount of quads per reset
+             * 
+             */
             uint32_t QuadCount = 0;
-            // TODO: Change this to textures loaded across all batches
-            // Amount of used texture slots in the current batch
+            /**
+             * @brief Amount of used texture slots in the current batch
+             * 
+             * TODO: Change this to textures loaded across all batches
+             * 
+             */
             uint32_t UsedTextureSlots = 0;
 
             /// Frame Counter Data
@@ -67,11 +79,17 @@ namespace Bell
         static void ResetStats();
 
     private:
-        /// Ends current scene and starts a new batch without needed
-        ///     to set camera and bind shaders
+        /**
+         * @brief Ends current scene and starts a new batch without needed
+         * to set camera and bind shaders
+         * 
+         */
         static void FlushAndReset();
 
-        /// Resets current batch in order to flush
+        /**
+         * @brief Resets current batch in order to flush
+         * 
+         */
         static void ResetBatchValues();
     };
 } // namespace Bell

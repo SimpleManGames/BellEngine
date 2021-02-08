@@ -22,7 +22,10 @@ namespace Bell
 {
     glm::vec2 Renderer2D::DefaultTexCoords[] = {{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}, {0.0, 1.0}};
 
-    // Describes the content of each Quad Vertex
+    /**
+     * @brief Describes the content of each Quad Vertex
+     * 
+     */
     struct QuadVertex
     {
         glm::vec3 Position;
@@ -32,57 +35,103 @@ namespace Bell
         float TilingFactor;
     };
 
-    // Holds info about the Renderer2D
+    /**
+     * @brief Holds info about the Renderer2D
+     * 
+     */
     struct Renderer2DData
     {
-        // Max Quads Per Draw Call
-        // This will be used to detect if a new batch is needed
-        // TODO: Switch this from being const to getting it from
-        //      the GPU
+        /**
+         * @brief Max Quads Per Draw Call
+         * This will be used to detect if a new batch is needed
+         * 
+         * TODO: Switch this from being const to getting it from
+         * the GPU
+         * 
+         */
         static const uint32_t MaxQuadsPerDrawCall = 10000;
-        // Max Vertices Per Draw Call
-        // Stores the value of the max vertices to be quickly
-        //      accessed later
+        /**
+         * @brief Max Vertices Per Draw Call
+         * Stores the value of the max vertices to be quickly
+         * accessed later
+         * 
+         */
         static const uint32_t MaxVerticesPerDrawCall = MaxQuadsPerDrawCall * 4;
-        // Max Indices Per Draw Call
-        // Stores the value of the max indices to be quickly
-        //      accessed later
+        /**
+         * @brief Max Indices Per Draw Call
+         * Stores the value of the max indices to be quickly
+         * accessed later
+         * 
+         */
         static const uint32_t MaxIndicesPerDrawCall = MaxQuadsPerDrawCall * 6;
-        // Max Texture Slots each batch can hold
-        // Currently assuming we have 32 slots on our GPU
-        // TODO: Switch this from static const to getting it from
-        //      the GPU
+        /**
+         * @brief Max Texture Slots each batch can hold
+         * Currently assuming we have 32 slots on our GPU
+         * 
+         * TODO: Switch this from static const to getting it from
+         * the GPU
+         * 
+         */
         static const uint32_t MaxTextureSlots = 32; // TODO: RenderCaps
 
         // TODO: Should be scopes once we control memory
-        // VAO
+        /**
+         * @brief Vertex Array Object
+         * 
+         */
         Ref<VertexArray> QuadVertexArray;
-        // VBO
+        /**
+         * @brief Vertex Buffer Object
+         * 
+         */
         Ref<VertexBuffer> QuadVertexBuffer;
-        // Default shader we use when user doesn't specify one
+        /**
+         * @brief Default shader we use when user doesn't specify one
+         * 
+         */
         Ref<Shader> DefaultShader;
 
-        // Stores a 1x1 white texture that we create
-        //      in order to use it for color tinting
+        /**
+         * @brief  Stores a 1x1 white texture that we create
+         * in order to use it for color tinting
+         * 
+         */
         Ref<Texture2D> WhiteTexture;
 
-        // Keeps count of how many Indicies are in the current batch
+        /**
+         * @brief Keeps count of how many Indicies are in the current batch
+         * 
+         */
         uint32_t QuadIndexCount = 0;
-        // Stores the pointer to beginning of the Vertex Buffer
+        /**
+         * @brief Stores the pointer to beginning of the Vertex Buffer
+         * 
+         */
         QuadVertex *QuadVertexBufferBase = nullptr;
-        // Stores the current location we are adding to in the
-        //      Vertex Buffer
+        /**
+         * @brief Stores the current location we are adding to in the Vertex Buffer
+         * 
+         */
         QuadVertex *QuadVertexBufferPtr = nullptr;
 
-        // The current Textures loaded for the batch
-        // TODO: Switch to Asset Handle when implemented
+        /**
+         * @brief  The current Textures loaded for the batch
+         * 
+         * TODO: Switch to Asset Handle when implemented
+         * 
+         */
         std::array<Ref<Texture2D>, MaxTextureSlots> TextureSlots;
-        // Current spot in the TextureSlots array to load additional
-        //      textures to the batch
-        // Starts at one since we always want the white texture loaded
+        /**
+         * @brief Current spot in the TextureSlots array to load additional textures to the batch
+         * Starts at one since we always want the white texture loaded
+         * 
+         */
         uint32_t TextureSlotIndex = 1; // 0 = White Texture
 
-        // Defines positions used for matrix math
+        /**
+         * @brief Defines positions used for matrix math
+         * 
+         */
         glm::vec4 QuadVertexPositions[4] =
             {
                 {-0.5f, -0.5f, 0.0f, 1.0f},
@@ -93,7 +142,10 @@ namespace Bell
         Renderer2D::Statistics Stats;
     };
 
-    // Access point to the data
+    /**
+     * @brief Access point to the data
+     * 
+     */
     static Renderer2DData s_Data;
 
     void Renderer2D::Init()

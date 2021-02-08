@@ -10,7 +10,13 @@
         "locale": "cpp",
         "regex": "cpp",
         "system_error": "cpp",
-        "xlocale": "cpp"
+        "xlocale": "cpp",
+        "memory": "cpp",
+        "type_traits": "cpp",
+        "vector": "cpp",
+        "xmemory": "cpp",
+        "xstddef": "cpp",
+        "*.rh": "cpp"
     },
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
     "workbench.iconTheme": "vs-minimal"

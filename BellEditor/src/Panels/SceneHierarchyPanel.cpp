@@ -49,28 +49,6 @@ namespace Bell::Editor
         if (m_SeletectionContext)
         {
             DrawComponents(m_SeletectionContext);
-
-            if (ImGui::Button("Add Component"))
-            {
-                ImGui::OpenPopup("AddComponent");
-            }
-
-            if (ImGui::BeginPopup("AddComponent"))
-            {
-                if (ImGui::MenuItem("Camera"))
-                {
-                    m_SeletectionContext.AddComponent<CameraComponent>();
-                    ImGui::CloseCurrentPopup();
-                }
-
-                if (ImGui::MenuItem("Sprite Renderer"))
-                {
-                    m_SeletectionContext.AddComponent<SpriteRendererComponent>();
-                    ImGui::CloseCurrentPopup();
-                }
-
-                ImGui::EndPopup();
-            }
         }
 
         ImGui::End(); // Properties
@@ -185,6 +163,98 @@ namespace Bell::Editor
         ImGui::PopID();
     }
 
+    template <typename ReactionFunction>
+    static float DrawDragFloatControl(const std::string &label, float &value, ReactionFunction reactionFunction, float rate = 0.5f, float columnWidth = 100.0f)
+    {
+        ImGui::PushID(label.c_str());
+
+        ImGui::Columns(2);
+        ImGui::SetColumnWidth(0, columnWidth);
+        ImGui::Text(label.c_str());
+        ImGui::NextColumn();
+
+        ImGui::PushItemWidth(-1);
+
+        if (ImGui::DragFloat("##DragFloat", &value), rate)
+        {
+            reactionFunction();
+        }
+
+        ImGui::Columns(1);
+        ImGui::PopID();
+
+        return value;
+    }
+
+    template <typename ReactionFuntion>
+    static void DrawComboControl(const std::string &label, const char *allSelections[], const char *currentSelection, ReactionFuntion reactionFuntion, float columnWidth = 100.0f)
+    {
+        ImGui::PushID(label.c_str());
+
+        ImGui::Columns(2);
+        ImGui::SetColumnWidth(0, columnWidth);
+        ImGui::Text(label.c_str());
+        ImGui::NextColumn();
+
+        ImGui::PushItemWidth(-1);
+
+        if (ImGui::BeginCombo("##Combo", currentSelection))
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                bool isSelected = currentSelection == allSelections[i];
+                if (ImGui::Selectable(allSelections[i], isSelected))
+                {
+                    currentSelection = allSelections[i];
+                    reactionFuntion(i);
+                }
+
+                if (isSelected)
+                {
+                    ImGui::SetItemDefaultFocus();
+                }
+            }
+            ImGui::EndCombo(); // Project Method
+        }
+
+        ImGui::Columns(1);
+        ImGui::PopID();
+    }
+
+    static void DrawCheckBoxControl(const std::string &label, bool &value, float columnWidth = 100.0f)
+    {
+        ImGui::PushID(label.c_str());
+
+        ImGui::Columns(2);
+        ImGui::SetColumnWidth(0, columnWidth);
+        ImGui::Text(label.c_str());
+        ImGui::NextColumn();
+
+        ImGui::PushItemWidth(-1);
+
+        ImGui::Checkbox("##CheckBox", &value);
+
+        ImGui::Columns(1);
+        ImGui::PopID();
+    }
+
+    static void DrawColor4Control(const std::string &label, glm::vec4 &value, float columnWidth = 100.0f)
+    {
+        ImGui::PushID(label.c_str());
+
+        ImGui::Columns(2);
+        ImGui::SetColumnWidth(0, columnWidth);
+        ImGui::Text(label.c_str());
+        ImGui::NextColumn();
+
+        ImGui::PushItemWidth(-1);
+
+        ImGui::ColorEdit4("##Color", glm::value_ptr(value));
+
+        ImGui::Columns(1);
+        ImGui::PopID();
+    }
+
     template <typename T, typename UIFunction>
     static void DrawComponent(const std::string &name, Entity entity, UIFunction uiFunction)
     {
@@ -192,15 +262,19 @@ namespace Bell::Editor
         if (entity.HasComponent<T>())
         {
             auto &component = entity.GetComponent<T>();
-            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{4, 4});
+            ImVec2 contentRegionAvail = ImGui::GetContentRegionAvail();
 
+            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{4, 4});
+            float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+            ImGui::Separator();
             bool open = ImGui::TreeNodeEx((void *)typeid(T).hash_code(), treeNodeFlags, name.c_str());
-            ImGui::SameLine(ImGui::GetWindowWidth() - 25.0f);
-            if (ImGui::Button("+", ImVec2{20, 20}))
+            ImGui::PopStyleVar();
+
+            ImGui::SameLine(contentRegionAvail.x - lineHeight * 0.5f);
+            if (ImGui::Button("+", ImVec2{lineHeight, lineHeight}))
             {
                 ImGui::OpenPopup("ComponentSettings");
             }
-            ImGui::PopStyleVar();
 
             bool removeComponent = false;
             if (ImGui::BeginPopup("ComponentSettings"))
@@ -224,17 +298,40 @@ namespace Bell::Editor
 
     void SceneHierarchyPanel::DrawComponents(Entity entity)
     {
-        DrawComponent<TagComponent>("Tag", entity, [](auto &component) {
-            auto &tag = component.Tag;
+        auto &tag = entity.GetComponent<TagComponent>().Tag;
 
-            char buffer[256];
-            memset(buffer, 0, sizeof(buffer));
-            strcpy_s(buffer, sizeof(buffer), tag.c_str());
-            if (ImGui::InputText("Tag", buffer, sizeof(buffer)))
+        char buffer[256];
+        memset(buffer, 0, sizeof(buffer));
+        strcpy_s(buffer, sizeof(buffer), tag.c_str());
+        if (ImGui::InputText("##Tag", buffer, sizeof(buffer)))
+        {
+            tag = std::string(buffer);
+        }
+
+        ImGui::SameLine();
+        ImGui::PushItemWidth(-1);
+
+        if (ImGui::Button("Add Component"))
+        {
+            ImGui::OpenPopup("AddComponent");
+        }
+
+        if (ImGui::BeginPopup("AddComponent"))
+        {
+            if (ImGui::MenuItem("Camera"))
             {
-                tag = std::string(buffer);
+                m_SeletectionContext.AddComponent<CameraComponent>();
+                ImGui::CloseCurrentPopup();
             }
-        });
+
+            if (ImGui::MenuItem("Sprite Renderer"))
+            {
+                m_SeletectionContext.AddComponent<SpriteRendererComponent>();
+                ImGui::CloseCurrentPopup();
+            }
+
+            ImGui::EndPopup();
+        }
 
         DrawComponent<TransformComponent>("Camera", entity, [](auto &component) {
             DrawVec3Control("Translation", component.Translation);
@@ -249,72 +346,41 @@ namespace Bell::Editor
 
         DrawComponent<CameraComponent>("Camera", entity, [](auto &component) {
             auto &camera = component.Camera;
-
             const char *projectionTypeString[] = {"Perspective", "Orthographic"};
             const char *currentProjectionTypeString = projectionTypeString[(int)camera.GetProjectionType()];
-            if (ImGui::BeginCombo("Projection Method", currentProjectionTypeString))
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    bool isSelected = currentProjectionTypeString == projectionTypeString[i];
-                    if (ImGui::Selectable(projectionTypeString[i], isSelected))
-                    {
-                        currentProjectionTypeString = projectionTypeString[i];
-                        camera.SetProjectionType((SceneCamera::ProjectionType)i);
-                    }
 
-                    if (isSelected)
-                    {
-                        ImGui::SetItemDefaultFocus();
-                    }
-                }
-                ImGui::EndCombo(); // Project Method
-            }
+            DrawComboControl("Projection", projectionTypeString, currentProjectionTypeString, [&](int i) { camera.SetProjectionType((SceneCamera::ProjectionType)i); });
 
             if (component.Camera.GetProjectionType() == SceneCamera::ProjectionType::Perspective)
             {
                 float verticalFov = glm::degrees(camera.GetPerspectiveVerticalFOV());
-                if (ImGui::DragFloat("Size", &verticalFov), 0.5f)
-                {
-                    camera.SetPerspectiveVerticalFOV(glm::radians(verticalFov));
-                }
+                DrawDragFloatControl("Size", verticalFov, [&] { camera.SetPerspectiveVerticalFOV(glm::radians(verticalFov)); });
+
                 float nearClip = camera.GetPerspectiveNearClip();
-                if (ImGui::DragFloat("Near Clip", &nearClip), 0.5f)
-                {
-                    camera.SetPerspectiveNearClip(nearClip);
-                }
+                DrawDragFloatControl("Near Clip", nearClip, [&] { camera.SetPerspectiveNearClip(nearClip); });
+
                 float farClip = camera.GetPerspectiveFarClip();
-                if (ImGui::DragFloat("Far Clip", &farClip), 0.5f)
-                {
-                    camera.SetPerspectiveFarClip(farClip);
-                }
+                DrawDragFloatControl("Far Clip", farClip, [&] { camera.SetPerspectiveFarClip(farClip); });
             }
 
             if (component.Camera.GetProjectionType() == SceneCamera::ProjectionType::Orthographic)
             {
                 float orthoSize = camera.GetOrthographicSize();
-                if (ImGui::DragFloat("Size", &orthoSize), 0.5f)
-                {
-                    camera.SetOrthographicSize(orthoSize);
-                }
+                DrawDragFloatControl("Size", orthoSize, [&] { camera.SetOrthographicSize(orthoSize); });
+
                 float nearClip = camera.GetOrthographicNearClip();
-                if (ImGui::DragFloat("Near Clip", &nearClip), 0.5f)
-                {
-                    camera.SetOrthographicNearClip(nearClip);
-                }
+                DrawDragFloatControl("Near Clip", nearClip, [&] { camera.SetOrthographicNearClip(nearClip); });
+
                 float farClip = camera.GetOrthographicFarClip();
-                if (ImGui::DragFloat("Far Clip", &farClip), 0.5f)
-                {
-                    camera.SetOrthographicFarClip(farClip);
-                }
+                DrawDragFloatControl("Far Clip", farClip, [&] { camera.SetOrthographicFarClip(farClip); });
             }
 
-            ImGui::Checkbox("Primary", &component.Primary);
-            ImGui::Checkbox("Fixed Aspect", &component.FixedAspectRatio);
+            DrawCheckBoxControl("Primary", component.Primary);
+            DrawCheckBoxControl("Fixed Aspect", component.FixedAspectRatio);
         });
 
         DrawComponent<SpriteRendererComponent>("Sprite", entity, [](auto &component) {
-            ImGui::ColorEdit4("Color", glm::value_ptr(component.Color));
+            DrawColor4Control("Color", component.Color);
         });
     }
 

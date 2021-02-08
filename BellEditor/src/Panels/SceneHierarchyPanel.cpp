@@ -333,7 +333,7 @@ namespace Bell::Editor
             ImGui::EndPopup();
         }
 
-        DrawComponent<TransformComponent>("Camera", entity, [](auto &component) {
+        DrawComponent<TransformComponent>("Transform", entity, [](auto &component) {
             DrawVec3Control("Translation", component.Translation);
 
             // Use degrees for easier readablity

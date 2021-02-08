@@ -8,6 +8,7 @@ set(EDITOR_SOURCE
     "${CMAKE_CURRENT_SOURCE_DIR}/src/BellEditorApp.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/EditorLayer.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/Panels/SceneHierarchyPanel.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/Panels/RendererStatsPanel.cpp"
 )
 
 set(IMGUI_SOURCE

@@ -3,6 +3,7 @@
 
 #include <Bell.h>
 #include "SceneHierarchyPanel.h"
+#include "RendererStatsPanel.h"
 
 namespace Bell::Editor
 {
@@ -33,6 +34,7 @@ namespace Bell::Editor
         bool m_ViewportFocused = false , m_ViewportHovered = false;
 
         SceneHierarchyPanel m_HierarchyPanel;
+        RendererStatsPanel m_RendererStatsPanel;
     };
 } // namespace Bell::Editor
 #endif // !_EDITORLAYER_H

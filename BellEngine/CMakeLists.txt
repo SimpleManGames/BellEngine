@@ -77,6 +77,13 @@ endif()
 
 add_subdirectory(libs/entt)
 
+#   yaml-cpp
+if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/libs/yaml-cpp/CMakeLists.txt")
+    message(FATAL_ERROR "The yaml-cpp submodules was not downloaded! GIT_SUBMODULE was turned off or failed. Please update submodules and try again.")
+endif()
+
+add_subdirectory(libs/yaml-cpp)
+
 target_include_directories(Bell 
     PUBLIC include
     PUBLIC libs/spdlog/include
@@ -84,18 +91,21 @@ target_include_directories(Bell
     PUBLIC libs/glfw/include
     PUBLIC libs/imgui/examples
     PUBLIC libs/imgui
-    PUBLIC libs/entt/single_include)
+    PUBLIC libs/entt/single_include
+    PUBLIC libs/yaml-cpp/include)
 
 target_link_directories(Bell
     PUBLIC libs/spdlog/src
     PUBLIC libs/glfw/src
     PUBLIC libs/imgui/examples
     PUBLIC libs/imgui
-    PUBLIC libs/entt/src)
+    PUBLIC libs/entt/src
+    PUBLIC libs/yaml-cpp/src)
 
 target_link_libraries(Bell 
     PUBLIC spdlog 
     PUBLIC glm 
     PUBLIC glfw
     PUBLIC glad
-    PUBLIC EnTT)
+    PUBLIC EnTT
+    PUBLIC YAML_CPP)

@@ -17,3 +17,6 @@
 [submodule "BellEngine/libs/entt"]
 	path = BellEngine/libs/entt
 	url = https://github.com/skypjack/entt.git
+[submodule "BellEngine/libs/yaml-cpp"]
+	path = BellEngine/libs/yaml-cpp
+	url = https://github.com/jbeder/yaml-cpp.git

@@ -108,4 +108,4 @@ target_link_libraries(Bell
     PUBLIC glfw
     PUBLIC glad
     PUBLIC EnTT
-    PUBLIC YAML_CPP)
+    PUBLIC yaml-cpp)

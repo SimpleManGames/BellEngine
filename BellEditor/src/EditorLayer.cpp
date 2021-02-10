@@ -4,6 +4,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Bell/Scene/SceneSerializer.h"
+
 #include "Scripts/EditorCamera.h"
 
 namespace Bell::Editor
@@ -32,6 +34,9 @@ namespace Bell::Editor
         m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<EditorCamera>();
 
         m_HierarchyPanel.SetContext(m_ActiveScene);
+
+        SceneSerializer serializer(m_ActiveScene);
+        serializer.Serialize("assets/scenes/Example.scene");
     }
 
     void EditorLayer::OnDetach()

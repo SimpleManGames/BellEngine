@@ -67,6 +67,7 @@ namespace Bell
 
         friend class Entity;
         friend class Editor::SceneHierarchyPanel;
+        friend class SceneSerializer;
     };
 } // namespace Bell
 

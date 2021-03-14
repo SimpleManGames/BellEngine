@@ -33,6 +33,7 @@
 // ----------------------------------
 
 #include "Bell/Base/Log.h"
+#include "Bell/Base/Debug/Assert.h"
 #include "Bell/Debug/Instrumentor.h"
 
 #endif // !_BPCH_H

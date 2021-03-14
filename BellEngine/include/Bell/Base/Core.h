@@ -50,8 +50,18 @@
 #endif // End of platform detection
 
 #ifdef B_DEBUG
+#if defined(B_PLATFORM_WINDOWS)
+#define B_DEBUGBREAK() __debugbreak()
+#elif defined(B_PLATFORM_LINUX)
+#include <signal.h>
+#define B_DEBUGBREAK() raise(SIGTRAP)
+#else
+#error "Platform doesn't support B_DEBUGBREAK() yet!"
+#endif
 #define B_ENABLE_ASSERTS 1
 #define B_ENABLE_PROFILING 1
+#else
+#define B_DEBUGBREAK()
 #endif // B_DEBUG
 
 #define B_EXPAND_MACRO(x) x

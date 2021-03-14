@@ -32,7 +32,7 @@ namespace Bell {
             data = stbi_load(path.c_str(), &width, &height, &channels, 0);
         }
         // Validate
-        B_CORE_ASSERT(data, "Failed to load image at {0}", path);
+        B_CORE_ASSERT(data, "Failed to load image!");
         // Set our unsigned ints from the output vars int values
         m_Width = width;
         m_Height = height;

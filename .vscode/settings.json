@@ -16,8 +16,10 @@
         "vector": "cpp",
         "xmemory": "cpp",
         "xstddef": "cpp",
-        "*.rh": "cpp"
+        "*.rh": "cpp",
+        "filesystem": "cpp"
     },
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
-    "workbench.iconTheme": "vs-minimal"
+    "workbench.iconTheme": "vs-minimal",
+    "C_Cpp.vcFormat.indent.preprocessor": "none"
 }

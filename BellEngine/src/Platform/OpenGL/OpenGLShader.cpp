@@ -155,7 +155,7 @@ namespace Bell
                 glDeleteShader(shader);
 
                 B_CORE_ERROR("{0}", infoLog.data());
-                B_CORE_ASSERT(false, "{0} compilation failure!", type);
+                B_CORE_ASSERT(false, "Shader compilation failure!");
                 break;
             }
             // Attach our shaders to our program

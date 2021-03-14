@@ -26,9 +26,8 @@
 
 #define _WINSOCKAPI_
 #ifdef B_PLATFORM_WINDOWS
-    #include <Windows.h>
+#include <Windows.h>
 #endif
-
 
 // ----- Common Engine Includes -----
 // ----------------------------------

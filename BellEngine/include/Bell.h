@@ -1,4 +1,4 @@
-// ----- Bell's Common Includes 
+// ----- Bell's Common Includes
 // ----- Used for Application to include all useful files
 // -----
 
@@ -8,6 +8,7 @@
 #include "Bell/Base/Application.h"
 #include "Bell/Layer/Layer.h"
 #include "Bell/Base/Log.h"
+#include "Bell/Base/Debug/Assert.h"
 
 #include "Bell/Base/Time.h"
 #include "Bell/Debug/Instrumentor.h"

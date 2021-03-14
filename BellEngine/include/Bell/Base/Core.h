@@ -54,28 +54,8 @@
 #define B_ENABLE_PROFILING 1
 #endif // B_DEBUG
 
-// TODO: Create a macro for no arguments other than the condition
-#ifdef B_ENABLE_ASSERTS
-#define B_ASSERT(x, ...)                                   \
-    {                                                      \
-        if (!(x))                                          \
-        {                                                  \
-            B_ERROR("Assertion Failed: {0}", __VA_ARGS__); \
-            __debugbreak();                                \
-        }                                                  \
-    }
-#define B_CORE_ASSERT(x, ...)                                   \
-    {                                                           \
-        if (!(x))                                               \
-        {                                                       \
-            B_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); \
-            __debugbreak();                                     \
-        }                                                       \
-    }
-#else
-#define B_ASSERT(x, ...)
-#define B_CORE_ASSERT(x, ...)
-#endif // B_ENABLE_ASSERTS
+#define B_EXPAND_MACRO(x) x
+#define B_STRINGIFY_MACRO(x) #x
 
 #define BIT(x) (1 << x)
 
@@ -123,5 +103,8 @@ namespace Bell
         return std::make_shared<T>(std::forward<Args>(args)...);
     }
 } // namespace Bell
+
+#include "Bell/Base/Log.h"
+#include "Bell/Base/Debug/Assert.h"
 
 #endif // !_CORE_H

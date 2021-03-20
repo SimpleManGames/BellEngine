@@ -20,3 +20,6 @@
 [submodule "BellEngine/libs/yaml-cpp"]
 	path = BellEngine/libs/yaml-cpp
 	url = https://github.com/jbeder/yaml-cpp.git
+[submodule "BellEngine/libs/googletest"]
+	path = BellEngine/libs/googletest
+	url = https://github.com/google/googletest.git

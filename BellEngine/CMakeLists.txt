@@ -5,15 +5,20 @@ file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS
     "include/*.h"
     "libs/stb_image/stb_image.h")
 
-add_library(Bell STATIC ${SOURCES} ${HEADERS})
+set(This Bell)
+
+add_library(${This} STATIC ${SOURCES} ${HEADERS})
 
 #           DEFINITIONS
-target_compile_definitions(Bell PUBLIC B_DEBUG=1) # B_DEBUG
+target_compile_definitions(${This} PUBLIC B_DEBUG=1) # B_DEBUG
 
-target_precompile_headers(Bell PUBLIC include/bpch.h)
+target_precompile_headers(${This} PUBLIC include/bpch.h)
 
 # Using some VS17 features
-set_target_properties(Bell PROPERTIES CXX_STANDARD 17)
+set_target_properties(${This} PROPERTIES CXX_STANDARD 17)
+
+#           Tell CMake we'll having tests
+enable_testing()
 
 #           DOWNLOAD ALL THE SUBMODULES
 find_package(Git QUIET)
@@ -84,7 +89,16 @@ endif()
 
 add_subdirectory(libs/yaml-cpp)
 
-target_include_directories(Bell 
+#   googletest
+if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/libs/googletest/CMakeLists.txt")
+    message(FATAL_ERROR "The googletest submodules was not downloaded! GIT_SUBMODULE was turned off or failed. Please update submodules and try again.")
+endif()
+
+add_subdirectory(libs/googletest)
+
+add_subdirectory(test)
+
+target_include_directories(${This} 
     PUBLIC include
     PUBLIC libs/spdlog/include
     PUBLIC libs/glm
@@ -92,9 +106,10 @@ target_include_directories(Bell
     PUBLIC libs/imgui/examples
     PUBLIC libs/imgui
     PUBLIC libs/entt/single_include
-    PUBLIC libs/yaml-cpp/include)
+    PUBLIC libs/yaml-cpp/include
+    PUBLIC libs/include(GoogleTest))
 
-target_link_directories(Bell
+target_link_directories(${This}
     PUBLIC libs/spdlog/src
     PUBLIC libs/glfw/src
     PUBLIC libs/imgui/examples
@@ -102,7 +117,7 @@ target_link_directories(Bell
     PUBLIC libs/entt/src
     PUBLIC libs/yaml-cpp/src)
 
-target_link_libraries(Bell 
+target_link_libraries(${This} 
     PUBLIC spdlog 
     PUBLIC glm 
     PUBLIC glfw

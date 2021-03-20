@@ -10,20 +10,21 @@
 
 namespace Bell
 {
-    Application* Application::s_Instance = nullptr;
+    Application *Application::s_Instance = nullptr;
 
-    Application::Application(const WindowProps& props)
+    Application::Application(const WindowProps &props)
     {
         Init(props);
     }
 
-    Application::~Application() {
+    Application::~Application()
+    {
         m_ApplicationState = ApplicationState::Destroying;
 
         Renderer::Shutdown();
     }
 
-    void Application::Init(const WindowProps& props)
+    void Application::Init(const WindowProps &props)
     {
         B_PROFILE_FUNCTION();
         {
@@ -66,7 +67,8 @@ namespace Bell
 #endif
     }
 
-    void Application::OnEvent(Event& e) {
+    void Application::OnEvent(Event &e)
+    {
         B_PROFILE_FUNCTION();
         // Makes a dispatcher
         EventDispatcher dispatcher(e);
@@ -84,12 +86,12 @@ namespace Bell
         }
     }
 
-    void Application::Run() {
+    void Application::Run()
+    {
         B_PROFILE_FUNCTION();
         m_ApplicationState = ApplicationState::Running;
 
-        while (m_ApplicationState == ApplicationState::Running
-            || m_ApplicationState == ApplicationState::Minimized)
+        while (m_ApplicationState == ApplicationState::Running || m_ApplicationState == ApplicationState::Minimized)
         {
             B_PROFILE_SCOPE("Run Loop");
 
@@ -101,7 +103,7 @@ namespace Bell
             if (!(m_ApplicationState == ApplicationState::Minimized))
             {
                 // Update each layer
-                for (Layer* layer : m_LayerStack)
+                for (Layer *layer : m_LayerStack)
                 {
                     B_PROFILE_SCOPE(layer->GetName().c_str());
                     layer->OnUpdate(deltaTime);
@@ -112,7 +114,7 @@ namespace Bell
             {
                 B_PROFILE_SCOPE("ImGuiLayer Render");
                 m_ImGuiLayer->Begin();
-                for (Layer* layer : m_LayerStack)
+                for (Layer *layer : m_LayerStack)
                     layer->OnImGuiRender();
                 m_ImGuiLayer->End();
             }
@@ -127,13 +129,15 @@ namespace Bell
         m_ApplicationState = ApplicationState::ShuttingDown;
     }
 
-    bool Application::OnWindowClose(WindowCloseEvent& e) {
+    bool Application::OnWindowClose(WindowCloseEvent &e)
+    {
         B_PROFILE_FUNCTION();
         m_ApplicationState = ApplicationState::ShuttingDown;
         return false;
     }
 
-    bool Application::OnWindowResize(WindowResizeEvent& e) {
+    bool Application::OnWindowResize(WindowResizeEvent &e)
+    {
         B_PROFILE_FUNCTION();
         if (e.GetWidth() == 0 || e.GetHeight() == 0)
         {
@@ -148,13 +152,15 @@ namespace Bell
         return false;
     }
 
-    void Application::PushLayer(Layer* layer) {
+    void Application::PushLayer(Layer *layer)
+    {
         B_PROFILE_FUNCTION();
         m_LayerStack.PushLayer(layer);
         layer->OnAttach();
     }
 
-    void Application::PushOverlay(Layer* layer) {
+    void Application::PushOverlay(Layer *layer)
+    {
         B_PROFILE_FUNCTION();
         m_LayerStack.PushOverlay(layer);
         layer->OnAttach();

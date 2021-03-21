@@ -7,10 +7,19 @@ file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS
 
 set(This Bell)
 
+#           OPTIONS
+option(BELL_DEBUG "Sets the B_DEBUG Preprocessor Macro" OFF)
+
 add_library(${This} STATIC ${SOURCES} ${HEADERS})
 
 #           DEFINITIONS
+if(BELL_DEBUG)
+message(STATUS "B_DEBUG=ON")
 target_compile_definitions(${This} PUBLIC B_DEBUG=1) # B_DEBUG
+else()
+message(STATUS "B_DEBUG=OFF")
+target_compile_definitions(${This} PUBLIC B_DEBUG=0) # B_DEBUG
+endif()
 
 target_precompile_headers(${This} PUBLIC include/bpch.h)
 
@@ -93,6 +102,9 @@ add_subdirectory(libs/yaml-cpp)
 if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/libs/googletest/CMakeLists.txt")
     message(FATAL_ERROR "The googletest submodules was not downloaded! GIT_SUBMODULE was turned off or failed. Please update submodules and try again.")
 endif()
+
+#   We want to use gMock in our tests
+set(BUILD_GMOCK true)
 
 add_subdirectory(libs/googletest)
 

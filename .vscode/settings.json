@@ -17,7 +17,8 @@
         "xmemory": "cpp",
         "xstddef": "cpp",
         "*.rh": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "xiosbase": "cpp"
     },
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
     "workbench.iconTheme": "vs-minimal",

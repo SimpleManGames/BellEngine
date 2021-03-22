@@ -27,3 +27,11 @@ add_test(
     NAME ${This}
     COMMAND ${This}
 )
+
+# Move the assets folder next to the EXE
+add_custom_command(
+    TARGET ${This} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_CURRENT_SOURCE_DIR}/${ASSET_FOLDER_NAME}
+    $<TARGET_FILE_DIR:${This}>/${ASSET_FOLDER_NAME}
+)

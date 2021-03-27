@@ -14,6 +14,12 @@ namespace Bell
 
     Application::Application(const WindowProps &props)
     {
+        if (s_Instance != nullptr)
+        {
+            B_CORE_WARN("There is already an instance of an Application, aborting the Init!");
+            return;
+        }
+
         Init(props);
     }
 

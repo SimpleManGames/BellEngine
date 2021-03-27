@@ -97,6 +97,7 @@ namespace Bell
 
         int LayerStackCount() const { return m_LayerStack.LayerCount(); }
 
+        inline static bool Valid() { return s_Instance == nullptr; }
         /**
          * @brief Gets a reference to the singleton instance
          * 

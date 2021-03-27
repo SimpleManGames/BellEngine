@@ -14,24 +14,24 @@ protected:
         props.Width = 1080;
         props.Height = 640;
 
-        app = new Bell::Application(props);
+        app = Bell::CreateScope<Bell::Application>(props);
+        //app = new Bell::Application(props);
     }
 
     void TearDown() override
     {
         Bell::Log::Shutdown();
         // Delete the app here, normally EntryPoint.h would do this
-        delete app;
+        //delete app;
     }
 
-    Bell::Application *app;
+    Bell::Scope<Bell::Application> app;
 };
 
 class TestLayer : public Bell::Layer
 {
 public:
-    TestLayer(Bell::Application *app)
-        : m_App(app)
+    TestLayer()
     {
     }
 
@@ -40,14 +40,13 @@ public:
         m_CurrentTimeIncrement += deltaTime;
         if (m_CurrentTimeIncrement >= EXIT_TIME)
         {
-            m_App->Get().Close();
+            Bell::Application::Get().Close();
         }
     }
 
 private:
     const float EXIT_TIME = 1.0f;
     float m_CurrentTimeIncrement = 0.0f;
-    Bell::Application *m_App;
 };
 
 TEST(BellTests, BellLogInit)
@@ -67,7 +66,7 @@ TEST_F(ApplicationFicture, LayerAdd)
 {
     int oldCount = app->LayerStackCount();
 
-    app->PushLayer(new TestLayer(app));
+    app->PushLayer(new TestLayer());
     int count = app->LayerStackCount();
     EXPECT_EQ(count, oldCount + 1);
 }

@@ -14,15 +14,13 @@ protected:
         props.Width = 1080;
         props.Height = 640;
 
+        // Unique ptr to avoid SEH exceptions from using raw ptr and delete
         app = Bell::CreateScope<Bell::Application>(props);
-        //app = new Bell::Application(props);
     }
 
     void TearDown() override
     {
         Bell::Log::Shutdown();
-        // Delete the app here, normally EntryPoint.h would do this
-        //delete app;
     }
 
     Bell::Scope<Bell::Application> app;
@@ -62,7 +60,7 @@ TEST_F(ApplicationFicture, ApplicationCreation)
     ASSERT_EQ(appState, Bell::ApplicationState::Initializing);
 }
 
-TEST_F(ApplicationFicture, LayerAdd)
+TEST_F(ApplicationFicture, LayerControl)
 {
     int oldCount = app->LayerStackCount();
 
@@ -73,5 +71,6 @@ TEST_F(ApplicationFicture, LayerAdd)
 
 TEST_F(ApplicationFicture, ApplicationRun)
 {
-    //app->Run();
+    app->PushLayer(new TestLayer());
+    app->Run();
 }

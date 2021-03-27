@@ -17,7 +17,8 @@ namespace Bell
          * @brief Sets up console logger
          * 
          */
-        static void Init();
+        static void Init(const std::string& coreName = "BELL",  const std::string& appName = "APP");
+        static void Shutdown();
 
         /**
          * @brief Gets the Core Logger which is used for internal messages

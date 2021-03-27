@@ -95,6 +95,8 @@ namespace Bell
          */
         void PushOverlay(Layer *layer);
 
+        int LayerStackCount() const { return m_LayerStack.LayerCount(); }
+
         /**
          * @brief Gets a reference to the singleton instance
          * 

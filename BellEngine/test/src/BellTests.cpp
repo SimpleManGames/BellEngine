@@ -19,11 +19,35 @@ protected:
 
     void TearDown() override
     {
+        Bell::Log::Shutdown();
         // Delete the app here, normally EntryPoint.h would do this
         delete app;
     }
 
     Bell::Application *app;
+};
+
+class TestLayer : public Bell::Layer
+{
+public:
+    TestLayer(Bell::Application *app)
+        : m_App(app)
+    {
+    }
+
+    virtual void OnUpdate(Bell::Timestep deltaTime) override
+    {
+        m_CurrentTimeIncrement += deltaTime;
+        if (m_CurrentTimeIncrement >= EXIT_TIME)
+        {
+            m_App->Get().Close();
+        }
+    }
+
+private:
+    const float EXIT_TIME = 1.0f;
+    float m_CurrentTimeIncrement = 0.0f;
+    Bell::Application *m_App;
 };
 
 TEST(BellTests, BellLogInit)
@@ -37,7 +61,18 @@ TEST_F(ApplicationFicture, ApplicationCreation)
 {
     Bell::ApplicationState appState = app->GetApplicationState();
     ASSERT_EQ(appState, Bell::ApplicationState::Initializing);
+}
 
-    // Close
-    app->Close();
+TEST_F(ApplicationFicture, LayerAdd)
+{
+    int oldCount = app->LayerStackCount();
+
+    app->PushLayer(new TestLayer(app));
+    int count = app->LayerStackCount();
+    EXPECT_EQ(count, oldCount + 1);
+}
+
+TEST_F(ApplicationFicture, ApplicationRun)
+{
+    //app->Run();
 }

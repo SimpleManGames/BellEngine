@@ -37,6 +37,8 @@ namespace Bell
         LayerStackIt begin() { return m_Layers.begin(); }
         LayerStackIt end() { return m_Layers.end(); }
 
+        int LayerCount() const { return m_Layers.size(); }
+
         operator bool() const;
 
     private:

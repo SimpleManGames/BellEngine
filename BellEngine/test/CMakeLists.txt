@@ -4,6 +4,7 @@ set(This BellTests)
 
 set(SOURCES
     "src/BellTests.cpp"
+    "src/LayerStackTests.cpp"
 )
 
 set(IMGUI_SOURCE

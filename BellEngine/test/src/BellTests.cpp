@@ -5,7 +5,7 @@
 class ApplicationFicture : public ::testing::Test
 {
 protected:
-    void SetUp() override
+    static void SetUpTestSuite()
     {
         Bell::Log::Init();
 
@@ -15,16 +15,24 @@ protected:
         props.Height = 640;
 
         // Unique ptr to avoid SEH exceptions from using raw ptr and delete
-        app = Bell::CreateScope<Bell::Application>(props);
+        app = new Bell::Application(props);
     }
 
-    void TearDown() override
+    static void TearDownTestSuite()
     {
         Bell::Log::Shutdown();
+        delete app;
+        app = nullptr;
     }
 
-    Bell::Scope<Bell::Application> app;
+    void SetUp() override {}
+
+    void TearDown() override {}
+
+    static Bell::Application *app;
 };
+
+Bell::Application* ApplicationFicture::app = nullptr;
 
 class TestLayer : public Bell::Layer
 {

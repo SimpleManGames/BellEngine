@@ -12,8 +12,8 @@
 
 namespace Bell
 {
-    typedef std::vector<Layer*> LayerStackVec;
-    typedef  std::vector<Layer*>::iterator LayerStackIt;
+    typedef std::vector<Layer *> LayerStackVec;
+    typedef std::vector<Layer *>::iterator LayerStackIt;
 
     class LayerStack
     {
@@ -23,24 +23,27 @@ namespace Bell
 
         // Add a layer to the front of the stack
         // Layers get pushed to the front half of the stack
-        void PushLayer(Layer* layer);
+        void PushLayer(Layer *layer);
         // Add a overlay specific layer to the front of the stack
         // Overlays get pushed to the second half of the stack
-        void PushOverlay(Layer* overlay);
+        void PushOverlay(Layer *overlay);
         // Remove the passed layer off the stack
         // Does not delete the layer just takes it off this stack
-        void PopLayer(Layer* layer);
+        void PopLayer(Layer *layer);
         // Remove the passed overlay layer off the stack
         // Does not delete the overlay just takes it off this stack
-        void PopOverlay(Layer* overlay);
+        void PopOverlay(Layer *overlay);
 
         LayerStackIt begin() { return m_Layers.begin(); }
         LayerStackIt end() { return m_Layers.end(); }
 
-        int LayerCount() const { return m_Layers.size(); }
+        int32_t LayerCount() const { return m_Layers.size(); }
+        const LayerStackVec GetAllLayers() const { return m_Layers; }
+
+        void ClearAllLayers();
 
         operator bool() const;
-
+        
     private:
         LayerStackVec m_Layers;
         // Iterator used to determine were we are placing layers onto the stack

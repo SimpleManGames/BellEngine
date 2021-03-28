@@ -83,7 +83,7 @@ namespace Bell
          * 
          * @param layer New Layer to add to the stack
          */
-        void PushLayer(Layer *layer);
+        void InsertLayer(Layer *layer);
         /**
          * @brief Pushing a new layer onto the back of the stack
          * - We mainly use this for Overlay/UI layers since we want those
@@ -93,7 +93,7 @@ namespace Bell
          * 
          * @param layer New Overlay Layer to add to the stack
          */
-        void PushOverlay(Layer *layer);
+        void InsertOverlay(Layer *layer);
 
         int LayerStackCount() const { return m_LayerStack.LayerCount(); }
 

@@ -68,7 +68,7 @@ namespace Bell
         {
             B_PROFILE_SCOPE("ImGuiLayer Creation");
             m_ImGuiLayer = new ImGuiLayer();
-            PushOverlay(m_ImGuiLayer);
+            InsertOverlay(m_ImGuiLayer);
         }
 #endif
     }
@@ -158,17 +158,17 @@ namespace Bell
         return false;
     }
 
-    void Application::PushLayer(Layer *layer)
+    void Application::InsertLayer(Layer *layer)
     {
         B_PROFILE_FUNCTION();
-        m_LayerStack.PushLayer(layer);
+        m_LayerStack.InsertLayer(layer);
         layer->OnAttach();
     }
 
-    void Application::PushOverlay(Layer *layer)
+    void Application::InsertOverlay(Layer *layer)
     {
         B_PROFILE_FUNCTION();
-        m_LayerStack.PushOverlay(layer);
+        m_LayerStack.InsertOverlay(layer);
         layer->OnAttach();
     }
 }

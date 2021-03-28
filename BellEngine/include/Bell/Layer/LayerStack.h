@@ -21,17 +21,33 @@ namespace Bell
         LayerStack() = default;
         ~LayerStack();
 
-        // Add a layer to the front of the stack
-        // Layers get pushed to the front half of the stack
-        void PushLayer(Layer *layer);
-        // Add a overlay specific layer to the front of the stack
-        // Overlays get pushed to the second half of the stack
-        void PushOverlay(Layer *overlay);
-        // Remove the passed layer off the stack
-        // Does not delete the layer just takes it off this stack
+        /**
+         * @brief Inserts a layer to the front half of the stack
+         * Layers get inserted to the back of the front half of the stack
+         * 
+         * @param layer 
+         */
+        void InsertLayer(Layer *layer);
+        /**
+         * @brief Inserts a overlay layer to the back of the stack
+         * Overlays get pushed to the second half of the stack
+         * 
+         * @param overlay Ptr to the overlay we are pushing
+         */
+        void InsertOverlay(Layer *overlay);
+        /**
+         * @brief Remove the passed layer off the stack
+         * Does not delete the layer just takes it off this stack
+         * 
+         * @param layer Ptr to the layer we want to pop off
+         */
         void PopLayer(Layer *layer);
-        // Remove the passed overlay layer off the stack
-        // Does not delete the overlay just takes it off this stack
+        /**
+         * @brief Remove the passed overlay layer off the stack
+         * Does not delete the overlay just takes it off this stack
+         * 
+         * @param overlay Ptr to the overlay we want to pop off
+         */
         void PopOverlay(Layer *overlay);
 
         LayerStackIt begin() { return m_Layers.begin(); }
@@ -40,6 +56,10 @@ namespace Bell
         int32_t LayerCount() const { return m_Layers.size(); }
         const LayerStackVec GetAllLayers() const { return m_Layers; }
 
+        /**
+         * @brief Clears the entire Layer Stack vector and resets the Insert Index
+         * 
+         */
         void ClearAllLayers();
 
         operator bool() const;

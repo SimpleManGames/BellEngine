@@ -23,7 +23,7 @@ namespace Bell
         BellEditorApp()
             : Application(WindowProps("Bell Editor"))
         {
-            PushLayer(new Editor::EditorLayer());
+            InsertLayer(new Editor::EditorLayer());
         }
     };
 

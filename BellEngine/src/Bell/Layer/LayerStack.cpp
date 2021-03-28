@@ -15,7 +15,7 @@ namespace Bell
         }
     }
 
-    void LayerStack::PushLayer(Layer *layer)
+    void LayerStack::InsertLayer(Layer *layer)
     {
         // Set the new point of m_LayerInsert while creating
         // a placing the layer of the stack at the old insert
@@ -24,7 +24,7 @@ namespace Bell
         m_LayerInsertIndex++;
     }
 
-    void LayerStack::PushOverlay(Layer *overlay)
+    void LayerStack::InsertOverlay(Layer *overlay)
     {
         // Add the overlay to the back half so they are
         // rendered last to be on top of everything

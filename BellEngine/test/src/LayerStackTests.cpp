@@ -60,7 +60,7 @@ TEST_F(LayerStackFixture, LayerStack_PushLayer)
 {
     int oldCount = s_layerStack->LayerCount();
 
-    s_layerStack->PushLayer(new TestLayer("Layer"));
+    s_layerStack->InsertLayer(new TestLayer("Layer"));
 
     int count = s_layerStack->LayerCount();
     EXPECT_EQ(count, oldCount + 1);
@@ -70,7 +70,7 @@ TEST_F(LayerStackFixture, LayerStack_PushOverlay)
 {
     int oldCount = s_layerStack->LayerCount();
 
-    s_layerStack->PushOverlay(new TestLayer("Overlay"));
+    s_layerStack->InsertOverlay(new TestLayer("Overlay"));
 
     int count = s_layerStack->LayerCount();
     EXPECT_EQ(count, oldCount + 1);
@@ -79,18 +79,18 @@ TEST_F(LayerStackFixture, LayerStack_PushOverlay)
 TEST_F(LayerStackFixture, LayerStack_ClearAllLayers)
 {
     // Add a bunch of layers
-    s_layerStack->PushLayer(new Bell::Layer());
-    s_layerStack->PushLayer(new Bell::Layer());
-    s_layerStack->PushLayer(new Bell::Layer());
-    s_layerStack->PushOverlay(new Bell::Layer());
-    s_layerStack->PushLayer(new Bell::Layer());
+    s_layerStack->InsertLayer(new Bell::Layer());
+    s_layerStack->InsertLayer(new Bell::Layer());
+    s_layerStack->InsertLayer(new Bell::Layer());
+    s_layerStack->InsertOverlay(new Bell::Layer());
+    s_layerStack->InsertLayer(new Bell::Layer());
 
     s_layerStack->ClearAllLayers();
 
     ASSERT_EQ(s_layerStack->LayerCount(), 0);
 
     // Check if the stack is still usable after clear
-    s_layerStack->PushLayer(new Bell::Layer());
+    s_layerStack->InsertLayer(new Bell::Layer());
 }
 
 TEST_F(LayerStackFixture, LayerStack_ValidatePlacement)
@@ -101,9 +101,9 @@ TEST_F(LayerStackFixture, LayerStack_ValidatePlacement)
 
 
     // Test regular layer first
-    s_layerStack->PushLayer(layer);
-    s_layerStack->PushLayer(inbetween);
-    s_layerStack->PushOverlay(overlay);
+    s_layerStack->InsertLayer(layer);
+    s_layerStack->InsertLayer(inbetween);
+    s_layerStack->InsertOverlay(overlay);
 
     EXPECT_TRUE(s_layerStack->GetAllLayers().front() == layer);
     EXPECT_TRUE(s_layerStack->GetAllLayers().back() == overlay);
@@ -111,9 +111,9 @@ TEST_F(LayerStackFixture, LayerStack_ValidatePlacement)
     s_layerStack->ClearAllLayers();
 
     // Test overlay first
-    s_layerStack->PushOverlay(overlay);
-    s_layerStack->PushLayer(layer);
-    s_layerStack->PushLayer(inbetween);
+    s_layerStack->InsertOverlay(overlay);
+    s_layerStack->InsertLayer(layer);
+    s_layerStack->InsertLayer(inbetween);
 
     EXPECT_TRUE(s_layerStack->GetAllLayers().front() == layer);
     EXPECT_TRUE(s_layerStack->GetAllLayers().back() == overlay);

@@ -21,7 +21,7 @@ public:
     Sandbox()
         : Application({})
     {
-        PushLayer(new Sandbox2D());
+        InsertLayer(new Sandbox2D());
     }
 };
 

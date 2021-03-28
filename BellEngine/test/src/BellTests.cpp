@@ -72,13 +72,13 @@ TEST_F(ApplicationFicture, LayerControl)
 {
     int oldCount = app->LayerStackCount();
 
-    app->PushLayer(new TestLayer());
+    app->InsertLayer(new TestLayer());
     int count = app->LayerStackCount();
     EXPECT_EQ(count, oldCount + 1);
 }
 
 TEST_F(ApplicationFicture, ApplicationRun)
 {
-    app->PushLayer(new TestLayer());
+    app->InsertLayer(new TestLayer());
     app->Run();
 }

@@ -166,8 +166,16 @@ namespace Bell
 #endif
 
 /// Profiling Macros
-#define B_PROFILE_BEGIN_SESSION(name) ::Bell::Instrumentor::Get().BeginSession(name)
-#define B_PROFILE_BEGIN_SESSION(name, filePath) ::Bell::Instrumentor::Get().BeginSession(name, filePath)
+#define B_PROFILE_BEGIN_SESSION_EXPAND(name) ::Bell::Instrumentor::Get().BeginSession(name)
+#define B_PROFILE_BEGIN_SESSION_EXPAND_WITHFILEPATH(name, filePath) ::Bell::Instrumentor::Get().BeginSession(name, filePath)
+
+#define GET_BEGIN_SESSION_MACRO(_1, _2, NAME, ...) NAME
+
+// Order the macro list from most amount of args to least
+
+// Starts a new session for profiling
+#define B_PROFILE_BEGIN_SESSION(...) GET_BEGIN_SESSION_MACRO(__VA_ARGS__, B_PROFILE_BEGIN_SESSION_EXPAND_WITHFILEPATH, B_PROFILE_BEGIN_SESSION_EXPAND)(__VA_ARGS__)
+
 #define B_PROFILE_END_SESSION() ::Bell::Instrumentor::Get().EndSession();
 
 #define B_PROFILE_SCOPE(name) ::Bell::InstrumentationTimer timer##__LINE__(name)

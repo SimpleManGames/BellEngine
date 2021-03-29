@@ -53,7 +53,7 @@ namespace Bell
         LayerStackIt begin() { return m_Layers.begin(); }
         LayerStackIt end() { return m_Layers.end(); }
 
-        int32_t LayerCount() const { return m_Layers.size(); }
+        int32_t LayerCount() const { return (int32_t)m_Layers.size(); }
         const LayerStackVec GetAllLayers() const { return m_Layers; }
 
         /**

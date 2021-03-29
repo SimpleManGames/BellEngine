@@ -99,7 +99,6 @@ TEST_F(LayerStackFixture, LayerStack_ValidatePlacement)
     TestLayer *inbetween = new TestLayer("Inbetween");
     TestLayer *overlay = new TestLayer("Overlay");
 
-
     // Test regular layer first
     s_layerStack->InsertLayer(layer);
     s_layerStack->InsertLayer(inbetween);
@@ -117,4 +116,36 @@ TEST_F(LayerStackFixture, LayerStack_ValidatePlacement)
 
     EXPECT_TRUE(s_layerStack->GetAllLayers().front() == layer);
     EXPECT_TRUE(s_layerStack->GetAllLayers().back() == overlay);
+}
+
+TEST_F(LayerStackFixture, LayerStack_PopLayer)
+{
+    // Add layer to remove later
+    TestLayer *layer = new TestLayer("Layer");
+    s_layerStack->InsertLayer(layer);
+    int oldCount = s_layerStack->LayerCount();
+
+    s_layerStack->PopLayer(layer);
+
+    int count = s_layerStack->LayerCount();
+    EXPECT_EQ(count, oldCount - 1) << "Count: " << count << " Old Count: " << oldCount;
+
+    ASSERT_FALSE(layer == nullptr);
+}
+
+TEST_F(LayerStackFixture, LayerStackFixture_LayerStack_PopOverlay)
+{
+    int startCount = s_layerStack->LayerCount();
+
+    // Add layer to remove later
+    TestLayer *overlay = new TestLayer("Overlay");
+    s_layerStack->InsertOverlay(overlay);
+    int oldCount = s_layerStack->LayerCount();
+
+    s_layerStack->PopOverlay(overlay);
+
+    int count = s_layerStack->LayerCount();
+    EXPECT_EQ(count, oldCount - 1) << "Count: " << count << " Old Count: " << oldCount;
+
+    ASSERT_FALSE(overlay == nullptr);
 }

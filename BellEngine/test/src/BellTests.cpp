@@ -2,6 +2,8 @@
 
 #include <Bell.h>
 
+#include "TestLayer.h"
+
 class ApplicationFicture : public ::testing::Test
 {
 protected:
@@ -34,27 +36,6 @@ protected:
 
 Bell::Application* ApplicationFicture::app = nullptr;
 
-class TestLayer : public Bell::Layer
-{
-public:
-    TestLayer()
-    {
-    }
-
-    virtual void OnUpdate(Bell::Timestep deltaTime) override
-    {
-        m_CurrentTimeIncrement += deltaTime;
-        if (m_CurrentTimeIncrement >= EXIT_TIME)
-        {
-            Bell::Application::Get().Close();
-        }
-    }
-
-private:
-    const float EXIT_TIME = 1.0f;
-    float m_CurrentTimeIncrement = 0.0f;
-};
-
 TEST(BellTests, BellLogInit)
 {
     Bell::Log::Init();
@@ -72,13 +53,13 @@ TEST_F(ApplicationFicture, LayerControl)
 {
     int oldCount = app->LayerStackCount();
 
-    app->InsertLayer(new TestLayer());
+    app->InsertLayer(new TestLayer("Layer"));
     int count = app->LayerStackCount();
     EXPECT_EQ(count, oldCount + 1);
 }
 
 TEST_F(ApplicationFicture, ApplicationRun)
 {
-    app->InsertLayer(new TestLayer());
+    app->InsertLayer(new TestLayer("Layer"));
     app->Run();
 }

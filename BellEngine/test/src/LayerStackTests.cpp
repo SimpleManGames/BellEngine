@@ -3,6 +3,8 @@
 #include <Bell/Layer/LayerStack.h>
 #include <Bell/Layer/Layer.h>
 
+#include "TestLayer.h"
+
 class LayerStackFixture : public ::testing::Test
 {
 protected:
@@ -34,27 +36,6 @@ protected:
 };
 
 Bell::LayerStack *LayerStackFixture::s_layerStack = nullptr;
-
-class TestLayer : public Bell::Layer
-{
-public:
-    TestLayer(const std::string &name)
-        : Layer(name)
-    {
-    }
-
-    virtual void OnUpdate(Bell::Timestep deltaTime) override
-    {
-        m_CurrentTimeIncrement += deltaTime;
-        if (m_CurrentTimeIncrement >= EXIT_TIME)
-        {
-        }
-    }
-
-private:
-    const float EXIT_TIME = 1.0f;
-    float m_CurrentTimeIncrement = 0.0f;
-};
 
 TEST_F(LayerStackFixture, LayerStack_PushLayer)
 {

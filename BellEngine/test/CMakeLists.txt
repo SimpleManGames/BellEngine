@@ -5,6 +5,7 @@ set(This BellTests)
 set(SOURCES
     "src/BellTests.cpp"
     "src/LayerStackTests.cpp"
+    "src/TestLayer.h"
 )
 
 set(IMGUI_SOURCE
@@ -20,7 +21,6 @@ add_executable(${This} ${SOURCES} ${IMGUI_SOURCE})
 #   Link libraries that we are dependant on
 target_link_libraries(${This} PUBLIC
     gtest_main
-    gmock_main
     Bell
 )
 

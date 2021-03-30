@@ -78,14 +78,14 @@ namespace Bell
         void OnEvent(Event &e);
 
         /**
-         * @brief Push a new layer onto the front of the stack.
+         * @brief Push a new layer onto the front of the stack and calls the Layer's OnAttach
          * Note: The LayerStack is updated in the reverse order
          * 
          * @param layer New Layer to add to the stack
          */
         void InsertLayer(Layer *layer);
         /**
-         * @brief Pushing a new layer onto the back of the stack
+         * @brief Pushing a new layer onto the back of the stack and calls the Layer's OnAttach
          * - We mainly use this for Overlay/UI layers since we want those
          * layers to receive events for to block clicks and such from reaching
          * other layers
@@ -95,6 +95,25 @@ namespace Bell
          */
         void InsertOverlay(Layer *layer);
 
+        /**
+         * @brief Removes the layer that is passed in off of the Layer Stack
+         * 
+         * @param layer Ptr to layer to pop
+         */
+        void PopLayer(Layer *layer);
+
+        /**
+         * @brief Removes the overlay that is passed in off of the Layer Stack
+         * 
+         * @param overlay Ptr to overlay to pop
+         */
+        void PopOverlay(Layer *overlay);
+
+        /**
+         * @brief Returns the size of the Layer Stack vector
+         * 
+         * @return int Size
+         */
         int LayerStackCount() const { return m_LayerStack.LayerCount(); }
 
         inline static bool Valid() { return s_Instance == nullptr; }

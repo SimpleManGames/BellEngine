@@ -47,7 +47,19 @@ TEST_F(LayerStackFixture, LayerStack_PushLayer)
     EXPECT_EQ(count, oldCount + 1);
 }
 
-TEST_F(LayerStackFixture, LayerStack_PushOverlay)
+TEST_F(LayerStackFixture, LayerStack_InsertLayer_Nullptr)
+{
+    int oldCount = s_layerStack->LayerCount();
+
+    TestLayer* nullLayer = nullptr;
+    bool result = s_layerStack->InsertLayer(nullLayer);
+    ASSERT_FALSE(result);
+
+    int count = s_layerStack->LayerCount();
+    EXPECT_EQ(count, oldCount);
+}
+
+TEST_F(LayerStackFixture, LayerStack_InsertOverlay)
 {
     int oldCount = s_layerStack->LayerCount();
 
@@ -55,6 +67,18 @@ TEST_F(LayerStackFixture, LayerStack_PushOverlay)
 
     int count = s_layerStack->LayerCount();
     EXPECT_EQ(count, oldCount + 1);
+}
+
+TEST_F(LayerStackFixture, LayerStack_InsertOverlay_Nullptr)
+{
+    int oldCount = s_layerStack->LayerCount();
+
+    TestLayer* nullLayer = nullptr;
+    bool result = s_layerStack->InsertOverlay(nullLayer);
+    ASSERT_FALSE(result);
+
+    int count = s_layerStack->LayerCount();
+    EXPECT_EQ(count, oldCount);
 }
 
 TEST_F(LayerStackFixture, LayerStack_ClearAllLayers)

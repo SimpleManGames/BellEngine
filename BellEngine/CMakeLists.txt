@@ -8,7 +8,7 @@ file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS
 set(This Bell)
 
 #           OPTIONS
-option(BELL_DEBUG "Sets the B_DEBUG Preprocessor Macro" OFF)
+option(BELL_DEBUG "Sets the B_DEBUG Preprocessor Macro" ON)
 
 add_library(${This} STATIC ${SOURCES} ${HEADERS})
 
@@ -104,7 +104,7 @@ if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/libs/googletest/CMakeLists.txt")
 endif()
 
 #   We want to use gMock in our tests
-set(BUILD_GMOCK true)
+set(BUILD_GMOCK false)
 
 add_subdirectory(libs/googletest)
 

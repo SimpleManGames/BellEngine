@@ -26,29 +26,33 @@ namespace Bell
          * Layers get inserted to the back of the front half of the stack
          * 
          * @param layer 
+         * @return bool If Insertion was successful
          */
-        void InsertLayer(Layer *layer);
+        bool InsertLayer(Layer *layer);
         /**
          * @brief Inserts a overlay layer to the back of the stack
          * Overlays get pushed to the second half of the stack
          * 
          * @param overlay Ptr to the overlay we are pushing
+         * @return bool If Insertion was successful
          */
-        void InsertOverlay(Layer *overlay);
+        bool InsertOverlay(Layer *overlay);
         /**
          * @brief Remove the passed layer off the stack
          * Does not delete the layer just takes it off this stack
          * 
          * @param layer Ptr to the layer we want to pop off
+         * @return bool If pop was successful
          */
-        void PopLayer(Layer *layer);
+        bool PopLayer(Layer *layer);
         /**
          * @brief Remove the passed overlay layer off the stack
          * Does not delete the overlay just takes it off this stack
          * 
          * @param overlay Ptr to the overlay we want to pop off
+         * @return bool If pop was successful
          */
-        void PopOverlay(Layer *overlay);
+        bool PopOverlay(Layer *overlay);
 
         LayerStackIt begin() { return m_Layers.begin(); }
         LayerStackIt end() { return m_Layers.end(); }

@@ -34,7 +34,7 @@ protected:
     static Bell::Application *app;
 };
 
-Bell::Application* ApplicationFicture::app = nullptr;
+Bell::Application *ApplicationFicture::app = nullptr;
 
 TEST(BellTests, BellLogInit)
 {
@@ -56,6 +56,24 @@ TEST_F(ApplicationFicture, LayerControl)
     app->InsertLayer(new TestLayer("Layer"));
     int count = app->LayerStackCount();
     EXPECT_EQ(count, oldCount + 1);
+}
+
+TEST_F(ApplicationFicture, Application_InsertLayer_Calls_OnAttach)
+{
+    TestLayer *layer = new TestLayer();
+    app->InsertLayer(layer);
+
+    ASSERT_TRUE(layer->Attached());
+}
+
+TEST_F(ApplicationFicture, Application_PopLayer_Calls_OnDetach)
+{
+    TestLayer *layer = new TestLayer();
+    app->InsertLayer(layer);
+
+    ASSERT_TRUE(layer->Attached());
+
+    
 }
 
 TEST_F(ApplicationFicture, ApplicationRun)

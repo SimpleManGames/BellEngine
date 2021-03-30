@@ -11,6 +11,16 @@ public:
     {
     }
 
+    virtual void OnAttach() override
+    {
+        m_Attached = true;
+    }
+
+    virtual void OnDetach() override
+    {
+        m_Attached = false;
+    }
+
     virtual void OnUpdate(Bell::Timestep deltaTime) override
     {
         m_CurrentTimeIncrement += deltaTime;
@@ -19,6 +29,8 @@ public:
             Bell::Application::Get().Close();
         }
     }
+
+    bool Attached() const { return m_Attached; }
 
 private:
     const float EXIT_TIME = 1.0f;

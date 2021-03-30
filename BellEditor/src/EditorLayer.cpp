@@ -25,18 +25,18 @@ namespace Bell::Editor
         m_CameraController.SetZoomLevel(5.0f);
 
         m_ActiveScene = CreateRef<Scene>();
-#if 0
+
         m_Square = m_ActiveScene->CreateEntity("Square");
         m_Square.AddComponent<SpriteRendererComponent>(glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
 
         m_CameraEntity = m_ActiveScene->CreateEntity("Camera Entity");
         m_CameraEntity.AddComponent<CameraComponent>();
         m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<EditorCamera>();
-#endif
+
         m_HierarchyPanel.SetContext(m_ActiveScene);
 
-        SceneSerializer serializer(m_ActiveScene);
-        serializer.Deserialize("assets/scenes/Example.scene");
+        //SceneSerializer serializer(m_ActiveScene);
+        //serializer.Deserialize("assets/scenes/Example.scene");
     }
 
     void EditorLayer::OnDetach()
@@ -159,7 +159,7 @@ namespace Bell::Editor
 
             if (ImGui::BeginMenu("Panels"))
             {
-                if(ImGui::MenuItem("Render Stats"))
+                if (ImGui::MenuItem("Render Stats"))
                 {
                     m_RendererStatsPanel.SetVisiblity(!m_RendererStatsPanel.GetVisiblity());
                 }
